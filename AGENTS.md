@@ -5,7 +5,7 @@ User instructions and the original brief in `Docs/Original_Romanian_Brief.txt` d
 ## Later user instructions, 10 October 2026
 
 - Read `Docs/SESSION_HANDOFF.md` before continuing. The recovered binary asset inventory is incomplete; historical reports are not fresh verification.
-- Build one large, refined map with room for up to six participants and selectable opponent count. The participant/network mode and exact map design must be resolved before replacing the two-faction implementation. Single-player-first still applies.
+- Build one large, refined 1 by 1 kilometre map with selectable one to five AI opponents. The user confirmed one human plus one to five AI, free-for-all, each with its own base, without online multiplayer, and chose the 1 km size over the 768 m proposal. At 200 cm per cell this is 500 by 500 cells. Detailed layout and elimination rules still require approval before replacing the two-faction implementation. Single-player-first still applies.
 - Final visuals require medium-or-higher refined geometry and the original art direction inspired by Tiny Glade; the old low-poly kit is prototype-only.
 - Search the user's Epic/Fab library first. Use Meshy only for a missing, suitable asset, using Meshy 7.1 (or 7 where necessary) for new generation. Read `Docs/ASSET_SOURCE_POLICY.md`; check usable download rights and an approved credit budget before submitting.
 - The user explicitly approved a push to the public repository. Do not publish credentials or third-party asset files whose redistribution rights have not been verified. Keep Git LFS enabled for binary asset types.

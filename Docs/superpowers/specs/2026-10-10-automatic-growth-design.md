@@ -2,7 +2,7 @@
 
 Date: 10 October 2026. Source baseline: `0cca2196e29175c4393d194e659a10a5d13c8ce6`.
 
-Status: the user approved the written rules on 10 October 2026 and explicitly requested implementation. Implementation and verification remain pending; this is not gameplay or art acceptance.
+Status: the user approved these rules and requested implementation on 10 October 2026. Final source `8048eb73d233d30f50fdb187facbff59255cc734` passed the recorded cloud checks and independent review; main integration `d5a6119d64a038e34d0392dc232e0b78af8c504f` was explicitly approved, pushed and cloud-tested. See `Docs/SESSION_HANDOFF.md` and dated evidence. Unreal execution and final visual growth remain unverified; this is not gameplay or art acceptance.
 
 ## Scope And Approach
 
