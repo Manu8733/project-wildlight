@@ -20,6 +20,8 @@ User instruction, 10 October 2026: Epic/Fab library first; Meshy only for what c
 
 The first two cached listings declare `isAiForbidden: true`. They must not be Meshy or other generative-AI inputs. A WPO function name in the third package does not prove leaf animation. This cache inventory does not establish that only three packages are owned.
 
+A bounded follow-up checked C: and D:, 18 standard alternate cache paths and selected shallow project/download directories. No additional downloaded tree, crop/farm or house-level kit was located. This is not a confirmed account-library gap: the full online Fab library still requires Epic authentication in Chrome, and custom/unmounted locations remain unverified. Do not submit new Meshy jobs until that source-selection gate is resolved.
+
 ## Public Repository Boundary
 
 Do not commit Epic/Fab raw assets, exports, textures or derived redistributable copies until their license and public redistribution permissions are verified. Public source code, import instructions and non-sensitive provenance records are separate from licensed content. No Epic library files have been published in this session.

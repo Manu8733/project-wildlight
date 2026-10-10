@@ -426,6 +426,28 @@ bool bridge_changes_route_and_expires_safely() {
     return true;
 }
 
+bool overlapping_roots_and_bridges_preserve_walkable_routes() {
+    for (bool roots_first : {false, true}) {
+        Simulation sim;
+        const Id wizard = first_unit(sim, Owner::Player, UnitKind::Wizard);
+        auto hold = unit_command(CommandType::SetStance, wizard); hold.stance = Stance::Hold;
+        CHECK(sim.issue(hold));
+        CHECK(sim.issue(unit_command(CommandType::Move, wizard, {27.5, 11.5})));
+        CHECK(wait_position(sim, wizard, {27.5, 11.5}));
+        auto roots = unit_command(CommandType::CastSpell, wizard, {29.5, 10.5});
+        roots.spell = SpellKind::RootBarrier;
+        auto bridge = unit_command(CommandType::CastSpell, wizard, {32, 11.5});
+        bridge.spell = SpellKind::LightBridge;
+        CHECK(sim.issue(roots_first ? roots : bridge));
+        CHECK(sim.issue(roots_first ? bridge : roots));
+        CHECK(!sim.walkable({30.5, 10.5}, Owner::Player));
+        const auto path = sim.find_path({36.5, 10.5}, {30.5, 10.5}, Owner::Player);
+        CHECK(!path.empty());
+        for (const auto& point : path) CHECK(sim.walkable(point, Owner::Player));
+    }
+    return true;
+}
+
 bool invalid_spells_do_not_consume_mana() {
     Simulation sim;
     const Id wizard = first_unit(sim, Owner::Player, UnitKind::Wizard);
@@ -641,6 +663,70 @@ bool checksummed_invalid_save_data_is_rejected() {
     return true;
 }
 
+bool research_saves_reject_maxed_research_and_preserve_valid_states() {
+    Simulation live;
+    advance(live, 7);
+    const auto before = live.serialize();
+    const auto raw = raw_save(before);
+    std::size_t cursor = 43 + read_u32(raw, 39);
+    for (int i = 0; i < 2; ++i) cursor += 4 + read_u32(raw, cursor) * 16;
+    for (int i = 0; i < 4; ++i) cursor += 4 + read_u32(raw, cursor);
+    constexpr std::size_t faction_bytes = 130, technology_offset = 104;
+    constexpr std::size_t research_offset = 109, research_timer_offset = 110;
+    CHECK(cursor + 2 * faction_bytes <= raw.size());
+
+    for (std::size_t faction = 0; faction < 2; ++faction) {
+        const auto base = cursor + faction * faction_bytes;
+        for (std::size_t technology = 0; technology < 5; ++technology) {
+            for (double timer : {0.0, 35.0}) {
+                auto invalid = raw;
+                invalid[base + technology_offset + technology] = 2;
+                invalid[base + research_offset] = static_cast<char>(technology);
+                write_double(invalid, base + research_timer_offset, timer);
+                const auto result = live.deserialize(wrap_save(invalid));
+                CHECK(!result && !result.reason.empty());
+                CHECK(live.serialize() == before);
+            }
+            for (std::uint8_t level : {std::uint8_t{0}, std::uint8_t{1}}) {
+                for (double timer : {0.0, 35.0}) {
+                    auto valid = raw;
+                    valid[base + technology_offset + technology] = static_cast<char>(level);
+                    valid[base + research_offset] = static_cast<char>(technology);
+                    write_double(valid, base + research_timer_offset, timer);
+                    const auto saved = wrap_save(valid);
+                    Simulation restored;
+                    CHECK(restored.deserialize(saved));
+                    CHECK(restored.serialize() == saved);
+                    restored.step(FixedStep);
+                    const auto& state = restored.state().factions[faction];
+                    CHECK(state.technologies[technology] == level + (timer == 0 ? 1 : 0));
+                    CHECK(state.research == (timer == 0 ? Technology::Count : static_cast<Technology>(technology)));
+                    Simulation continued;
+                    CHECK(continued.deserialize(restored.serialize()));
+                    CHECK(continued.serialize() == restored.serialize());
+                }
+            }
+        }
+    }
+
+    auto completed = raw;
+    for (std::size_t faction = 0; faction < 2; ++faction) {
+        const auto base = cursor + faction * faction_bytes;
+        for (std::size_t technology = 0; technology < 5; ++technology)
+            completed[base + technology_offset + technology] = 2;
+        completed[base + research_offset] = static_cast<char>(Technology::Count);
+        write_double(completed, base + research_timer_offset, 0);
+    }
+    Simulation restored;
+    const auto saved = wrap_save(completed);
+    CHECK(restored.deserialize(saved));
+    CHECK(restored.serialize() == saved);
+    restored.step(FixedStep);
+    for (const auto& faction : restored.state().factions)
+        for (auto level : faction.technologies) CHECK(level == 2);
+    return true;
+}
+
 bool research_upgrade_and_trade_progression() {
     Simulation sim;
     Command research; research.type = CommandType::Research; research.technology = Technology::Forestry;
@@ -752,6 +838,7 @@ int main() {
         {"light connection and disconnection", light_connection_and_demolition},
         {"root barrier mana, cooldown and expiry", roots_cost_cooldown_and_expiration},
         {"temporary bridge route and safe expiry", bridge_changes_route_and_expires_safely},
+        {"overlapping roots and bridges keep routes walkable", overlapping_roots_and_bridges_preserve_walkable_routes},
         {"invalid spell atomicity", invalid_spells_do_not_consume_mana},
         {"enemy sabotage and light restoration", enemy_disruption_breaks_and_restores_light},
         {"illusions, population and save continuation", illusions_expire_without_population_cost},
@@ -760,6 +847,7 @@ int main() {
         {"save roundtrip and deterministic continuation", save_roundtrip_and_continuation},
         {"corrupt save atomic rejection", corrupted_saves_fail_atomically},
         {"checksummed invalid persistence fields", checksummed_invalid_save_data_is_rejected},
+        {"research save invariants and version-1 compatibility", research_saves_reject_maxed_research_and_preserve_valid_states},
         {"research, upgrade and trade progression", research_upgrade_and_trade_progression},
         {"three AI personalities with honest resources", ai_personalities_obey_resource_rules},
         {"AI skirmish ends by castle defeat", normal_skirmish_reaches_castle_defeat},

@@ -85,6 +85,11 @@ def main():
             raise RuntimeError(f"exit {result.returncode}; see {log.relative_to(ROOT)}\n" + result.stdout[-4000:])
         return {"command": command, "log": str(log.relative_to(ROOT)), "output": result.stdout[-3000:]}
 
+    def run_binary(name, binary, arguments=()):
+        if not binary.is_file():
+            raise RuntimeError("Required compiled executable not found: " + str(binary.relative_to(ROOT)))
+        return run(name, [str(binary), *arguments])
+
     def syntax():
         scripts = sorted((ROOT / "Tools").glob("*.py")) + sorted((ROOT / "Art/Source").glob("*.py")) + sorted((ROOT / "Docs").glob("*.py"))
         for path in scripts:
@@ -111,14 +116,15 @@ def main():
         implementation = str(ROOT / "Core/src/Simulation.cpp")
         tests = sorted(str(path) for path in (ROOT / "Core/tests").glob("*.cpp"))
         suffix = "_sanitized" if args.sanitize else ""
-        test_binary = ARTIFACTS / ("core_tests" + suffix)
-        cli_binary = ARTIFACTS / ("wildlight_headless" + suffix)
+        extension = ".exe" if os.name == "nt" else ""
+        test_binary = ARTIFACTS / ("core_tests" + suffix + extension)
+        cli_binary = ARTIFACTS / ("wildlight_headless" + suffix + extension)
         check("compile_tests", lambda: run("compile_tests" + suffix, base + [implementation, *tests, "-o", str(test_binary)]))
-        if tests and test_binary.exists() and "compile_tests" not in failures:
-            check("simulation_tests", lambda: run("simulation_tests" + suffix, [str(test_binary)]))
+        if "compile_tests" not in failures:
+            check("simulation_tests", lambda: run_binary("simulation_tests" + suffix, test_binary))
         check("compile_headless", lambda: run("compile_headless" + suffix, base + [implementation, str(ROOT / "Core/tools/headless.cpp"), "-o", str(cli_binary)]))
-        if cli_binary.exists() and "compile_headless" not in failures:
-            check("headless_match", lambda: run("headless_match" + suffix, [str(cli_binary), "--ticks", "600", "--seed", "101"]))
+        if "compile_headless" not in failures:
+            check("headless_match", lambda: run_binary("headless_match" + suffix, cli_binary, ["--ticks", "600", "--seed", "101"]))
     if not args.core_only:
         check("asset_exports", validate_art)
     report["success"] = not failures

@@ -1,15 +1,15 @@
 # Verification scope
 
-`Core/tests/simulation_tests.cpp` exercises the engine-independent C++20 simulation through its public command, query, step and persistence interfaces. It contains 26 independent scenarios covering:
+`Core/tests/simulation_tests.cpp` exercises the engine-independent C++20 simulation through its public command, query, step and persistence interfaces. It contains 28 independent scenarios covering:
 
 - Stable entity IDs, seeded determinism, fixed-step partitioning and invalid elapsed time.
 - Atomic rejection of mixed ownership, stale IDs, invalid enums, NaN/infinite/huge coordinates, unseen hostile targets and illegal spells.
 - Upfront building/recruitment costs, progressive construction, cancellation refunds and reserved population.
 - Movement, duplicate selections, permanent-ford paths, physical worker cargo/deposit delivery and non-negative resource bounds.
-- Light extension/disconnection, enemy sabotage/restoration, root detours and temporary bridge routes with safe expiry.
+- Light extension/disconnection, enemy sabotage/restoration, root detours and temporary bridge routes with safe expiry. Overlapping roots always block bridge routes, regardless of casting order.
 - Illusions and population, Veil concealment and nearby scout reveal, real combat damage and friendly-fire rejection.
 - Research, economic upgrades and market trade.
-- Save roundtrip, deterministic continuation, truncated/oversized/checksum-invalid files and correctly checksummed invalid state fields.
+- Save roundtrip, deterministic continuation, truncated/oversized/checksum-invalid files and correctly checksummed invalid state fields. Active research of an already-maxed technology is atomically rejected for either faction; valid version-1 research states remain compatible.
 - Three AI personalities, an AI skirmish ending by castle defeat and a player victory through connected lantern objectives.
 
 The checksummed corruption fixtures intentionally target schema version 1 at the file boundary. A save-format migration must update those fixtures and add compatibility tests rather than silently removing them.
@@ -19,8 +19,11 @@ The checksummed corruption fixtures intentionally target schema version 1 at the
 From the repository root:
 
 ```sh
-python3 Tools/verify.py
+python3 -m unittest discover -s Tests -p 'test_*.py'
+python3 Tools/verify.py --core-only
 ```
+
+The Python suite checks verification-run execution and progress-ledger reporting in isolated temporary fixtures. Drop `--core-only` only when the asset exports have actually been restored: 200 original binary assets are currently missing, so a full art check is expected to fail rather than certify absent content.
 
 For a standalone strict GCC build:
 

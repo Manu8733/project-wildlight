@@ -8,6 +8,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Test verification and progress regressions
+        run: python3 -m unittest discover -s Tests -p 'test_*.py'
       - name: Compile, test and validate source
         run: python3 Tools/verify.py --core-only
       - name: Attach verification report

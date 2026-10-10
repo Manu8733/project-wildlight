@@ -10,7 +10,7 @@ Read [the current handoff](Docs/SESSION_HANDOFF.md) first. This is a partial rec
 
 1. Read [current evidence and remaining work](Docs/PROGRESS.md). The two requested lists contain **72 + 33 = 105 requirements**. Source implementation, cloud verification, engine verification and user acceptance are tracked separately.
 2. For the portable simulation, follow [Build and verification](Docs/BUILD_AND_VERIFY.md).
-3. On the Windows laptop, install **Unreal Engine 5.8.1**, Visual Studio 2022 with the Unreal C++ workload, Git and Git LFS. Follow [the laptop checklist](Docs/LAPTOP_QUICKSTART.md), then run `Tools/Build-Windows.ps1` from PowerShell.
+3. The recovered Unreal lock is **5.8.1**, while the local installed engine is **5.6.1**. Resolve this mismatch through a verified toolchain or an explicitly tested migration before treating [the laptop checklist](Docs/LAPTOP_QUICKSTART.md) or `Tools/Build-Windows.ps1` as a working engine build.
 4. Read [the game design](Docs/GDD.md), [art direction](Docs/ArtBible.md) and [QA acceptance plan](Docs/QA_PLAN.md) before changing balance or adding content.
 
 ## Repository layout
@@ -30,7 +30,7 @@ Three scenario definitions, nineteen building definitions, twelve unit definitio
 
 The original visual kit is authored with explicit geometry and materials in Blender scripts. The project does not depend on generated stock images. Rendered kit previews are art previews, not proof of Unreal gameplay or final graphical quality.
 
-View the [day and evening asset previews](Docs/VISUAL_PREVIEW.md) to inspect the current original style.
+The [historical preview page](Docs/VISUAL_PREVIEW.md) references original renders that were not recovered. Those references are not available final visuals or evidence of the requested art quality.
 
 The repository is [Manu8733/project-wildlight](https://github.com/Manu8733/project-wildlight). It was verified public on 10 October 2026; the user explicitly approved pushing to this public repository. The original private-repository request is preserved in the brief, with this later override recorded in the handoff. Push and hosted-check evidence are tracked separately from game acceptance. The source archive remains usable independently of GitHub.
 

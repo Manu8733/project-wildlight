@@ -1,10 +1,10 @@
 # Wildlight implementation evidence
 
-**The requested work is not fully complete.** The first two original lists contain **72 and 33 tasks (105 total)**; the declared totals match the parsed checkboxes. List 3 / Steam is deferred. All 105 user-acceptance flags remain false until explicit acceptance is recorded.
+**The requested work is not fully complete.** The first two original lists contain **72 and 33 tasks (105 total)**; the declared totals match the parsed checkboxes. List 3 / Steam is deferred. Explicit user acceptance is recorded for 0 of 105 requirements; rendering never changes acceptance flags.
 
-Read [the current recovery and continuation handoff](SESSION_HANDOFF.md) first. The original cloud's evidence is historical; 200 original binary assets were not transferred. Fresh Windows MinGW portable-core checks passed, but Unreal APIs, Editor/Shipping builds, integrated visuals, GPU performance and independent playtests remain unverified.
+Read the current [SESSION_HANDOFF.md](SESSION_HANDOFF.md) for the continuation context and environment limits. [Recovery/RECOVERY_MANIFEST.json](Recovery/RECOVERY_MANIFEST.json) describes the original recovered snapshot; [Recovery/MISSING_ASSETS.json](Recovery/MISSING_ASSETS.json) records its missing assets, not completed content. Historical reports are not fresh verification. Current verification is recorded below from the ledger. Source/catalog entries are not proof of completed final content or engine validation.
 
-The [GitHub repository](https://github.com/Manu8733/project-wildlight) was verified public on 10 October 2026. The user explicitly approved public push, overriding the original private-repository request. The first checkpoint push is being prepared; hosted workflow execution and remote LFS restoration are not yet verified.
+The [public GitHub repository](https://github.com/Manu8733/project-wildlight) is recorded. Its public visibility was verified on 2026-10-10. Public push is explicitly approved by the user. The source push has been verified. Hosted checks passed as recorded in the ledger.
 
 ## Status totals
 
@@ -21,7 +21,10 @@ A `VerifiedCloud` row covers only the recorded document, configuration, asset or
 
 ## Verification record
 
-Fresh baseline: Windows GCC 15.1.0 / CMake 3.29.2 / GNU Make 4.4.1, Release C++20. Configuration, build and CTest passed: 26 scenarios, 452 assertions and CTest 2/2. Evidence: `Evidence/2026-10-10/core-baseline.json` and companion logs. This does not verify Unreal, sanitizers, six participants or current missing asset exports.
+- Fresh Windows portable-core baseline on the unchanged recovered snapshot: configuration/build succeeded; 26 scenarios, 452 assertions; CTest 2/2. Not Unreal or six-participant validation. Evidence: `Evidence/2026-10-10/core-baseline.json`. Command: `Exact configure, build and ctest executable paths and arguments are recorded in the evidence JSON.`.
+- Initial source checkpoint e0731fc matched origin/main and its GitHub-hosted core workflow completed successfully on 10 October 2026. This does not validate missing assets or Unreal. Evidence: `https://github.com/Manu8733/project-wildlight/actions/runs/38064225293`. Command: `git ls-remote origin refs/heads/main; GitHub workflow: python3 Tools/verify.py --core-only`.
+- Independent cloud clone of e0731fc passed all six core verifier checks, 26 scenarios and 452 assertions, plus 600 headless ticks. GCC 13.3.0/Python 3.12.14; no Unreal/GPU validation. Evidence: `https://chatgpt.com/c/6aca4e5e-be78-83eb-aa4c-46fca7061ac8`. Command: `python3 Tools/verify.py --core-only`.
+- Fresh Windows regression checkpoint: roots/bridge precedence, maxed research load validation and required verifier runtime execution corrected. All six checks passed; 28 scenarios/769 assertions and 600 headless ticks. Separate Python regression suite passed 14/14. Unreal, graphics and six-participant acceptance remain unverified. Evidence: `Evidence/2026-10-10/core-regressions-windows.json`. Command: `CXX=C:/msys64/mingw64/bin/g++.exe with MinGW64/bin in PATH: python.exe Tools/verify.py --core-only; python.exe -m unittest discover -s Tests -p 'test_*.py' -v`.
 
 ## Outstanding gates
 
@@ -29,7 +32,7 @@ Fresh baseline: Windows GCC 15.1.0 / CMake 3.29.2 / GNU Make 4.4.1, Release C++2
 - Finish and review unit rigs/animation, final UV/texture/LOD/collision, VFX/audio, complete tutorial/remapping/accessibility and all polished scenarios.
 - Measure 100/200/500-unit scenes where supported and long sessions on an actual GPU; regress RTX 3050 Low.
 - Complete fair-AI and economy/class tuning, independent playtest and explicit acceptance.
-- Confirm public-repository push/hosted checks and copy verified backup to independent owner-controlled storage.
+- Keep repository visibility, push and hosted-check evidence current; copy a verified backup to independent owner-controlled storage.
 
 ## Full two-list traceability
 

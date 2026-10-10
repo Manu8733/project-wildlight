@@ -505,23 +505,24 @@ std::vector<Vec2> Simulation::find_path(Vec2 from, Vec2 to, Owner owner) const {
         if (state_.terrain[static_cast<std::size_t>(i)] == Terrain::Water ||
             state_.terrain[static_cast<std::size_t>(i)] == Terrain::Rock)
             pass[static_cast<std::size_t>(i)] = 0;
-    for (const auto &e : state_.effects)
-        if (e.remaining > 0 &&
-            (e.kind == SpellKind::LightBridge || e.kind == SpellKind::RootBarrier)) {
-            int loX = std::max(0, static_cast<int>(e.position.x - e.radius - 1)),
-                hiX = std::min(w - 1, static_cast<int>(e.position.x + e.radius + 1));
-            int loY = std::max(0, static_cast<int>(e.position.y - e.radius - 1)),
-                hiY = std::min(h - 1, static_cast<int>(e.position.y + e.radius + 1));
-            for (int y = loY; y <= hiY; ++y)
-                for (int x = loX; x <= hiX; ++x)
-                    if (distance({x + 0.5, y + 0.5}, e.position) <= e.radius) {
-                        auto idx = static_cast<std::size_t>(y * w + x);
-                        if (e.kind == SpellKind::RootBarrier)
-                            pass[idx] = 0;
-                        else if (state_.terrain[idx] == Terrain::Water)
-                            pass[idx] = 1;
-                    }
-        }
+    // Roots take precedence over bridges regardless of their casting order.
+    for (auto kind : {SpellKind::LightBridge, SpellKind::RootBarrier})
+        for (const auto &e : state_.effects)
+            if (e.remaining > 0 && e.kind == kind) {
+                int loX = std::max(0, static_cast<int>(e.position.x - e.radius - 1)),
+                    hiX = std::min(w - 1, static_cast<int>(e.position.x + e.radius + 1));
+                int loY = std::max(0, static_cast<int>(e.position.y - e.radius - 1)),
+                    hiY = std::min(h - 1, static_cast<int>(e.position.y + e.radius + 1));
+                for (int y = loY; y <= hiY; ++y)
+                    for (int x = loX; x <= hiX; ++x)
+                        if (distance({x + 0.5, y + 0.5}, e.position) <= e.radius) {
+                            auto idx = static_cast<std::size_t>(y * w + x);
+                            if (e.kind == SpellKind::RootBarrier)
+                                pass[idx] = 0;
+                            else if (state_.terrain[idx] == Terrain::Water)
+                                pass[idx] = 1;
+                        }
+            }
     for (const auto &b : state_.buildings)
         if (b.health > 0) {
             if (b.kind == BuildingKind::Gate && b.owner == owner && complete(b))
@@ -2578,6 +2579,9 @@ LoadResult Simulation::deserialize(const std::string &input) {
         for (auto t : f.technologies)
             if (t > 2)
                 return fail("Invalid technology level.");
+        if (f.research != Technology::Count &&
+            f.technologies[static_cast<std::size_t>(f.research)] >= 2)
+            return fail("Cannot research a technology already at its maximum level.");
     }
     std::unordered_set<Id> identifiers;
     auto id_valid = [&](Id id) {

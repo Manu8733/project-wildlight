@@ -190,7 +190,7 @@
       ],
       "verification_commands": [],
       "remaining": [
-      "Public visibility was verified on 10 October 2026 and explicitly approved by the user, overriding the original private-repository request. First push, remote LFS integrity and external backup still need recorded verification."
+      "Public visibility was verified on 10 October 2026 and explicitly approved by the user, overriding the original private-repository request. Source commit e0731fc was pushed and matched the remote SHA; its GitHub core workflow passed. No binary assets have been published; remote LFS integrity and external backup remain unverified."
       ],
       "accepted": false
     },
@@ -2223,7 +2223,32 @@
     "visibility_verified_date": "2026-10-10",
     "public_push_approved": true,
     "created_by": "User after integration create permission rejection",
-    "pushed": false,
-    "hosted_checks_verified": false
-  }
+    "pushed": true,
+    "verified_push_commit": "e0731fc1d7295c75342eae985c6077bd378d00a8",
+    "hosted_checks_verified": true,
+    "hosted_checks_commit": "e0731fc1d7295c75342eae985c6077bd378d00a8",
+    "hosted_checks_url": "https://github.com/Manu8733/project-wildlight/actions/runs/38064225293"
+  },
+  "verification_runs": [
+    {
+      "summary": "Fresh Windows portable-core baseline on the unchanged recovered snapshot: configuration/build succeeded; 26 scenarios, 452 assertions; CTest 2/2. Not Unreal or six-participant validation.",
+      "evidence_path": "Evidence/2026-10-10/core-baseline.json",
+      "command": "Exact configure, build and ctest executable paths and arguments are recorded in the evidence JSON."
+    },
+    {
+      "summary": "Initial source checkpoint e0731fc matched origin/main and its GitHub-hosted core workflow completed successfully on 10 October 2026. This does not validate missing assets or Unreal.",
+      "evidence_path": "https://github.com/Manu8733/project-wildlight/actions/runs/38064225293",
+      "command": "git ls-remote origin refs/heads/main; GitHub workflow: python3 Tools/verify.py --core-only"
+    },
+    {
+      "summary": "Independent cloud clone of e0731fc passed all six core verifier checks, 26 scenarios and 452 assertions, plus 600 headless ticks. GCC 13.3.0/Python 3.12.14; no Unreal/GPU validation.",
+      "evidence_path": "https://chatgpt.com/c/6aca4e5e-be78-83eb-aa4c-46fca7061ac8",
+      "command": "python3 Tools/verify.py --core-only"
+    },
+    {
+      "summary": "Fresh Windows regression checkpoint: roots/bridge precedence, maxed research load validation and required verifier runtime execution corrected. All six checks passed; 28 scenarios/769 assertions and 600 headless ticks. Separate Python regression suite passed 14/14. Unreal, graphics and six-participant acceptance remain unverified.",
+      "evidence_path": "Evidence/2026-10-10/core-regressions-windows.json",
+      "command": "CXX=C:/msys64/mingw64/bin/g++.exe with MinGW64/bin in PATH: python.exe Tools/verify.py --core-only; python.exe -m unittest discover -s Tests -p 'test_*.py' -v"
+    }
+  ]
 }

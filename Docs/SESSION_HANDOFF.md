@@ -10,6 +10,7 @@ Updated: 10 October 2026. This file is the durable continuation context for eith
 - `Recovery/RECOVERY_MANIFEST.json` records the original snapshot, not the later edited checkout. `Recovery/MISSING_ASSETS.json` records 200 missing original binary assets.
 - Missing: 82 static exports, four rigged exports, two Blender masters, three renders, eight WAVs, 50 SVGs, 50 PNGs and one icon contact sheet. No original `.uasset` or `.umap` had been produced.
 - Public repository: `https://github.com/Manu8733/project-wildlight`. Public visibility and the initially empty remote were verified on 10 October. The user explicitly approved public push after being told about the visibility.
+- First source checkpoint: `e0731fc1d7295c75342eae985c6077bd378d00a8`, confirmed by `git ls-remote origin refs/heads/main`. Its [GitHub core workflow](https://github.com/Manu8733/project-wildlight/actions/runs/38064225293) completed successfully. Binary assets were not included.
 - The initial recovery archive was CRC- and per-file-SHA-256-verified. It is not a complete cloud backup or restored Git history.
 
 ## Current User Requirements
@@ -26,6 +27,10 @@ Updated: 10 October 2026. This file is the durable continuation context for eith
 ## Verified Baseline
 
 Windows portable-core verification used GCC 15.1.0 (MSYS2 MinGW64), CMake 3.29.2 and GNU Make 4.4.1. Release C++20 with warnings-as-errors, no exceptions and no RTTI passed configuration, build and CTest. Results: 26 scenarios, 452 assertions; CTest 2/2, including a 600-tick headless match with seed 101. See `Evidence/2026-10-10/core-baseline.json` and companion logs. No sanitizers, six-participant match or Unreal build were run by this baseline.
+
+The follow-up cloud chat independently cloned the first checkpoint in detached HEAD and passed `python3 Tools/verify.py --core-only`: all six checks, 26 scenarios and 452 assertions, plus the 600-tick headless match. It found GCC 13.3.0, Python 3.12.14, Git 2.51.1, Git LFS 3.4.1 and Make; CMake, Blender, UnrealEditor and `nvidia-smi` were not found in PATH. This is a portable-core check, not a GPU or Unreal session.
+
+The later local regression checkpoint fixes three confirmed defects: effect-order-dependent paths through RootBarrier/LightBridge overlaps; acceptance of active research on an already-maxed technology; and the Windows verifier silently skipping runtime checks when the compiler produced `.exe` files. Each defect was reproduced before its fix. Fresh Windows verification now runs all six checks and passes 28 scenarios/769 assertions plus 600 headless ticks. The isolated Python suite passes 14/14 tests, covering visibility/acceptance reporting and verifier execution on Windows/Linux. CMake/CTest also passed 2/2. See `Evidence/2026-10-10/core-regressions-windows.json`. The independent review reported no remaining actionable findings in this limited scope. These fixes do not implement six participants, staged harvesting or automatic building growth.
 
 Installed Unreal is 5.6.1; the recovered project lock is 5.8.1. Do not relabel the lock or claim engine compatibility without a deliberate tested migration. Blender 5.2.2 LTS is available and has produced native CPU renders. The previous generators recorded Blender 4.3.2.
 
@@ -45,13 +50,13 @@ Blender refinement v1 has a grounded 5.43 m pivot, smooth geometry, bark/foliage
 
 Independent QA passed 68/69 round-trip checks. The one strict normal comparison fails after Blender reimport. A separate raw-GLB diagnostic passes the same `1e-4` tolerance on all 38,000 triangles (max error `8.3736e-5`); the larger difference is introduced by Blender custom-normal reimport, not the exported normal accessor. Keep this warning visible and verify Unreal import/rendering. Do not loosen the global tolerance to hide it.
 
-The local downloaded library inventory found Ribbon Grass, Medieval Modular Wall Pack and Day by the Beach. This is not a full account-ownership inventory. No licensed Epic files were copied to GitHub. See `ASSET_SOURCE_POLICY.md`.
+The bounded local downloaded-library inventory found Ribbon Grass, Medieval Modular Wall Pack and Day by the Beach. C: and D: plus 18 standard alternate paths were checked, but this is not a full account-ownership inventory. The online Fab library requires Epic login in Chrome before absence can be confirmed. No licensed Epic files were copied to GitHub. See `ASSET_SOURCE_POLICY.md`.
 
 ## Cloud And Cross-Account Continuation
 
-A separate current-account cloud chat was created: `6aca4e5e-be78-83eb-aa4c-46fca7061ac8` (title returned: `Verificare atasament Wildlight`). It received the full original text brief, but not the local source ZIP or oak files. Its initial response confirmed the missing attachment. It is not a published reusable Codex Cloud environment.
+A separate current-account cloud chat was created: `6aca4e5e-be78-83eb-aa4c-46fca7061ac8` (title returned: `Verificare atașament Wildlight`; Codex executor `01a12642-643a-7713-9ec3-53468169d05c`, host `durable`). It received the full original text brief, but not the local source ZIP or oak files. After the public push, it cloned the exact first checkpoint, read all three lists, verified the brief hash and passed portable-core tests. Its checkout remained clean. It is not a published reusable Codex Cloud environment, and Blender/Unreal/GPU availability is not established there.
 
-Use the GitHub repository as the common versioned source once the push is verified. Each account must connect its own authorized GitHub access. Personal vault values and cloud task files are account/task-specific. Existing task files and conversations do not become a live shared filesystem through a repository or a shared link.
+Use the GitHub repository as the common versioned source. Each account must connect its own authorized GitHub access for writes. Personal vault values and cloud task files are account/task-specific. Existing task files and conversations do not become a live shared filesystem through a repository or a shared link.
 
 At each continuation: fetch the remote, inspect status and divergence, read this handoff, run the relevant tests, commit a focused milestone and push normally. Reconcile concurrent commits; never reset or overwrite work from the other account. Write outcomes and remaining gates into the repository before ending.
 
