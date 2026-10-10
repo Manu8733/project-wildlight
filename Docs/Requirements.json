@@ -2224,10 +2224,10 @@
     "public_push_approved": true,
     "created_by": "User after integration create permission rejection",
     "pushed": true,
-    "verified_push_commit": "e0731fc1d7295c75342eae985c6077bd378d00a8",
+    "verified_push_commit": "1f7423945de61d40f04bcf6e27833cb4732dabf7",
     "hosted_checks_verified": true,
-    "hosted_checks_commit": "e0731fc1d7295c75342eae985c6077bd378d00a8",
-    "hosted_checks_url": "https://github.com/Manu8733/project-wildlight/actions/runs/38064225293"
+    "hosted_checks_commit": "1f7423945de61d40f04bcf6e27833cb4732dabf7",
+    "hosted_checks_url": "https://github.com/Manu8733/project-wildlight/actions/runs/38065197895"
   },
   "verification_runs": [
     {
@@ -2249,6 +2249,11 @@
       "summary": "Fresh Windows regression checkpoint: roots/bridge precedence, maxed research load validation and required verifier runtime execution corrected. All six checks passed; 28 scenarios/769 assertions and 600 headless ticks. Separate Python regression suite passed 14/14. Unreal, graphics and six-participant acceptance remain unverified.",
       "evidence_path": "Evidence/2026-10-10/core-regressions-windows.json",
       "command": "CXX=C:/msys64/mingw64/bin/g++.exe with MinGW64/bin in PATH: python.exe Tools/verify.py --core-only; python.exe -m unittest discover -s Tests -p 'test_*.py' -v"
+    },
+    {
+      "summary": "Source checkpoint 1f74239 matched origin/main and passed the GitHub Python/core workflow. Independent cloud tests passed 14/14 Python and six normal core checks, 28 scenarios/769 assertions, 600 ticks. Default sanitizer run FAILED because LeakSanitizer cannot read cloud /proc task data; same sanitized binaries passed ASan/UBSan with detect_leaks=0. Leak detection, Unreal and GPU remain unverified.",
+      "evidence_path": "https://chatgpt.com/c/6aca4e5e-be78-83eb-aa4c-46fca7061ac8",
+      "command": "python3 -m unittest discover -s Tests -p 'test_*.py'; python3 Tools/verify.py --core-only; python3 Tools/verify.py --core-only --sanitize; supplemental sanitized binary execution with ASAN_OPTIONS=detect_leaks=0"
     }
   ]
 }
