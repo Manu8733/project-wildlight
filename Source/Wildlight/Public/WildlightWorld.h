@@ -42,6 +42,7 @@ public:
     void StartMatch(int32 Map, wildlight::AIPersonality Personality, wildlight::Difficulty Difficulty);
     void RefreshPresentation();
     wildlight::CommandResult Submit(const wildlight::Command& Command);
+    wildlight::CommandResult SetAutomaticGrowthPolicy(const wildlight::AutomaticGrowthPolicy& Policy);
     wildlight::Id Pick(wildlight::Vec2 Position, bool bIncludeResources = true) const;
     bool SaveMatch(const FString& Slot, FString& Error) const;
     bool LoadMatch(const FString& Slot, FString& Error);
@@ -64,6 +65,8 @@ private:
     UStaticMeshComponent* MakeMesh(const FName& Name, UStaticMesh* Mesh, UMaterialInterface* Material);
     void PlayCue(int32 Index, FVector Position, bool bSpatial);
     void PresentEvents();
+    void InitializeEventCursorFromSave();
+    UStaticMesh* FindBuildingMesh(const wildlight::Building& Building);
     void ClearDecorationsForBuilding(const wildlight::Building& Building);
     UPROPERTY() TMap<uint32, TObjectPtr<AWildlightEntity>> Visuals;
     UPROPERTY() TArray<TObjectPtr<UHierarchicalInstancedStaticMeshComponent>> TerrainGroups;
@@ -91,6 +94,8 @@ private:
     float VisualTime = 0.f;
     TArray<FVector> FireflyOrigins;
     TMap<uint32, double> PreviousHealth;
+    TMap<uint32, uint8> PresentedBuildingLevels;
+    TSet<FString> MissingBuildingTierWarnings;
     float LastImpactTime = -10.f;
     uint64 LastEventTick = 0;
     TSet<FString> EventsAtLastTick;

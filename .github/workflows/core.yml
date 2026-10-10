@@ -12,6 +12,11 @@ jobs:
         run: python3 -m unittest discover -s Tests -p 'test_*.py'
       - name: Compile, test and validate source
         run: python3 Tools/verify.py --core-only
+      - name: Validate CMake and CTest integration
+        run: |
+          cmake -S Core -B .artifacts/cmake-core -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+          cmake --build .artifacts/cmake-core --parallel 2
+          ctest --test-dir .artifacts/cmake-core --output-on-failure
       - name: Attach verification report
         if: always()
         uses: actions/upload-artifact@v4

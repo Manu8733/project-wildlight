@@ -11,7 +11,7 @@
 namespace wildlight {
 using Id = std::uint32_t;
 constexpr double FixedStep = 0.1;
-constexpr std::uint32_t SaveVersion = 1;
+constexpr std::uint32_t SaveVersion = 2;
 
 struct Vec2 {
     double x = 0;
@@ -88,7 +88,8 @@ enum class CommandType : std::uint8_t {
     Research,
     Trade,
     SetStance,
-    Surrender
+    Surrender,
+    SetAutomaticGrowth
 };
 enum class OrderType : std::uint8_t {
     Idle,
@@ -109,6 +110,11 @@ struct Resources {
     double get(ResourceKind kind) const;
     void add(ResourceKind kind, double amount);
     bool can_afford(const Resources &cost) const;
+};
+struct AutomaticGrowthPolicy {
+    bool enabled = true;
+    double protected_wood = 100;
+    double protected_stone = 50;
 };
 struct BuildingDefinition {
     BuildingKind kind;
@@ -162,7 +168,10 @@ struct Building {
     double production_timer = 0, train_timer = 0, attack_timer = 0;
     Vec2 rally;
     std::vector<UnitKind> train_queue;
+    double harvested_food = 0;
+    std::uint64_t last_damage_tick = 0;
 };
+Resources building_upgrade_cost(const Building &building);
 struct Unit {
     Id id = 0;
     Owner owner = Owner::Neutral;
@@ -213,6 +222,9 @@ struct FactionState {
     Technology research = Technology::Count;
     double research_timer = 0;
     std::uint32_t units_lost = 0, units_recruited = 0, buildings_lost = 0;
+    AutomaticGrowthPolicy automatic_growth;
+    std::uint32_t housing_demand_ticks = 0;
+    std::uint32_t automatic_growth_cooldown_ticks = 0;
 };
 struct Event {
     std::uint64_t tick = 0;
@@ -255,6 +267,7 @@ struct Command {
     double amount = 50;
     std::uint8_t rotation = 0;
     Stance stance = Stance::Defensive;
+    AutomaticGrowthPolicy automatic_growth;
 };
 struct CommandResult {
     bool accepted = false;
@@ -287,6 +300,7 @@ class Simulation {
     bool is_visible(Owner owner, Vec2 position) const;
     bool is_unit_visible(Owner viewer, Id unit_id) const;
     double day_fraction() const;
+    std::string automatic_growth_status(Id building_id) const;
     void step(double seconds);
     std::string serialize() const;
     LoadResult deserialize(const std::string &bytes);
@@ -304,6 +318,9 @@ class Simulation {
     void update_outcome();
     void assign_jobs();
     void recalculate_factions();
+    void update_automatic_growth();
+    std::string automatic_growth_reason(const Building &building) const;
+    bool upgrade_building(Building &building);
     void event(Owner owner, Id subject, const std::string &text);
     void damage(Id target, double amount, bool siege, Owner source);
     void order_path(Unit &unit, Vec2 destination);

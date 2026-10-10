@@ -6,6 +6,17 @@
 #include "Engine/Engine.h"
 #include "CanvasItem.h"
 #include "Engine/Font.h"
+#include "Engine/GameViewportClient.h"
+#include "Engine/World.h"
+#include "Styling/CoreStyle.h"
+#include "Widgets/SCanvas.h"
+#include "Widgets/SBoxPanel.h"
+#include "Widgets/Input/SCheckBox.h"
+#include "Widgets/Input/SNumericEntryBox.h"
+#include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SScaleBox.h"
+#include "Widgets/Text/STextBlock.h"
+#include "Widgets/Accessibility/SlateWidgetAccessibleTypes.h"
 
 namespace
 {
@@ -17,6 +28,152 @@ FString CostText(const wildlight::Resources& R)
     return FString::Printf(TEXT("Wood %.0f   Stone %.0f   Food %.0f   Gold %.0f   Light %.0f"), R.wood, R.stone, R.food, R.gold, R.mana);
 }
 FString Name(std::string_view S) { return UTF8_TO_TCHAR(std::string(S).c_str()); }
+}
+bool AWildlightHUD::CanEditAutomaticGrowth() const
+{
+    const auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
+    return C && IsValid(C->Arena) && C->Arena->bRunning && !C->Arena->bPaused
+        && !C->bMainMenu && !C->bSettings
+        && C->Arena->Simulation.state().outcome == wildlight::MatchOutcome::Playing;
+}
+wildlight::AutomaticGrowthPolicy AWildlightHUD::ReadAutomaticGrowthPolicy() const
+{
+    const auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
+    if (C && IsValid(C->Arena)) return C->Arena->Simulation.state().factions[0].automatic_growth;
+    wildlight::AutomaticGrowthPolicy Policy;
+    Policy.enabled = false;
+    return Policy;
+}
+void AWildlightHUD::ApplyAutomaticGrowthPolicy(const wildlight::AutomaticGrowthPolicy& Policy)
+{
+    if (!CanEditAutomaticGrowth()) return;
+    auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
+    const auto Result = C->Arena->SetAutomaticGrowthPolicy(Policy);
+    C->Notify(Result.accepted ? TEXT("Automatic growth policy updated.") : UTF8_TO_TCHAR(Result.reason.c_str()));
+}
+FText AWildlightHUD::AutomaticGrowthStatusText() const
+{
+    const auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
+    if (!C || !IsValid(C->Arena)) return FText::GetEmpty();
+    for (uint32 Id : C->Arena->Selection)
+    {
+        const auto* B = C->Arena->Simulation.building(Id);
+        if (!B) continue;
+        if (B->kind != wildlight::BuildingKind::House && B->kind != wildlight::BuildingKind::Farm) return FText::GetEmpty();
+        const std::string Reason = C->Arena->Simulation.automatic_growth_status(B->id);
+        return FText::FromString(FString::Printf(TEXT("Level %d / 3  |  Automatic growth: %s"), static_cast<int32>(B->level), UTF8_TO_TCHAR(Reason.c_str())));
+    }
+    return FText::GetEmpty();
+}
+void AWildlightHUD::EnsureGrowthControls()
+{
+    if (GrowthControls.IsValid() || !GetWorld()) return;
+    UGameViewportClient* Viewport = GetWorld()->GetGameViewport();
+    if (!Viewport) return;
+    const FText GrowthLabel = FText::FromString(TEXT("Automatic house and farm growth"));
+    const FText WoodLabel = FText::FromString(TEXT("Protected wood reserve"));
+    const FText StoneLabel = FText::FromString(TEXT("Protected stone reserve"));
+    GrowthControls = SNew(SCanvas)
+        .Visibility_Lambda([this]() { return CanEditAutomaticGrowth() ? EVisibility::SelfHitTestInvisible : EVisibility::Collapsed; })
+        + SCanvas::Slot()
+        .Position(TAttribute<FVector2D>::CreateLambda([this]() { return GrowthControlsPosition; }))
+        .Size(TAttribute<FVector2D>::CreateLambda([this]() { return GrowthControlsSize; }))
+        [
+            SNew(SScaleBox)
+            .Stretch(EStretch::UserSpecified)
+            .UserSpecifiedScale_Lambda([this]() { return Scale; })
+            .HAlign(HAlign_Left).VAlign(VAlign_Top)
+            [
+                SNew(SBox)
+                .WidthOverride_Lambda([this]() { return GrowthControlsSize.X / Scale; })
+                [
+                    SNew(SVerticalBox)
+                    + SVerticalBox::Slot().AutoHeight()
+                    [
+                        SNew(SCheckBox)
+                        .IsFocusable(true)
+                        .AccessibleParams(FAccessibleWidgetData(GrowthLabel, GrowthLabel, true))
+                        .ToolTipText(FText::FromString(TEXT("Grow houses and farms automatically while keeping your protected reserves.")))
+                        .IsChecked_Lambda([this]() { return ReadAutomaticGrowthPolicy().enabled ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
+                        .OnCheckStateChanged_Lambda([this](ECheckBoxState State)
+                        {
+                            if (State == ECheckBoxState::Undetermined) return;
+                            auto Policy = ReadAutomaticGrowthPolicy();
+                            Policy.enabled = State == ECheckBoxState::Checked;
+                            ApplyAutomaticGrowthPolicy(Policy);
+                        })
+                        [
+                            SNew(STextBlock).Text(GrowthLabel)
+                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(Ink)
+                        ]
+                    ]
+                    + SVerticalBox::Slot().AutoHeight().Padding(0, 6, 0, 0)
+                    [
+                        SNew(SHorizontalBox)
+                        + SHorizontalBox::Slot().FillWidth(1).Padding(0, 0, 12, 0)
+                        [
+                            SNew(SNumericEntryBox<double>)
+                            .AllowSpin(false).AllowWheel(false)
+                            .MinValue(0.0).MaxValue(1000000.0)
+                            .MinFractionalDigits(0).MaxFractionalDigits(2).MinDesiredValueWidth(100)
+                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
+                            .AccessibleParams(FAccessibleWidgetData(WoodLabel, WoodLabel, true))
+                            .ToolTipText(FText::FromString(TEXT("Wood kept after automatic growth. Reserve range: 0 to 1,000,000.")))
+                            .Value_Lambda([this]() { return TOptional<double>(ReadAutomaticGrowthPolicy().protected_wood); })
+                            .OnValueCommitted_Lambda([this](double Value, ETextCommit::Type CommitType)
+                            {
+                                if (CommitType == ETextCommit::OnCleared) return;
+                                auto Policy = ReadAutomaticGrowthPolicy();
+                                Policy.protected_wood = Value;
+                                ApplyAutomaticGrowthPolicy(Policy);
+                            })
+                            .Label()
+                            [
+                                SNew(STextBlock).Text(FText::FromString(TEXT("Wood reserve")))
+                                .Font(FCoreStyle::GetDefaultFontStyle("Regular", 12)).ColorAndOpacity(Ink)
+                            ]
+                        ]
+                        + SHorizontalBox::Slot().FillWidth(1)
+                        [
+                            SNew(SNumericEntryBox<double>)
+                            .AllowSpin(false).AllowWheel(false)
+                            .MinValue(0.0).MaxValue(1000000.0)
+                            .MinFractionalDigits(0).MaxFractionalDigits(2).MinDesiredValueWidth(100)
+                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
+                            .AccessibleParams(FAccessibleWidgetData(StoneLabel, StoneLabel, true))
+                            .ToolTipText(FText::FromString(TEXT("Stone kept after automatic growth. Reserve range: 0 to 1,000,000.")))
+                            .Value_Lambda([this]() { return TOptional<double>(ReadAutomaticGrowthPolicy().protected_stone); })
+                            .OnValueCommitted_Lambda([this](double Value, ETextCommit::Type CommitType)
+                            {
+                                if (CommitType == ETextCommit::OnCleared) return;
+                                auto Policy = ReadAutomaticGrowthPolicy();
+                                Policy.protected_stone = Value;
+                                ApplyAutomaticGrowthPolicy(Policy);
+                            })
+                            .Label()
+                            [
+                                SNew(STextBlock).Text(FText::FromString(TEXT("Stone reserve")))
+                                .Font(FCoreStyle::GetDefaultFontStyle("Regular", 12)).ColorAndOpacity(Ink)
+                            ]
+                        ]
+                    ]
+                    + SVerticalBox::Slot().AutoHeight().Padding(0, 6, 0, 0)
+                    [
+                        SNew(STextBlock).Text_Lambda([this]() { return AutomaticGrowthStatusText(); })
+                        .AutoWrapText(true).Font(FCoreStyle::GetDefaultFontStyle("Regular", 12)).ColorAndOpacity(Gold)
+                    ]
+                ]
+            ]
+        ];
+    GrowthViewport = Viewport;
+    Viewport->AddViewportWidgetContent(GrowthControls.ToSharedRef(), 10);
+}
+void AWildlightHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (GrowthControls.IsValid() && GrowthViewport.IsValid()) GrowthViewport->RemoveViewportWidgetContent(GrowthControls.ToSharedRef());
+    GrowthControls.Reset();
+    GrowthViewport.Reset();
+    Super::EndPlay(EndPlayReason);
 }
 void AWildlightHUD::Panel(float X, float Y, float W, float H, FLinearColor Color)
 {
@@ -221,6 +378,12 @@ void AWildlightHUD::DrawMatch()
     const float MapSize = 216.f * Scale;
     const float BottomY = Canvas->ClipY - 252.f * Scale;
     const float X = 16.f * Scale, W = Canvas->ClipX - MapSize - 58.f * Scale;
+    const float GrowthTop = BottomY - 118.f * Scale;
+    Panel(X, GrowthTop, W, 106.f * Scale, PanelColor);
+    Panels.Add(FBox2D(FVector2D(X, GrowthTop), FVector2D(X + W, GrowthTop + 106.f * Scale)));
+    GrowthControlsPosition = FVector2D(X + 12.f * Scale, GrowthTop + 8.f * Scale);
+    GrowthControlsSize = FVector2D(W - 24.f * Scale, 90.f * Scale);
+    EnsureGrowthControls();
     Panel(X, BottomY, W, 236.f * Scale, PanelColor);
     Panels.Add(FBox2D(FVector2D(X, BottomY), FVector2D(X + W, Canvas->ClipY)));
     DrawMinimap(Canvas->ClipX - MapSize - 20.f * Scale, BottomY + 14.f * Scale, MapSize);
@@ -228,14 +391,15 @@ void AWildlightHUD::DrawMatch()
     const wildlight::Unit* U = nullptr;
     for (uint32 Id : C->Arena->Selection) { if (!B) B = C->Arena->Simulation.building(Id); if (!U) U = C->Arena->Simulation.unit(Id); }
     FString SelectionLabel = TEXT("Your kingdom");
-    if (B) SelectionLabel = Name(wildlight::definition(B->kind).name) + FString::Printf(TEXT("  /  %.0f%% built%s"), B->progress * 100, B->connected ? TEXT("  /  Connected") : TEXT(""));
+    if (B) SelectionLabel = Name(wildlight::definition(B->kind).name) + FString::Printf(TEXT("  /  Level %d  /  %.0f%% built%s"), static_cast<int32>(B->level), B->progress * 100, B->connected ? TEXT("  /  Connected") : TEXT(""));
     else if (U) SelectionLabel = Name(wildlight::definition(U->kind).name) + FString::Printf(TEXT("  /  %d selected"), C->Arena->Selection.Num());
     Label(SelectionLabel.Left(52), X + 12.f * Scale, BottomY + 12.f * Scale, 14.f, Gold);
     const float ActionX = X + W - 285.f * Scale;
     if (B)
     {
         Button(TEXT("Repair"), TEXT("repair"), TEXT("Select workers or engineers as well as this building."), ActionX, BottomY + 8.f * Scale, 82.f * Scale, 28.f * Scale);
-        Button(TEXT("Upgrade"), TEXT("upgrade"), TEXT("Improve a completed building (maximum level 3)."), ActionX + 90.f * Scale, BottomY + 8.f * Scale, 82.f * Scale, 28.f * Scale);
+        const FString UpgradeTip = TEXT("Improve a completed building (maximum level 3).\n") + CostText(wildlight::building_upgrade_cost(*B));
+        Button(TEXT("Upgrade"), TEXT("upgrade"), UpgradeTip, ActionX + 90.f * Scale, BottomY + 8.f * Scale, 82.f * Scale, 28.f * Scale);
         Button(TEXT("Dismantle"), TEXT("demolish"), TEXT("Dismantle the selected building and recover part of its cost."), ActionX + 180.f * Scale, BottomY + 8.f * Scale, 94.f * Scale, 28.f * Scale);
     }
     else if (U)
@@ -299,7 +463,7 @@ void AWildlightHUD::DrawMatch()
     if (C->bBuildPreview || C->bSpellPreview || C->bPatrolPreview)
     {
         const FString Hint = C->bBuildPreview ? TEXT("Choose a building site  |  R rotates  |  Right-click cancels") : C->bSpellPreview ? TEXT("Choose a spell target  |  Right-click cancels") : TEXT("Choose a patrol point  |  Right-click cancels");
-        Label(Hint, 24.f * Scale, BottomY - 32.f * Scale, 16.f, Gold);
+        Label(Hint, 24.f * Scale, GrowthTop - 32.f * Scale, 16.f, Gold);
     }
     else if (C->Arena->bTutorial)
     {

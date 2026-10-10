@@ -100,7 +100,7 @@ bool valid_resources(const Resources& resources) {
     return true;
 }
 
-// Version-1 persistence regression helpers intentionally exercise the file
+// Persistence regression helpers intentionally exercise the file
 // boundary with correctly checksummed invalid payloads. Otherwise corruption
 // tests would only prove that the checksum parser runs, not that data is valid.
 std::string raw_save(const std::string& saved) {
@@ -114,10 +114,10 @@ std::string raw_save(const std::string& saved) {
         raw.push_back(static_cast<char>(nibble(saved[i]) * 16 + nibble(saved[i + 1])));
     return raw;
 }
-std::string wrap_save(const std::string& raw) {
+std::string wrap_save(const std::string& raw, std::uint32_t version = SaveVersion) {
     std::uint32_t checksum = 2166136261u;
     for (const unsigned char byte : raw) { checksum ^= byte; checksum *= 16777619u; }
-    std::string saved = "WILDLIGHT " + std::to_string(SaveVersion) + " " + std::to_string(checksum) + "\n";
+    std::string saved = "WILDLIGHT " + std::to_string(version) + " " + std::to_string(checksum) + "\n";
     constexpr char hex[] = "0123456789abcdef";
     for (const unsigned char byte : raw) { saved += hex[byte >> 4]; saved += hex[byte & 15]; }
     return saved;
@@ -134,6 +134,610 @@ std::uint32_t read_u32(const std::string& raw, std::size_t offset) {
     for (int byte = 0; byte < 4; ++byte)
         result |= static_cast<std::uint32_t>(static_cast<unsigned char>(raw[offset + byte])) << (8 * byte);
     return result;
+}
+void write_u64(std::string& raw, std::size_t offset, std::uint64_t value) {
+    for (int byte = 0; byte < 8; ++byte) raw[offset + byte] = static_cast<char>(value >> (8 * byte));
+}
+std::size_t growth_extension_offset(const Simulation& sim, const std::string& raw) {
+    return raw.size() - (58 + 20 * sim.state().buildings.size());
+}
+std::string legacy_payload(const Simulation& sim) {
+    auto raw = raw_save(sim.serialize());
+    // The exact old payload ends before v2's faction count and metadata.
+    raw.resize(growth_extension_offset(sim, raw));
+    return raw;
+}
+bool payload_preserved(const Simulation& sim, const std::string& raw, std::uint32_t version) {
+    const auto restored = raw_save(sim.serialize());
+    return version == 1 ? restored.substr(0, growth_extension_offset(sim, restored)) == raw
+                        : restored == raw;
+}
+void isolate_growth(Simulation& sim) {
+    auto& state = const_cast<State&>(sim.state());
+    state.ai_timer = 100;
+    for (auto& unit : state.units) {
+        unit.order = OrderType::Idle;
+        unit.target_id = 0;
+        unit.job_id = 0;
+        unit.path.clear();
+        unit.path_index = 0;
+        unit.automatic_work = false;
+        unit.stance = Stance::Hold;
+    }
+}
+Building& test_building(Simulation& sim, Id id) {
+    return *const_cast<Building*>(sim.building(id));
+}
+Id completed_growth_building(Simulation& sim, BuildingKind kind, Owner owner = Owner::Player) {
+    const Id id = place_near_castle(sim, kind, owner);
+    if (id) test_building(sim, id).progress = 1;
+    isolate_growth(sim);
+    return id;
+}
+void add_residents(Simulation& sim, int count, Owner owner = Owner::Player) {
+    auto& state = const_cast<State&>(sim.state());
+    const Unit worker = *sim.unit(first_unit(sim, owner, UnitKind::Worker));
+    for (int i = 0; i < count; ++i) {
+        Unit resident = worker;
+        resident.id = state.next_id++;
+        state.units.push_back(resident);
+    }
+}
+Command growth_policy(Owner owner = Owner::Player, bool enabled = true,
+                      double wood = 100, double stone = 50) {
+    Command command;
+    command.type = CommandType::SetAutomaticGrowth;
+    command.owner = owner;
+    command.automatic_growth = {enabled, wood, stone};
+    return command;
+}
+
+bool automatic_policy_validation_is_atomic() {
+    Simulation sim;
+    CHECK(sim.state().factions[0].automatic_growth.enabled);
+    CHECK(sim.state().factions[1].automatic_growth.enabled);
+    CHECK(sim.issue(growth_policy(Owner::Player, false, 125, 75)));
+    CHECK(!sim.state().factions[0].automatic_growth.enabled);
+    CHECK(sim.state().factions[0].automatic_growth.protected_wood == 125);
+    CHECK(sim.state().factions[1].automatic_growth.protected_wood == 100);
+    CHECK(sim.issue(growth_policy(Owner::Enemy, true, 1000000, 1000000)));
+    CHECK(sim.issue(growth_policy(Owner::Player, true, 0, 0)));
+    for (double invalid : {-1.0, 1000000.01, std::numeric_limits<double>::quiet_NaN(),
+                           std::numeric_limits<double>::infinity()}) {
+        CHECK(reject_without_mutation(sim, growth_policy(Owner::Player, true, invalid, 50)));
+        CHECK(reject_without_mutation(sim, growth_policy(Owner::Player, true, 100, invalid)));
+    }
+    CHECK(reject_without_mutation(sim, growth_policy(Owner::Neutral)));
+    CHECK(reject_without_mutation(sim, growth_policy(static_cast<Owner>(255))));
+    auto malformed = growth_policy(); malformed.target_id = first_building(sim, Owner::Enemy, BuildingKind::Castle);
+    CHECK(reject_without_mutation(sim, malformed));
+    malformed.target_id = 0; malformed.ids = {first_unit(sim, Owner::Player, UnitKind::Worker)};
+    CHECK(reject_without_mutation(sim, malformed));
+    return true;
+}
+
+bool growth_reserves_use_deposited_stock_and_tolerance() {
+    for (double deficit : {0.0, 5e-9, 2e-8}) {
+        Simulation sim;
+        const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+        CHECK(farm);
+        test_building(sim, farm).harvested_food = 120;
+        auto& stock = const_cast<State&>(sim.state()).factions[0].resources;
+        stock.wood = 145.5 - deficit; stock.stone = 56.5;
+        advance(sim, 10);
+        CHECK(sim.building(farm)->level == (deficit <= 1e-8 ? 2 : 1));
+        CHECK(stock.wood + 1e-8 >= (deficit <= 1e-8 ? 100 : 145.5 - deficit));
+        CHECK(stock.stone + 1e-8 >= 50);
+    }
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(farm);
+    test_building(sim, farm).harvested_food = 120;
+    auto& state = const_cast<State&>(sim.state());
+    state.factions[0].resources.wood = 145;
+    state.factions[0].resources.stone = 56.5;
+    for (auto& unit : state.units)
+        if (unit.owner == Owner::Player && unit.kind == UnitKind::Worker) {
+            unit.cargo_kind = ResourceKind::Wood; unit.cargo = 12;
+        }
+    advance(sim, 10);
+    CHECK(sim.building(farm)->level == 1);
+    CHECK(sim.automatic_growth_status(farm).find("reserve") != std::string::npos);
+    CHECK(sim.issue(growth_policy(Owner::Player, true, 1000000, 1000000)));
+    advance(sim, 10);
+    CHECK(sim.building(farm)->level == 1);
+    CHECK(state.factions[0].resources.wood == 145);
+    for (double stone_deficit : {5e-9, 2e-8}) {
+        Simulation boundary;
+        const Id boundary_farm = completed_growth_building(boundary, BuildingKind::Farm);
+        CHECK(boundary_farm);
+        test_building(boundary, boundary_farm).harvested_food = 120;
+        CHECK(boundary.issue(growth_policy(Owner::Player, true, 0, 0)));
+        auto& stock = const_cast<State&>(boundary.state()).factions[0].resources;
+        stock.wood = 45.5; stock.stone = 6.5 - stone_deficit;
+        advance(boundary, 10);
+        CHECK(boundary.building(boundary_farm)->level == (stone_deficit < 1e-8 ? 2 : 1));
+        CHECK(stock.wood >= 0 && stock.stone >= 0);
+    }
+    return true;
+}
+
+bool housing_demand_resets_and_counts_queued_recruits() {
+    Simulation sim;
+    const Id house = completed_growth_building(sim, BuildingKind::House);
+    CHECK(house);
+    auto& state = const_cast<State&>(sim.state());
+    auto& castle = test_building(sim, first_building(sim, Owner::Player, BuildingKind::Castle));
+    castle.train_queue.assign(8, UnitKind::Worker);
+    castle.train_timer = 100;
+    advance(sim, 99);
+    CHECK(state.factions[0].population == 21);
+    CHECK(state.factions[0].housing_demand_ticks == 99);
+    castle.train_queue.clear();
+    advance(sim, 1);
+    CHECK(state.factions[0].housing_demand_ticks == 0);
+    CHECK(sim.building(house)->level == 1);
+    castle.train_queue.assign(8, UnitKind::Worker);
+    advance(sim, 50);
+    CHECK(state.factions[0].housing_demand_ticks == 50);
+    CHECK(sim.issue(growth_policy(Owner::Player, false)));
+    CHECK(state.factions[0].housing_demand_ticks == 0);
+    advance(sim, 50);
+    CHECK(state.factions[0].housing_demand_ticks == 0);
+    CHECK(sim.issue(growth_policy()));
+    advance(sim, 99);
+    CHECK(sim.building(house)->level == 1);
+    advance(sim, 1);
+    CHECK(sim.building(house)->level == 2);
+    CHECK(state.factions[0].population_limit == 34);
+    advance(sim, 1);
+    CHECK(state.factions[0].housing_demand_ticks == 0);
+    return true;
+}
+
+bool growth_priority_uses_stable_ids_and_skips_blocked_houses() {
+    Simulation sim;
+    const Id house = completed_growth_building(sim, BuildingKind::House);
+    const Id other_house = completed_growth_building(sim, BuildingKind::House);
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(house && other_house && farm);
+    test_building(sim, farm).harvested_food = 120;
+    add_residents(sim, 15);
+    auto& state = const_cast<State&>(sim.state());
+    state.factions[0].automatic_growth_cooldown_ticks = 100;
+    std::reverse(state.buildings.begin(), state.buildings.end());
+    advance(sim, 100);
+    CHECK(sim.building(house)->level == 2);
+    CHECK(sim.building(other_house)->level == 1);
+    CHECK(sim.building(farm)->level == 1);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    CHECK(state.factions[0].population_limit == 42);
+    CHECK(near(state.factions[0].resources.wood, 450 - 2 * 45 - 70 - 29.25));
+    Simulation blocked;
+    const Id blocked_house = completed_growth_building(blocked, BuildingKind::House);
+    const Id ready_farm = completed_growth_building(blocked, BuildingKind::Farm);
+    CHECK(blocked_house && ready_farm);
+    add_residents(blocked, 8);
+    test_building(blocked, blocked_house).health = definition(BuildingKind::House).health * 0.89;
+    test_building(blocked, ready_farm).harvested_food = 120;
+    const_cast<State&>(blocked.state()).factions[0].automatic_growth_cooldown_ticks = 100;
+    advance(blocked, 100);
+    CHECK(blocked.building(blocked_house)->level == 1);
+    CHECK(blocked.building(ready_farm)->level == 2);
+    Simulation unaffordable;
+    const Id expensive_house = completed_growth_building(unaffordable, BuildingKind::House);
+    const Id cheaper_farm = completed_growth_building(unaffordable, BuildingKind::Farm);
+    CHECK(expensive_house && cheaper_farm);
+    test_building(unaffordable, expensive_house).level = 2;
+    test_building(unaffordable, expensive_house).health = definition(BuildingKind::House).health * 1.35;
+    test_building(unaffordable, cheaper_farm).harvested_food = 120;
+    add_residents(unaffordable, 15);
+    auto& unaffordable_state = const_cast<State&>(unaffordable.state());
+    unaffordable_state.factions[0].resources.wood = 150;
+    unaffordable_state.factions[0].automatic_growth_cooldown_ticks = 100;
+    advance(unaffordable, 100);
+    CHECK(unaffordable.building(expensive_house)->level == 2);
+    CHECK(unaffordable.building(cheaper_farm)->level == 2);
+    CHECK(near(unaffordable_state.factions[0].resources.wood, 104.5));
+    return true;
+}
+
+bool farm_history_credits_actual_cargo_and_survives_disable() {
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(farm);
+    CHECK(sim.issue(growth_policy(Owner::Player, false)));
+    auto& worker = *const_cast<Unit*>(sim.unit(first_unit(sim, Owner::Player, UnitKind::Worker)));
+    worker.position = {sim.building(farm)->position.x + 2, sim.building(farm)->position.y};
+    worker.order = OrderType::Gather; worker.target_id = farm;
+    worker.cargo_kind = ResourceKind::Food; worker.cargo = 11.9;
+    const double stock = sim.state().factions[0].resources.food;
+    advance(sim, 1);
+    CHECK(near(sim.building(farm)->harvested_food, 0.1));
+    CHECK(near(worker.cargo, 12));
+    CHECK(near(sim.state().factions[0].resources.food, stock));
+    test_building(sim, farm).harvested_food = 119.95;
+    worker.order = OrderType::Gather; worker.cargo = 0; worker.target_id = farm;
+    advance(sim, 1);
+    CHECK(sim.building(farm)->harvested_food == 120);
+    CHECK(!sim.state().factions[0].automatic_growth.enabled);
+    worker.order = OrderType::Idle;
+    CHECK(sim.issue(growth_policy()));
+    advance(sim, 8);
+    CHECK(sim.building(farm)->level == 2);
+    CHECK(sim.building(farm)->harvested_food == 0);
+    CHECK(sim.issue(growth_policy(Owner::Player, false)));
+    worker.order = OrderType::Gather; worker.cargo = 0; worker.target_id = farm;
+    advance(sim, 1);
+    CHECK(sim.building(farm)->harvested_food > 0.5);
+    test_building(sim, farm).harvested_food = 239.99;
+    advance(sim, 1);
+    CHECK(sim.building(farm)->harvested_food == 240);
+    worker.order = OrderType::Idle;
+    CHECK(sim.issue(growth_policy()));
+    advance(sim, 148);
+    CHECK(sim.state().tick == 160);
+    CHECK(sim.building(farm)->level == 3);
+    CHECK(sim.building(farm)->harvested_food == 0);
+    worker.order = OrderType::Gather; worker.cargo = 0; worker.target_id = farm;
+    advance(sim, 1);
+    CHECK(sim.building(farm)->harvested_food == 0);
+    return true;
+}
+
+bool manual_growth_bypasses_reserve_and_resets_auto_cooldown() {
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    const Id house = completed_growth_building(sim, BuildingKind::House);
+    CHECK(farm && house);
+    test_building(sim, farm).harvested_food = 120;
+    auto& state = const_cast<State&>(sim.state());
+    state.factions[0].resources.wood = 120;
+    state.factions[0].resources.stone = 20;
+    CHECK(sim.issue(growth_policy(Owner::Player, true, 1000000, 1000000)));
+    Command upgrade; upgrade.type = CommandType::Upgrade; upgrade.target_id = farm;
+    test_building(sim, farm).health = definition(BuildingKind::Farm).health * 0.5;
+    CHECK(sim.issue(upgrade));
+    CHECK(sim.building(farm)->level == 2);
+    CHECK(sim.building(farm)->harvested_food == 0);
+    CHECK(near(sim.building(farm)->health, definition(BuildingKind::Farm).health * 1.35 * 0.5));
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    CHECK(near(state.factions[0].resources.wood, 74.5));
+    upgrade.target_id = house;
+    advance(sim, 1);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 149);
+    CHECK(sim.issue(upgrade));
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    upgrade.target_id = farm;
+    CHECK(reject_without_mutation(sim, upgrade));
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    CHECK(sim.issue(growth_policy(Owner::Player, false)));
+    sim.step(0);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    advance(sim, 150);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 0);
+    return true;
+}
+
+bool damage_health_completion_and_maximum_gate_growth() {
+    for (int condition = 0; condition < 5; ++condition) {
+        Simulation sim;
+        const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+        CHECK(farm);
+        auto& building = test_building(sim, farm);
+        building.harvested_food = 120;
+        if (condition == 0) building.progress = 0.99;
+        if (condition == 1) building.health *= 0.899;
+        if (condition == 2) building.last_damage_tick = 1;
+        if (condition == 3) { building.level = 3; building.harvested_food = 0; }
+        if (condition == 4) building.health *= 0.9;
+        advance(sim, 100);
+        CHECK(sim.building(farm)->level == (condition == 3 ? 3 : condition == 4 ? 2 : 1));
+        if (condition == 2) {
+            CHECK(sim.automatic_growth_status(farm).find("damage") != std::string::npos);
+            advance(sim, 9);
+            CHECK(sim.building(farm)->level == 1);
+            advance(sim, 1);
+            CHECK(sim.building(farm)->level == 2);
+        }
+    }
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(farm);
+    test_building(sim, farm).harvested_food = 120;
+    auto& state = const_cast<State&>(sim.state());
+    const Id projectile = state.next_id++;
+    state.projectiles.push_back({projectile, Owner::Enemy, sim.building(farm)->position, farm, 4, 10, false});
+    advance(sim, 1);
+    CHECK(sim.building(farm)->last_damage_tick == 1);
+    CHECK(sim.building(farm)->health < definition(BuildingKind::Farm).health);
+    advance(sim, 99);
+    CHECK(sim.building(farm)->level == 1);
+    advance(sim, 10);
+    CHECK(sim.building(farm)->level == 2);
+    return true;
+}
+
+bool automatic_growth_uses_absolute_phase_and_both_factions() {
+    Simulation sim;
+    const Id player = completed_growth_building(sim, BuildingKind::Farm);
+    const Id enemy = completed_growth_building(sim, BuildingKind::Farm, Owner::Enemy);
+    CHECK(player && enemy);
+    auto& state = const_cast<State&>(sim.state());
+    state.tick = 7;
+    test_building(sim, player).harvested_food = 120;
+    test_building(sim, enemy).harvested_food = 120;
+    advance(sim, 2);
+    CHECK(sim.building(player)->level == 1 && sim.building(enemy)->level == 1);
+    advance(sim, 1);
+    CHECK(sim.building(player)->level == 2 && sim.building(enemy)->level == 2);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 150);
+    CHECK(state.factions[1].automatic_growth_cooldown_ticks == 150);
+    test_building(sim, player).harvested_food = 240;
+    test_building(sim, enemy).harvested_food = 240;
+    advance(sim, 149);
+    CHECK(sim.building(player)->level == 2 && sim.building(enemy)->level == 2);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 1);
+    advance(sim, 1);
+    CHECK(sim.building(player)->level == 3 && sim.building(enemy)->level == 3);
+    Simulation manual_phase;
+    const Id manually_grown = completed_growth_building(manual_phase, BuildingKind::Farm);
+    CHECK(manually_grown);
+    auto& phase = const_cast<State&>(manual_phase.state());
+    phase.tick = 7;
+    Command upgrade; upgrade.type = CommandType::Upgrade; upgrade.target_id = manually_grown;
+    CHECK(manual_phase.issue(upgrade));
+    test_building(manual_phase, manually_grown).harvested_food = 240;
+    advance(manual_phase, 150);
+    CHECK(phase.tick == 157 && phase.factions[0].automatic_growth_cooldown_ticks == 0);
+    CHECK(manual_phase.building(manually_grown)->level == 2);
+    advance(manual_phase, 3);
+    CHECK(manual_phase.building(manually_grown)->level == 3);
+    return true;
+}
+
+bool terminal_outcomes_prevent_automatic_spending() {
+    for (Owner loser : {Owner::Player, Owner::Enemy}) {
+        Simulation sim;
+        const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+        CHECK(farm);
+        test_building(sim, farm).harvested_food = 120;
+        auto& state = const_cast<State&>(sim.state());
+        state.tick = 9;
+        test_building(sim, first_building(sim, loser, BuildingKind::Castle)).health = 0;
+        state.factions[0].resources.wood = 200;
+        const double wood = state.factions[0].resources.wood;
+        advance(sim, 1);
+        CHECK(state.outcome == (loser == Owner::Player ? MatchOutcome::EnemyVictory : MatchOutcome::PlayerVictory));
+        CHECK(sim.building(farm)->level == 1);
+        CHECK(state.factions[0].resources.wood == wood);
+        CHECK(state.factions[0].housing_demand_ticks == 0);
+    }
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(farm);
+    test_building(sim, farm).harvested_food = 120;
+    const double wood = sim.state().factions[0].resources.wood;
+    Command surrender; surrender.type = CommandType::Surrender;
+    CHECK(sim.issue(surrender));
+    advance(sim, 10);
+    CHECK(sim.building(farm)->level == 1);
+    CHECK(sim.state().factions[0].resources.wood == wood);
+    return true;
+}
+
+bool explicit_purchases_spend_before_automatic_growth() {
+    Simulation sim;
+    const Id farm = completed_growth_building(sim, BuildingKind::Farm);
+    CHECK(farm);
+    auto& state = const_cast<State&>(sim.state());
+    state.tick = 9;
+    state.factions[0].resources.wood = 145.5;
+    state.factions[0].resources.stone = 56.5;
+    test_building(sim, farm).harvested_food = 120;
+    CHECK(sim.automatic_growth_status(farm) == "Ready");
+    const Id house = place_near_castle(sim, BuildingKind::House);
+    CHECK(house);
+    isolate_growth(sim);
+    CHECK(near(state.factions[0].resources.wood, 100.5));
+    CHECK(near(state.factions[0].resources.stone, 46.5));
+    advance(sim, 1);
+    CHECK(sim.building(farm)->level == 1);
+    CHECK(near(state.factions[0].resources.wood, 100.5));
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 0);
+    return true;
+}
+
+bool same_tick_manual_upgrades_emit_distinct_level_events() {
+    Simulation sim;
+    const Id house = completed_growth_building(sim, BuildingKind::House);
+    CHECK(house);
+    const auto before = sim.state().events.size();
+    Command upgrade; upgrade.type = CommandType::Upgrade; upgrade.target_id = house;
+    CHECK(near(building_upgrade_cost(*sim.building(house)).wood, 29.25));
+    CHECK(sim.issue(upgrade));
+    CHECK(near(building_upgrade_cost(*sim.building(house)).wood, 58.5));
+    CHECK(sim.issue(upgrade));
+    CHECK(sim.state().events.size() == before + 2);
+    const auto& second = sim.state().events[before];
+    const auto& third = sim.state().events[before + 1];
+    CHECK(second.tick == third.tick && second.subject_id == house && third.subject_id == house);
+    CHECK(second.text == "Building upgraded to level 2.");
+    CHECK(third.text == "Building upgraded to level 3.");
+    return true;
+}
+
+bool version_one_migration_preserves_legacy_fields_without_inventing_history() {
+    Simulation original;
+    const Id house = completed_growth_building(original, BuildingKind::House);
+    const Id farm = completed_growth_building(original, BuildingKind::Farm);
+    CHECK(house && farm);
+    add_residents(original, 8);
+    CHECK(original.issue(growth_policy(Owner::Player, false)));
+    advance(original, 17);
+    test_building(original, farm).production_timer = 77;
+    test_building(original, farm).harvested_food = 115;
+    test_building(original, farm).last_damage_tick = 16;
+    const auto raw = legacy_payload(original);
+    const auto old_save = wrap_save(raw, 1);
+    CHECK(old_save.starts_with("WILDLIGHT 1 "));
+    Simulation restored;
+    CHECK(restored.deserialize(old_save));
+    CHECK(payload_preserved(restored, raw, 1));
+    CHECK(restored.serialize().starts_with("WILDLIGHT 2 "));
+    for (const auto& faction : restored.state().factions) {
+        CHECK(!faction.automatic_growth.enabled);
+        CHECK(faction.automatic_growth.protected_wood == 100);
+        CHECK(faction.automatic_growth.protected_stone == 50);
+        CHECK(faction.housing_demand_ticks == 0);
+        CHECK(faction.automatic_growth_cooldown_ticks == 0);
+    }
+    for (const auto& building : restored.state().buildings) {
+        CHECK(building.harvested_food == 0);
+        CHECK(building.last_damage_tick == 0);
+    }
+    CHECK(restored.building(farm)->production_timer == 77);
+    advance(restored, 113);
+    CHECK(restored.building(house)->level == 1);
+    CHECK(restored.issue(growth_policy()));
+    advance(restored, 99);
+    CHECK(restored.building(house)->level == 1);
+    advance(restored, 1);
+    CHECK(restored.building(house)->level == 2);
+    const auto before = restored.serialize();
+    std::vector<std::string> invalid{
+        wrap_save(raw.substr(0, raw.size() - 1), 1), wrap_save(raw + "extra", 1),
+        wrap_save(raw, 0), wrap_save(raw, 3), wrap_save(raw, 2)
+    };
+    auto damaged = raw; write_u32(damaged, 16, 0); invalid.push_back(wrap_save(damaged, 1));
+    damaged = raw; write_double(damaged, 8, std::numeric_limits<double>::quiet_NaN());
+    invalid.push_back(wrap_save(damaged, 1));
+    for (const auto& bytes : invalid) {
+        CHECK(!restored.deserialize(bytes));
+        CHECK(restored.serialize() == before);
+    }
+    return true;
+}
+
+bool version_two_extension_rejects_invalid_metadata_atomically() {
+    Simulation live;
+    const Id farm = completed_growth_building(live, BuildingKind::Farm);
+    const Id second_farm = completed_growth_building(live, BuildingKind::Farm);
+    const Id house = completed_growth_building(live, BuildingKind::House);
+    CHECK(farm && second_farm && house);
+    advance(live, 7);
+    test_building(live, farm).harvested_food = 120;
+    test_building(live, second_farm).level = 2;
+    test_building(live, second_farm).harvested_food = 240;
+    const auto before = live.serialize();
+    const auto raw = raw_save(before);
+    const auto extension = growth_extension_offset(live, raw);
+    CHECK(read_u32(raw, extension) == 2);
+    CHECK(read_u32(raw, extension + 54) == live.state().buildings.size());
+    Simulation valid;
+    CHECK(valid.deserialize(before));
+    CHECK(valid.serialize() == before);
+    std::vector<std::string> invalid;
+    const auto wrong_u32 = [&](std::size_t offset, std::uint32_t value) {
+        auto changed = raw; write_u32(changed, offset, value); invalid.push_back(wrap_save(changed));
+    };
+    const auto wrong_double = [&](std::size_t offset, double value) {
+        auto changed = raw; write_double(changed, offset, value); invalid.push_back(wrap_save(changed));
+    };
+    for (std::uint32_t count : {0u, 1u, 3u, 0xffffffffu}) wrong_u32(extension, count);
+    for (std::size_t faction = 0; faction < 2; ++faction) {
+        const auto base = extension + 4 + 25 * faction;
+        auto changed = raw; changed[base] = 2; invalid.push_back(wrap_save(changed));
+        changed = raw; changed[base] = 0; write_u32(changed, base + 17, 1);
+        invalid.push_back(wrap_save(changed));
+        for (double value : {-0.01, 1000000.01, std::numeric_limits<double>::quiet_NaN(),
+                             std::numeric_limits<double>::infinity()}) {
+            wrong_double(base + 1, value);
+            wrong_double(base + 9, value);
+        }
+        wrong_u32(base + 17, 101);
+        wrong_u32(base + 21, 151);
+    }
+    wrong_u32(extension + 54, 0);
+    wrong_u32(extension + 54, static_cast<std::uint32_t>(live.state().buildings.size() - 1));
+    wrong_u32(extension + 54, static_cast<std::uint32_t>(live.state().buildings.size() + 1));
+    const auto metadata = extension + 58;
+    wrong_u32(metadata, live.state().next_id);
+    wrong_u32(metadata + 20, read_u32(raw, metadata));
+    for (std::size_t i = 0; i < live.state().buildings.size(); ++i) {
+        const auto& building = live.state().buildings[i];
+        const auto entry = metadata + i * 20;
+        auto changed = raw; write_u64(changed, entry + 12, live.state().tick + 1);
+        invalid.push_back(wrap_save(changed));
+        for (double value : {-0.01, std::numeric_limits<double>::quiet_NaN(),
+                             std::numeric_limits<double>::infinity()}) wrong_double(entry + 4, value);
+        wrong_double(entry + 4, building.kind == BuildingKind::Farm ?
+                     (building.level == 1 ? 120.0001 : 240.0001) : 0.0001);
+    }
+    auto maxed = raw;
+    // The second farm's legacy level byte precedes its metadata; validate zero-only history at L3.
+    std::size_t cursor = 43 + read_u32(raw, 39);
+    for (int i = 0; i < 2; ++i) cursor += 4 + read_u32(raw, cursor) * 16;
+    for (int i = 0; i < 4; ++i) cursor += 4 + read_u32(raw, cursor);
+    cursor += 260 + 4;
+    for (const auto& building : live.state().buildings) {
+        if (building.id == second_farm) maxed[cursor + 39] = 3;
+        cursor += 85 + building.train_queue.size();
+    }
+    invalid.push_back(wrap_save(maxed));
+    invalid.push_back(wrap_save(raw.substr(0, extension)));
+    invalid.push_back(wrap_save(raw.substr(0, raw.size() - 1)));
+    invalid.push_back(wrap_save(raw + "extra"));
+    for (const auto& bytes : invalid) {
+        const auto result = live.deserialize(bytes);
+        CHECK(!result && !result.reason.empty());
+        CHECK(live.serialize() == before);
+    }
+    // Valid reordered entries prove that stable IDs, rather than vector indices, bind the data.
+    auto reordered = raw;
+    const auto first = raw.substr(metadata, 20), last = raw.substr(raw.size() - 20, 20);
+    reordered.replace(metadata, 20, last);
+    reordered.replace(raw.size() - 20, 20, first);
+    CHECK(valid.deserialize(wrap_save(reordered)));
+    CHECK(valid.building(farm)->harvested_food == 120);
+    CHECK(valid.building(second_farm)->harvested_food == 240);
+    return true;
+}
+
+bool growth_save_continuation_preserves_dwell_cooldown_and_split_steps() {
+    Simulation original, restored;
+    const Id house = completed_growth_building(original, BuildingKind::House);
+    const Id farm = completed_growth_building(original, BuildingKind::Farm);
+    CHECK(house && farm);
+    add_residents(original, 8);
+    test_building(original, farm).harvested_food = 120;
+    auto& state = const_cast<State&>(original.state());
+    state.factions[0].automatic_growth_cooldown_ticks = 100;
+    advance(original, 99);
+    CHECK(state.factions[0].housing_demand_ticks == 99);
+    CHECK(state.factions[0].automatic_growth_cooldown_ticks == 1);
+    CHECK(restored.deserialize(original.serialize()));
+    CHECK(restored.serialize() == original.serialize());
+    original.step(FixedStep); restored.step(FixedStep / 2); restored.step(FixedStep / 2);
+    CHECK(original.building(house)->level == 2);
+    CHECK(restored.serialize() == original.serialize());
+    advance(original, 149); advance(restored, 149);
+    CHECK(original.building(farm)->level == 1);
+    CHECK(restored.serialize() == original.serialize());
+    Simulation boundary;
+    CHECK(boundary.deserialize(original.serialize()));
+    advance(original, 1); advance(restored, 1); advance(boundary, 1);
+    CHECK(original.building(farm)->level == 2);
+    CHECK(restored.serialize() == original.serialize());
+    CHECK(boundary.serialize() == original.serialize());
+    Simulation no_capacity;
+    isolate_growth(no_capacity);
+    test_building(no_capacity, first_building(no_capacity, Owner::Player, BuildingKind::Castle)).progress = 0;
+    advance(no_capacity, 100);
+    CHECK(no_capacity.state().outcome == MatchOutcome::Playing);
+    CHECK(no_capacity.state().factions[0].population_limit == 0);
+    CHECK(no_capacity.state().factions[0].housing_demand_ticks == 0);
+    return true;
 }
 
 bool initial_state_and_ids() {
@@ -649,14 +1253,16 @@ bool corrupted_saves_fail_atomically() {
 bool checksummed_invalid_save_data_is_rejected() {
     Simulation sim;
     const auto before = sim.serialize();
-    const auto raw = raw_save(before);
-    CHECK(raw.size() > 15000 && wrap_save(raw) == before);
+    for (const std::uint32_t version : {1u, 2u}) {
+    const auto raw = version == 1 ? legacy_payload(sim) : raw_save(before);
+    CHECK(raw.size() > 15000);
+    CHECK(version == 1 || wrap_save(raw, version) == before);
     std::vector<std::string> invalid;
     const auto wrong_u32 = [&](std::size_t offset, std::uint32_t value) {
-        auto changed = raw; write_u32(changed, offset, value); invalid.push_back(wrap_save(changed));
+        auto changed = raw; write_u32(changed, offset, value); invalid.push_back(wrap_save(changed, version));
     };
     const auto wrong_double = [&](std::size_t offset, double value) {
-        auto changed = raw; write_double(changed, offset, value); invalid.push_back(wrap_save(changed));
+        auto changed = raw; write_double(changed, offset, value); invalid.push_back(wrap_save(changed, version));
     };
     wrong_double(8, std::numeric_limits<double>::quiet_NaN()); // Accumulator
     wrong_double(8, -0.01);
@@ -665,8 +1271,8 @@ bool checksummed_invalid_save_data_is_rejected() {
     wrong_u32(24, 3); // Map outside catalog
     wrong_u32(28, 65); // Unsupported map dimensions
     wrong_u32(39, 0xffffffffu); // Oversized terrain vector
-    auto changed = raw; changed[36] = static_cast<char>(255); invalid.push_back(wrap_save(changed));
-    changed = raw; changed[43] = static_cast<char>(255); invalid.push_back(wrap_save(changed));
+    auto changed = raw; changed[36] = static_cast<char>(255); invalid.push_back(wrap_save(changed, version));
+    changed = raw; changed[43] = static_cast<char>(255); invalid.push_back(wrap_save(changed, version));
 
     // Advance over terrain, crossing/objective vectors, and the four fog masks.
     std::size_t cursor = 43 + read_u32(raw, 39);
@@ -675,7 +1281,7 @@ bool checksummed_invalid_save_data_is_rejected() {
     CHECK(cursor + 260 + 4 + 170 < raw.size());
     wrong_double(cursor, std::numeric_limits<double>::infinity()); // Player wood
     wrong_double(cursor, -1); // Resource underflow
-    changed = raw; changed[cursor + 109] = static_cast<char>(255); invalid.push_back(wrap_save(changed));
+    changed = raw; changed[cursor + 109] = static_cast<char>(255); invalid.push_back(wrap_save(changed, version));
     cursor += 260;
     CHECK(read_u32(raw, cursor) == 2);
     cursor += 4;
@@ -683,12 +1289,13 @@ bool checksummed_invalid_save_data_is_rejected() {
     wrong_double(cursor + 23, 1e100); // Building health beyond maximum
     wrong_double(cursor + 31, 2); // Construction progress beyond completion
     wrong_u32(cursor + 85, read_u32(raw, cursor)); // Second castle duplicates first ID
-    changed = raw; changed[cursor + 5] = static_cast<char>(255); invalid.push_back(wrap_save(changed));
-    invalid.push_back(wrap_save(raw + "trailing bytes"));
+    changed = raw; changed[cursor + 5] = static_cast<char>(255); invalid.push_back(wrap_save(changed, version));
+    invalid.push_back(wrap_save(raw + "trailing bytes", version));
     for (const auto& bytes : invalid) {
         const auto result = sim.deserialize(bytes);
         CHECK(!result && !result.reason.empty());
         CHECK(sim.serialize() == before);
+    }
     }
     return true;
 }
@@ -697,7 +1304,8 @@ bool research_saves_reject_maxed_research_and_preserve_valid_states() {
     Simulation live;
     advance(live, 7);
     const auto before = live.serialize();
-    const auto raw = raw_save(before);
+    for (const std::uint32_t version : {1u, 2u}) {
+    const auto raw = version == 1 ? legacy_payload(live) : raw_save(before);
     std::size_t cursor = 43 + read_u32(raw, 39);
     for (int i = 0; i < 2; ++i) cursor += 4 + read_u32(raw, cursor) * 16;
     for (int i = 0; i < 4; ++i) cursor += 4 + read_u32(raw, cursor);
@@ -713,7 +1321,7 @@ bool research_saves_reject_maxed_research_and_preserve_valid_states() {
                 invalid[base + technology_offset + technology] = 2;
                 invalid[base + research_offset] = static_cast<char>(technology);
                 write_double(invalid, base + research_timer_offset, timer);
-                const auto result = live.deserialize(wrap_save(invalid));
+                const auto result = live.deserialize(wrap_save(invalid, version));
                 CHECK(!result && !result.reason.empty());
                 CHECK(live.serialize() == before);
             }
@@ -723,10 +1331,10 @@ bool research_saves_reject_maxed_research_and_preserve_valid_states() {
                     valid[base + technology_offset + technology] = static_cast<char>(level);
                     valid[base + research_offset] = static_cast<char>(technology);
                     write_double(valid, base + research_timer_offset, timer);
-                    const auto saved = wrap_save(valid);
+                    const auto saved = wrap_save(valid, version);
                     Simulation restored;
                     CHECK(restored.deserialize(saved));
-                    CHECK(restored.serialize() == saved);
+                    CHECK(payload_preserved(restored, valid, version));
                     restored.step(FixedStep);
                     const auto& state = restored.state().factions[faction];
                     CHECK(state.technologies[technology] == level + (timer == 0 ? 1 : 0));
@@ -748,12 +1356,13 @@ bool research_saves_reject_maxed_research_and_preserve_valid_states() {
         write_double(completed, base + research_timer_offset, 0);
     }
     Simulation restored;
-    const auto saved = wrap_save(completed);
+    const auto saved = wrap_save(completed, version);
     CHECK(restored.deserialize(saved));
-    CHECK(restored.serialize() == saved);
+    CHECK(payload_preserved(restored, completed, version));
     restored.step(FixedStep);
     for (const auto& faction : restored.state().factions)
         for (auto level : faction.technologies) CHECK(level == 2);
+    }
     return true;
 }
 
@@ -857,6 +1466,20 @@ int main() {
     const Test tests[]{
         {"initial state and stable IDs", initial_state_and_ids},
         {"housing pressure grows after 100 fixed ticks", housing_pressure_grows_after_one_hundred_ticks},
+        {"automatic policy validation is atomic", automatic_policy_validation_is_atomic},
+        {"automatic reserves use deposited stock and affordability tolerance", growth_reserves_use_deposited_stock_and_tolerance},
+        {"housing demand resets and counts queued recruits", housing_demand_resets_and_counts_queued_recruits},
+        {"automatic priority uses stable IDs and skips blocked houses", growth_priority_uses_stable_ids_and_skips_blocked_houses},
+        {"farm history credits actual cargo while growth is disabled", farm_history_credits_actual_cargo_and_survives_disable},
+        {"manual growth bypasses reserves and resets automatic cooldown", manual_growth_bypasses_reserve_and_resets_auto_cooldown},
+        {"damage, health, completion and maximum level gate growth", damage_health_completion_and_maximum_gate_growth},
+        {"automatic growth uses absolute phase for both factions", automatic_growth_uses_absolute_phase_and_both_factions},
+        {"terminal outcomes prevent automatic spending", terminal_outcomes_prevent_automatic_spending},
+        {"explicit purchases spend before automatic growth", explicit_purchases_spend_before_automatic_growth},
+        {"same-tick manual upgrades emit distinct tier events", same_tick_manual_upgrades_emit_distinct_level_events},
+        {"true version-1 migration preserves gameplay without fabricated history", version_one_migration_preserves_legacy_fields_without_inventing_history},
+        {"version-2 extension rejects malformed metadata atomically", version_two_extension_rejects_invalid_metadata_atomically},
+        {"growth save continuation preserves dwell, cooldown and split ticks", growth_save_continuation_preserves_dwell_cooldown_and_split_steps},
         {"seed and command determinism", deterministic_seed_and_commands},
         {"fixed-step partition and invalid time", fixed_step_partition},
         {"atomic command validation", command_validation_is_atomic},
@@ -878,7 +1501,7 @@ int main() {
         {"save roundtrip and deterministic continuation", save_roundtrip_and_continuation},
         {"corrupt save atomic rejection", corrupted_saves_fail_atomically},
         {"checksummed invalid persistence fields", checksummed_invalid_save_data_is_rejected},
-        {"research save invariants and version-1 compatibility", research_saves_reject_maxed_research_and_preserve_valid_states},
+        {"research save invariants and persistence compatibility", research_saves_reject_maxed_research_and_preserve_valid_states},
         {"research, upgrade and trade progression", research_upgrade_and_trade_progression},
         {"three AI personalities with honest resources", ai_personalities_obey_resource_rules},
         {"AI skirmish ends by castle defeat", normal_skirmish_reaches_castle_defeat},

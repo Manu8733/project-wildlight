@@ -49,6 +49,10 @@ bool WithinFootprint(const wildlight::Building& B, wildlight::Vec2 P)
     const int32 Top = FMath::FloorToInt(B.position.y) - H / 2;
     return P.x >= Left && P.x < Left + W && P.y >= Top && P.y < Top + H;
 }
+FString EventPresentationKey(const wildlight::Event& Event)
+{
+    return FString::Printf(TEXT("%u/%u/%s"), static_cast<uint32>(Event.owner), Event.subject_id, UTF8_TO_TCHAR(Event.text.c_str()));
+}
 }
 
 AWildlightEntity::AWildlightEntity()
@@ -169,6 +173,27 @@ UStaticMesh* AWildlightWorld::FindMesh(const FString& Identifier, UStaticMesh* F
     UStaticMesh* Mesh = LoadObject<UStaticMesh>(nullptr, *(TEXT("/Game/Wildlight/Meshes/") + Name + TEXT(".") + Name));
     return Mesh ? Mesh : Fallback;
 }
+UStaticMesh* AWildlightWorld::FindBuildingMesh(const wildlight::Building& Building)
+{
+    const bool bHouse = Building.kind == wildlight::BuildingKind::House;
+    const bool bFarm = Building.kind == wildlight::BuildingKind::Farm;
+    if (!bHouse && !bFarm) return FindMesh(BuildingNames[static_cast<int32>(Building.kind)], Cube);
+    const TCHAR* HouseTiers[] = {TEXT("SM_House_L1"), TEXT("SM_House_L2"), TEXT("SM_House_L3")};
+    const TCHAR* FarmTiers[] = {TEXT("SM_Farm_L1"), TEXT("SM_Farm_L2"), TEXT("SM_Farm_L3")};
+    const int32 Tier = FMath::Clamp(static_cast<int32>(Building.level) - 1, 0, 2);
+    const FString Name(bHouse ? HouseTiers[Tier] : FarmTiers[Tier]);
+    const FString Path = TEXT("/Game/Wildlight/Meshes/") + Name + TEXT(".") + Name;
+    if (UStaticMesh* Mesh = LoadObject<UStaticMesh>(nullptr, *Path, nullptr, LOAD_NoWarn | LOAD_Quiet)) return Mesh;
+    if (!MissingBuildingTierWarnings.Contains(Name))
+    {
+        MissingBuildingTierWarnings.Add(Name);
+        UE_LOG(LogTemp, Warning, TEXT("Missing building tier %s; using prototype fallback. Final level art is unavailable."), *Name);
+    }
+    const FString PrototypeName = bHouse ? TEXT("SM_House") : TEXT("SM_Farm");
+    const FString PrototypePath = TEXT("/Game/Wildlight/Meshes/") + PrototypeName + TEXT(".") + PrototypeName;
+    UStaticMesh* Prototype = LoadObject<UStaticMesh>(nullptr, *PrototypePath, nullptr, LOAD_NoWarn | LOAD_Quiet);
+    return Prototype ? Prototype : Cube;
+}
 UStaticMeshComponent* AWildlightWorld::MakeMesh(const FName& Name, UStaticMesh* Mesh, UMaterialInterface* Material)
 {
     UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(this, MakeUniqueObjectName(this, UStaticMeshComponent::StaticClass(), Name));
@@ -212,6 +237,7 @@ void AWildlightWorld::StartMatch(int32 Map, wildlight::AIPersonality Personality
     bPaused = false;
     AutosaveTimer = 0.f;
     PreviousHealth.Empty();
+    PresentedBuildingLevels.Empty();
     LastEventTick = 0; EventsAtLastTick.Empty();
     PreviousOutcome = wildlight::MatchOutcome::Playing;
     BuildArena();
@@ -345,17 +371,23 @@ void AWildlightWorld::RefreshPresentation()
         if (!V)
         {
             V = GetWorld()->SpawnActor<AWildlightEntity>();
+            Visuals.Add(B.id, V);
+            ClearDecorationsForBuilding(B);
+        }
+        const uint8* PresentedLevel = PresentedBuildingLevels.Find(B.id);
+        if (!PresentedLevel || *PresentedLevel != B.level)
+        {
             const auto& D = wildlight::definition(B.kind);
-            UStaticMesh* Mesh = FindMesh(BuildingNames[static_cast<int32>(B.kind)], Cube);
+            UStaticMesh* Mesh = FindBuildingMesh(B);
             const bool bFallback = Mesh == Cube;
             const FVector Bounds = Mesh->GetBounds().BoxExtent * 2;
             const bool bGate = B.kind == wildlight::BuildingKind::Gate && !bFallback;
             const double MeshWidth = bGate ? Bounds.Y : Bounds.X, MeshHeight = bGate ? Bounds.X : Bounds.Y;
             const double Fit = FMath::Min((D.width * CellSize - 4.) / FMath::Max(MeshWidth, 1.), (D.height * CellSize - 4.) / FMath::Max(MeshHeight, 1.));
+            V->Body->EmptyOverrideMaterials();
             V->Configure(Mesh, B.owner == wildlight::Owner::Player ? PlayerMaterial : EnemyMaterial, false, bFallback ? FVector(D.width * 2.f, D.height * 2.f, 2.5f) : FVector(FMath::Min(Fit, 1.3)), bGate ? 90.f : 0.f);
             if (bFallback) V->Body->SetMaterial(0, B.owner == wildlight::Owner::Player ? PlayerMaterial : EnemyMaterial);
-            Visuals.Add(B.id, V);
-            ClearDecorationsForBuilding(B);
+            PresentedBuildingLevels.Add(B.id, B.level);
         }
         V->SetActorLocation(BuildingWorldPosition(B));
         V->SetActorRotation(FRotator(0, B.rotation * 90.f, 0));
@@ -443,7 +475,7 @@ void AWildlightWorld::RefreshPresentation()
     }
     TArray<uint32> Remove;
     for (const auto& Pair : Visuals) if (!Alive.Contains(Pair.Key)) Remove.Add(Pair.Key);
-    for (uint32 Id : Remove) { if (Visuals[Id]) Visuals[Id]->Destroy(); Visuals.Remove(Id); Selection.Remove(Id); PreviousHealth.Remove(Id); }
+    for (uint32 Id : Remove) { if (Visuals[Id]) Visuals[Id]->Destroy(); Visuals.Remove(Id); Selection.Remove(Id); PreviousHealth.Remove(Id); PresentedBuildingLevels.Remove(Id); }
     UpdateLightLinks();
     PresentEvents();
 }
@@ -516,11 +548,23 @@ wildlight::CommandResult AWildlightWorld::Submit(const wildlight::Command& Comma
     if (Result.accepted)
     {
         RefreshPresentation();
-        const int32 Cue = Command.type == wildlight::CommandType::Build || Command.type == wildlight::CommandType::Upgrade ? 1 : Command.type == wildlight::CommandType::CastSpell ? 2 : 0;
-        PlayCue(Cue, ToWorld(Command.position), false);
+        // Upgrades use their event cue, including automatic transitions.
+        if (Command.type != wildlight::CommandType::Upgrade)
+        {
+            const int32 Cue = Command.type == wildlight::CommandType::Build ? 1 : Command.type == wildlight::CommandType::CastSpell ? 2 : 0;
+            PlayCue(Cue, ToWorld(Command.position), false);
+        }
     }
     else PlayCue(3, FVector::ZeroVector, false);
     return Result;
+}
+wildlight::CommandResult AWildlightWorld::SetAutomaticGrowthPolicy(const wildlight::AutomaticGrowthPolicy& Policy)
+{
+    wildlight::Command Command;
+    Command.type = wildlight::CommandType::SetAutomaticGrowth;
+    Command.owner = wildlight::Owner::Player;
+    Command.automatic_growth = Policy;
+    return Submit(Command);
 }
 void AWildlightWorld::UpdatePreview(bool bVisible, wildlight::BuildingKind Kind, wildlight::Vec2 Position, uint8 Rotation)
 {
@@ -554,7 +598,8 @@ bool AWildlightWorld::LoadMatch(const FString& Slot, FString& Error)
     if (!Result.accepted) { Error = UTF8_TO_TCHAR(Result.reason.c_str()); return false; }
     for (auto& Pair : Visuals) if (Pair.Value) Pair.Value->Destroy();
     Visuals.Empty(); Selection.Empty();
-    PreviousHealth.Empty(); LastEventTick = Simulation.state().tick; EventsAtLastTick.Empty();
+    PreviousHealth.Empty(); PresentedBuildingLevels.Empty();
+    InitializeEventCursorFromSave();
     PreviousOutcome = Simulation.state().outcome;
     bRunning = true; bPaused = false;
     BuildArena(); RefreshPresentation();
@@ -575,14 +620,21 @@ void AWildlightWorld::PresentEvents()
         if (Event.tick < LastEventTick) continue;
         if (Event.tick > LastEventTick) { LastEventTick = Event.tick; EventsAtLastTick.Empty(); }
         const FString Text = UTF8_TO_TCHAR(Event.text.c_str());
-        const FString Key = FString::Printf(TEXT("%u/%s"), Event.subject_id, *Text);
+        const FString Key = EventPresentationKey(Event);
         if (EventsAtLastTick.Contains(Key)) continue;
         EventsAtLastTick.Add(Key);
         if (Event.owner != wildlight::Owner::Player || !bRunning) continue;
-        if (Text.Contains(TEXT("completed")) || Text.Contains(TEXT("recruited")) || Text.Contains(TEXT("destroyed")))
+        if (Text.Contains(TEXT("completed")) || Text.Contains(TEXT("recruited")) || Text.Contains(TEXT("destroyed")) || Text.Contains(TEXT("upgraded")))
         {
             if (auto* Controller = Cast<AWildlightPlayerController>(UGameplayStatics::GetPlayerController(this, 0))) Controller->Notify(Text);
             PlayCue(Text.Contains(TEXT("destroyed")) ? 3 : 1, FVector::ZeroVector, false);
         }
     }
+}
+void AWildlightWorld::InitializeEventCursorFromSave()
+{
+    LastEventTick = Simulation.state().tick;
+    EventsAtLastTick.Empty();
+    for (const auto& Event : Simulation.state().events)
+        if (Event.tick == LastEventTick) EventsAtLastTick.Add(EventPresentationKey(Event));
 }

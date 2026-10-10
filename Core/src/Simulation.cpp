@@ -34,6 +34,18 @@ void deposit(FactionState &faction, ResourceKind resource, double amount) {
                                                              faction.resources.get(resource))));
 }
 bool complete(const Building &b) { return b.health > 0 && b.progress >= 1; }
+bool grows_automatically(BuildingKind kind) {
+    return kind == BuildingKind::House || kind == BuildingKind::Farm;
+}
+double farm_milestone(const Building &building) {
+    return building.kind != BuildingKind::Farm || building.level >= 3 ? 0
+           : building.level == 1 ? 120 : 240;
+}
+bool valid_growth_policy(const AutomaticGrowthPolicy &policy) {
+    return std::isfinite(policy.protected_wood) && policy.protected_wood >= 0 &&
+           policy.protected_wood <= 1000000 && std::isfinite(policy.protected_stone) &&
+           policy.protected_stone >= 0 && policy.protected_stone <= 1000000;
+}
 bool storage(BuildingKind k) { return k == BuildingKind::Castle || k == BuildingKind::Depot; }
 bool light_node(BuildingKind k) {
     return k == BuildingKind::Castle || k == BuildingKind::Beacon || k == BuildingKind::Sanctuary;
@@ -267,6 +279,16 @@ void Resources::add(ResourceKind k, double a) {
 bool Resources::can_afford(const Resources &c) const {
     return wood + 1e-8 >= c.wood && stone + 1e-8 >= c.stone && food + 1e-8 >= c.food &&
            gold + 1e-8 >= c.gold && mana + 1e-8 >= c.mana;
+}
+Resources building_upgrade_cost(const Building &building) {
+    Resources cost = definition(building.kind).cost;
+    const double multiplier = 0.65 * building.level;
+    cost.wood *= multiplier;
+    cost.stone *= multiplier;
+    cost.gold *= multiplier;
+    cost.food = 0;
+    cost.mana = 0;
+    return cost;
 }
 
 Simulation::Simulation() { new_match(); }
@@ -713,13 +735,23 @@ CommandResult Simulation::issue(const Command &c) {
     if (state_.outcome != MatchOutcome::Playing)
         return reject("The match has ended.");
     if (static_cast<unsigned>(c.owner) >= 2 ||
-        static_cast<unsigned>(c.type) > static_cast<unsigned>(CommandType::Surrender) ||
+        static_cast<unsigned>(c.type) > static_cast<unsigned>(CommandType::SetAutomaticGrowth) ||
         !finite(c.position) || c.ids.size() > MaximumEntities)
         return reject("Invalid command parameters.");
     auto &faction = state_.factions[side(c.owner)];
+    if (c.type == CommandType::SetAutomaticGrowth) {
+        if (!valid_growth_policy(c.automatic_growth) || c.target_id || !c.ids.empty())
+            return reject("Invalid automatic growth policy parameters.");
+        faction.automatic_growth = c.automatic_growth;
+        if (!faction.automatic_growth.enabled)
+            faction.housing_demand_ticks = 0;
+        return accept();
+    }
     if (c.type == CommandType::Surrender) {
         state_.outcome =
             c.owner == Owner::Player ? MatchOutcome::EnemyVictory : MatchOutcome::PlayerVictory;
+        for (auto &f : state_.factions)
+            f.housing_demand_ticks = 0;
         event(c.owner, 0, "The kingdom surrendered.");
         return accept();
     }
@@ -827,20 +859,8 @@ CommandResult Simulation::issue(const Command &c) {
         if (c.type == CommandType::Upgrade) {
             if (!complete(*b) || b->level >= 3)
                 return reject("This building cannot be upgraded further.");
-            Resources cost = definition(b->kind).cost;
-            cost.wood *= 0.65 * b->level;
-            cost.stone *= 0.65 * b->level;
-            cost.gold *= 0.65 * b->level;
-            cost.food = 0;
-            cost.mana = 0;
-            if (!faction.resources.can_afford(cost))
+            if (!upgrade_building(*b))
                 return reject("Not enough resources for the upgrade.");
-            double ratio = b->health / max_health(*b);
-            subtract(faction.resources, cost);
-            ++b->level;
-            b->health = max_health(*b) * ratio;
-            event(c.owner, b->id, "Building upgraded.");
-            recalculate_factions();
             return accept();
         }
         if (b->kind == BuildingKind::Castle)
@@ -1159,6 +1179,90 @@ void Simulation::recalculate_factions() {
             if (f.resources.get(k) > f.capacity.get(k))
                 f.resources.add(k, f.capacity.get(k) - f.resources.get(k));
 }
+bool Simulation::upgrade_building(Building &building) {
+    if (!complete(building) || building.level >= 3)
+        return false;
+    auto &faction = state_.factions[side(building.owner)];
+    const Resources cost = building_upgrade_cost(building);
+    if (!faction.resources.can_afford(cost))
+        return false;
+    const double health_fraction = building.health / max_health(building);
+    subtract(faction.resources, cost);
+    // The shared affordability tolerance must not leave a negative stock balance.
+    for (auto kind : {ResourceKind::Wood, ResourceKind::Stone, ResourceKind::Food,
+                      ResourceKind::Gold, ResourceKind::Mana})
+        if (faction.resources.get(kind) < 0)
+            faction.resources.add(kind, -faction.resources.get(kind));
+    ++building.level;
+    building.health = max_health(building) * health_fraction;
+    building.harvested_food = 0;
+    if (grows_automatically(building.kind))
+        faction.automatic_growth_cooldown_ticks = 150;
+    event(building.owner, building.id,
+          "Building upgraded to level " + std::to_string(building.level) + ".");
+    recalculate_factions();
+    return true;
+}
+std::string Simulation::automatic_growth_reason(const Building &building) const {
+    if (!grows_automatically(building.kind))
+        return "Manual upgrades only";
+    if (state_.outcome != MatchOutcome::Playing)
+        return "Match ended";
+    const auto &faction = state_.factions[side(building.owner)];
+    if (!faction.automatic_growth.enabled)
+        return "Automatic growth disabled";
+    if (building.level >= 3)
+        return "Maximum level";
+    if (!complete(building))
+        return "Construction unfinished";
+    if (building.health < max_health(building) * 0.9)
+        return "Repair needed (90% health required)";
+    if (building.last_damage_tick &&
+        (building.last_damage_tick > state_.tick || state_.tick - building.last_damage_tick < 100))
+        return "Recent damage (10 seconds without damage required)";
+    if (building.kind == BuildingKind::House && faction.housing_demand_ticks < 100)
+        return "Housing demand (80% capacity for 10 seconds required)";
+    if (building.kind == BuildingKind::Farm && building.harvested_food < farm_milestone(building))
+        return "Farm production (" + std::to_string(static_cast<int>(building.harvested_food)) +
+               "/" + std::to_string(static_cast<int>(farm_milestone(building))) + " food)";
+    if (faction.automatic_growth_cooldown_ticks)
+        return "Automatic growth cooldown";
+    const Resources cost = building_upgrade_cost(building);
+    if (!faction.resources.can_afford(cost) ||
+        faction.resources.wood - cost.wood + 1e-8 < faction.automatic_growth.protected_wood ||
+        faction.resources.stone - cost.stone + 1e-8 < faction.automatic_growth.protected_stone)
+        return "Protected reserve (deposited wood and stone required)";
+    return "Ready";
+}
+std::string Simulation::automatic_growth_status(Id id) const {
+    const auto *candidate = building(id);
+    return candidate ? automatic_growth_reason(*candidate) : "Building unavailable";
+}
+void Simulation::update_automatic_growth() {
+    for (auto &faction : state_.factions) {
+        const bool pressure = faction.population_limit > 0 &&
+                              static_cast<std::int64_t>(faction.population) * 5 >=
+                                  static_cast<std::int64_t>(faction.population_limit) * 4;
+        if (!faction.automatic_growth.enabled || state_.outcome != MatchOutcome::Playing || !pressure)
+            faction.housing_demand_ticks = 0;
+        else
+            faction.housing_demand_ticks = std::min(100u, faction.housing_demand_ticks + 1);
+    }
+    if (state_.outcome != MatchOutcome::Playing || state_.tick % 10 != 0)
+        return;
+    for (Owner owner : {Owner::Player, Owner::Enemy}) {
+        Building *candidate = nullptr;
+        for (auto &building : state_.buildings) {
+            if (building.owner != owner || automatic_growth_reason(building) != "Ready")
+                continue;
+            if (!candidate || (building.kind == BuildingKind::House && candidate->kind != BuildingKind::House) ||
+                (building.kind == candidate->kind && building.id < candidate->id))
+                candidate = &building;
+        }
+        if (candidate)
+            upgrade_building(*candidate);
+    }
+}
 void Simulation::update_network() {
     for (auto &b : state_.buildings)
         b.connected = false;
@@ -1455,6 +1559,7 @@ void Simulation::damage(Id id, double amount, bool siege, Owner source) {
             (b->kind == BuildingKind::Wall || b->kind == BuildingKind::Gate ? 8.0 : 2.0) +
             state_.factions[side(owner)].technologies[2] * 2.0;
         b->health -= std::max(1.0, amount - armor);
+        b->last_damage_tick = state_.tick;
         if (b->health <= 0) {
             b->health = 0;
             ++state_.factions[side(owner)].buildings_lost;
@@ -1633,6 +1738,8 @@ void Simulation::update_units() {
                 }
                 u.cargo_kind = kind;
                 u.cargo += amount;
+                if (farming && farm->level < 3 && amount > 0)
+                    farm->harvested_food = std::min(farm_milestone(*farm), farm->harvested_food + amount);
                 if (u.cargo >= 12 - 1e-8 || (!farming && n->remaining <= 0)) {
                     u.order = OrderType::ReturnCargo;
                     clear_path(u);
@@ -2086,6 +2193,9 @@ void Simulation::update_ai() {
 }
 void Simulation::fixed_step() {
     ++state_.tick;
+    for (auto &faction : state_.factions)
+        if (faction.automatic_growth_cooldown_ticks)
+            --faction.automatic_growth_cooldown_ticks;
     update_effects();
     update_network();
     recalculate_factions();
@@ -2105,6 +2215,7 @@ void Simulation::fixed_step() {
     update_network();
     update_visibility();
     update_outcome();
+    update_automatic_growth();
 }
 void Simulation::step(double seconds) {
     if (!std::isfinite(seconds) || seconds <= 0 || seconds > 3600 ||
@@ -2350,7 +2461,23 @@ std::string Simulation::serialize() const {
     w.number(s.ai_timer);
     w.number(s.upkeep_timer);
     w.u32(s.ai_phase);
-    std::string result = "WILDLIGHT 1 " + std::to_string(checksum(w.bytes)) + "\n";
+    // Preserve the complete v1 payload above; all new state is in this extension.
+    w.u32(static_cast<std::uint32_t>(s.factions.size()));
+    for (const auto &faction : s.factions) {
+        w.u8(faction.automatic_growth.enabled ? 1 : 0);
+        w.number(faction.automatic_growth.protected_wood);
+        w.number(faction.automatic_growth.protected_stone);
+        w.u32(faction.housing_demand_ticks);
+        w.u32(faction.automatic_growth_cooldown_ticks);
+    }
+    w.u32(static_cast<std::uint32_t>(s.buildings.size()));
+    for (const auto &building : s.buildings) {
+        w.u32(building.id);
+        w.number(building.harvested_food);
+        w.u64(building.last_damage_tick);
+    }
+    std::string result = "WILDLIGHT " + std::to_string(SaveVersion) + " " +
+                         std::to_string(checksum(w.bytes)) + "\n";
     result.reserve(result.size() + w.bytes.size() * 2);
     constexpr char hex[] = "0123456789abcdef";
     for (unsigned char c : w.bytes) {
@@ -2366,11 +2493,12 @@ LoadResult Simulation::deserialize(const std::string &input) {
     auto newline = input.find('\n');
     if (newline == std::string::npos || newline > 64)
         return fail("Invalid save header.");
-    constexpr std::string_view prefix = "WILDLIGHT 1 ";
-    if (input.compare(0, prefix.size(), prefix) != 0)
+    constexpr std::string_view legacy_prefix = "WILDLIGHT 1 ", current_prefix = "WILDLIGHT 2 ";
+    const bool legacy = input.compare(0, legacy_prefix.size(), legacy_prefix) == 0;
+    if (!legacy && input.compare(0, current_prefix.size(), current_prefix) != 0)
         return fail("Unsupported save format or schema version.");
     std::uint32_t expected = 0;
-    auto parsed = std::from_chars(input.data() + prefix.size(), input.data() + newline, expected);
+    auto parsed = std::from_chars(input.data() + current_prefix.size(), input.data() + newline, expected);
     if (parsed.ec != std::errc{} || parsed.ptr != input.data() + newline)
         return fail("Invalid save checksum field.");
     if ((input.size() - newline - 1) % 2)
@@ -2536,6 +2664,42 @@ LoadResult Simulation::deserialize(const std::string &input) {
     s.ai_timer = r.number();
     s.upkeep_timer = r.number();
     s.ai_phase = r.u32();
+    if (legacy) {
+        for (auto &faction : s.factions)
+            faction.automatic_growth.enabled = false;
+    } else {
+        if (r.count(s.factions.size()) != s.factions.size())
+            return fail("Invalid automatic growth faction count.");
+        for (auto &faction : s.factions) {
+            const auto enabled = r.u8();
+            faction.automatic_growth.enabled = enabled != 0;
+            faction.automatic_growth.protected_wood = r.number();
+            faction.automatic_growth.protected_stone = r.number();
+            faction.housing_demand_ticks = r.u32();
+            faction.automatic_growth_cooldown_ticks = r.u32();
+            if (enabled > 1 || !valid_growth_policy(faction.automatic_growth) ||
+                faction.housing_demand_ticks > 100 || faction.automatic_growth_cooldown_ticks > 150 ||
+                (!faction.automatic_growth.enabled && faction.housing_demand_ticks != 0))
+                return fail("Invalid automatic growth policy or timer.");
+        }
+        const auto metadata_count = r.count(MaximumEntities);
+        if (metadata_count != s.buildings.size())
+            return fail("Incomplete automatic growth building metadata.");
+        std::unordered_set<Id> metadata_ids;
+        for (std::size_t i = 0; i < metadata_count && r.ok; ++i) {
+            const Id id = r.u32();
+            const double harvested_food = r.number();
+            const auto last_damage_tick = r.u64();
+            auto building = std::find_if(s.buildings.begin(), s.buildings.end(),
+                                         [&](const auto &candidate) { return candidate.id == id; });
+            if (building == s.buildings.end() || !metadata_ids.insert(id).second ||
+                !std::isfinite(harvested_food) || harvested_food < 0 ||
+                harvested_food > farm_milestone(*building) || last_damage_tick > s.tick)
+                return fail("Invalid automatic growth building metadata.");
+            building->harvested_food = harvested_food;
+            building->last_damage_tick = last_damage_tick;
+        }
+    }
     if (!r.ok || r.index != raw.size())
         return fail("Truncated, oversized, or trailing save data.");
     auto bounded = [](double value, double low, double high) {
