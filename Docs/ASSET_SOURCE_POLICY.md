@@ -20,13 +20,25 @@ User instruction, 10 October 2026: Epic/Fab library first; Meshy only for what c
 
 The first two cached listings declare `isAiForbidden: true`. They must not be Meshy or other generative-AI inputs. A WPO function name in the third package does not prove leaf animation. This cache inventory does not establish that only three packages are owned.
 
-A bounded follow-up checked C: and D:, 18 standard alternate cache paths and selected shallow project/download directories. No additional downloaded tree, crop/farm or house-level kit was located. This is not a confirmed account-library gap: the full online Fab library still requires Epic authentication in Chrome, and custom/unmounted locations remain unverified. Do not submit new Meshy jobs until that source-selection gate is resolved.
+A bounded follow-up checked C: and D:, 18 standard alternate cache paths and selected shallow project/download directories. No additional downloaded tree, crop/farm or house-level kit was located. This local search did not establish an account-library gap.
+
+The authenticated Fab library was subsequently inspected through rendered product cards: 59 of 59 listed products were observed. Relevant owned candidates include three Megascans tree species, grass and flowers, modular houses/castles, the Stylized Harvest Farm environment and a Melee Weapon Aura VFX pack. The full account inventory stays in local outputs, not in the public repository. The shortlist and verification limits are recorded in `FAB_ASSET_SHORTLIST.md`; owning a listing does not prove its files are downloaded, compatible with 5.8.1 or final-quality for Wildlight.
+
+## Vegetation And VFX Acceptance
+
+- The user rejected the previous Meshy oak as a final tree. Preserve its historical files; do not use it as the final map tree or keep refining it in place of a suitable library candidate.
+- Trees, grass and flowers must visibly react to gentle wind and gusts. A skeleton alone is insufficient evidence; material-driven WPO/Pivot Painter or a suitable skeletal wind system must preserve anchored roots/stem bases and appropriate branch/leaf motion.
+- The three owned Megascans tree listings declare simple and Pivot Painter wind plus LOD/quality tiers. This is publisher evidence, not a verified Wildlight import. Preserve their existing wind metadata if adapting geometry in Blender; regenerated vertex colors/UVs can destroy masks and pivots.
+- Retain source textures/UVs, opacity/translucency, normals, scale and LOD data as appropriate. The recovered palette-only importer disables material/texture import and cannot silently be reused for these PBR assets. Its validator also rejects textured GLBs; extend the contract with tests before adopting a textured pipeline.
+- Check rooted deformation, per-instance variation, culling bounds, shadows, Low-preset performance and visual motion in a compatible real Unreal session. No final wind/rig/performance acceptance is claimed from a product description.
+- Niagara effects follow the same library-first order. The owned melee aura pack may supply suitable weapon glows, but its listing's links to other packs do not establish ownership of their trails, impact or projectile systems. Search environment packages for included effects before declaring a specific gameplay VFX missing.
+- No local Blender render, Unreal session or GPU work is authorized by the latest cloud-first instruction. Cloud Core execution is separate from a compatible Blender/Unreal/GPU authoring environment; the latter is not currently established.
 
 ## Public Repository Boundary
 
 Do not commit Epic/Fab raw assets, exports, textures or derived redistributable copies until their license and public redistribution permissions are verified. Public source code, import instructions and non-sensitive provenance records are separate from licensed content. No Epic library files have been published in this session.
 
-The original Meshy oak was a separately approved free-plan test. Its CC BY 4.0 attribution and retained source must accompany public distribution. It is not mislabeled as Meshy 7/7.1 or as a privately licensed asset.
+The original Meshy oak was a separately approved free-plan test, subsequently rejected for final art. Its CC BY 4.0 attribution and retained source must accompany any public distribution. It is not mislabeled as Meshy 7/7.1 or as a privately licensed asset.
 
 ## Model Access Check
 

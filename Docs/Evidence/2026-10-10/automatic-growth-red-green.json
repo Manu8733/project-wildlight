@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-10",
+  "execution_host": "GitHub Actions ubuntu-24.04",
+  "local_compilation_executed": false,
+  "unreal_compiled": false,
+  "gpu_performance_verified": false,
+  "runs": [
+    {
+      "commit": "8051741aaed275f80cc7469914f1020a13673f4a",
+      "url": "https://github.com/Manu8733/project-wildlight/actions/runs/38068182608",
+      "expected_failure": true,
+      "result": "Core compiled; missing automatic House transition failed at tick 100. 28/29 scenarios and 776 assertions evaluated; 14 Python tests passed."
+    },
+    {
+      "commit": "131b6453adbb86eb161f18b56a7ad24957f9dcdd",
+      "url": "https://github.com/Manu8733/project-wildlight/actions/runs/38068319671",
+      "expected_failure": true,
+      "result": "Four new static adapter wiring checks failed; 14 existing Python tests passed. Core execution was skipped after Python failure."
+    },
+    {
+      "commit": "bde36656cfeb644b01b11faea2083a1d60d90a41",
+      "url": "https://github.com/Manu8733/project-wildlight/actions/runs/38069139071",
+      "expected_failure": false,
+      "result": "18 Python tests, six normal Core checks, 43/43 scenarios with 1471 assertions, 600 headless ticks and release CMake/CTest 2/2 passed.",
+      "verification_artifact_id": 11676431744,
+      "artifact_digest": "sha256:c32c066e45da445ebdf7555e758468f2d72c79493fd3c1df8f3adafd4affd4da",
+      "review": "Independent three-file Core review found no actionable issues. Adapter review found guidance/tooltip overlap and hidden fractional costs; these are not accepted by this first GREEN result."
+    },
+    {
+      "commit": "b7a366ef26f9e4c22ce419f24a5e25101d41a732",
+      "url": "https://github.com/Manu8733/project-wildlight/actions/runs/38069439951",
+      "expected_failure": true,
+      "result": "Three new static presentation contracts failed; 18 previous Python tests passed. Actual responsive Unreal screenshots are still required."
+    },
+    {
+      "commit": "3d79dd0134034c76799ecc8e79095109407f878a",
+      "url": "https://github.com/Manu8733/project-wildlight/actions/runs/38069755954",
+      "expected_failure": false,
+      "result": "21 Python tests, six normal Core checks, 43/43 scenarios with 1471 assertions, 600 headless ticks, release CTest 2/2 and debug ASan/UBSan/LSan CTest 2/2 passed.",
+      "compiler": "GNU 13.3.0",
+      "verification_artifact_id": 11676517154,
+      "artifact_digest": "sha256:f2eb2100b55f7f03a4088ba9a4b26324ac502c639225894c32daeaeab5015999",
+      "sanitizer_environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:halt_on_error=1",
+        "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+      },
+      "review": "Tooltip layering, vertical fit and fractional costs corrected. Whole-change review identified a remaining mixed-selection HUD/command target mismatch; follow-up correction pending."
+    }
+  ],
+  "limits": [
+    "Static adapter checks do not compile or exercise Unreal.",
+    "No compatible cloud Unreal/Blender/GPU authoring environment is established.",
+    "The historical Codex Cloud LeakSanitizer /proc failure remains preserved; the newer GitHub leak-enabled sanitizer pass is a separate host and exact-commit result.",
+    "No acceptance flags or original checklist entries changed."
+  ]
+}

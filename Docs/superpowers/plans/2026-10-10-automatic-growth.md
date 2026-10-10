@@ -6,7 +6,7 @@
 
 **Architecture:** Extend the existing fixed-step Core, not frame-driven Blueprint rules. Reuse a single upgrade-price/application path; store bounded production and policy metadata in a version-2 save extension. Unreal reads authoritative state, refreshes tier meshes and submits validated policy commands.
 
-**Tech Stack:** C++20 portable Core, existing Unreal 5.8.1 C++ adapter, Python unittest, GitHub Ubuntu worker and existing Codex Cloud verification chat.
+**Tech Stack:** C++20 portable Core, existing Unreal 5.8.1 C++ adapter, Python unittest and GitHub Ubuntu workers. The existing Codex Cloud verification chat is currently unreachable.
 
 ## Global Constraints
 
@@ -111,7 +111,7 @@ self.assertIn('SM_House_L', world_source)
 self.assertIn('SM_Farm_L', world_source)
 ```
 
-- [ ] Implement controls with existing UMG patterns, accessible labels and finite numeric reserve bounds. Do not let the HUD make eligibility decisions or mutate Core state directly.
+- [ ] Implement controls with Slate, matching the existing Canvas HUD and already-enabled Slate dependencies, accessible labels and finite numeric reserve bounds. Do not let the HUD make eligibility decisions or mutate Core state directly.
 - [ ] Cache authoritative building level per actor; look for the exact tier asset and refresh on changes or direct loaded tier. Fallback to an available prototype with one diagnostic per missing tier; do not describe fallback as completed visual growth.
 - [ ] Preserve transform, selection, fog and actor identity. Initialize event deduplication at save/load so events on the saved tick cannot replay upgrade cues.
 - [ ] Run contract checks and all regressions on the cloud worker. Review source for engine API plausibility and preserve `ImplementedNotEngineVerified`: no compatible cloud engine exists yet.
@@ -122,7 +122,7 @@ self.assertIn('SM_Farm_L', world_source)
 **Files:** `Docs/SESSION_HANDOFF.md`, `Docs/CHANGELOG.md`, dated evidence; user-facing checkpoint summary/archive under chat outputs.
 
 - [ ] Fetch the remote and verify no unrelated upstream commits are overwritten. Run `git diff --check` and scan changed files for credentials and licensed binaries.
-- [ ] Run `python3 -m unittest discover -s Tests -p 'test_*.py'` and `python3 Tools/verify.py --core-only` in cloud for the exact code commit. Report actual counts, commands and workflow URL. Preserve the known LeakSanitizer limitation; no default sanitizer success may be claimed.
+- [ ] Run `python3 -m unittest discover -s Tests -p 'test_*.py'`, `python3 Tools/verify.py --core-only`, and the existing CMake/CTest suite in cloud for the exact code commit. Report actual counts, commands and workflow URL. Preserve the known LeakSanitizer limitation; no default sanitizer success may be claimed.
 - [ ] Obtain an independent whole-change review covering reserve underflow, deterministic scheduling, v1/v2 persistence and presentation feedback. Resolve important findings, rerun affected tests, then merge normally into main and push.
 - [ ] Record exact remote SHA and verification. Export a source-only Git archive and verify ZIP entries/CRC and original brief hash. Do not include missing assets or licensed Fab files.
 - [ ] Tell the user what works in Core, what remains engine/art-unverified, and leave the Fab login tab for inventory. Show real render progress only when there is an actual new rendered artifact; no local rendering is allowed by the latest instruction.

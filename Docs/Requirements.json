@@ -2224,10 +2224,11 @@
     "public_push_approved": true,
     "created_by": "User after integration create permission rejection",
     "pushed": true,
-    "verified_push_commit": "1f7423945de61d40f04bcf6e27833cb4732dabf7",
+    "verified_push_commit": "3d79dd0134034c76799ecc8e79095109407f878a",
+    "verified_push_ref": "refs/heads/codex/automatic-growth",
     "hosted_checks_verified": true,
-    "hosted_checks_commit": "1f7423945de61d40f04bcf6e27833cb4732dabf7",
-    "hosted_checks_url": "https://github.com/Manu8733/project-wildlight/actions/runs/38065197895"
+    "hosted_checks_commit": "3d79dd0134034c76799ecc8e79095109407f878a",
+    "hosted_checks_url": "https://github.com/Manu8733/project-wildlight/actions/runs/38069755954"
   },
   "verification_runs": [
     {
@@ -2254,6 +2255,11 @@
       "summary": "Source checkpoint 1f74239 matched origin/main and passed the GitHub Python/core workflow. Independent cloud tests passed 14/14 Python and six normal core checks, 28 scenarios/769 assertions, 600 ticks. Default sanitizer run FAILED because LeakSanitizer cannot read cloud /proc task data; same sanitized binaries passed ASan/UBSan with detect_leaks=0. Leak detection, Unreal and GPU remain unverified.",
       "evidence_path": "https://chatgpt.com/c/6aca4e5e-be78-83eb-aa4c-46fca7061ac8",
       "command": "python3 -m unittest discover -s Tests -p 'test_*.py'; python3 Tools/verify.py --core-only; python3 Tools/verify.py --core-only --sanitize; supplemental sanitized binary execution with ASAN_OPTIONS=detect_leaks=0"
+    },
+    {
+      "summary": "Feature source checkpoint 3d79dd0 on codex/automatic-growth passed GitHub Ubuntu: 21 Python tests, six normal checks, 43/43 scenarios and 1471 assertions, 600 headless ticks, release CTest 2/2 and debug ASan/UBSan/LSan CTest 2/2 with detect_leaks=1. Core is independently reviewed. A mixed-selection HUD/command target issue remains under correction; engine, final tier models, wind, Niagara and acceptance remain unverified.",
+      "evidence_path": "Evidence/2026-10-10/automatic-growth-red-green.json",
+      "command": "python3 -m unittest discover -s Tests -p 'test_*.py'; python3 Tools/verify.py --core-only; Release and WILDLIGHT_SANITIZE=ON Debug CMake builds and CTest; workflow 38069755954"
     }
   ]
 }

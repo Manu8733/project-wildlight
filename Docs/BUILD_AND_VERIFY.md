@@ -4,7 +4,7 @@ Run commands from the repository root. Build directories and logs are generated 
 
 ## Cloud-compatible simulation
 
-Requirements: a C++20 compiler and Python 3. The actual cloud toolchain is Linux with g++ 14; Unreal is absent. The canonical verifier invokes the compiler directly; it does not depend on CMake.
+Requirements: a C++20 compiler and Python 3. Current execution uses GitHub Ubuntu workers; record their actual compiler/runtime versions with each verification. The earlier durable Codex Cloud host is currently unreachable. No compatible cloud Unreal/Blender/GPU toolchain is established. The canonical verifier invokes the compiler directly; it does not depend on CMake.
 
 ```bash
 python3 Tools/verify.py
@@ -54,7 +54,7 @@ Shipping uses Unreal Automation Tool `BuildCookRun` and archives under `Builds/W
 
 ## Art reproduction
 
-Use the generator and exact commands in `Art/ART_BIBLE.md` and `Art/ASSET_REVIEW.md`. Blender 4.3.2 is available in the cloud for CPU operations. Re-export and compare `Art/manifest.json` and export reports. FBX is imported as static meshes in the initial Unreal script. Unit skeletal import and final animations require an additional verified path; static unit meshes do not complete rigging.
+The original generator reports reference Blender 4.3.2, but that is not a verified current cloud installation. Do not run the procedural generator over selected licensed assets: it can overwrite exports and manifests. Use `ASSET_SOURCE_POLICY.md` and `FAB_ASSET_SHORTLIST.md` for library-first selection. The old importer disables materials/textures, so it is not a verified PBR/wind-preserving path. Unit skeletal import and final animations also need a verified path; static meshes do not complete rigging or visible foliage wind. The user's latest instruction prohibits local Unreal, Blender renders and GPU workloads; production previews need a real compatible cloud authoring environment.
 
 ## Debugging and evidence
 
