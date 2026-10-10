@@ -1,5 +1,7 @@
 # Valley Cloud Readiness Implementation Plan
 
+Historical cloud-only execution plan. The user subsequently authorized optimized local Unreal via MCP, is installing 5.8 and will announce readiness. Do not apply this plan's former local-execution prohibition to that authorized work; current lightweight preparation is tracked in `2026-10-11-valley-authoring-preparation.md`. The cloud runtime gate itself remains failed.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Establish a verified cloud authoring runtime and private asset intake before executing the approved 768 m environment design.

@@ -32,7 +32,7 @@ The authenticated Fab library was subsequently inspected through rendered produc
 - Retain source textures/UVs, opacity/translucency, normals, scale and LOD data as appropriate. The recovered palette-only importer disables material/texture import and cannot silently be reused for these PBR assets. Its validator also rejects textured GLBs; extend the contract with tests before adopting a textured pipeline.
 - Check rooted deformation, per-instance variation, culling bounds, shadows, Low-preset performance and visual motion in a compatible real Unreal session. No final wind/rig/performance acceptance is claimed from a product description.
 - Niagara effects follow the same library-first order. The owned melee aura pack may supply suitable weapon glows, but its listing's links to other packs do not establish ownership of their trails, impact or projectile systems. Search environment packages for included effects before declaring a specific gameplay VFX missing.
-- No local Blender render, Unreal session or GPU work is authorized by the latest cloud-first instruction. Cloud Core execution is separate from a compatible Blender/Unreal/GPU authoring environment; the latter is not currently established.
+- The later user instruction authorizes optimized local Unreal via MCP, superseding the earlier cloud-only restriction for that work. The user is installing 5.8 and will announce readiness; no local editor/shader/render workload starts before that message. Do not interpret this as authorization to install an engine, rent a cloud GPU, perform expensive Blender renders or publish licensed content. Cloud Core execution remains separate from editor/renderer verification.
 
 ## Public Repository Boundary
 

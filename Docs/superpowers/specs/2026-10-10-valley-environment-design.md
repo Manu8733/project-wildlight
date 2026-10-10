@@ -34,7 +34,7 @@ Native Unreal Landscape, Water and Sky Atmosphere are the selected implementatio
 
 ## Verification And Delivery
 
-1. Prove connected cloud execution, compatible Unreal and a usable renderer before engine work. Keep heavy production off the laptop. No unapproved server rental, subscription or credit spending.
+1. Prove compatible Unreal and a usable authoring connection before engine work. The later user instruction permits optimized local Unreal through MCP; wait for their announced completion of the 5.8 installation before launching it. The game remains locked to 5.8.1 unless a deliberate migration is approved/tested. No unapproved server rental, subscription or credit spending.
 2. Verify private asset intake and repeatable material/wind-preserving import before adapting geometry. Use isolated versioned Blender masters and inspect exports as well as scene previews.
 3. Validate the full blockout and measured extent, then terrain, routes, crossings, resource access, vegetation and water. No unfinished regions, holes, incoherent overlaps or permanently sealed starts.
 4. Capture actual overview/detail renders at day, dusk, night and rain, plus a short wind/transition sequence. Index commit, engine version, preset, camera and artifact hashes. Label Blender asset previews separately from Unreal environment/gameplay captures.
