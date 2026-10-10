@@ -37,22 +37,24 @@ class GrowthAdapterContracts(unittest.TestCase):
         self.assertIn("Command.owner = wildlight::Owner::Player;", policy)
         self.assertIn("Command.automatic_growth = Policy;", policy)
         self.assertIn("return Submit(Command);", policy)
-        self.assertIn("->SetAutomaticGrowthPolicy(", self.hud)
+        self.assertTrue("->SetAutomaticGrowthPolicy(" in self.hud, "HUD must submit policy through World")
 
     def test_selected_building_reads_core_status_and_level(self):
-        self.assertIn("automatic_growth_status(B->id)", self.hud)
-        self.assertIn("B->level", self.hud)
+        self.assertTrue("automatic_growth_status(B->id)" in self.hud, "HUD must read Core eligibility")
+        self.assertTrue("B->level" in self.hud, "HUD must show the authoritative building level")
 
     def test_level_variants_refresh_cached_actors(self):
         for kind in ("House", "Farm"):
             for level in (1, 2, 3):
-                self.assertIn(f'SM_{kind}_L{level}', self.world)
+                self.assertTrue(f'SM_{kind}_L{level}' in self.world, f"Missing tier asset lookup: {kind} L{level}")
         refresh = function_body(self.world, "AWildlightWorld::RefreshPresentation")
         self.assertIn("PresentedBuildingLevels.Find(B.id)", refresh)
         self.assertIn("PresentedBuildingLevels.Add(B.id, B.level)", refresh)
 
     def test_load_initializes_saved_tick_event_dedup_before_refresh(self):
         load = function_body(self.world, "AWildlightWorld::LoadMatch")
+        self.assertTrue("InitializeEventCursorFromSave();" in load, "Load must initialize saved event dedup")
+        self.assertTrue("RefreshPresentation();" in load, "Load must refresh authoritative presentation")
         self.assertLess(load.index("InitializeEventCursorFromSave();"), load.index("RefreshPresentation();"))
         initialize = function_body(self.world, "AWildlightWorld::InitializeEventCursorFromSave")
         self.assertIn("LastEventTick = Simulation.state().tick;", initialize)
