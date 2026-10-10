@@ -1,6 +1,7 @@
 """Static adapter contracts only; these do not compile or exercise Unreal."""
 
 from pathlib import Path
+import re
 import unittest
 
 
@@ -61,6 +62,36 @@ class GrowthAdapterContracts(unittest.TestCase):
         self.assertIn("Simulation.state().events", initialize)
         self.assertIn("Event.tick == LastEventTick", initialize)
         self.assertIn("EventsAtLastTick.Add(", initialize)
+
+    def test_upgrade_cost_text_preserves_fractional_prices(self):
+        cost_text = function_body(self.hud, "CostText")
+        self.assertTrue('Wood %.2f   Stone %.2f' in cost_text, "Upgrade wood/stone prices need two decimal places")
+        self.assertNotIn("%.0f", cost_text)
+        match = function_body(self.hud, "AWildlightHUD::DrawMatch")
+        self.assertIn("CostText(wildlight::building_upgrade_cost(*B))", match)
+
+    def test_match_scale_reserves_space_for_guidance_before_panels(self):
+        match = function_body(self.hud, "AWildlightHUD::DrawMatch")
+        declaration = re.search(r"const float MatchLayoutHeight = ([0-9.]+)f;", match)
+        self.assertIsNotNone(declaration, "Match needs an explicit vertical fit budget for its new growth band")
+        self.assertGreaterEqual(float(declaration.group(1)), 370 + 126 + 40 + 3 * 19 + 12,
+                                "Budget must fit the bottom stack plus a three-line guide and gap")
+        fit = "Scale = FMath::Min(Scale, Canvas->ClipY / MatchLayoutHeight);"
+        self.assertTrue(fit in match, "Match scale must respect the viewport height")
+        self.assertLess(match.index(fit), match.index("Panel("))
+
+    def test_action_tooltips_use_slate_above_growth_with_cleanup(self):
+        tooltip = function_body(self.hud, "AWildlightHUD::EnsureActionTooltip")
+        growth = function_body(self.hud, "AWildlightHUD::EnsureGrowthControls")
+        tooltip_layer = re.search(r"AddViewportWidgetContent\(ActionTooltip.ToSharedRef\(\), (\d+)\)", tooltip)
+        growth_layer = re.search(r"AddViewportWidgetContent\(GrowthControls.ToSharedRef\(\), (\d+)\)", growth)
+        self.assertIsNotNone(tooltip_layer, "Action tooltip must be registered with Slate")
+        self.assertIsNotNone(growth_layer, "Growth controls must have an explicit layer")
+        self.assertGreater(int(tooltip_layer.group(1)), int(growth_layer.group(1)), "Tooltips must draw above growth inputs")
+        draw = function_body(self.hud, "AWildlightHUD::DrawHUD")
+        self.assertIn("ActionTooltipText = FText::FromString(B.Tooltip);", draw)
+        end = function_body(self.hud, "AWildlightHUD::EndPlay")
+        self.assertIn("RemoveViewportWidgetContent(ActionTooltip.ToSharedRef())", end)
 
 
 if __name__ == "__main__":
