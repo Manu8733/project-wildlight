@@ -8,6 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 WORLD = ROOT / "Source/Wildlight/Private/WildlightWorld.cpp"
 HUD = ROOT / "Source/Wildlight/Private/WildlightHUD.cpp"
+CONTROLLER = ROOT / "Source/Wildlight/Private/WildlightPlayerController.cpp"
 
 
 def function_body(source: str, name: str) -> str:
@@ -31,6 +32,7 @@ class GrowthAdapterContracts(unittest.TestCase):
     def setUpClass(cls):
         cls.world = WORLD.read_text(encoding="utf-8")
         cls.hud = HUD.read_text(encoding="utf-8")
+        cls.controller = CONTROLLER.read_text(encoding="utf-8")
 
     def test_policy_is_submitted_through_owner_validated_command(self):
         policy = function_body(self.world, "AWildlightWorld::SetAutomaticGrowthPolicy")
@@ -43,6 +45,20 @@ class GrowthAdapterContracts(unittest.TestCase):
     def test_selected_building_reads_core_status_and_level(self):
         self.assertTrue("automatic_growth_status(B->id)" in self.hud, "HUD must read Core eligibility")
         self.assertTrue("B->level" in self.hud, "HUD must show the authoritative building level")
+
+    def test_building_readouts_and_commands_share_lowest_owned_live_id(self):
+        selector = function_body(self.world, "AWildlightWorld::SelectedBuildingId")
+        self.assertIn("B->owner == wildlight::Owner::Player", selector)
+        self.assertIn("B->health > 0", selector)
+        self.assertIn("Kind == wildlight::BuildingKind::Count || B->kind == Kind", selector)
+        self.assertIn("SelectedId == 0 || Id < SelectedId", selector)
+        self.assertIn("return SelectedId;", selector)
+        command_selector = function_body(self.controller, "ControllerSelectedBuilding")
+        self.assertIn("return World.SelectedBuildingId(Kind);", command_selector)
+        for name in ("AWildlightHUD::DrawMatch", "AWildlightHUD::AutomaticGrowthStatusText"):
+            body = function_body(self.hud, name)
+            self.assertTrue("Simulation.building(C->Arena->SelectedBuildingId())" in body,
+                            f"{name} must read the same selected target used by commands")
 
     def test_level_variants_refresh_cached_actors(self):
         for kind in ("House", "Farm"):
