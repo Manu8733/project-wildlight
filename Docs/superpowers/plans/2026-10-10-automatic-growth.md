@@ -8,6 +8,8 @@
 
 **Tech Stack:** C++20 portable Core, existing Unreal 5.8.1 C++ adapter, Python unittest and GitHub Ubuntu workers. The existing Codex Cloud verification chat is currently unreachable.
 
+**Verified checkpoint:** Tasks 1 and 2 are source-complete at `8048eb73d233d30f50fdb187facbff59255cc734`, with 43/43 Core scenarios, 1471 assertions, 22 Python tests, release and leak-enabled sanitized CTest 2/2 each on GitHub cloud. Final independent review found no remaining actionable issues. The user approved main integration and push. Delivery and exact remote/archive identity are recorded after that operation; no Unreal or final-art acceptance is implied.
+
 ## Global Constraints
 
 - Approved specification: `Docs/superpowers/specs/2026-10-10-automatic-growth-design.md`.
@@ -20,7 +22,7 @@
 
 ## Shared Interfaces And File Ownership
 
-Core implementer owns `Core/include/wildlight/Simulation.hpp`, `Core/src/Simulation.cpp` and `Core/tests/simulation_tests.cpp` including persistence tests. Adapter implementer owns `Source/Wildlight/Public/WildlightWorld.h`, `Source/Wildlight/Private/WildlightWorld.cpp`, `Source/Wildlight/Public/WildlightHUD.h`, `Source/Wildlight/Private/WildlightHUD.cpp` and focused adapter contract tests. Root owns documentation, evidence, Git and cloud verification dispatch. Never stage or revert another worker's files.
+Core implementer owns `Core/include/wildlight/Simulation.hpp`, `Core/src/Simulation.cpp` and `Core/tests/simulation_tests.cpp` including persistence tests. Adapter implementer owns `Source/Wildlight/Public/WildlightWorld.h`, `Source/Wildlight/Private/WildlightWorld.cpp`, `Source/Wildlight/Public/WildlightHUD.h`, `Source/Wildlight/Private/WildlightHUD.cpp` and focused adapter contract tests. Root additionally authorized only the existing `ControllerSelectedBuilding` helper in `WildlightPlayerController.cpp` to delegate to the shared World selector after independent review found a target mismatch. Root owns documentation, evidence, Git and cloud verification dispatch. Never stage or revert another worker's files.
 
 Exact public contract:
 
