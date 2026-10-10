@@ -71,16 +71,7 @@ std::vector<wildlight::Id> ControllerSelectedUnits(const AWildlightWorld& World,
 wildlight::Id ControllerSelectedBuilding(const AWildlightWorld& World,
     wildlight::BuildingKind Kind = wildlight::BuildingKind::Count)
 {
-    for (uint32 Id : ControllerSortedSelection(World))
-    {
-        const wildlight::Building* Building = World.Simulation.building(Id);
-        if (Building && Building->owner == wildlight::Owner::Player
-            && (Kind == wildlight::BuildingKind::Count || Building->kind == Kind))
-        {
-            return Id;
-        }
-    }
-    return 0;
+    return World.SelectedBuildingId(Kind);
 }
 
 bool ControllerMatchInput(const AWildlightPlayerController& Controller)

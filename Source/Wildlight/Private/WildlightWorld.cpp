@@ -513,6 +513,21 @@ void AWildlightWorld::UpdateLightLinks()
     }
     for (; Index < LightLinks.Num(); ++Index) LightLinks[Index]->SetVisibility(false);
 }
+wildlight::Id AWildlightWorld::SelectedBuildingId(wildlight::BuildingKind Kind) const
+{
+    wildlight::Id SelectedId = 0;
+    for (uint32 Id : Selection)
+    {
+        const auto* B = Simulation.building(Id);
+        if (B && B->owner == wildlight::Owner::Player && B->health > 0
+            && (Kind == wildlight::BuildingKind::Count || B->kind == Kind)
+            && (SelectedId == 0 || Id < SelectedId))
+        {
+            SelectedId = Id;
+        }
+    }
+    return SelectedId;
+}
 wildlight::Id AWildlightWorld::Pick(wildlight::Vec2 Position, bool bResources) const
 {
     wildlight::Id Best = 0;

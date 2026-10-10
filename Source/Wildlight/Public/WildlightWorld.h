@@ -43,6 +43,7 @@ public:
     void RefreshPresentation();
     wildlight::CommandResult Submit(const wildlight::Command& Command);
     wildlight::CommandResult SetAutomaticGrowthPolicy(const wildlight::AutomaticGrowthPolicy& Policy);
+    wildlight::Id SelectedBuildingId(wildlight::BuildingKind Kind = wildlight::BuildingKind::Count) const;
     wildlight::Id Pick(wildlight::Vec2 Position, bool bIncludeResources = true) const;
     bool SaveMatch(const FString& Slot, FString& Error) const;
     bool LoadMatch(const FString& Slot, FString& Error);

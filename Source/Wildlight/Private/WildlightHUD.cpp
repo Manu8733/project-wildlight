@@ -56,15 +56,10 @@ FText AWildlightHUD::AutomaticGrowthStatusText() const
 {
     const auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
     if (!C || !IsValid(C->Arena)) return FText::GetEmpty();
-    for (uint32 Id : C->Arena->Selection)
-    {
-        const auto* B = C->Arena->Simulation.building(Id);
-        if (!B) continue;
-        if (B->kind != wildlight::BuildingKind::House && B->kind != wildlight::BuildingKind::Farm) return FText::GetEmpty();
-        const std::string Reason = C->Arena->Simulation.automatic_growth_status(B->id);
-        return FText::FromString(FString::Printf(TEXT("Level %d / 3  |  Automatic growth: %s"), static_cast<int32>(B->level), UTF8_TO_TCHAR(Reason.c_str())));
-    }
-    return FText::GetEmpty();
+    const auto* B = C->Arena->Simulation.building(C->Arena->SelectedBuildingId());
+    if (!B || (B->kind != wildlight::BuildingKind::House && B->kind != wildlight::BuildingKind::Farm)) return FText::GetEmpty();
+    const std::string Reason = C->Arena->Simulation.automatic_growth_status(B->id);
+    return FText::FromString(FString::Printf(TEXT("Level %d / 3  |  Automatic growth: %s"), static_cast<int32>(B->level), UTF8_TO_TCHAR(Reason.c_str())));
 }
 void AWildlightHUD::EnsureGrowthControls()
 {
@@ -435,9 +430,9 @@ void AWildlightHUD::DrawMatch()
     Panel(X, BottomY, W, 236.f * Scale, PanelColor);
     Panels.Add(FBox2D(FVector2D(X, BottomY), FVector2D(X + W, Canvas->ClipY)));
     DrawMinimap(Canvas->ClipX - MapSize - 20.f * Scale, BottomY + 14.f * Scale, MapSize);
-    const wildlight::Building* B = nullptr;
+    const wildlight::Building* B = C->Arena->Simulation.building(C->Arena->SelectedBuildingId());
     const wildlight::Unit* U = nullptr;
-    for (uint32 Id : C->Arena->Selection) { if (!B) B = C->Arena->Simulation.building(Id); if (!U) U = C->Arena->Simulation.unit(Id); }
+    for (uint32 Id : C->Arena->Selection) { if (!U) U = C->Arena->Simulation.unit(Id); }
     FString SelectionLabel = TEXT("Your kingdom");
     if (B) SelectionLabel = Name(wildlight::definition(B->kind).name) + FString::Printf(TEXT("  /  Level %d  /  %.0f%% built%s"), static_cast<int32>(B->level), B->progress * 100, B->connected ? TEXT("  /  Connected") : TEXT(""));
     else if (U) SelectionLabel = Name(wildlight::definition(U->kind).name) + FString::Printf(TEXT("  /  %d selected"), C->Arena->Selection.Num());
