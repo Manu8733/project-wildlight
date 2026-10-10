@@ -1,0 +1,357 @@
+{
+  "format_version": 1,
+  "authorship": "Original explicit vector paths in Tools/author_icons.py; no external images or image-generation model",
+  "status": "Prototype interface glyphs; in-engine layout, contrast and recognition review pending",
+  "assets": [
+    {
+      "id": "Resource_Wood",
+      "asset_name": "T_Resource_Wood",
+      "svg": "UI/SVG/Resource_Wood.svg",
+      "png": "UI/PNG/Resource_Wood.png",
+      "sha256": "80900b6b07734710e38f8bd708e3737763cb741e0c38a4bdf3938b577cc9fd3b"
+    },
+    {
+      "id": "Resource_Stone",
+      "asset_name": "T_Resource_Stone",
+      "svg": "UI/SVG/Resource_Stone.svg",
+      "png": "UI/PNG/Resource_Stone.png",
+      "sha256": "6351f81ba4b9bcb697c404984c2b46960dbe578c9a7cc3da2c62433385ac8861"
+    },
+    {
+      "id": "Resource_Food",
+      "asset_name": "T_Resource_Food",
+      "svg": "UI/SVG/Resource_Food.svg",
+      "png": "UI/PNG/Resource_Food.png",
+      "sha256": "acc29e7b680f66a6bde66ea835ac0655153ce531800acfe445e9c8d5cc42a6c2"
+    },
+    {
+      "id": "Resource_Gold",
+      "asset_name": "T_Resource_Gold",
+      "svg": "UI/SVG/Resource_Gold.svg",
+      "png": "UI/PNG/Resource_Gold.png",
+      "sha256": "e3dcb868eb81fd8318c681bf08aa311974cd6e5d6aa1d97b88534d311a38b1d5"
+    },
+    {
+      "id": "Resource_Mana",
+      "asset_name": "T_Resource_Mana",
+      "svg": "UI/SVG/Resource_Mana.svg",
+      "png": "UI/PNG/Resource_Mana.png",
+      "sha256": "086a09c97d7da5e3ddbf311795bd253954b45699490dc8e70b1cd0778e851de0"
+    },
+    {
+      "id": "Building_Castle",
+      "asset_name": "T_Building_Castle",
+      "svg": "UI/SVG/Building_Castle.svg",
+      "png": "UI/PNG/Building_Castle.png",
+      "sha256": "e32b2ab9fefb98b1bd68dd891be07bcf8b16bc7bfb2a71afd8c5625c14654086"
+    },
+    {
+      "id": "Building_House",
+      "asset_name": "T_Building_House",
+      "svg": "UI/SVG/Building_House.svg",
+      "png": "UI/PNG/Building_House.png",
+      "sha256": "2a5799c15ddd05970e4ffbe496d5b52cea6865d9b123e3db1b99901a9c2f7929"
+    },
+    {
+      "id": "Building_Farm",
+      "asset_name": "T_Building_Farm",
+      "svg": "UI/SVG/Building_Farm.svg",
+      "png": "UI/PNG/Building_Farm.png",
+      "sha256": "5e191e443e303e69672af461752bff20575e4b2eab03a218a57ca5046db8234d"
+    },
+    {
+      "id": "Building_Mill",
+      "asset_name": "T_Building_Mill",
+      "svg": "UI/SVG/Building_Mill.svg",
+      "png": "UI/PNG/Building_Mill.png",
+      "sha256": "77ca40075fea13339dfe39eedede92194348765790c2ebdca9e92e562cec76fe"
+    },
+    {
+      "id": "Building_Depot",
+      "asset_name": "T_Building_Depot",
+      "svg": "UI/SVG/Building_Depot.svg",
+      "png": "UI/PNG/Building_Depot.png",
+      "sha256": "66784d40e7b7df7e55267b5255f3bad80e6b59b3a36ddfefe41a3ce0a405efae"
+    },
+    {
+      "id": "Building_LumberCamp",
+      "asset_name": "T_Building_LumberCamp",
+      "svg": "UI/SVG/Building_LumberCamp.svg",
+      "png": "UI/PNG/Building_LumberCamp.png",
+      "sha256": "b64aad760638cac98d63aacd4500a2d6ca19317152ff13dda42bf73eed0c7992"
+    },
+    {
+      "id": "Building_Quarry",
+      "asset_name": "T_Building_Quarry",
+      "svg": "UI/SVG/Building_Quarry.svg",
+      "png": "UI/PNG/Building_Quarry.png",
+      "sha256": "02825dea4cda422b28c63d7a548b01b033da0c6a8bfcd19e74d558b376fd2bdf"
+    },
+    {
+      "id": "Building_GoldMine",
+      "asset_name": "T_Building_GoldMine",
+      "svg": "UI/SVG/Building_GoldMine.svg",
+      "png": "UI/PNG/Building_GoldMine.png",
+      "sha256": "c5ee32146b5a5b35dd419c9d498c8f340ea39499ee48040836d3a9a3300cdb64"
+    },
+    {
+      "id": "Building_Barracks",
+      "asset_name": "T_Building_Barracks",
+      "svg": "UI/SVG/Building_Barracks.svg",
+      "png": "UI/PNG/Building_Barracks.png",
+      "sha256": "ff417a8ac265d1f9aa2984eba129bdd584ceef249393bde5db113b9aad184346"
+    },
+    {
+      "id": "Building_ArcherRange",
+      "asset_name": "T_Building_ArcherRange",
+      "svg": "UI/SVG/Building_ArcherRange.svg",
+      "png": "UI/PNG/Building_ArcherRange.png",
+      "sha256": "c476285bb7d2437ec033fb21a07104577d73e782209879d95ff8e8a1bd881ff3"
+    },
+    {
+      "id": "Building_Forge",
+      "asset_name": "T_Building_Forge",
+      "svg": "UI/SVG/Building_Forge.svg",
+      "png": "UI/PNG/Building_Forge.png",
+      "sha256": "e6f79a4f69266ead183c6c5c8d37fe7574afd6ee045da31981096cf605c19580"
+    },
+    {
+      "id": "Building_Market",
+      "asset_name": "T_Building_Market",
+      "svg": "UI/SVG/Building_Market.svg",
+      "png": "UI/PNG/Building_Market.png",
+      "sha256": "3c45330d8eccddfaff1e89608f8a9cdd7a6af125e6f5feab9395b782ba47c992"
+    },
+    {
+      "id": "Building_Wall",
+      "asset_name": "T_Building_Wall",
+      "svg": "UI/SVG/Building_Wall.svg",
+      "png": "UI/PNG/Building_Wall.png",
+      "sha256": "2e9384ba49d480f6d92957330f0d30ca864fe2a832b1374b6fc321fb4debe883"
+    },
+    {
+      "id": "Building_Gate",
+      "asset_name": "T_Building_Gate",
+      "svg": "UI/SVG/Building_Gate.svg",
+      "png": "UI/PNG/Building_Gate.png",
+      "sha256": "e81d8ce6afab5fb7585b384c922e850d19e40ec45e2e0be79edd48e8a96d2792"
+    },
+    {
+      "id": "Building_Watchtower",
+      "asset_name": "T_Building_Watchtower",
+      "svg": "UI/SVG/Building_Watchtower.svg",
+      "png": "UI/PNG/Building_Watchtower.png",
+      "sha256": "624ca1b7f223929d778503865c8bcbb57cfbfd6824f3a72bca46d9d8d3722e7c"
+    },
+    {
+      "id": "Building_Beacon",
+      "asset_name": "T_Building_Beacon",
+      "svg": "UI/SVG/Building_Beacon.svg",
+      "png": "UI/PNG/Building_Beacon.png",
+      "sha256": "2b4e42614ad124f00482f0d2b33b7f3eb0a6f643cb42c24dc8dfeb20b0795023"
+    },
+    {
+      "id": "Building_Sanctuary",
+      "asset_name": "T_Building_Sanctuary",
+      "svg": "UI/SVG/Building_Sanctuary.svg",
+      "png": "UI/PNG/Building_Sanctuary.png",
+      "sha256": "8dc838d8d83ab0e98e7063859acefde5faae1bd4c7599572ed2ee7e49f45c495"
+    },
+    {
+      "id": "Building_MageTower",
+      "asset_name": "T_Building_MageTower",
+      "svg": "UI/SVG/Building_MageTower.svg",
+      "png": "UI/PNG/Building_MageTower.png",
+      "sha256": "e90525f25bd8d4bf9d6faaf86c2fc5723de3cd28d9762445b5b0d69b52295e8c"
+    },
+    {
+      "id": "Building_SiegeWorkshop",
+      "asset_name": "T_Building_SiegeWorkshop",
+      "svg": "UI/SVG/Building_SiegeWorkshop.svg",
+      "png": "UI/PNG/Building_SiegeWorkshop.png",
+      "sha256": "55119bcc40f96e1e01bd29093f5b87c45feadbfc8249f0484aa015fb1ce6d17e"
+    },
+    {
+      "id": "Unit_Worker",
+      "asset_name": "T_Unit_Worker",
+      "svg": "UI/SVG/Unit_Worker.svg",
+      "png": "UI/PNG/Unit_Worker.png",
+      "sha256": "4afbd04547e026290e3471ed06034b2a45d8a6e4721df7e09ead7877472cf16f"
+    },
+    {
+      "id": "Unit_Militia",
+      "asset_name": "T_Unit_Militia",
+      "svg": "UI/SVG/Unit_Militia.svg",
+      "png": "UI/PNG/Unit_Militia.png",
+      "sha256": "91f34a9cd6dbf7d81970e478dff6ad626552220fbee7fb73ae6dbf235012d452"
+    },
+    {
+      "id": "Unit_Spearman",
+      "asset_name": "T_Unit_Spearman",
+      "svg": "UI/SVG/Unit_Spearman.svg",
+      "png": "UI/PNG/Unit_Spearman.png",
+      "sha256": "9d56c11c39acd6ae2091772fe3b1b890d8938a028463826786dcf4ba8a5b366a"
+    },
+    {
+      "id": "Unit_Swordsman",
+      "asset_name": "T_Unit_Swordsman",
+      "svg": "UI/SVG/Unit_Swordsman.svg",
+      "png": "UI/PNG/Unit_Swordsman.png",
+      "sha256": "054eac88d0a8a6cbdbd87fedeb05ff2a1b203e5265bc91fc2efb30ed90541d70"
+    },
+    {
+      "id": "Unit_Archer",
+      "asset_name": "T_Unit_Archer",
+      "svg": "UI/SVG/Unit_Archer.svg",
+      "png": "UI/PNG/Unit_Archer.png",
+      "sha256": "2c755224fbf578df6cc97b13ccd9429fdae374a6a95dcca42d23a8eb279358c6"
+    },
+    {
+      "id": "Unit_Cavalry",
+      "asset_name": "T_Unit_Cavalry",
+      "svg": "UI/SVG/Unit_Cavalry.svg",
+      "png": "UI/PNG/Unit_Cavalry.png",
+      "sha256": "fd9c4de6241fec572e55b0183254d6cd32d0105abbce770bfe1d9930feb35523"
+    },
+    {
+      "id": "Unit_Engineer",
+      "asset_name": "T_Unit_Engineer",
+      "svg": "UI/SVG/Unit_Engineer.svg",
+      "png": "UI/PNG/Unit_Engineer.png",
+      "sha256": "0538c724729d5fa3d7c83937b2bc6bea06a82a8dac6f6beae0b3a8bd3e29dc02"
+    },
+    {
+      "id": "Unit_ArcaneGuard",
+      "asset_name": "T_Unit_ArcaneGuard",
+      "svg": "UI/SVG/Unit_ArcaneGuard.svg",
+      "png": "UI/PNG/Unit_ArcaneGuard.png",
+      "sha256": "85b3b1ccead854ba464c1bd367b0870bedee8cb6325424418d70de1841b58077"
+    },
+    {
+      "id": "Unit_ForestAlly",
+      "asset_name": "T_Unit_ForestAlly",
+      "svg": "UI/SVG/Unit_ForestAlly.svg",
+      "png": "UI/PNG/Unit_ForestAlly.png",
+      "sha256": "bf3686d90b0df3c606c1161e76794496244fa5f9d3d497eff2592a14ec3f987e"
+    },
+    {
+      "id": "Unit_Ram",
+      "asset_name": "T_Unit_Ram",
+      "svg": "UI/SVG/Unit_Ram.svg",
+      "png": "UI/PNG/Unit_Ram.png",
+      "sha256": "588249f33fe7767a1227d317c97ffbe34990e8a006c5c783fee672afd9df74f0"
+    },
+    {
+      "id": "Unit_Catapult",
+      "asset_name": "T_Unit_Catapult",
+      "svg": "UI/SVG/Unit_Catapult.svg",
+      "png": "UI/PNG/Unit_Catapult.png",
+      "sha256": "7ee69b6974cc6377843e71115a68dd0bb60862bc002ea76e0249992dcedd7fcb"
+    },
+    {
+      "id": "Unit_Wizard",
+      "asset_name": "T_Unit_Wizard",
+      "svg": "UI/SVG/Unit_Wizard.svg",
+      "png": "UI/PNG/Unit_Wizard.png",
+      "sha256": "aee318eeb4aeea35f5110bdd632921b17b4ae9cdfa2849dfb6602bdac11303e2"
+    },
+    {
+      "id": "Spell_RootBarrier",
+      "asset_name": "T_Spell_RootBarrier",
+      "svg": "UI/SVG/Spell_RootBarrier.svg",
+      "png": "UI/PNG/Spell_RootBarrier.png",
+      "sha256": "3ac9c59062bf000657c746c87c6480b3dab50823d938c45b49824ada7f953d0e"
+    },
+    {
+      "id": "Spell_Heal",
+      "asset_name": "T_Spell_Heal",
+      "svg": "UI/SVG/Spell_Heal.svg",
+      "png": "UI/PNG/Spell_Heal.png",
+      "sha256": "919df3861e1f2198ecf02b943cdbf6d5b7b6d255f0bdb65755b51399b4f227d6"
+    },
+    {
+      "id": "Spell_HarvestBloom",
+      "asset_name": "T_Spell_HarvestBloom",
+      "svg": "UI/SVG/Spell_HarvestBloom.svg",
+      "png": "UI/PNG/Spell_HarvestBloom.png",
+      "sha256": "16d1fe7b885e9eac56398ebfe4e22f6319d2bd294aa495141e765063034abe4e"
+    },
+    {
+      "id": "Spell_LightBridge",
+      "asset_name": "T_Spell_LightBridge",
+      "svg": "UI/SVG/Spell_LightBridge.svg",
+      "png": "UI/PNG/Spell_LightBridge.png",
+      "sha256": "5d57ec87765e6ace36040c4949e2a5c729fd4eb52ff13cdbdb68b9852c982141"
+    },
+    {
+      "id": "Spell_Amplify",
+      "asset_name": "T_Spell_Amplify",
+      "svg": "UI/SVG/Spell_Amplify.svg",
+      "png": "UI/PNG/Spell_Amplify.png",
+      "sha256": "8d5ab97892647fa90a8511dae39fdd01adb2c082964f98e74d1bfff8588d2f77"
+    },
+    {
+      "id": "Spell_Shield",
+      "asset_name": "T_Spell_Shield",
+      "svg": "UI/SVG/Spell_Shield.svg",
+      "png": "UI/PNG/Spell_Shield.png",
+      "sha256": "779fbb3330a30e5cfc90026fe561d84bd5290a0decd5b63f18c5dc766b6dcd3c"
+    },
+    {
+      "id": "Spell_Veil",
+      "asset_name": "T_Spell_Veil",
+      "svg": "UI/SVG/Spell_Veil.svg",
+      "png": "UI/PNG/Spell_Veil.png",
+      "sha256": "33713ab523a527d4d92d4b98898876373c47388840ab99b128a94270a1824b06"
+    },
+    {
+      "id": "Spell_Disrupt",
+      "asset_name": "T_Spell_Disrupt",
+      "svg": "UI/SVG/Spell_Disrupt.svg",
+      "png": "UI/PNG/Spell_Disrupt.png",
+      "sha256": "619708547cdfde1597e72a6807381b73fdb70c1f5963aa019f9662fd584f20bf"
+    },
+    {
+      "id": "Spell_Illusion",
+      "asset_name": "T_Spell_Illusion",
+      "svg": "UI/SVG/Spell_Illusion.svg",
+      "png": "UI/PNG/Spell_Illusion.png",
+      "sha256": "8da1e9d0eeef228204708ec856e94a70a59f3c58ef24cb77de2b70ba1496d986"
+    },
+    {
+      "id": "Technology_Forestry",
+      "asset_name": "T_Technology_Forestry",
+      "svg": "UI/SVG/Technology_Forestry.svg",
+      "png": "UI/PNG/Technology_Forestry.png",
+      "sha256": "d359fc5c2cbd73cf72d146d0c85596f25ceb4d6b39000dee6f22f16422af9445"
+    },
+    {
+      "id": "Technology_Agriculture",
+      "asset_name": "T_Technology_Agriculture",
+      "svg": "UI/SVG/Technology_Agriculture.svg",
+      "png": "UI/PNG/Technology_Agriculture.png",
+      "sha256": "f9f71e7ba2e74a46cc23779a56ae0d0f55df8a8b05ea002b46ad380e1ef79da5"
+    },
+    {
+      "id": "Technology_Masonry",
+      "asset_name": "T_Technology_Masonry",
+      "svg": "UI/SVG/Technology_Masonry.svg",
+      "png": "UI/PNG/Technology_Masonry.png",
+      "sha256": "3b8ae1e03c7685526c304092f3a59fa33478c5303b848577720b03353a7fc053"
+    },
+    {
+      "id": "Technology_Steel",
+      "asset_name": "T_Technology_Steel",
+      "svg": "UI/SVG/Technology_Steel.svg",
+      "png": "UI/PNG/Technology_Steel.png",
+      "sha256": "cba673da19b8783207f933c057c044d5734c0ef965e2a40b71ec2996ae025ff7"
+    },
+    {
+      "id": "Technology_Arcana",
+      "asset_name": "T_Technology_Arcana",
+      "svg": "UI/SVG/Technology_Arcana.svg",
+      "png": "UI/PNG/Technology_Arcana.png",
+      "sha256": "f4e2ed74380a0c4642ff2991148babaa35ff91afd84bab7533dcdb1bbacc4c17"
+    }
+  ]
+}

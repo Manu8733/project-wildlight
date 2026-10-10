@@ -1,0 +1,81 @@
+{
+  "format_version": 1,
+  "units": "meters",
+  "blender_version": "4.3.2",
+  "authoring": "Original prototype armatures, explicit normalized bone weights and keyframes",
+  "source": "Source/Wildlight_Unit_Rigs.blend",
+  "static_library_unchanged": true,
+  "unreal_skeletal_integration_tested": false,
+  "production_animation_accepted": false,
+  "unrigged_unit_ids": [
+    "Militia",
+    "Spearman",
+    "Swordsman",
+    "Archer",
+    "Cavalry",
+    "Engineer",
+    "ArcaneGuard",
+    "ForestAlly",
+    "Ram",
+    "Catapult"
+  ],
+  "assets": [
+    {
+      "id": "Worker",
+      "mesh_name": "SK_Worker",
+      "rig_bones": 17,
+      "weighted_vertices": 1916,
+      "weights_normalized": true,
+      "glb_skins": 1,
+      "glb_animations": [
+        "Worker_Walk",
+        "Worker_Work"
+      ],
+      "fbx": "Exports/Rigged/SK_Worker.fbx",
+      "glb": "Exports/Rigged/SK_Worker.glb",
+      "animation_frames": {
+        "Worker_Walk": [
+          1.0,
+          25.0
+        ],
+        "Worker_Work": [
+          1.0,
+          37.0
+        ]
+      },
+      "fps": 24,
+      "maximum_measured_work_cast_displacement_m": 0.5750379152728999,
+      "status": "initial weighted prototype; deformation/foot sliding and Unreal import need visual review",
+      "validation_pass": true
+    },
+    {
+      "id": "Wizard",
+      "mesh_name": "SK_Wizard",
+      "rig_bones": 17,
+      "weighted_vertices": 2682,
+      "weights_normalized": true,
+      "glb_skins": 1,
+      "glb_animations": [
+        "Wizard_Idle",
+        "Wizard_Cast"
+      ],
+      "fbx": "Exports/Rigged/SK_Wizard.fbx",
+      "glb": "Exports/Rigged/SK_Wizard.glb",
+      "animation_frames": {
+        "Wizard_Idle": [
+          1.0,
+          49.0
+        ],
+        "Wizard_Cast": [
+          1.0,
+          49.0
+        ]
+      },
+      "fps": 24,
+      "maximum_measured_work_cast_displacement_m": 0.44540442871516983,
+      "status": "initial weighted prototype; deformation/foot sliding and Unreal import need visual review",
+      "validation_pass": true
+    }
+  ],
+  "passed": true
+}

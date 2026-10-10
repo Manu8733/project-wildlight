@@ -1,0 +1,431 @@
+﻿PROJECT WILDLIGHT
+PREZENTAREA JOCULUI + PLANUL COMPLET DE DEZVOLTARE ÎN 3 LISTE
+Document de lucru pentru Notepad | Versiunea 1.0 | 10 octombrie 2026
+
+IMPORTANT
+- „Project Wildlight” este doar numele intern. Numele comercial va fi verificat înainte de publicare.
+- Planul descrie direcția propusă, nu funcționalități deja implementate.
+- Prioritate: gameplay-first, cu identitate vizuală fantasy stilizată încă de la început.
+- Lansare inițială: Windows PC, single-player contra AI; multiplayer doar ulterior, dacă există cerere și resurse.
+- Un task este „gata” numai după verificare, testare și acceptare, nu doar după generarea codului cu AI.
+- Checklistele se pot bifa în Notepad: înlocuiește [ ] cu [x] după ce verificăm fiecare punct.
+
+========================================================================
+I. PREZENTAREA JOCULUI — VIZIUNE, POVESTE, EXPERIENȚĂ ȘI ORIGINALITATE
+========================================================================
+
+1. IDENTITATE
+Titlu intern: PROJECT WILDLIGHT
+Gen: Real-Time Strategy (RTS) + Castle Builder + economie medievală + magie tactică
+Perspectivă: 3D izometrică, cameră strategică liberă (zoom, rotire, pan)
+Platformă de lansare: Windows PC, prin Steam
+Mod de lansare: Single-player / skirmish împotriva AI-ului; tutorial și provocări
+Direcție artistică: fantasy stilizat premium, luminos, fermecător, cu vegetație bogată,
+  licurici, apă, ceață subtilă, lumini calde, cristale, magie vizibilă și noapte spectaculoasă
+Referință de feeling: plăcerea de a construi și asedia din jocurile clasice RTS,
+  dar cu reguli, univers, interfață, identitate și mecanici proprii — NU clonă Stronghold.
+
+2. PITCH-UL JOCULUI (PENTRU PREZENTARE)
+„Ridică un regat într-o lume în care lumina este putere. Conectează sanctuare și turnuri
+magice pentru a-ți extinde teritoriul, construiește o economie vie, ridică ziduri și
+comandă armate și vrăjitori. Fiecare conexiune de lumină îți poate proteja orașul —
+sau poate deveni punctul lui vulnerabil. Modifică rutele de luptă cu magie, sabotează
+rețeaua inamicului și cucerește cetatea rivală într-un RTS fantasy 3D spectaculos.”
+
+Tagline de lucru (engleză): BUILD A KINGDOM. COMMAND MAGIC. SHAPE THE BATTLEFIELD.
+Tagline de lucru (română): RIDICĂ UN REGAT. STĂPÂNEȘTE MAGIA. SCHIMBĂ BĂTĂLIA.
+
+3. CE TREBUIE SĂ SIMTĂ JUCĂTORUL
+- Satisfacție când așază prima fermă, vede locuitorii muncind și apoi ridică o cetate.
+- Fascinație când apar licuricii, farurile se aprind și satul devine spectaculos noaptea.
+- Tensiune strategică atunci când adversarul atacă o conexiune magică vitală.
+- Sentiment de creativitate când folosește o vrajă pentru a deschide o rută, nu doar
+  pentru a face mai mult damage.
+- Recompensa unei victorii obținute prin economie + tactică + controlul terenului.
+- Comenzi RTS rapide, ușor de înțeles, fără micro-management inutil.
+
+4. CE NE DIFERENȚIAZĂ — CELE 3 PILOANE DE GAMEPLAY
+A) REȚEAUA VIE DE LUMINĂ
+   - Arbore/sanctuar central => faruri => clădiri speciale => zone conectate.
+   - Legăturile susțin producția magică, apărarea, unele rute și anumite vrăji.
+   - Inamicul poate ocupa/distruge/reconfigura noduri ca să îți fragmenteze regatul.
+   - Nu este doar un efect decorativ: schimbă prioritățile strategice.
+B) MAGIE CARE TRANSFORMĂ SITUAȚIA TACTICĂ
+   - Poduri temporare între puncte permise; bariere de rădăcini; zone de ceață.
+   - Vrăjile modifică accesul, vizibilitatea, apărarea și aprovizionarea.
+   - Fiecare vrajă are cost, durată, cooldown și contracarare; nu câștigă singură meciul.
+C) UN REGAT CARE REACȚIONEAZĂ LA ALEGEREA TA
+   - Stil economic/defensiv/arcan influențează clădiri, bonusuri și aspecte estetice.
+   - Lumea pare vie: muncitori, fum, vegetație, lumină, magie, licurici și sunete.
+   - Transformările vizuale sunt legate de progres și decizii, nu doar de un shader.
+
+5. LUMEA ȘI FIRUL NARATIV (PROPUNERE)
+Lumea este traversată de „fire” de lumină magică, rămășițele unei rețele antice care
+ținea ținuturile conectate. Regate rivale au început să revendice nodurile acestei
+rețele. Unele folosesc energia pentru a hrăni comunități și păduri; altele pentru a
+alimenta fortificații și mașini de război. Jucătorul fondează un nou regat și trebuie
+să decidă cum își folosește energia, ce teritorii apără și când atacă un rival.
+Nu definim deocamdată campania narativă completă; prioritare sunt partidele RTS bune.
+
+6. LOOP-UL UNEI PARTIDE (20–45 MINUTE, ȚINTĂ DE TESTAT)
+  1) Amplasezi primele clădiri și asiguri lemn + hrană.
+  2) Aduni piatră și aur; stabilești depozite, case, recrutare și ziduri.
+  3) Explorezi; descoperi ruine, resurse și puncte magice strategice.
+  4) Conectezi faruri și extinzi rețeaua de lumină.
+  5) Recrutezi infanterie, arcași, unități de sprijin și primul vrăjitor.
+  6) Ridici fortificații, aperi punctele slabe și sabotezi infrastructura inamicului.
+  7) Asediezi baza adversarului; câștigi prin cucerirea centrului său de comandă
+     sau printr-un obiectiv special definit pentru hartă.
+
+7. SISTEMELE ECONOMICE
+Resurse de bază: lemn, piatră, hrană, aur, energie magică.
+Sisteme propuse: muncitori, construcție, locuire, depozitare, producție, transport,
+lanțuri economice scurte, recrutare, întreținere și schimburi comerciale opționale.
+Principiu: suficientă profunzime pentru decizii reale, fără zeci de resurse redundante.
+
+8. CLĂDIRI (EXEMPLE, NU LISTĂ FINALĂ)
+Castel, casă, fermă, moară, depozit, tăietorie, carieră, mină, barăci,
+poligon de arcași, forjă, piață, zid, poartă, turn de apărare, far de lumină,
+sanctuar, turn al vrăjitorilor și atelier de asediu.
+
+9. ARMATE ȘI LUPTĂ
+- Unități convenționale: miliție, sulițași, spadasini, arcași, cavalerie, ingineri.
+- Unități fantasy: gardieni arcani, creaturi invocate sau aliați ai pădurii (de decis).
+- Asedii: catapulte, berbeci, distrugerea zidurilor/porților, garnizoane și contrabalans.
+- Control: selecție multiplă, grupuri, formații, atac, apărare, retragere, patrulare.
+- AI rival folosește economie, recunoaștere și tactici — nu doar valuri repetitive.
+
+10. CELE 3 ȘCOLI DE MAGIE
+PĂZITORUL RĂDĂCINILOR — apărare și natură:
+  barieră de rădăcini, vindecare locală, creștere temporară a randamentului fermei.
+ARHITECTUL LUMINII — infrastructură și mobilitate:
+  pod temporar, amplificarea unui far, scut pe clădiri / apărarea unui nod.
+ȚESĂTORUL UMBRELOR — sabotaj și diversiune:
+  ceață care ascunde unități, bruiaj al rețelei adverse, iluzie cu durată limitată.
+La prototip: 1 vrăjitor + 2 vrăji. La 1.0: trei școli, dar păstrăm doar abilitățile
+care produc alegeri strategice clare.
+
+11. ADVERSARII AI
+Personalități propuse: Constructorul (defensiv), Cuceritorul (agresiv), Arcanistul
+(control magic). AI-ul planifică economie, construcții, recrutare, recunoaștere,
+apărare, asediu și obiective. Nivelurile de dificultate trebuie să fie credibile.
+
+12. CONȚINUTUL-ȚINTĂ PENTRU VERSIUNEA 1.0 (AJUSTABIL)
+- 3–5 hărți bine distincte; skirmish contra AI și tutorial complet.
+- Aproximativ 15–20 tipuri de clădiri; 8–12 tipuri de unități.
+- 3 școli de magie; aproximativ 6–9 vrăji cu utilitate reală.
+- 3 personalități AI; mai multe dificultăți, salvări și accesibilitate.
+- Materiale vizuale stilizate coerente, sunet, VFX, minimap și opțiuni grafice.
+- 60 FPS ca obiectiv măsurat pe un PC de referință definit după prototip.
+- Joc single-player finalizat, fără dependență de multiplayer.
+
+13. CE NU PROMITEM PENTRU 1.0
+- Multiplayer, campanie narativă uriașă, open world, distrugere complet procedurală
+  a terenului, sute de tipuri de unități, grafică fotorealistă și platforme console.
+- Niciun termen fix sau succes comercial garantat înainte de măsurători și playtesting.
+
+14. PRIMELE CRITERII DE SUCCES
+Vertical slice: o hartă frumoasă și jucabilă, 8–10 clădiri, 3 tipuri de unități,
+1 vrăjitor, 1 AI adversar, faruri funcționale, un ciclu complet de partidă,
+salvare/încărcare și măsurători reale de performanță. Demo-ul trebuie testat de
+persoane care nu au lucrat la proiect și care pot înțelege mecanica distinctivă.
+
+15. MODELUL DE LUCRU ȘI HARDWARE
+Laptop existent: Intel i7 generația 12, RTX 3050 Laptop 4 GB VRAM, 16 GB RAM.
+Codex Cloud: scriere cod, documentație, analiză, scripturi și teste compatibile
+cu mediul; NU presupunem că are GPU sau un editor Unreal funcțional.
+Codex local + laptop: compilări și teste ușoare, hărți mici, setări grafice reduse.
+PC Windows GPU închiriat: scenă finală, animații complexe, editare vizuală,
+randare, testare de performanță, compilări/build-uri solicitante.
+GitHub: depozit central privat. Git LFS pentru asset-uri mari; backup independent.
+
+
+========================================================================
+II. LISTA 1 — CODEX CLOUD + CODEX LOCAL + LAPTOP
+========================================================================
+
+A. PLANIFICARE ȘI ARHITECTURĂ
+-----------------------------
+[ ] 01. Stabilirea publicului-țintă, concurenților și diferențierii mecanicii de lumină.
+[ ] 02. Finalizarea GDD: pitch, piloni, buclă de joc, obiective, condiții de victorie.
+[ ] 03. Împărțirea dezvoltării în milestone-uri, sprinturi, taskuri și definiții de gata.
+[ ] 04. Alegerea unei versiuni stabile Unreal Engine și blocarea versiunii proiectului.
+[ ] 05. Instalarea locală a Unreal, a toolchain-ului C++, a Git și a Git LFS.
+[ ] 06. Crearea proiectului Unreal C++ și a unui nivel minimal care pornește corect.
+[ ] 07. Crearea repository-ului GitHub privat, protecție pentru fișiere sensibile, .gitignore și .gitattributes.
+[ ] 08. Conectarea Codex la repository, reguli AGENTS.md, șabloane de PR și verificări.
+[ ] 09. Stabilirea standardelor C++, Blueprint, Data Assets, nume, foldere și documentație.
+[ ] 10. Proiectarea arhitecturii: comenzi, simulare, prezentare, AI, salvare, conținut.
+[ ] 11. Conceperea sistemului de identificatori stabili, serializare și pași controlați de simulare.
+[ ] 12. Crearea listei cu asset-uri necesare, licențe, autor, sursă și cost.
+[ ] 13. Configurarea backup-urilor proiectului, a versionării asset-urilor și a restaurării.
+
+B. CONTROL, CAMERĂ, UX ȘI CONSTRUCȚII
+-------------------------------------
+[ ] 01. Implementarea camerei RTS: pan, zoom, rotire, edge scrolling și limite.
+[ ] 02. Selecție individuală, box select, grupuri de unități și indicatori de selecție.
+[ ] 03. Implementarea input-ului remapabil și comenzilor prin click-dreapta.
+[ ] 04. Crearea infrastructurii pentru ordine Build/Move/Attack/Gather/CastSpell.
+[ ] 05. Plasarea clădirilor cu preview valid/invalid, rotație, coliziune și cost.
+[ ] 06. Construcție progresivă, reparație, upgrade, demolare și anularea comenzilor.
+[ ] 07. Ziduri, porți, turnuri și reguli de conectare a segmentelor.
+[ ] 08. Prototip HUD: resurse, clădiri, unități, alerte, minimap și tooltips.
+[ ] 09. Meniul principal, pauză, setări, ecran de victorie și înfrângere.
+
+C. ECONOMIE ȘI POPULAȚIE
+------------------------
+[ ] 01. Definirea resurselor: lemn, piatră, hrană, aur și energie magică.
+[ ] 02. Depozite, capacitate, producție, consum și costuri ale clădirilor/unităților.
+[ ] 03. Muncitori, joburi, atribuirea sarcinilor și prioritizarea producției.
+[ ] 04. Recoltare, minerit, ferme, lanțuri economice și transport/logistică.
+[ ] 05. Case, populație, moral, hrană și consecințele lipsei resurselor.
+[ ] 06. Tehnologii și îmbunătățiri economice cu costuri și condiții clare.
+[ ] 07. Balansare automată a economiei și verificarea blocajelor de progres.
+
+D. UNITĂȚI, LUPTĂ ȘI NAVIGAȚIE
+------------------------------
+[ ] 01. Recrutarea și întreținerea trupelor; clase de unități și statistici.
+[ ] 02. Ordin de mișcare, formații, ocolire obstacole și coliziuni de grup.
+[ ] 03. Pathfinding pentru rute cu ziduri, poduri temporare și porți.
+[ ] 04. Atac corp la corp, atac la distanță, proiectile, armor/damage, cooldown.
+[ ] 05. Comportament defensiv, patrulare, retragere, asistență și priorități ținte.
+[ ] 06. Sistem de asediu: berbeci, catapulte, turnuri și obiecte destructibile.
+[ ] 07. Balanța claselor de trupe și controale strategice lizibile.
+
+E. MAGIE ȘI SISTEMELE ORIGINALE
+-------------------------------
+[ ] 01. Implementarea farurilor și a nodurilor cu conexiuni verificabile.
+[ ] 02. Calculul razei de influență, consumului și alimentării rețelei de lumină.
+[ ] 03. Legarea producției și efectelor teritoriale de rețeaua magică.
+[ ] 04. Sabotajul și restabilirea conexiunilor magice; feedback clar pentru jucător.
+[ ] 05. Primul vrăjitor + două vrăji: pod temporar și barieră de rădăcini.
+[ ] 06. Reguli pentru durată, mana, cooldown, contramăsuri și validarea terenului.
+[ ] 07. Extinderea la trei școli de magie și setul aprobat de abilități.
+[ ] 08. Ruine magice, puncte speciale, obiective secundare și explorare.
+[ ] 09. Integrarea atmosferei zi/noapte fără a distruge vizibilitatea RTS.
+
+F. ADVERSARI ȘI CONȚINUT SINGLE-PLAYER
+--------------------------------------
+[ ] 01. AI economic: plan de construcție, producție și gestionarea resurselor.
+[ ] 02. AI militar: recrutare, recunoaștere, atac, apărare și asedii.
+[ ] 03. AI magic: apărarea farurilor, atacarea conexiunilor și folosirea vrăjilor.
+[ ] 04. Trei personalități AI și dificultăți testabile, evitând bonusuri injuste.
+[ ] 05. Crearea obiectivelor de victorie/înfrângere, abandon, restart și statistici.
+[ ] 06. Sistem pentru scenarii, poziții de start, hărți și obiective variate.
+[ ] 07. Tutorial ghidat, provocări și onboarding fără supraîncărcare.
+[ ] 08. Salvări, autosave, încărcare, migrarea versiunilor și teste de corupere.
+
+G. ASSET-URI ȘI VIZUALURI CE POT FI PREGĂTITE
+---------------------------------------------
+[ ] 01. Art bible: siluete, palete, proporții, materiale, reguli de lizibilitate.
+[ ] 02. Scripturi Blender Python pentru clădiri și decoruri procedurale simple.
+[ ] 03. Prototipuri 3D low-poly, pivots, coliziuni și forme placeholder.
+[ ] 04. Automatizarea exporturilor FBX/glTF și validarea convențiilor de numire.
+[ ] 05. Materiale stylized de bază și rețete de texturi procedurale.
+[ ] 06. Pregătirea rigging-ului și a animațiilor simple, în limita hardware-ului.
+[ ] 07. Definirea scripturilor/parametrilor pentru efectele Niagara și licurici.
+[ ] 08. Crearea iconurilor UI și a specificațiilor pentru sunete/muzică.
+[ ] 09. Integrarea asset-urilor ușoare și verificarea lizibilității pe laptop.
+
+H. TESTARE, ACCESIBILITATE ȘI ÎNTREȚINERE
+-----------------------------------------
+[ ] 01. Teste automate pentru resurse, comenzi, construcții, magie și lupte.
+[ ] 02. Simulări headless ale economiei și ale confruntărilor AI unde sunt fezabile.
+[ ] 03. Verificarea locală a compilărilor și testelor disponibile pe laptop.
+[ ] 04. Profilarea logicii, loguri și diagnostic pentru erori reproductibile.
+[ ] 05. Scalare UI, accesibilitate, remapare taste și reducerea efectelor vizuale.
+[ ] 06. Verificarea comportamentului la rezoluții diferite și pe setări Low.
+[ ] 07. Verificarea originii/licenței pentru fiecare model, textură, sunet și font.
+[ ] 08. Documentație de build, testare, debugging, versiuni și changelog.
+[ ] 09. Planul de arhitectură pentru multiplayer ulterior, fără implementarea lui.
+[ ] 10. Pregătirea unei versiuni demo jucabile și a feedbackului de playtest.
+
+TOTAL SARCINI ÎN ACEASTĂ LISTĂ: 72
+
+========================================================================
+III. LISTA 2 — PC GPU ÎNCHIRIAT
+========================================================================
+
+A. CONFIGURAREA WORKSTATION-ULUI GPU
+------------------------------------
+[ ] 01. Alegerea unui PC Windows GPU potrivit pentru Unreal/Blender și verificarea bugetului.
+[ ] 02. Instalarea Unreal, toolchain C++, Blender, drivere și utilitare de profilare.
+[ ] 03. Conectare remote securizată, Git/Git LFS, repo și sincronizare de asset-uri.
+[ ] 04. Verificarea VRAM, RAM, stocării, lățimii de bandă și costului per sesiune.
+[ ] 05. Pregătirea unei sesiuni de lucru cu taskuri precise și backup înainte/după.
+
+B. IMPORT ȘI ARTĂ 3D FINALĂ
+---------------------------
+[ ] 01. Importul tuturor asset-urilor cu verificarea scării, pivoturilor și coliziunilor.
+[ ] 02. Modele finale pentru clădiri, castel, fortificații, vrăjitori, trupe, creaturi.
+[ ] 03. UV mapping, baking, texturi, materiale premium și atlasuri optimizate.
+[ ] 04. Rigging, skinning, animații de mișcare, atac, muncă și vrăji.
+[ ] 05. LOD, instancing, culling, streaming de texturi și bugete de VRAM.
+[ ] 06. Finisarea hărților, vegetației, apei, terenului, ruinelor și punctelor magice.
+
+C. ILUMINARE, VFX, SUNET ȘI PREZENTARE
+--------------------------------------
+[ ] 01. Setarea finală a iluminării, umbrelor, expunerii și reflexiilor.
+[ ] 02. Testarea Lumen/Nanite și a alternativelor pentru setări grafice reduse.
+[ ] 03. Licurici în Niagara, particule ambientale, praf magic și vegetație animată.
+[ ] 04. VFX finale pentru fiecare vrajă, proiectil, explozie și distrugere.
+[ ] 05. Ceață, vreme și tranziții zi/noapte, cu lizibilitate RTS păstrată.
+[ ] 06. Integrarea animațiilor și sunetelor cu evenimentele reale din gameplay.
+[ ] 07. Finisarea interfeței și verificarea ei pe rezoluții și scale diferite.
+[ ] 08. Capturi și trailer realizate din gameplay reprezentativ (nu promisiuni false).
+
+D. TESTARE GREU DE RULAT PE LAPTOP
+----------------------------------
+[ ] 01. Compilări complete, shader compilation și testarea proiectului întreg.
+[ ] 02. Stres-test cu 100/200/500+ unități numai unde sistemele permit.
+[ ] 03. Profilare CPU/GPU cu Unreal Insights și instrumentele motorului.
+[ ] 04. Optimizarea pathfinding-ului, AI-ului, materialelor, VFX și memoriei.
+[ ] 05. Testarea hărților încărcate și a sesiunilor lungi cu economie dezvoltată.
+[ ] 06. Detectarea blocajelor, memory leaks, erorilor și crash-urilor.
+[ ] 07. Definirea și verificarea presetărilor Low/Medium/High/Epic.
+[ ] 08. Testele pe GPU puternic PLUS regresie pe laptopul RTX 3050 (testele pe laptop rămân locale).
+
+E. VALIDAREA FINALĂ ȘI BUILD-UL
+-------------------------------
+[ ] 01. Playtesting integrat cu toate sistemele și hărțile finale.
+[ ] 02. Corectarea defectelor de animație, coliziune, cameră, UI și navigație.
+[ ] 03. Compilarea Shipping pentru Windows, cooking, packaging și verificare la instalare curată.
+[ ] 04. Validarea cerințelor de sistem și a stabilității înainte de lansare.
+[ ] 05. Pregătirea build-ului candidat, rapoartelor de QA și pachetului de asset-uri.
+[ ] 06. Sincronizarea în repo/backup a rezultatelor și oprirea închirierii după sesiune.
+
+TOTAL SARCINI ÎN ACEASTĂ LISTĂ: 33
+
+========================================================================
+IV. LISTA 3 — STEAM: PUBLICARE, PROMOVARE ȘI OPERARE
+========================================================================
+
+A. CONTUL, DREPTURILE ȘI DATELE DE PUBLICARE
+--------------------------------------------
+[ ] 01. Crearea contului Steamworks Partner și acceptarea acordurilor necesare.
+[ ] 02. Stabilirea publicării ca persoană fizică sau prin firmă, după consultanță fiscală la nevoie.
+[ ] 03. Verificarea identității, beneficiarului, datelor bancare și fiscale.
+[ ] 04. Activarea protecției contului, permisiuni administrative și 2FA/Steam Guard.
+[ ] 05. Plata taxei Steam Direct de 100 USD pentru aplicație (plus taxe aplicabile).
+[ ] 06. Configurarea AppID-ului și a detaliilor aplicației în Steamworks.
+[ ] 07. Verificarea numelui comercial, logoului și drepturilor de utilizare.
+[ ] 08. Inventarul licențelor pentru cod, asset-uri, muzică, fonturi și AI generativ.
+
+B. PAGINA COMERCIALĂ A JOCULUI
+------------------------------
+[ ] 01. Stabilirea publicului, poziționării, genului și a argumentelor clare de cumpărare.
+[ ] 02. Descriere scurtă și lungă corectă, originală, în engleză.
+[ ] 03. Prezentarea clară a construcțiilor, economiei, AI-ului, vrăjitorilor și luminii.
+[ ] 04. Capturi reale din joc și trailer cu gameplay reprezentativ.
+[ ] 05. Steam capsule art: toate dimensiunile cerute în documentația actuală.
+[ ] 06. Artwork pentru Steam Library, hero banner, icon și logo.
+[ ] 07. Alegerea tagurilor, genurilor și funcționalităților implementate efectiv.
+[ ] 08. Localizarea paginii și a materialelor în limbile selectate.
+[ ] 09. Cerințe minime/recomandate numai după benchmark-uri reale.
+[ ] 10. Completarea chestionarelor Steam: conținut, clasificări, declarații AI după caz.
+[ ] 11. Alegerea prețului și a prețurilor regionale conform politicilor Steam.
+[ ] 12. Completarea checklistului paginii și trimiterea acesteia la verificare.
+[ ] 13. Publicarea paginii Coming Soon cu respectarea timpilor minimi impuși.
+
+C. PROMOVARE, DEMO ȘI VALIDAREA INTERESULUI
+-------------------------------------------
+[ ] 01. Planul de anunț: trailer, devlog, clipuri TikTok/YouTube și comunități RTS.
+[ ] 02. Crearea canalelor oficiale și a paginii de suport (site/Discord dacă este util).
+[ ] 03. Comunitate și moderare: reguli, update-uri, răspunsuri și evidența feedbackului.
+[ ] 04. Strategie pentru wishlist-uri fără a promite date sau funcții neverificate.
+[ ] 05. Crearea unui demo distinct, reprezentativ, stabil și clar pentru jucători.
+[ ] 06. Steam Playtest: înscrieri, acces, distribuire și colectarea feedbackului.
+[ ] 07. Evaluarea eligibilității pentru Steam Next Fest și pregătirea din timp.
+[ ] 08. Testarea paginii, mesajelor promoționale și interesului real al jucătorilor.
+
+D. INTEGRAREA TEHNICĂ STEAM
+---------------------------
+[ ] 01. Integrarea Steamworks SDK/Online Services corespunzătoare proiectului.
+[ ] 02. Achievements și statistici: design, implementare, iconuri și verificare.
+[ ] 03. Steam Cloud: configurare, conflicte de salvare și teste între calculatoare.
+[ ] 04. Steam Input/controller — numai dacă alegem să susținem oficial controllerul.
+[ ] 05. Steam Overlay și tratarea cazurilor când Steam este offline/nepornit.
+[ ] 06. Setarea launcher-ului, depots, executabilelor și a opțiunilor de lansare.
+[ ] 07. SteamPipe: încărcare build-uri, branch beta, parole și revenire la versiuni.
+[ ] 08. Test de descărcare și pornire pe calculator curat prin clientul Steam.
+[ ] 09. Verificarea salvărilor, setărilor, achievements și update-urilor în build Steam.
+
+E. REVIEW, LANSARE ȘI OPERAȚIUNI
+--------------------------------
+[ ] 01. Trimiterea paginii Steam și a build-ului pentru review; rezolvarea observațiilor.
+[ ] 02. Respectarea perioadei minime după taxa Direct și a perioadei Coming Soon.
+[ ] 03. Stabilirea datei, a planului de lansare și a procedurii de rollback.
+[ ] 04. Evaluarea reducerii de lansare și a regulilor Steam privind reducerile.
+[ ] 05. Verificarea finală a paginii, prețurilor, limbilor, build-ului și permisiunilor.
+[ ] 06. Publicarea efectivă în Steamworks, după aprobări, și confirmarea prezenței publice.
+[ ] 07. Monitorizarea crash-urilor, review-urilor, feedbackului și suportului la lansare.
+[ ] 08. Distribuirea hotfix-urilor, actualizărilor și changelog-urilor.
+[ ] 09. Rapoarte de vânzări, refund-uri, plăți, comisioane și contabilitate/fiscalitate.
+[ ] 10. Plan pentru reduceri viitoare, actualizări și materiale promoționale noi.
+[ ] 11. Decizia privind multiplayer pe baza cererii, costului, performanței și bugetului.
+[ ] 12. Mentenanță post-lansare, compatibilitate salvări, suport și backup-uri.
+
+TOTAL SARCINI ÎN ACEASTĂ LISTĂ: 50
+
+========================================================================
+V. ORDINEA CONCRETĂ DE EXECUȚIE (CE FACEM MAI ÎNTÂI)
+========================================================================
+
+FAZA 0 — PREGĂTIRE
+[ ] Instalăm/confirmăm Unreal și toolchain pe laptop.
+[ ] Creăm proiectul C++ Wildlight și repository privat GitHub.
+[ ] Configurăm Codex, AGENTS.md, Git LFS și un test minim de compilare.
+[ ] Stabilim art bible: atmosferă fantasy stilizată + principii de lizibilitate RTS.
+
+FAZA 1 — PRIMUL GAMEPLAY
+[ ] Cameră RTS și selecție.
+[ ] Plasarea unei clădiri și deducerea resurselor.
+[ ] Muncitor care adună lemn.
+[ ] Două tipuri de unități + atac de bază.
+[ ] Un adversar AI capabil să construiască și să atace.
+[ ] O partidă care se termină prin victorie sau înfrângere.
+
+FAZA 2 — MECANICA DISTINCTIVĂ
+[ ] Conectarea a două faruri magice.
+[ ] Efect economic clar al luminii.
+[ ] Atac asupra unui far care întrerupe efectul.
+[ ] Un vrăjitor cu pod magic temporar și barieră de rădăcini.
+[ ] Testăm dacă mecanica produce decizii interesante, nu doar efecte frumoase.
+
+FAZA 3 — VERTICAL SLICE PREMIUM
+[ ] Construim o hartă reprezentativă cu pădure, castel, râu și licurici.
+[ ] Integram modelele, animațiile, UI-ul, iluminarea și sunetul.
+[ ] Verificăm performanța pe laptop și pe workstation GPU.
+[ ] Organizăm playtest cu persoane din afara proiectului.
+
+FAZA 4 — EXTINDEREA LA SINGLE-PLAYER 1.0
+[ ] Extindem conținutul doar în urma feedbackului și a testelor.
+[ ] Finisăm AI-ul, economia, asediile, magia și hărțile.
+[ ] Adăugăm tutorial, salvări, accesibilitate și setări grafice.
+[ ] Pregătim demo-ul și pagina Steam Coming Soon.
+
+FAZA 5 — QA ȘI LANSARE
+[ ] QA complet și test de instalare curată.
+[ ] Steam Playtest / demo și corectarea problemelor majore.
+[ ] Build Shipping Windows + upload SteamPipe.
+[ ] Review Steamworks, calendar de lansare, prețuri și pagină finală.
+[ ] Lansare și suport pentru problemele raportate.
+
+========================================================================
+VI. REGULI CA SĂ NU PIERDEM TIMP SAU BANI
+========================================================================
+
+1. Nu închiriem GPU lunar dacă nu avem sarcini vizuale pregătite.
+2. Nu începem cu 20 de hărți; terminăm întâi una bună.
+3. Nu introducem multiplayer înainte ca single-player să fie complet și distractiv.
+4. Nu cumpărăm sute de asset-uri înainte de a stabili stilul și licențele.
+5. Nu folosim conținut protejat din Stronghold sau din alte jocuri.
+6. Nu confundăm codul generat de Codex cu un build compilat și verificat.
+7. Nu lăsăm efectele grafice să distrugă claritatea comenzilor RTS.
+8. Nu promitem pe Steam funcții care nu există încă.
+9. Păstrăm backup-uri și parolele/secretele în afara repository-ului.
+10. Testăm periodic pe laptop cu 4 GB VRAM; grafică bună nu trebuie să însemne un joc inutilizabil.
+11. Înregistrăm costuri: cloud GPU, asset-uri, Steam, marketing și timpul de dezvoltare.
+12. Înainte de lansare, verificăm documentația actuală Steam/Epic, licențele și obligațiile fiscale.
+
+SFÂRȘIT DOCUMENT

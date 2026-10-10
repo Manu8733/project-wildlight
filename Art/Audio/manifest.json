@@ -1,0 +1,103 @@
+{
+  "format_version": 1,
+  "authorship": "Original deterministic mathematical synthesis in Tools/author_audio.py; no external recordings",
+  "status": "Prototype synthesis studies; final sound design, listening review and Unreal mix remain pending",
+  "assets": [
+    {
+      "id": "A_WoodlandLoop",
+      "path": "Audio/A_WoodlandLoop.wav",
+      "purpose": "Quiet woodland and original pentatonic bell study",
+      "loop": true,
+      "duration_seconds": 32,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -18.93,
+      "rms_dbfs": -33.45,
+      "sha256": "6e11f83588040c4e46be1883e7a3c800c551da55a78af59faf6509d4f34c60cd"
+    },
+    {
+      "id": "A_Command",
+      "path": "Audio/A_Command.wav",
+      "purpose": "Accepted order acknowledgement",
+      "loop": false,
+      "duration_seconds": 0.22,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -17.2,
+      "rms_dbfs": -30.34,
+      "sha256": "24a9938ffe0154487857d425912e82be4a1be571cbc45195c1d64c18fd22d1e6"
+    },
+    {
+      "id": "A_Build",
+      "path": "Audio/A_Build.wav",
+      "purpose": "Construction placement cue",
+      "loop": false,
+      "duration_seconds": 0.62,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -15.55,
+      "rms_dbfs": -27.69,
+      "sha256": "3d1eefef6fc16e4830f1bcc8f727872e9f6af3b6ba687b9473f2c4b129dd5927"
+    },
+    {
+      "id": "A_Magic",
+      "path": "Audio/A_Magic.wav",
+      "purpose": "Spell confirmation and light-network cue",
+      "loop": false,
+      "duration_seconds": 1.4,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -11.26,
+      "rms_dbfs": -26.26,
+      "sha256": "d5aadfc8f9d78c60c85e151792e268befbc9f2996f69b0890f1b8937fcc63422"
+    },
+    {
+      "id": "A_Alert",
+      "path": "Audio/A_Alert.wav",
+      "purpose": "Notification cue",
+      "loop": false,
+      "duration_seconds": 0.7,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -16.3,
+      "rms_dbfs": -28.93,
+      "sha256": "e584d94dfb1212987b87bfaf07a922c026d05a964c11f608c2e3f49b37d26a49"
+    },
+    {
+      "id": "A_Impact",
+      "path": "Audio/A_Impact.wav",
+      "purpose": "Restrained combat impact",
+      "loop": false,
+      "duration_seconds": 0.35,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -13.4,
+      "rms_dbfs": -28.56,
+      "sha256": "c79ddc6070cedfd7861381846a4931206094f0a7afa9811b1046f5b8e15ab0c6"
+    },
+    {
+      "id": "A_Victory",
+      "path": "Audio/A_Victory.wav",
+      "purpose": "Victory cue",
+      "loop": false,
+      "duration_seconds": 2.8,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -13.92,
+      "rms_dbfs": -26.5,
+      "sha256": "2a71562907d6733f91b813a1378b37c508f531d2c76ae7db5bec4921a40ccc63"
+    },
+    {
+      "id": "A_Defeat",
+      "path": "Audio/A_Defeat.wav",
+      "purpose": "Defeat cue",
+      "loop": false,
+      "duration_seconds": 2.2,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak_dbfs": -14.12,
+      "rms_dbfs": -27.85,
+      "sha256": "526c45679e9d192b8ebbd8f421697f69b95bbc5d53a8adc32596646e6dda64c3"
+    }
+  ]
+}

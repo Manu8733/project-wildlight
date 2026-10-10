@@ -1,0 +1,2229 @@
+{
+  "schema_version": 1,
+  "project": "Wildlight",
+  "initial_game_language": "en",
+  "source": "Docs/Original_Romanian_Brief.txt",
+  "source_preserved": true,
+  "scope": {
+    "included_lists": [
+      1,
+      2
+    ],
+    "excluded_lists": [
+      3
+    ],
+    "steam_deferred": true
+  },
+  "counts": {
+    "list_1_declared": 72,
+    "list_1_parsed": 72,
+    "list_2_declared": 33,
+    "list_2_parsed": 33,
+    "tracked": 105
+  },
+  "acceptance_policy": "Only explicit user acceptance sets accepted=true; VerifiedCloud is not acceptance and does not imply Unreal verification.",
+  "status_definitions": {
+    "NotStarted": "No implemented deliverable; specifications may exist.",
+    "ImplementedNotEngineVerified": "Relevant source or configuration exists; composite coverage may be partial and Unreal/platform execution remains unverified.",
+    "VerifiedCloud": "The stated limited document/configuration/portable scope was checked in this cloud; inspect remaining work before treating the full task as complete.",
+    "BlockedHardware": "A required actual laptop/Windows/GPU action cannot run in this environment; preparation may exist.",
+    "NeedsPlaytest": "Tuning or experience acceptance needs measured integrated matches and player feedback.",
+    "BlockedCredentials": "A required remote operation was rejected by current integration permissions; local preparation may exist."
+  },
+  "section_names_ro": {
+    "CLOUD-A": "PLANIFICARE ȘI ARHITECTURĂ",
+    "CLOUD-B": "CONTROL, CAMERĂ, UX ȘI CONSTRUCȚII",
+    "CLOUD-C": "ECONOMIE ȘI POPULAȚIE",
+    "CLOUD-D": "UNITĂȚI, LUPTĂ ȘI NAVIGAȚIE",
+    "CLOUD-E": "MAGIE ȘI SISTEMELE ORIGINALE",
+    "CLOUD-F": "ADVERSARI ȘI CONȚINUT SINGLE-PLAYER",
+    "CLOUD-G": "ASSET-URI ȘI VIZUALURI CE POT FI PREGĂTITE",
+    "CLOUD-H": "TESTARE, ACCESIBILITATE ȘI ÎNTREȚINERE",
+    "GPU-A": "CONFIGURAREA WORKSTATION-ULUI GPU",
+    "GPU-B": "IMPORT ȘI ARTĂ 3D FINALĂ",
+    "GPU-C": "ILUMINARE, VFX, SUNET ȘI PREZENTARE",
+    "GPU-D": "TESTARE GREU DE RULAT PE LAPTOP",
+    "GPU-E": "VALIDAREA FINALĂ ȘI BUILD-UL"
+  },
+  "requirements": [
+    {
+      "id": "CLOUD-A01",
+      "list": 1,
+      "section": "A",
+      "number": 1,
+      "title_en": "Define audience, comparisons and light-network differentiation",
+      "original_text_ro": "Stabilirea publicului-țintă, concurenților și diferențierii mecanicii de lumină.",
+      "source_line": 149,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [
+        "Inspect Docs/GDD.md against Docs/Original_Romanian_Brief.txt."
+      ],
+      "remaining": [
+        "Independent gameplay validation and user acceptance remain pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A02",
+      "list": 1,
+      "section": "A",
+      "number": 2,
+      "title_en": "Finalize game design, pillars, loop, objectives and victory conditions",
+      "original_text_ro": "Finalizarea GDD: pitch, piloni, buclă de joc, obiective, condiții de victorie.",
+      "source_line": 150,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [
+        "Inspect Docs/GDD.md against Docs/Original_Romanian_Brief.txt."
+      ],
+      "remaining": [
+        "Independent gameplay validation and user acceptance remain pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A03",
+      "list": 1,
+      "section": "A",
+      "number": 3,
+      "title_en": "Define milestones, sprints, tasks and done criteria",
+      "original_text_ro": "Împărțirea dezvoltării în milestone-uri, sprinturi, taskuri și definiții de gata.",
+      "source_line": 151,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/MILESTONES.md",
+        "Docs/Requirements.json"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Milestone gates must be met by actual implementation evidence and user acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A04",
+      "list": 1,
+      "section": "A",
+      "number": 4,
+      "title_en": "Choose and lock a stable Unreal Engine version",
+      "original_text_ro": "Alegerea unei versiuni stabile Unreal Engine și blocarea versiunii proiectului.",
+      "source_line": 152,
+      "status": "VerifiedCloud",
+      "scope_coverage": "configuration",
+      "evidence_paths": [
+        "engine-lock.json",
+        "Wildlight.uproject",
+        "Docs/BUILD_AND_VERIFY.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify installed Unreal version and compatibility on the laptop."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A05",
+      "list": 1,
+      "section": "A",
+      "number": 5,
+      "title_en": "Install local Unreal, C++ toolchain, Git and Git LFS",
+      "original_text_ro": "Instalarea locală a Unreal, a toolchain-ului C++, a Git și a Git LFS.",
+      "source_line": 153,
+      "status": "BlockedHardware",
+      "scope_coverage": "none",
+      "evidence_paths": [
+        "Docs/LAPTOP_QUICKSTART.md",
+        "Tools/Build-Windows.ps1"
+      ],
+      "verification_commands": [
+        "./Tools/Build-Windows.ps1 -EngineRoot 'C:\\Program Files\\Epic Games\\UE_5.8' -Stage Verify"
+      ],
+      "remaining": [
+        "No access to the user Windows laptop; installed toolchain and local compile/test results are unknown."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A06",
+      "list": 1,
+      "section": "A",
+      "number": 6,
+      "title_en": "Create Unreal C++ project and a correctly starting minimal level",
+      "original_text_ro": "Crearea proiectului Unreal C++ și a unui nivel minimal care pornește corect.",
+      "source_line": 154,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Wildlight.uproject",
+        "Source/Wildlight/",
+        "Config/",
+        "Tools/Import-Assets.py"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Compile native targets, run importer and verify minimal/editor/packaged startup on Windows."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A07",
+      "list": 1,
+      "section": "A",
+      "number": 7,
+      "title_en": "Create private GitHub repository and sensitive-file safeguards",
+      "original_text_ro": "Crearea repository-ului GitHub privat, protecție pentru fișiere sensibile, .gitignore și .gitattributes.",
+      "source_line": 155,
+      "status": "VerifiedCloud",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        ".gitignore",
+        ".gitattributes",
+        "Docs/PROGRESS.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+      "Public visibility was verified on 10 October 2026 and explicitly approved by the user, overriding the original private-repository request. First push, remote LFS integrity and external backup still need recorded verification."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A08",
+      "list": 1,
+      "section": "A",
+      "number": 8,
+      "title_en": "Connect repository workflow, agent rules, PR templates and checks",
+      "original_text_ro": "Conectarea Codex la repository, reguli AGENTS.md, șabloane de PR și verificări.",
+      "source_line": 156,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "AGENTS.md",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/workflows/core.yml"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Local agent/PR/CI configuration authored; first remote push and passing hosted workflow remain pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A09",
+      "list": 1,
+      "section": "A",
+      "number": 9,
+      "title_en": "Define C++, Blueprint, Data Asset, naming and folder standards",
+      "original_text_ro": "Stabilirea standardelor C++, Blueprint, Data Assets, nume, foldere și documentație.",
+      "source_line": 157,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/ARCHITECTURE.md",
+        "AGENTS.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify implementation follows the standards; Data Asset loading is a future validated content path."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A10",
+      "list": 1,
+      "section": "A",
+      "number": 10,
+      "title_en": "Design command, simulation, presentation, AI, save and content architecture",
+      "original_text_ro": "Proiectarea arhitecturii: comenzi, simulare, prezentare, AI, salvare, conținut.",
+      "source_line": 158,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/ARCHITECTURE.md",
+        "AGENTS.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify implementation follows the standards; Data Asset loading is a future validated content path."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A11",
+      "list": 1,
+      "section": "A",
+      "number": 11,
+      "title_en": "Design stable IDs, serialization and controlled simulation steps",
+      "original_text_ro": "Conceperea sistemului de identificatori stabili, serializare și pași controlați de simulare.",
+      "source_line": 159,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/include/wildlight/Simulation.hpp",
+        "Core/src/Simulation.cpp",
+        "Docs/ARCHITECTURE.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run stable-ID, fixed-step and persistence tests; integration/platform verification and acceptance remain pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A12",
+      "list": 1,
+      "section": "A",
+      "number": 12,
+      "title_en": "Inventory required assets, licenses, authors, sources and costs",
+      "original_text_ro": "Crearea listei cu asset-uri necesare, licențe, autor, sursă și cost.",
+      "source_line": 160,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Docs/ASSET_PROVENANCE.md",
+        "Art/LICENSES.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Validate generated manifest/checksums and reconcile actual shipped files; final content is not present yet."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-A13",
+      "list": 1,
+      "section": "A",
+      "number": 13,
+      "title_en": "Configure backups, asset versioning and verified restoration",
+      "original_text_ro": "Configurarea backup-urilor proiectului, a versionării asset-urilor și a restaurării.",
+      "source_line": 161,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Tools/backup.py",
+        "Docs/BACKUP_AND_RECOVERY.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Record archive verification and full restore test; external independent storage and Windows restore remain outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B01",
+      "list": 1,
+      "section": "B",
+      "number": 1,
+      "title_en": "Implement strategic camera, pan, zoom, rotation, edge scroll and limits",
+      "original_text_ro": "Implementarea camerei RTS: pan, zoom, rotire, edge scrolling și limite.",
+      "source_line": 165,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B02",
+      "list": 1,
+      "section": "B",
+      "number": 2,
+      "title_en": "Implement single/box selection, unit groups and indicators",
+      "original_text_ro": "Selecție individuală, box select, grupuri de unități și indicatori de selecție.",
+      "source_line": 166,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B03",
+      "list": 1,
+      "section": "B",
+      "number": 3,
+      "title_en": "Implement remappable input and right-click orders",
+      "original_text_ro": "Implementarea input-ului remapabil și comenzilor prin click-dreapta.",
+      "source_line": 167,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Config/DefaultInput.ini",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Right-click intent is authored; a fully working remap interface, conflict handling and persistence require implementation/verification."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B04",
+      "list": 1,
+      "section": "B",
+      "number": 4,
+      "title_en": "Implement Build, Move, Attack, Gather and CastSpell command infrastructure",
+      "original_text_ro": "Crearea infrastructurii pentru ordine Build/Move/Attack/Gather/CastSpell.",
+      "source_line": 168,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B05",
+      "list": 1,
+      "section": "B",
+      "number": 5,
+      "title_en": "Implement valid/invalid building preview, rotation, collision and costs",
+      "original_text_ro": "Plasarea clădirilor cu preview valid/invalid, rotație, coliziune și cost.",
+      "source_line": 169,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B06",
+      "list": 1,
+      "section": "B",
+      "number": 6,
+      "title_en": "Implement progressive construction, repair, upgrade, demolition and cancellation",
+      "original_text_ro": "Construcție progresivă, reparație, upgrade, demolare și anularea comenzilor.",
+      "source_line": 170,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B07",
+      "list": 1,
+      "section": "B",
+      "number": 7,
+      "title_en": "Implement connected wall, gate and tower rules",
+      "original_text_ro": "Ziduri, porți, turnuri și reguli de conectare a segmentelor.",
+      "source_line": 171,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Footprint walls/gates/tower logic is authored; connected-segment snapping, visual joins and dense gate navigation require engine review and any missing implementation."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B08",
+      "list": 1,
+      "section": "B",
+      "number": 8,
+      "title_en": "Create resource/building/unit/alert/minimap/tooltip HUD",
+      "original_text_ro": "Prototip HUD: resurse, clădiri, unități, alerte, minimap și tooltips.",
+      "source_line": 172,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-B09",
+      "list": 1,
+      "section": "B",
+      "number": 9,
+      "title_en": "Create main menu, pause, settings and victory/defeat screens",
+      "original_text_ro": "Meniul principal, pauză, setări, ecran de victorie și înfrângere.",
+      "source_line": 173,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run applicable Unreal interaction checks in Docs/QA_PLAN.md; composite features require complete engine acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C01",
+      "list": 1,
+      "section": "C",
+      "number": 1,
+      "title_en": "Define wood, stone, food, gold and magic energy",
+      "original_text_ro": "Definirea resurselor: lemn, piatră, hrană, aur și energie magică.",
+      "source_line": 177,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/include/wildlight/Simulation.hpp",
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Validate resource catalog and conservation checks; verify HUD integration and acceptance."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C02",
+      "list": 1,
+      "section": "C",
+      "number": 2,
+      "title_en": "Implement storage/capacity, production, consumption and costs",
+      "original_text_ro": "Depozite, capacitate, producție, consum și costuri ale clădirilor/unităților.",
+      "source_line": 178,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Execute resource/logistics/research tests and integrated economy playtest; verify full requirement coverage."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C03",
+      "list": 1,
+      "section": "C",
+      "number": 3,
+      "title_en": "Implement workers, jobs, assignment and production priorities",
+      "original_text_ro": "Muncitori, joburi, atribuirea sarcinilor și prioritizarea producției.",
+      "source_line": 179,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Automatic worker jobs and farm preference exist; explicit player production-priority UI is not complete. Validate recovery/logistics and integrated playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C04",
+      "list": 1,
+      "section": "C",
+      "number": 4,
+      "title_en": "Implement gathering, mining, farms, short chains and cargo logistics",
+      "original_text_ro": "Recoltare, minerit, ferme, lanțuri economice și transport/logistică.",
+      "source_line": 180,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Execute resource/logistics/research tests and integrated economy playtest; verify full requirement coverage."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C05",
+      "list": 1,
+      "section": "C",
+      "number": 5,
+      "title_en": "Implement housing, population, morale and shortage consequences",
+      "original_text_ro": "Case, populație, moral, hrană și consecințele lipsei resurselor.",
+      "source_line": 181,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Execute resource/logistics/research tests and integrated economy playtest; verify full requirement coverage."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C06",
+      "list": 1,
+      "section": "C",
+      "number": 6,
+      "title_en": "Implement economic research/upgrades with explicit prerequisites",
+      "original_text_ro": "Tehnologii și îmbunătățiri economice cu costuri și condiții clare.",
+      "source_line": 182,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Execute resource/logistics/research tests and integrated economy playtest; verify full requirement coverage."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-C07",
+      "list": 1,
+      "section": "C",
+      "number": 7,
+      "title_en": "Automatically evaluate balance and progression deadlocks",
+      "original_text_ro": "Balansare automată a economiei și verificarea blocajelor de progres.",
+      "source_line": 183,
+      "status": "NeedsPlaytest",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Docs/QA_PLAN.md",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Automated simulations need analysis, tuning and independent progression-deadlock/economy evaluation."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D01",
+      "list": 1,
+      "section": "D",
+      "number": 1,
+      "title_en": "Implement recruitment, upkeep, classes and unit statistics",
+      "original_text_ro": "Recrutarea și întreținerea trupelor; clase de unități și statistici.",
+      "source_line": 187,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run relevant simulation and integrated unit/path/combat/siege acceptance tests."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D02",
+      "list": 1,
+      "section": "D",
+      "number": 2,
+      "title_en": "Implement group movement, formations, avoidance and collision",
+      "original_text_ro": "Ordin de mișcare, formații, ocolire obstacole și coliziuni de grup.",
+      "source_line": 188,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Group destinations and obstacle paths do not establish full collision avoidance; dense formations/gate movement require further work."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D03",
+      "list": 1,
+      "section": "D",
+      "number": 3,
+      "title_en": "Implement paths through walls, temporary bridges and gates",
+      "original_text_ro": "Pathfinding pentru rute cu ziduri, poduri temporare și porți.",
+      "source_line": 189,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run relevant simulation and integrated unit/path/combat/siege acceptance tests."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D04",
+      "list": 1,
+      "section": "D",
+      "number": 4,
+      "title_en": "Implement melee, ranged projectiles, armor, damage and cooldowns",
+      "original_text_ro": "Atac corp la corp, atac la distanță, proiectile, armor/damage, cooldown.",
+      "source_line": 190,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run relevant simulation and integrated unit/path/combat/siege acceptance tests."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D05",
+      "list": 1,
+      "section": "D",
+      "number": 5,
+      "title_en": "Implement defense, patrol, retreat, assistance and target priorities",
+      "original_text_ro": "Comportament defensiv, patrulare, retragere, asistență și priorități ținte.",
+      "source_line": 191,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Validate stance/patrol/assistance; explicit retreat and target-priority behavior require coverage review."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D06",
+      "list": 1,
+      "section": "D",
+      "number": 6,
+      "title_en": "Implement rams, catapults, defense towers and destruction",
+      "original_text_ro": "Sistem de asediu: berbeci, catapulte, turnuri și obiecte destructibile.",
+      "source_line": 192,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run relevant simulation and integrated unit/path/combat/siege acceptance tests."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-D07",
+      "list": 1,
+      "section": "D",
+      "number": 7,
+      "title_en": "Balance unit classes and readable strategic controls",
+      "original_text_ro": "Balanța claselor de trupe și controale strategice lizibile.",
+      "source_line": 193,
+      "status": "NeedsPlaytest",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Class statistics are provisional; compare matchups, strategic clarity and counters with actual players."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E01",
+      "list": 1,
+      "section": "E",
+      "number": 1,
+      "title_en": "Implement beacons and verifiable node connections",
+      "original_text_ro": "Implementarea farurilor și a nodurilor cu conexiuni verificabile.",
+      "source_line": 197,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E02",
+      "list": 1,
+      "section": "E",
+      "number": 2,
+      "title_en": "Compute network influence, consumption and supply",
+      "original_text_ro": "Calculul razei de influență, consumului și alimentării rețelei de lumină.",
+      "source_line": 198,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E03",
+      "list": 1,
+      "section": "E",
+      "number": 3,
+      "title_en": "Connect production and territory effects to the light network",
+      "original_text_ro": "Legarea producției și efectelor teritoriale de rețeaua magică.",
+      "source_line": 199,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E04",
+      "list": 1,
+      "section": "E",
+      "number": 4,
+      "title_en": "Implement sabotage/restoration with clear player feedback",
+      "original_text_ro": "Sabotajul și restabilirea conexiunilor magice; feedback clar pentru jucător.",
+      "source_line": 200,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E05",
+      "list": 1,
+      "section": "E",
+      "number": 5,
+      "title_en": "Implement first wizard, Light Bridge and Root Barrier",
+      "original_text_ro": "Primul vrăjitor + două vrăji: pod temporar și barieră de rădăcini.",
+      "source_line": 201,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E06",
+      "list": 1,
+      "section": "E",
+      "number": 6,
+      "title_en": "Validate duration, mana, cooldown, counterplay and terrain",
+      "original_text_ro": "Reguli pentru durată, mana, cooldown, contramăsuri și validarea terenului.",
+      "source_line": 202,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E07",
+      "list": 1,
+      "section": "E",
+      "number": 7,
+      "title_en": "Extend to three magic schools and approved abilities",
+      "original_text_ro": "Extinderea la trei școli de magie și setul aprobat de abilități.",
+      "source_line": 203,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E08",
+      "list": 1,
+      "section": "E",
+      "number": 8,
+      "title_en": "Implement magic ruins, sites, side objectives and exploration",
+      "original_text_ro": "Ruine magice, puncte speciale, obiective secundare și explorare.",
+      "source_line": 204,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-E09",
+      "list": 1,
+      "section": "E",
+      "number": 9,
+      "title_en": "Integrate day/night atmosphere while preserving RTS readability",
+      "original_text_ro": "Integrarea atmosferei zi/noapte fără a distruge vizibilitatea RTS.",
+      "source_line": 205,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify simulation rules and integrated feedback; catalog spells/maps are not fully animated/polished accepted content."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F01",
+      "list": 1,
+      "section": "F",
+      "number": 1,
+      "title_en": "Implement AI economy, building plan, production and resources",
+      "original_text_ro": "AI economic: plan de construcție, producție și gestionarea resurselor.",
+      "source_line": 209,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F02",
+      "list": 1,
+      "section": "F",
+      "number": 2,
+      "title_en": "Implement AI recruitment, scouting, attack, defense and siege",
+      "original_text_ro": "AI militar: recrutare, recunoaștere, atac, apărare și asedii.",
+      "source_line": 210,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F03",
+      "list": 1,
+      "section": "F",
+      "number": 3,
+      "title_en": "Implement AI beacon defense, link attacks and spell use",
+      "original_text_ro": "AI magic: apărarea farurilor, atacarea conexiunilor și folosirea vrăjilor.",
+      "source_line": 211,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F04",
+      "list": 1,
+      "section": "F",
+      "number": 4,
+      "title_en": "Implement three AI personalities and fair testable difficulties",
+      "original_text_ro": "Trei personalități AI și dificultăți testabile, evitând bonusuri injuste.",
+      "source_line": 212,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F05",
+      "list": 1,
+      "section": "F",
+      "number": 5,
+      "title_en": "Implement outcomes, surrender, restart and match statistics",
+      "original_text_ro": "Crearea obiectivelor de victorie/înfrângere, abandon, restart și statistici.",
+      "source_line": 213,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F06",
+      "list": 1,
+      "section": "F",
+      "number": 6,
+      "title_en": "Implement scenario/start-position/map/objective infrastructure",
+      "original_text_ro": "Sistem pentru scenarii, poziții de start, hărți și obiective variate.",
+      "source_line": 214,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Seeded tests must demonstrate actual fair AI behavior and objectives; full matches and UI require engine playtest."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F07",
+      "list": 1,
+      "section": "F",
+      "number": 7,
+      "title_en": "Implement guided tutorial, challenges and manageable onboarding",
+      "original_text_ro": "Tutorial ghidat, provocări și onboarding fără supraîncărcare.",
+      "source_line": 215,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Source/Wildlight/",
+        "Docs/GDD.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "An instructional guide is not full predicate-driven tutorial/challenge content; author and verify complete onboarding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-F08",
+      "list": 1,
+      "section": "F",
+      "number": 8,
+      "title_en": "Implement saves, autosave, loading, migration and corruption tests",
+      "original_text_ro": "Salvări, autosave, încărcare, migrarea versiunilor și teste de corupere.",
+      "source_line": 216,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/src/Simulation.cpp",
+        "Source/Wildlight/",
+        "Docs/ARCHITECTURE.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run round-trip/corruption checks and platform autosave/load; unsupported versions are rejected, migration is not implemented."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G01",
+      "list": 1,
+      "section": "G",
+      "number": 1,
+      "title_en": "Create silhouette, palette, proportion, material and readability art bible",
+      "original_text_ro": "Art bible: siluete, palete, proporții, materiale, reguli de lizibilitate.",
+      "source_line": 220,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/ArtBible.md",
+        "Art/ART_BIBLE.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Review actual integrated scene and obtain user acceptance of style."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G02",
+      "list": 1,
+      "section": "G",
+      "number": 2,
+      "title_en": "Create Blender Python building/environment generator scripts",
+      "original_text_ro": "Scripturi Blender Python pentru clădiri și decoruri procedurale simple.",
+      "source_line": 221,
+      "status": "VerifiedCloud",
+      "scope_coverage": "export_automation",
+      "evidence_paths": [
+        "Art/Source/build_wildlight_art.py",
+        "Art/Source/validate_wildlight_art.py",
+        "Art/manifest.json",
+        "Art/validation_report.json"
+      ],
+      "verification_commands": [
+        "blender --background --python Art/Source/validate_wildlight_art.py"
+      ],
+      "remaining": [
+        "41 original meshes passed independent Blender FBX re-import and GLB container validation; Unreal import/material/collision/naming integration acceptance remains pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G03",
+      "list": 1,
+      "section": "G",
+      "number": 3,
+      "title_en": "Create low-poly 3D prototypes with pivots and collision shapes",
+      "original_text_ro": "Prototipuri 3D low-poly, pivots, coliziuni și forme placeholder.",
+      "source_line": 222,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Art/Source/build_wildlight_art.py",
+        "Art/ASSET_REVIEW.md",
+        "Tools/Import-Assets.py"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Record generated export validation; in-engine collision/material/UV/scale/LOD checks remain outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G04",
+      "list": 1,
+      "section": "G",
+      "number": 4,
+      "title_en": "Automate FBX/glTF exports and validate names",
+      "original_text_ro": "Automatizarea exporturilor FBX/glTF și validarea convențiilor de numire.",
+      "source_line": 223,
+      "status": "VerifiedCloud",
+      "scope_coverage": "export_automation",
+      "evidence_paths": [
+        "Art/Source/build_wildlight_art.py",
+        "Art/Source/validate_wildlight_art.py",
+        "Art/manifest.json",
+        "Art/validation_report.json"
+      ],
+      "verification_commands": [
+        "blender --background --python Art/Source/validate_wildlight_art.py"
+      ],
+      "remaining": [
+        "41 original meshes passed independent Blender FBX re-import and GLB container validation; Unreal import/material/collision/naming integration acceptance remains pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G05",
+      "list": 1,
+      "section": "G",
+      "number": 5,
+      "title_en": "Create basic stylized materials and procedural texture recipes",
+      "original_text_ro": "Materiale stylized de bază și rețete de texturi procedurale.",
+      "source_line": 224,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Art/Source/build_wildlight_art.py",
+        "Art/ASSET_REVIEW.md",
+        "Tools/Import-Assets.py"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Original constant palette materials exist; final procedural texture masks/UV/atlas recipe, Unreal material fidelity and quality remain unverified."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G06",
+      "list": 1,
+      "section": "G",
+      "number": 6,
+      "title_en": "Prepare rigs and simple animations within hardware limits",
+      "original_text_ro": "Pregătirea rigging-ului și a animațiilor simple, în limita hardware-ului.",
+      "source_line": 225,
+      "status": "NotStarted",
+      "scope_coverage": "none",
+      "evidence_paths": [
+        "Art/ASSET_REVIEW.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Static unit prototypes are not completed rigging/animation; author rigs and required animation clips, then engine-test them."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G07",
+      "list": 1,
+      "section": "G",
+      "number": 7,
+      "title_en": "Define Niagara/firefly scripts and parameters",
+      "original_text_ro": "Definirea scripturilor/parametrilor pentru efectele Niagara și licurici.",
+      "source_line": 226,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/VFX_AUDIO_SPEC.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Parameters are specified only; actual Niagara authoring and GPU/in-engine verification remain pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G08",
+      "list": 1,
+      "section": "G",
+      "number": 8,
+      "title_en": "Create UI icons and sound/music specifications",
+      "original_text_ro": "Crearea iconurilor UI și a specificațiilor pentru sunete/muzică.",
+      "source_line": 227,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Docs/VFX_AUDIO_SPEC.md",
+        "Tools/author_audio.py",
+        "Art/Audio/"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Original audio synthesis studies need listening and in-engine mix/integration; complete UI icon source and HUD verification require evidence."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-G09",
+      "list": 1,
+      "section": "G",
+      "number": 9,
+      "title_en": "Integrate lightweight assets and verify laptop readability",
+      "original_text_ro": "Integrarea asset-urilor ușoare și verificarea lizibilității pe laptop.",
+      "source_line": 228,
+      "status": "BlockedHardware",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Tools/Import-Assets.py",
+        "Docs/LAPTOP_QUICKSTART.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run actual imported assets, resolutions and Low readability checks on the laptop."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H01",
+      "list": 1,
+      "section": "H",
+      "number": 1,
+      "title_en": "Automate resource, command, building, magic and combat tests",
+      "original_text_ro": "Teste automate pentru resurse, comenzi, construcții, magie și lupte.",
+      "source_line": 232,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run automated/headless/profiling checks and record exact outputs; then review coverage and unresolved cases."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H02",
+      "list": 1,
+      "section": "H",
+      "number": 2,
+      "title_en": "Run feasible headless economy and AI-confrontation simulations",
+      "original_text_ro": "Simulări headless ale economiei și ale confruntărilor AI unde sunt fezabile.",
+      "source_line": 233,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run automated/headless/profiling checks and record exact outputs; then review coverage and unresolved cases."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H03",
+      "list": 1,
+      "section": "H",
+      "number": 3,
+      "title_en": "Verify local builds and available laptop tests",
+      "original_text_ro": "Verificarea locală a compilărilor și testelor disponibile pe laptop.",
+      "source_line": 234,
+      "status": "BlockedHardware",
+      "scope_coverage": "none",
+      "evidence_paths": [
+        "Docs/LAPTOP_QUICKSTART.md",
+        "Tools/Build-Windows.ps1"
+      ],
+      "verification_commands": [
+        "./Tools/Build-Windows.ps1 -EngineRoot 'C:\\Program Files\\Epic Games\\UE_5.8' -Stage Verify"
+      ],
+      "remaining": [
+        "No access to the user Windows laptop; installed toolchain and local compile/test results are unknown."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H04",
+      "list": 1,
+      "section": "H",
+      "number": 4,
+      "title_en": "Profile logic and create reproducible logs/diagnostics",
+      "original_text_ro": "Profilarea logicii, loguri și diagnostic pentru erori reproductibile.",
+      "source_line": 235,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Core/",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run automated/headless/profiling checks and record exact outputs; then review coverage and unresolved cases."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H05",
+      "list": 1,
+      "section": "H",
+      "number": 5,
+      "title_en": "Implement UI scale, accessibility, key remapping and reduced effects",
+      "original_text_ro": "Scalare UI, accesibilitate, remapare taste și reducerea efectelor vizuale.",
+      "source_line": 236,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Config/",
+        "Source/Wildlight/",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Verify runtime UI scale/reduced effects, accessible ownership cues and full remapping implementation."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H06",
+      "list": 1,
+      "section": "H",
+      "number": 6,
+      "title_en": "Verify resolutions and Low settings",
+      "original_text_ro": "Verificarea comportamentului la rezoluții diferite și pe setări Low.",
+      "source_line": 237,
+      "status": "BlockedHardware",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Tools/Import-Assets.py",
+        "Docs/LAPTOP_QUICKSTART.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Run actual imported assets, resolutions and Low readability checks on the laptop."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H07",
+      "list": 1,
+      "section": "H",
+      "number": 7,
+      "title_en": "Verify provenance/license of every model, texture, sound and font",
+      "original_text_ro": "Verificarea originii/licenței pentru fiecare model, textură, sunet și font.",
+      "source_line": 238,
+      "status": "ImplementedNotEngineVerified",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Docs/ASSET_PROVENANCE.md",
+        "Art/LICENSES.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Validate generated manifest/checksums and reconcile actual shipped files; final content is not present yet."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H08",
+      "list": 1,
+      "section": "H",
+      "number": 8,
+      "title_en": "Document build, tests, debugging, versions and changelog",
+      "original_text_ro": "Documentație de build, testare, debugging, versiuni și changelog.",
+      "source_line": 239,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/BUILD_AND_VERIFY.md",
+        "Docs/LAPTOP_QUICKSTART.md",
+        "Docs/CHANGELOG.md",
+        "engine-lock.json"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Execute Windows steps and keep evidence current; user acceptance pending."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H09",
+      "list": 1,
+      "section": "H",
+      "number": 9,
+      "title_en": "Plan future multiplayer architecture without implementation",
+      "original_text_ro": "Planul de arhitectură pentru multiplayer ulterior, fără implementarea lui.",
+      "source_line": 240,
+      "status": "VerifiedCloud",
+      "scope_coverage": "document",
+      "evidence_paths": [
+        "Docs/MULTIPLAYER_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "Future implementation intentionally excluded; accept the plan separately."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "CLOUD-H10",
+      "list": 1,
+      "section": "H",
+      "number": 10,
+      "title_en": "Prepare playable demo and playtest feedback collection",
+      "original_text_ro": "Pregătirea unei versiuni demo jucabile și a feedbackului de playtest.",
+      "source_line": 241,
+      "status": "BlockedHardware",
+      "scope_coverage": "partial",
+      "evidence_paths": [
+        "Docs/QA_PLAN.md",
+        "Docs/MILESTONES.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "A compiled integrated Windows demo and independent playtest are unavailable; complete them on actual hardware."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-A01",
+      "list": 2,
+      "section": "A",
+      "number": 1,
+      "title_en": "Choose appropriate Windows GPU machine and verify budget",
+      "original_text_ro": "Alegerea unui PC Windows GPU potrivit pentru Unreal/Blender și verificarea bugetului.",
+      "source_line": 251,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-A02",
+      "list": 2,
+      "section": "A",
+      "number": 2,
+      "title_en": "Install Unreal, C++ toolchain, Blender, drivers and profiling utilities",
+      "original_text_ro": "Instalarea Unreal, toolchain C++, Blender, drivere și utilitare de profilare.",
+      "source_line": 252,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-A03",
+      "list": 2,
+      "section": "A",
+      "number": 3,
+      "title_en": "Configure secure remote access, Git/LFS, repo and asset sync",
+      "original_text_ro": "Conectare remote securizată, Git/Git LFS, repo și sincronizare de asset-uri.",
+      "source_line": 253,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-A04",
+      "list": 2,
+      "section": "A",
+      "number": 4,
+      "title_en": "Verify VRAM, RAM, storage, bandwidth and session cost",
+      "original_text_ro": "Verificarea VRAM, RAM, stocării, lățimii de bandă și costului per sesiune.",
+      "source_line": 254,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-A05",
+      "list": 2,
+      "section": "A",
+      "number": 5,
+      "title_en": "Prepare precise session tasks and before/after backup",
+      "original_text_ro": "Pregătirea unei sesiuni de lucru cu taskuri precise și backup înainte/după.",
+      "source_line": 255,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B01",
+      "list": 2,
+      "section": "B",
+      "number": 1,
+      "title_en": "Import all assets and verify scale, pivots and collision",
+      "original_text_ro": "Importul tuturor asset-urilor cu verificarea scării, pivoturilor și coliziunilor.",
+      "source_line": 259,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B02",
+      "list": 2,
+      "section": "B",
+      "number": 2,
+      "title_en": "Finish building, castle, fortification, wizard, troop and creature models",
+      "original_text_ro": "Modele finale pentru clădiri, castel, fortificații, vrăjitori, trupe, creaturi.",
+      "source_line": 260,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B03",
+      "list": 2,
+      "section": "B",
+      "number": 3,
+      "title_en": "Finish UVs, baking, premium textures/materials and optimized atlases",
+      "original_text_ro": "UV mapping, baking, texturi, materiale premium și atlasuri optimizate.",
+      "source_line": 261,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B04",
+      "list": 2,
+      "section": "B",
+      "number": 4,
+      "title_en": "Finish rigging, skinning and move/attack/work/spell animation",
+      "original_text_ro": "Rigging, skinning, animații de mișcare, atac, muncă și vrăji.",
+      "source_line": 262,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B05",
+      "list": 2,
+      "section": "B",
+      "number": 5,
+      "title_en": "Finish LOD, instancing, culling, texture streaming and VRAM budgets",
+      "original_text_ro": "LOD, instancing, culling, streaming de texturi și bugete de VRAM.",
+      "source_line": 263,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-B06",
+      "list": 2,
+      "section": "B",
+      "number": 6,
+      "title_en": "Polish maps, vegetation, water, terrain, ruins and magic sites",
+      "original_text_ro": "Finisarea hărților, vegetației, apei, terenului, ruinelor și punctelor magice.",
+      "source_line": 264,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C01",
+      "list": 2,
+      "section": "C",
+      "number": 1,
+      "title_en": "Finalize lighting, shadows, exposure and reflections",
+      "original_text_ro": "Setarea finală a iluminării, umbrelor, expunerii și reflexiilor.",
+      "source_line": 268,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C02",
+      "list": 2,
+      "section": "C",
+      "number": 2,
+      "title_en": "Compare Lumen/Nanite and affordable low-tier alternatives",
+      "original_text_ro": "Testarea Lumen/Nanite și a alternativelor pentru setări grafice reduse.",
+      "source_line": 269,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C03",
+      "list": 2,
+      "section": "C",
+      "number": 3,
+      "title_en": "Integrate Niagara fireflies, ambient particles, magic dust and animated vegetation",
+      "original_text_ro": "Licurici în Niagara, particule ambientale, praf magic și vegetație animată.",
+      "source_line": 270,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C04",
+      "list": 2,
+      "section": "C",
+      "number": 4,
+      "title_en": "Finalize spell/projectile/explosion/destruction VFX",
+      "original_text_ro": "VFX finale pentru fiecare vrajă, proiectil, explozie și distrugere.",
+      "source_line": 271,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C05",
+      "list": 2,
+      "section": "C",
+      "number": 5,
+      "title_en": "Integrate fog, weather and day/night with RTS readability",
+      "original_text_ro": "Ceață, vreme și tranziții zi/noapte, cu lizibilitate RTS păstrată.",
+      "source_line": 272,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C06",
+      "list": 2,
+      "section": "C",
+      "number": 6,
+      "title_en": "Integrate animation/audio with actual gameplay events",
+      "original_text_ro": "Integrarea animațiilor și sunetelor cu evenimentele reale din gameplay.",
+      "source_line": 273,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C07",
+      "list": 2,
+      "section": "C",
+      "number": 7,
+      "title_en": "Polish interface across resolutions and UI scales",
+      "original_text_ro": "Finisarea interfeței și verificarea ei pe rezoluții și scale diferite.",
+      "source_line": 274,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-C08",
+      "list": 2,
+      "section": "C",
+      "number": 8,
+      "title_en": "Capture representative gameplay and gameplay trailer",
+      "original_text_ro": "Capturi și trailer realizate din gameplay reprezentativ (nu promisiuni false).",
+      "source_line": 275,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D01",
+      "list": 2,
+      "section": "D",
+      "number": 1,
+      "title_en": "Run full compilation, shader compilation and integrated project tests",
+      "original_text_ro": "Compilări complete, shader compilation și testarea proiectului întreg.",
+      "source_line": 279,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D02",
+      "list": 2,
+      "section": "D",
+      "number": 2,
+      "title_en": "Run supported 100/200/500+ unit stress tests",
+      "original_text_ro": "Stres-test cu 100/200/500+ unități numai unde sistemele permit.",
+      "source_line": 280,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D03",
+      "list": 2,
+      "section": "D",
+      "number": 3,
+      "title_en": "Profile CPU/GPU with Unreal Insights and engine tools",
+      "original_text_ro": "Profilare CPU/GPU cu Unreal Insights și instrumentele motorului.",
+      "source_line": 281,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D04",
+      "list": 2,
+      "section": "D",
+      "number": 4,
+      "title_en": "Optimize pathfinding, AI, materials, VFX and memory",
+      "original_text_ro": "Optimizarea pathfinding-ului, AI-ului, materialelor, VFX și memoriei.",
+      "source_line": 282,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D05",
+      "list": 2,
+      "section": "D",
+      "number": 5,
+      "title_en": "Test dense maps and long sessions with developed economy",
+      "original_text_ro": "Testarea hărților încărcate și a sesiunilor lungi cu economie dezvoltată.",
+      "source_line": 283,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D06",
+      "list": 2,
+      "section": "D",
+      "number": 6,
+      "title_en": "Detect stalls, leaks, errors and crashes",
+      "original_text_ro": "Detectarea blocajelor, memory leaks, erorilor și crash-urilor.",
+      "source_line": 284,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D07",
+      "list": 2,
+      "section": "D",
+      "number": 7,
+      "title_en": "Define and verify Low/Medium/High/Epic graphics tiers",
+      "original_text_ro": "Definirea și verificarea presetărilor Low/Medium/High/Epic.",
+      "source_line": 285,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-D08",
+      "list": 2,
+      "section": "D",
+      "number": 8,
+      "title_en": "Validate strong GPU and regress RTX 3050 laptop locally",
+      "original_text_ro": "Testele pe GPU puternic PLUS regresie pe laptopul RTX 3050 (testele pe laptop rămân locale).",
+      "source_line": 286,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E01",
+      "list": 2,
+      "section": "E",
+      "number": 1,
+      "title_en": "Playtest integrated final systems and maps",
+      "original_text_ro": "Playtesting integrat cu toate sistemele și hărțile finale.",
+      "source_line": 290,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E02",
+      "list": 2,
+      "section": "E",
+      "number": 2,
+      "title_en": "Fix animation, collision, camera, UI and navigation defects",
+      "original_text_ro": "Corectarea defectelor de animație, coliziune, cameră, UI și navigație.",
+      "source_line": 291,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E03",
+      "list": 2,
+      "section": "E",
+      "number": 3,
+      "title_en": "Compile/cook/package Windows Shipping and test clean installation",
+      "original_text_ro": "Compilarea Shipping pentru Windows, cooking, packaging și verificare la instalare curată.",
+      "source_line": 292,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E04",
+      "list": 2,
+      "section": "E",
+      "number": 4,
+      "title_en": "Validate actual system requirements and stability",
+      "original_text_ro": "Validarea cerințelor de sistem și a stabilității înainte de lansare.",
+      "source_line": 293,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E05",
+      "list": 2,
+      "section": "E",
+      "number": 5,
+      "title_en": "Prepare candidate build, QA reports and asset package",
+      "original_text_ro": "Pregătirea build-ului candidat, rapoartelor de QA și pachetului de asset-uri.",
+      "source_line": 294,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    },
+    {
+      "id": "GPU-E06",
+      "list": 2,
+      "section": "E",
+      "number": 6,
+      "title_en": "Sync repo/backups and stop paid compute after session",
+      "original_text_ro": "Sincronizarea în repo/backup a rezultatelor și oprirea închirierii după sesiune.",
+      "source_line": 295,
+      "status": "BlockedHardware",
+      "scope_coverage": "preparation_only",
+      "evidence_paths": [
+        "Docs/GPU_SESSION_RUNBOOK.md",
+        "Docs/PERFORMANCE_BUDGETS.md",
+        "Docs/QA_PLAN.md"
+      ],
+      "verification_commands": [],
+      "remaining": [
+        "No accessible Windows GPU workstation and no authorized rental budget; execution, measured results and user acceptance are outstanding."
+      ],
+      "accepted": false
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/Manu8733/project-wildlight",
+    "owner": "Manu8733",
+    "name": "project-wildlight",
+    "private_verified": false,
+    "visibility": "public",
+    "visibility_verified_date": "2026-10-10",
+    "public_push_approved": true,
+    "created_by": "User after integration create permission rejection",
+    "pushed": false,
+    "hosted_checks_verified": false
+  }
+}

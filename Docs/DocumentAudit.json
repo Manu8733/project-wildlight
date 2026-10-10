@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "scope": "Document and original two-list traceability audit only",
+  "parsed_requirements": 105,
+  "list_1": 72,
+  "list_2": 33,
+  "unique_ids": 105,
+  "accepted": 0,
+  "source_sha256": "68f3aeb67af1a6b56260d556b1b8381b5d6b828e4b1d6c05fd98f5b89df3868c",
+  "issues": [],
+  "passed": true,
+  "unreal_verified": false
+}

@@ -1,0 +1,871 @@
+{
+  "schema_version": 1,
+  "status": "not_transferred",
+  "expected_asset_count_missing": 200,
+  "reason": "Native Save as did not trigger a download. Binary preview is unsupported and image previews were empty.",
+  "other_omissions": [
+    "Git history",
+    "Generated executables and build caches",
+    "Art/Source/Wildlight_Valley.blend1 observed backup copy"
+  ],
+  "assets": [
+    {
+      "path": "Wildlight/Art/Audio/A_Alert.wav",
+      "kind": "audio_wav",
+      "original_sha256": "e584d94dfb1212987b87bfaf07a922c026d05a964c11f608c2e3f49b37d26a49"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Build.wav",
+      "kind": "audio_wav",
+      "original_sha256": "3d1eefef6fc16e4830f1bcc8f727872e9f6af3b6ba687b9473f2c4b129dd5927"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Command.wav",
+      "kind": "audio_wav",
+      "original_sha256": "24a9938ffe0154487857d425912e82be4a1be571cbc45195c1d64c18fd22d1e6"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Defeat.wav",
+      "kind": "audio_wav",
+      "original_sha256": "526c45679e9d192b8ebbd8f421697f69b95bbc5d53a8adc32596646e6dda64c3"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Impact.wav",
+      "kind": "audio_wav",
+      "original_sha256": "c79ddc6070cedfd7861381846a4931206094f0a7afa9811b1046f5b8e15ab0c6"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Magic.wav",
+      "kind": "audio_wav",
+      "original_sha256": "d5aadfc8f9d78c60c85e151792e268befbc9f2996f69b0890f1b8937fcc63422"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_Victory.wav",
+      "kind": "audio_wav",
+      "original_sha256": "2a71562907d6733f91b813a1378b37c508f531d2c76ae7db5bec4921a40ccc63"
+    },
+    {
+      "path": "Wildlight/Art/Audio/A_WoodlandLoop.wav",
+      "kind": "audio_wav",
+      "original_sha256": "6e11f83588040c4e46be1883e7a3c800c551da55a78af59faf6509d4f34c60cd"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_ArcaneGuard.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Archer.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_ArcherRange.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Barracks.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Beacon.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Bridge.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Castle.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Catapult.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Cavalry.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Crystal.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Depot.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Engineer.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Farm.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Flowers.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_ForestAlly.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Forge.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Gate.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_GoldMine.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_GrassTuft.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_House.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Lantern.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_LumberCamp.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_MageTower.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Market.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Militia.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Mill.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Mushroom.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Quarry.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Ram.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Rock.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Ruin.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Sanctuary.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_SiegeWorkshop.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Spearman.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Swordsman.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_TreeOak.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_TreePine.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Wall.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Watchtower.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Wizard.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/FBX/SM_Worker.fbx",
+      "kind": "static_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_ArcaneGuard.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Archer.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_ArcherRange.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Barracks.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Beacon.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Bridge.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Castle.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Catapult.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Cavalry.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Crystal.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Depot.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Engineer.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Farm.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Flowers.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_ForestAlly.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Forge.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Gate.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_GoldMine.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_GrassTuft.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_House.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Lantern.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_LumberCamp.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_MageTower.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Market.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Militia.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Mill.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Mushroom.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Quarry.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Ram.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Rock.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Ruin.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Sanctuary.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_SiegeWorkshop.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Spearman.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Swordsman.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_TreeOak.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_TreePine.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Wall.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Watchtower.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Wizard.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/GLB/SM_Worker.glb",
+      "kind": "static_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/Rigged/SK_Wizard.fbx",
+      "kind": "rigged_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/Rigged/SK_Wizard.glb",
+      "kind": "rigged_glb"
+    },
+    {
+      "path": "Wildlight/Art/Exports/Rigged/SK_Worker.fbx",
+      "kind": "rigged_fbx"
+    },
+    {
+      "path": "Wildlight/Art/Exports/Rigged/SK_Worker.glb",
+      "kind": "rigged_glb"
+    },
+    {
+      "path": "Wildlight/Art/Renders/Wildlight_Asset_Catalog.png",
+      "kind": "showcase_png"
+    },
+    {
+      "path": "Wildlight/Art/Renders/Wildlight_Asset_Valley_Day.png",
+      "kind": "showcase_png"
+    },
+    {
+      "path": "Wildlight/Art/Renders/Wildlight_Asset_Valley_Night.png",
+      "kind": "showcase_png"
+    },
+    {
+      "path": "Wildlight/Art/Source/Wildlight_Unit_Rigs.blend",
+      "kind": "blender_master"
+    },
+    {
+      "path": "Wildlight/Art/Source/Wildlight_Valley.blend",
+      "kind": "blender_master"
+    },
+    {
+      "path": "Wildlight/Art/UI/Glyph_Studies.png",
+      "kind": "ui_contact_sheet"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_ArcherRange.png",
+      "kind": "ui_png",
+      "original_sha256": "c476285bb7d2437ec033fb21a07104577d73e782209879d95ff8e8a1bd881ff3"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Barracks.png",
+      "kind": "ui_png",
+      "original_sha256": "ff417a8ac265d1f9aa2984eba129bdd584ceef249393bde5db113b9aad184346"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Beacon.png",
+      "kind": "ui_png",
+      "original_sha256": "2b4e42614ad124f00482f0d2b33b7f3eb0a6f643cb42c24dc8dfeb20b0795023"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Castle.png",
+      "kind": "ui_png",
+      "original_sha256": "e32b2ab9fefb98b1bd68dd891be07bcf8b16bc7bfb2a71afd8c5625c14654086"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Depot.png",
+      "kind": "ui_png",
+      "original_sha256": "66784d40e7b7df7e55267b5255f3bad80e6b59b3a36ddfefe41a3ce0a405efae"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Farm.png",
+      "kind": "ui_png",
+      "original_sha256": "5e191e443e303e69672af461752bff20575e4b2eab03a218a57ca5046db8234d"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Forge.png",
+      "kind": "ui_png",
+      "original_sha256": "e6f79a4f69266ead183c6c5c8d37fe7574afd6ee045da31981096cf605c19580"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Gate.png",
+      "kind": "ui_png",
+      "original_sha256": "e81d8ce6afab5fb7585b384c922e850d19e40ec45e2e0be79edd48e8a96d2792"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_GoldMine.png",
+      "kind": "ui_png",
+      "original_sha256": "c5ee32146b5a5b35dd419c9d498c8f340ea39499ee48040836d3a9a3300cdb64"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_House.png",
+      "kind": "ui_png",
+      "original_sha256": "2a5799c15ddd05970e4ffbe496d5b52cea6865d9b123e3db1b99901a9c2f7929"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_LumberCamp.png",
+      "kind": "ui_png",
+      "original_sha256": "b64aad760638cac98d63aacd4500a2d6ca19317152ff13dda42bf73eed0c7992"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_MageTower.png",
+      "kind": "ui_png",
+      "original_sha256": "e90525f25bd8d4bf9d6faaf86c2fc5723de3cd28d9762445b5b0d69b52295e8c"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Market.png",
+      "kind": "ui_png",
+      "original_sha256": "3c45330d8eccddfaff1e89608f8a9cdd7a6af125e6f5feab9395b782ba47c992"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Mill.png",
+      "kind": "ui_png",
+      "original_sha256": "77ca40075fea13339dfe39eedede92194348765790c2ebdca9e92e562cec76fe"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Quarry.png",
+      "kind": "ui_png",
+      "original_sha256": "02825dea4cda422b28c63d7a548b01b033da0c6a8bfcd19e74d558b376fd2bdf"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Sanctuary.png",
+      "kind": "ui_png",
+      "original_sha256": "8dc838d8d83ab0e98e7063859acefde5faae1bd4c7599572ed2ee7e49f45c495"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_SiegeWorkshop.png",
+      "kind": "ui_png",
+      "original_sha256": "55119bcc40f96e1e01bd29093f5b87c45feadbfc8249f0484aa015fb1ce6d17e"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Wall.png",
+      "kind": "ui_png",
+      "original_sha256": "2e9384ba49d480f6d92957330f0d30ca864fe2a832b1374b6fc321fb4debe883"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Building_Watchtower.png",
+      "kind": "ui_png",
+      "original_sha256": "624ca1b7f223929d778503865c8bcbb57cfbfd6824f3a72bca46d9d8d3722e7c"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Resource_Food.png",
+      "kind": "ui_png",
+      "original_sha256": "acc29e7b680f66a6bde66ea835ac0655153ce531800acfe445e9c8d5cc42a6c2"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Resource_Gold.png",
+      "kind": "ui_png",
+      "original_sha256": "e3dcb868eb81fd8318c681bf08aa311974cd6e5d6aa1d97b88534d311a38b1d5"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Resource_Mana.png",
+      "kind": "ui_png",
+      "original_sha256": "086a09c97d7da5e3ddbf311795bd253954b45699490dc8e70b1cd0778e851de0"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Resource_Stone.png",
+      "kind": "ui_png",
+      "original_sha256": "6351f81ba4b9bcb697c404984c2b46960dbe578c9a7cc3da2c62433385ac8861"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Resource_Wood.png",
+      "kind": "ui_png",
+      "original_sha256": "80900b6b07734710e38f8bd708e3737763cb741e0c38a4bdf3938b577cc9fd3b"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Amplify.png",
+      "kind": "ui_png",
+      "original_sha256": "8d5ab97892647fa90a8511dae39fdd01adb2c082964f98e74d1bfff8588d2f77"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Disrupt.png",
+      "kind": "ui_png",
+      "original_sha256": "619708547cdfde1597e72a6807381b73fdb70c1f5963aa019f9662fd584f20bf"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_HarvestBloom.png",
+      "kind": "ui_png",
+      "original_sha256": "16d1fe7b885e9eac56398ebfe4e22f6319d2bd294aa495141e765063034abe4e"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Heal.png",
+      "kind": "ui_png",
+      "original_sha256": "919df3861e1f2198ecf02b943cdbf6d5b7b6d255f0bdb65755b51399b4f227d6"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Illusion.png",
+      "kind": "ui_png",
+      "original_sha256": "8da1e9d0eeef228204708ec856e94a70a59f3c58ef24cb77de2b70ba1496d986"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_LightBridge.png",
+      "kind": "ui_png",
+      "original_sha256": "5d57ec87765e6ace36040c4949e2a5c729fd4eb52ff13cdbdb68b9852c982141"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_RootBarrier.png",
+      "kind": "ui_png",
+      "original_sha256": "3ac9c59062bf000657c746c87c6480b3dab50823d938c45b49824ada7f953d0e"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Shield.png",
+      "kind": "ui_png",
+      "original_sha256": "779fbb3330a30e5cfc90026fe561d84bd5290a0decd5b63f18c5dc766b6dcd3c"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Spell_Veil.png",
+      "kind": "ui_png",
+      "original_sha256": "33713ab523a527d4d92d4b98898876373c47388840ab99b128a94270a1824b06"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Technology_Agriculture.png",
+      "kind": "ui_png",
+      "original_sha256": "f9f71e7ba2e74a46cc23779a56ae0d0f55df8a8b05ea002b46ad380e1ef79da5"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Technology_Arcana.png",
+      "kind": "ui_png",
+      "original_sha256": "f4e2ed74380a0c4642ff2991148babaa35ff91afd84bab7533dcdb1bbacc4c17"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Technology_Forestry.png",
+      "kind": "ui_png",
+      "original_sha256": "d359fc5c2cbd73cf72d146d0c85596f25ceb4d6b39000dee6f22f16422af9445"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Technology_Masonry.png",
+      "kind": "ui_png",
+      "original_sha256": "3b8ae1e03c7685526c304092f3a59fa33478c5303b848577720b03353a7fc053"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Technology_Steel.png",
+      "kind": "ui_png",
+      "original_sha256": "cba673da19b8783207f933c057c044d5734c0ef965e2a40b71ec2996ae025ff7"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_ArcaneGuard.png",
+      "kind": "ui_png",
+      "original_sha256": "85b3b1ccead854ba464c1bd367b0870bedee8cb6325424418d70de1841b58077"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Archer.png",
+      "kind": "ui_png",
+      "original_sha256": "2c755224fbf578df6cc97b13ccd9429fdae374a6a95dcca42d23a8eb279358c6"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Catapult.png",
+      "kind": "ui_png",
+      "original_sha256": "7ee69b6974cc6377843e71115a68dd0bb60862bc002ea76e0249992dcedd7fcb"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Cavalry.png",
+      "kind": "ui_png",
+      "original_sha256": "fd9c4de6241fec572e55b0183254d6cd32d0105abbce770bfe1d9930feb35523"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Engineer.png",
+      "kind": "ui_png",
+      "original_sha256": "0538c724729d5fa3d7c83937b2bc6bea06a82a8dac6f6beae0b3a8bd3e29dc02"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_ForestAlly.png",
+      "kind": "ui_png",
+      "original_sha256": "bf3686d90b0df3c606c1161e76794496244fa5f9d3d497eff2592a14ec3f987e"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Militia.png",
+      "kind": "ui_png",
+      "original_sha256": "91f34a9cd6dbf7d81970e478dff6ad626552220fbee7fb73ae6dbf235012d452"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Ram.png",
+      "kind": "ui_png",
+      "original_sha256": "588249f33fe7767a1227d317c97ffbe34990e8a006c5c783fee672afd9df74f0"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Spearman.png",
+      "kind": "ui_png",
+      "original_sha256": "9d56c11c39acd6ae2091772fe3b1b890d8938a028463826786dcf4ba8a5b366a"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Swordsman.png",
+      "kind": "ui_png",
+      "original_sha256": "054eac88d0a8a6cbdbd87fedeb05ff2a1b203e5265bc91fc2efb30ed90541d70"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Wizard.png",
+      "kind": "ui_png",
+      "original_sha256": "aee318eeb4aeea35f5110bdd632921b17b4ae9cdfa2849dfb6602bdac11303e2"
+    },
+    {
+      "path": "Wildlight/Art/UI/PNG/Unit_Worker.png",
+      "kind": "ui_png",
+      "original_sha256": "4afbd04547e026290e3471ed06034b2a45d8a6e4721df7e09ead7877472cf16f"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_ArcherRange.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Barracks.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Beacon.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Castle.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Depot.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Farm.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Forge.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Gate.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_GoldMine.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_House.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_LumberCamp.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_MageTower.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Market.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Mill.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Quarry.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Sanctuary.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_SiegeWorkshop.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Wall.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Building_Watchtower.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Resource_Food.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Resource_Gold.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Resource_Mana.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Resource_Stone.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Resource_Wood.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Amplify.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Disrupt.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_HarvestBloom.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Heal.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Illusion.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_LightBridge.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_RootBarrier.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Shield.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Spell_Veil.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Technology_Agriculture.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Technology_Arcana.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Technology_Forestry.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Technology_Masonry.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Technology_Steel.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_ArcaneGuard.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Archer.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Catapult.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Cavalry.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Engineer.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_ForestAlly.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Militia.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Ram.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Spearman.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Swordsman.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Wizard.svg",
+      "kind": "ui_svg"
+    },
+    {
+      "path": "Wildlight/Art/UI/SVG/Unit_Worker.svg",
+      "kind": "ui_svg"
+    }
+  ]
+}

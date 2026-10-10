@@ -1,0 +1,10 @@
+{
+  "engine": "Unreal Engine",
+  "version": "5.8.1",
+  "association": "5.8",
+  "verification": "Project target, not an engine build verified in this cloud environment",
+  "source": "https://forums.unrealengine.com/tag/released/11396",
+  "platform": "Windows x86_64",
+  "game_language": "en",
+  "simulation_cell_centimeters": 200
+}

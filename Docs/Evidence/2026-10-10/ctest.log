@@ -1,0 +1,59 @@
+Internal ctest changing into directory: C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build
+UpdateCTestConfiguration  from :C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build/DartConfiguration.tcl
+Parse Config file:C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build/DartConfiguration.tcl
+Parse Config file:C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build/DartConfiguration.tcl
+Test project C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: simulation_behaviors
+
+1: Test command: C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\wildlight_tests.exe
+1: Working Directory: C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build
+1: Test timeout computed to be: 60
+1: PASS initial state and stable IDs
+1: PASS seed and command determinism
+1: PASS fixed-step partition and invalid time
+1: PASS atomic command validation
+1: PASS visibility and ownership
+1: PASS construction costs, completion and cancellation
+1: PASS recruitment cost and population reservation
+1: PASS pathfinding over a permanent ford
+1: PASS movement and duplicate selection
+1: PASS worker gathering and physical cargo delivery
+1: PASS light connection and disconnection
+1: PASS root barrier mana, cooldown and expiry
+1: PASS temporary bridge route and safe expiry
+1: PASS invalid spell atomicity
+1: PASS enemy sabotage and light restoration
+1: PASS illusions, population and save continuation
+1: PASS veil concealment and nearby scout reveal
+1: PASS combat damage and friendly fire
+1: PASS save roundtrip and deterministic continuation
+1: PASS corrupt save atomic rejection
+1: PASS checksummed invalid persistence fields
+1: PASS research, upgrade and trade progression
+1: PASS three AI personalities with honest resources
+1: PASS AI skirmish ends by castle defeat
+1: PASS connected lantern objectives award victory
+1: PASS match outcome and end-state serialization
+1: Portable simulation tests: 26/26 scenarios, 452 assertions evaluated.
+1: These tests do not compile Unreal or measure graphics performance.
+1/2 Test #1: simulation_behaviors .............   Passed    1.70 sec
+test 2
+    Start 2: idle_player_match
+
+2: Test command: C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\wildlight_headless.exe "--ticks" "600" "--seed" "101"
+2: Working Directory: C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build
+2: Test timeout computed to be: 60
+2: {"engine":"portable-core","tick":600,"map":0,"units":32,"buildings":9,"light_connected":9,"outcome":0,"simulation_ms":65.0788,"graphics_measured":false,"factions":[{"wood":906,"stone":300,"food":189.95,"gold":180,"mana":161,"population":13,"population_limit":18,"morale":100},{"wood":71.97,"stone":279,"food":370.2,"gold":61,"mana":161,"population":23,"population_limit":26,"morale":100}]}
+2/2 Test #2: idle_player_match ................   Passed    0.14 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   1.87 sec

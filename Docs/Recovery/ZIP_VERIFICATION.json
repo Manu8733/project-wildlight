@@ -1,0 +1,14 @@
+{
+  "archive": "Wildlight-surse-recuperate-partial.zip",
+  "archive_bytes": 266891,
+  "archive_sha256": "015a2e91b516328a72e0782226d80844fe6d6d3ece9e7bf1d79fd264b275dc09",
+  "project_file_count": 93,
+  "missing_asset_count": 200,
+  "crc_passed": true,
+  "per_file_sha256_passed": true,
+  "original_brief_hash_passed": true,
+  "static_validation": {
+    "python_sources_parsed": 10,
+    "json_files_parsed_including_uproject": 13
+  }
+}

@@ -1,0 +1,5549 @@
+{
+  "schema_version": 1,
+  "project": "Wildlight",
+  "authoring": "Original geometry authored with Blender Python",
+  "blender_version": "4.3.2",
+  "unit": "metres",
+  "unreal_unit_conversion": "FBX metres to Unreal centimetres, import uniform scale 1",
+  "material_palette_srgb": {
+    "WL_Plaster": "#F2E5CA",
+    "WL_PlasterShade": "#D7C8AA",
+    "WL_Darkwood": "#493C32",
+    "WL_Wood": "#866542",
+    "WL_CutWood": "#B09460",
+    "WL_Stone": "#A3AD98",
+    "WL_StoneLight": "#C1CAB4",
+    "WL_StoneDark": "#73836F",
+    "WL_Roof": "#B96750",
+    "WL_RoofLight": "#D58B6C",
+    "WL_RoofShadow": "#8B5145",
+    "WL_Copper": "#C4824E",
+    "WL_Gold": "#DAB967",
+    "WL_Metal": "#57717D",
+    "WL_Leaf": "#77945B",
+    "WL_LeafLight": "#A3B576",
+    "WL_LeafDark": "#536F55",
+    "WL_Grass": "#9CAC77",
+    "WL_GrassLight": "#B5BC83",
+    "WL_Earth": "#8A7156",
+    "WL_Path": "#D7BD92",
+    "WL_Crystal": "#8CCFBC",
+    "WL_Rune": "#C5EBD4",
+    "WL_Window": "#FFD99A",
+    "WL_Cloth": "#74958A",
+    "WL_Banner": "#E2BC76",
+    "WL_Skin": "#CAA881",
+    "WL_Hair": "#5D4938",
+    "WL_RedCloth": "#A45043",
+    "WL_Water": "#3F979B",
+    "WL_Foam": "#BCE4CF",
+    "WL_Mushroom": "#C77656",
+    "WL_Flower": "#E8D29C",
+    "WL_Violet": "#9276A6",
+    "WL_Black": "#273D38"
+  },
+  "format_version": 1,
+  "units": "meters",
+  "palette": {
+    "WL_Plaster": [
+      0.8879231178819663,
+      0.7835377915261935,
+      0.5906188409193369,
+      1
+    ],
+    "WL_PlasterShade": [
+      0.6795424696330938,
+      0.5775804404296506,
+      0.4019777798321958,
+      1
+    ],
+    "WL_Darkwood": [
+      0.06662593864377289,
+      0.04518620438567554,
+      0.03189603307301153,
+      1
+    ],
+    "WL_Wood": [
+      0.238397573812271,
+      0.1301364766903643,
+      0.05448027644244237,
+      1
+    ],
+    "WL_CutWood": [
+      0.43415363617474895,
+      0.2961382707983211,
+      0.11697066775851084,
+      1
+    ],
+    "WL_Stone": [
+      0.3662525955988395,
+      0.4178850708481375,
+      0.31398871337571754,
+      1
+    ],
+    "WL_StoneLight": [
+      0.5332764040105052,
+      0.5906188409193369,
+      0.45641102318040466,
+      1
+    ],
+    "WL_StoneDark": [
+      0.1714411007328226,
+      0.22696587351009836,
+      0.1589608350608804,
+      1
+    ],
+    "WL_Roof": [
+      0.4851499400560704,
+      0.13563332965520566,
+      0.08021982031446832,
+      1
+    ],
+    "WL_RoofLight": [
+      0.665387298282272,
+      0.2581828529215958,
+      0.14995978981060856,
+      1
+    ],
+    "WL_RoofShadow": [
+      0.2581828529215958,
+      0.0822827071298148,
+      0.0595112381629812,
+      1
+    ],
+    "WL_Copper": [
+      0.5520114015120001,
+      0.2232279573168085,
+      0.07618538148130785,
+      1
+    ],
+    "WL_Gold": [
+      0.7011018919329731,
+      0.4851499400560704,
+      0.13563332965520566,
+      1
+    ],
+    "WL_Metal": [
+      0.0953074666309647,
+      0.1651321945016676,
+      0.20507873639031693,
+      1
+    ],
+    "WL_Leaf": [
+      0.184474994500441,
+      0.2961382707983211,
+      0.10461648409110419,
+      1
+    ],
+    "WL_LeafLight": [
+      0.3662525955988395,
+      0.4620769996544071,
+      0.18116424424986022,
+      1
+    ],
+    "WL_LeafDark": [
+      0.08650046203654976,
+      0.1589608350608804,
+      0.09084171118340768,
+      1
+    ],
+    "WL_Grass": [
+      0.33245153634617935,
+      0.41254261348390375,
+      0.184474994500441,
+      1
+    ],
+    "WL_GrassLight": [
+      0.4620769996544071,
+      0.5028864580325687,
+      0.22696587351009836,
+      1
+    ],
+    "WL_Earth": [
+      0.25415209433082675,
+      0.1651321945016676,
+      0.09305896284668745,
+      1
+    ],
+    "WL_Path": [
+      0.6795424696330938,
+      0.5088813208549338,
+      0.2874408377269175,
+      1
+    ],
+    "WL_Crystal": [
+      0.26225065752969623,
+      0.6239603916750761,
+      0.5028864580325687,
+      1
+    ],
+    "WL_Rune": [
+      0.5583403896342679,
+      0.8307698767746546,
+      0.6583748172794485,
+      1
+    ],
+    "WL_Window": [
+      1.0,
+      0.6938717612919899,
+      0.32314320911295075,
+      1
+    ],
+    "WL_Cloth": [
+      0.17464740365558504,
+      0.3005437944157765,
+      0.25415209433082675,
+      1
+    ],
+    "WL_Banner": [
+      0.7605245046752924,
+      0.5028864580325687,
+      0.18116424424986022,
+      1
+    ],
+    "WL_Skin": [
+      0.5906188409193369,
+      0.39157247774972326,
+      0.2195261997292692,
+      1
+    ],
+    "WL_Hair": [
+      0.10946171077829933,
+      0.06662593864377289,
+      0.03954623527673284,
+      1
+    ],
+    "WL_RedCloth": [
+      0.3712376804741491,
+      0.08021982031446832,
+      0.05612849004960009,
+      1
+    ],
+    "WL_Water": [
+      0.04970656598412723,
+      0.30946892281750854,
+      0.3277780980565422,
+      1
+    ],
+    "WL_Foam": [
+      0.5028864580325687,
+      0.7758222183174236,
+      0.6239603916750761,
+      1
+    ],
+    "WL_Mushroom": [
+      0.5711248294648731,
+      0.18116424424986022,
+      0.09305896284668745,
+      1
+    ],
+    "WL_Flower": [
+      0.8069522576692516,
+      0.6444796819705821,
+      0.33245153634617935,
+      1
+    ],
+    "WL_Violet": [
+      0.2874408377269175,
+      0.18116424424986022,
+      0.38132601143253014,
+      1
+    ],
+    "WL_Black": [
+      0.0202885630566524,
+      0.046665086336880095,
+      0.03954623527673284,
+      1
+    ]
+  },
+  "texture_dependency": "none",
+  "source": "Source/Wildlight_Valley.blend",
+  "review_status": "Source/export geometry validated; pending Unreal integration and GPU visual acceptance",
+  "assets": [
+    {
+      "id": "Castle",
+      "mesh_name": "SM_Castle",
+      "identifier": "Castle",
+      "kind": "building",
+      "description": "Four corner towers, gabled royal keep, banners, broad entrance staircase",
+      "vertices": 7582,
+      "triangles": 14094,
+      "bounds_m": {
+        "min": [
+          -4.3086,
+          -3.6421,
+          0.0
+        ],
+        "max": [
+          4.3086,
+          3.7066,
+          8.557
+        ]
+      },
+      "bounds_min": [
+        -4.3086,
+        -3.6421,
+        0.0
+      ],
+      "bounds_max": [
+        4.3086,
+        3.7066,
+        8.557
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Castle",
+      "fbx": "Exports/FBX/SM_Castle.fbx",
+      "glb": "Exports/GLB/SM_Castle.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Gold",
+        "WL_Metal",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Gold",
+        "WL_Metal",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -4.3086,
+            -3.6421,
+            0.0
+          ],
+          "max": [
+            4.3086,
+            3.7066,
+            8.557
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "House",
+      "mesh_name": "SM_House",
+      "identifier": "House",
+      "kind": "building",
+      "description": "Half timber cottage with shingled eaves, porch, chimney and planted window box",
+      "vertices": 2935,
+      "triangles": 5207,
+      "bounds_m": {
+        "min": [
+          -2.2385,
+          -2.83,
+          0.0
+        ],
+        "max": [
+          2.2385,
+          2.03,
+          5.935
+        ]
+      },
+      "bounds_min": [
+        -2.2385,
+        -2.83,
+        0.0
+      ],
+      "bounds_max": [
+        2.2385,
+        2.03,
+        5.935
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_House",
+      "fbx": "Exports/FBX/SM_House.fbx",
+      "glb": "Exports/GLB/SM_House.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_LeafLight"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_LeafLight"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_LeafLight": [
+          0.366252601146698,
+          0.46207699179649353,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.2385,
+            -2.83,
+            0.0
+          ],
+          "max": [
+            2.2385,
+            2.03,
+            5.935
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Farm",
+      "mesh_name": "SM_Farm",
+      "identifier": "Farm",
+      "kind": "building",
+      "description": "Working cottage and fenced golden wheat rows",
+      "vertices": 4379,
+      "triangles": 7783,
+      "bounds_m": {
+        "min": [
+          -2.1891,
+          -2.73,
+          0.0
+        ],
+        "max": [
+          5.2,
+          2.545,
+          5.285
+        ]
+      },
+      "bounds_min": [
+        -2.1891,
+        -2.73,
+        0.0
+      ],
+      "bounds_max": [
+        5.2,
+        2.545,
+        5.285
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Farm",
+      "fbx": "Exports/FBX/SM_Farm.fbx",
+      "glb": "Exports/GLB/SM_Farm.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Earth",
+        "WL_GrassLight",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Earth",
+        "WL_GrassLight",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_Earth": [
+          0.2541520893573761,
+          0.16513219475746155,
+          0.09305896610021591,
+          1.0
+        ],
+        "WL_GrassLight": [
+          0.46207699179649353,
+          0.5028864741325378,
+          0.22696587443351746,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.1891,
+            -2.73,
+            0.0
+          ],
+          "max": [
+            5.2,
+            2.545,
+            5.285
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Mill",
+      "mesh_name": "SM_Mill",
+      "identifier": "Mill",
+      "kind": "building",
+      "description": "Tapered windmill with four wooden ladder sails",
+      "vertices": 2105,
+      "triangles": 3954,
+      "bounds_m": {
+        "min": [
+          -2.2627,
+          -1.825,
+          0.0
+        ],
+        "max": [
+          2.2627,
+          1.825,
+          6.7
+        ]
+      },
+      "bounds_min": [
+        -2.2627,
+        -1.825,
+        0.0
+      ],
+      "bounds_max": [
+        2.2627,
+        1.825,
+        6.7
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Mill",
+      "fbx": "Exports/FBX/SM_Mill.fbx",
+      "glb": "Exports/GLB/SM_Mill.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Roof",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Roof",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.2627,
+            -1.825,
+            0.0
+          ],
+          "max": [
+            2.2627,
+            1.825,
+            6.7
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Depot",
+      "mesh_name": "SM_Depot",
+      "identifier": "Depot",
+      "kind": "building",
+      "description": "Broad storehouse with visible shipping crates, barrels and wooden trade sign",
+      "vertices": 3707,
+      "triangles": 6635,
+      "bounds_m": {
+        "min": [
+          -2.5849,
+          -3.3675,
+          0.0
+        ],
+        "max": [
+          3.1,
+          2.33,
+          5.435
+        ]
+      },
+      "bounds_min": [
+        -2.5849,
+        -3.3675,
+        0.0
+      ],
+      "bounds_max": [
+        3.1,
+        2.33,
+        5.435
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Depot",
+      "fbx": "Exports/FBX/SM_Depot.fbx",
+      "glb": "Exports/GLB/SM_Depot.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.5849,
+            -3.3675,
+            0.0
+          ],
+          "max": [
+            3.1,
+            2.33,
+            5.435
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "LumberCamp",
+      "mesh_name": "SM_LumberCamp",
+      "identifier": "LumberCamp",
+      "kind": "building",
+      "description": "Open saw shed and stacked timber with exposed pale cut ends",
+      "vertices": 1575,
+      "triangles": 2763,
+      "bounds_m": {
+        "min": [
+          -2.0324,
+          -1.93,
+          0.0
+        ],
+        "max": [
+          2.0324,
+          2.7944,
+          4.04
+        ]
+      },
+      "bounds_min": [
+        -2.0324,
+        -1.93,
+        0.0
+      ],
+      "bounds_max": [
+        2.0324,
+        2.7944,
+        4.04
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_LumberCamp",
+      "fbx": "Exports/FBX/SM_LumberCamp.fbx",
+      "glb": "Exports/GLB/SM_LumberCamp.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.0324,
+            -1.93,
+            0.0
+          ],
+          "max": [
+            2.0324,
+            2.7944,
+            4.04
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Quarry",
+      "mesh_name": "SM_Quarry",
+      "identifier": "Quarry",
+      "kind": "building",
+      "description": "Faceted stone cut and timber jib crane carrying a dressed block",
+      "vertices": 1062,
+      "triangles": 2036,
+      "bounds_m": {
+        "min": [
+          -2.625,
+          -2.6,
+          0.0
+        ],
+        "max": [
+          2.625,
+          2.175,
+          4.2
+        ]
+      },
+      "bounds_min": [
+        -2.625,
+        -2.6,
+        0.0
+      ],
+      "bounds_max": [
+        2.625,
+        2.175,
+        4.2
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Quarry",
+      "fbx": "Exports/FBX/SM_Quarry.fbx",
+      "glb": "Exports/GLB/SM_Quarry.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Wood"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Wood"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.625,
+            -2.6,
+            0.0
+          ],
+          "max": [
+            2.625,
+            2.175,
+            4.2
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "GoldMine",
+      "mesh_name": "SM_GoldMine",
+      "identifier": "GoldMine",
+      "kind": "building",
+      "description": "Rocky pit entrance with timber props, rails, loaded ore wagon and gold veins",
+      "vertices": 1118,
+      "triangles": 2128,
+      "bounds_m": {
+        "min": [
+          -2.675,
+          -3.5033,
+          0.0
+        ],
+        "max": [
+          2.675,
+          2.8,
+          3.6
+        ]
+      },
+      "bounds_min": [
+        -2.675,
+        -3.5033,
+        0.0
+      ],
+      "bounds_max": [
+        2.675,
+        2.8,
+        3.6
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_GoldMine",
+      "fbx": "Exports/FBX/SM_GoldMine.fbx",
+      "glb": "Exports/GLB/SM_GoldMine.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Black",
+        "WL_Wood",
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Gold"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Black",
+        "WL_Wood",
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Gold"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.675,
+            -3.5033,
+            0.0
+          ],
+          "max": [
+            2.675,
+            2.8,
+            3.6
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Barracks",
+      "mesh_name": "SM_Barracks",
+      "identifier": "Barracks",
+      "kind": "building",
+      "description": "Garrison longhouse with training weapons and proud royal banners",
+      "vertices": 3233,
+      "triangles": 5713,
+      "bounds_m": {
+        "min": [
+          -3.2296,
+          -3.23,
+          0.0
+        ],
+        "max": [
+          3.45,
+          2.43,
+          6.135
+        ]
+      },
+      "bounds_min": [
+        -3.2296,
+        -3.23,
+        0.0
+      ],
+      "bounds_max": [
+        3.45,
+        2.43,
+        6.135
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Barracks",
+      "fbx": "Exports/FBX/SM_Barracks.fbx",
+      "glb": "Exports/GLB/SM_Barracks.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -3.2296,
+            -3.23,
+            0.0
+          ],
+          "max": [
+            3.45,
+            2.43,
+            6.135
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "ArcherRange",
+      "mesh_name": "SM_ArcherRange",
+      "identifier": "ArcherRange",
+      "kind": "building",
+      "description": "Training lodge with three large concentric archery targets",
+      "vertices": 3547,
+      "triangles": 6411,
+      "bounds_m": {
+        "min": [
+          -2.4859,
+          -3.825,
+          0.0
+        ],
+        "max": [
+          2.4859,
+          1.93,
+          5.535
+        ]
+      },
+      "bounds_min": [
+        -2.4859,
+        -3.825,
+        0.0
+      ],
+      "bounds_max": [
+        2.4859,
+        1.93,
+        5.535
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_ArcherRange",
+      "fbx": "Exports/FBX/SM_ArcherRange.fbx",
+      "glb": "Exports/GLB/SM_ArcherRange.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_RedCloth",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_RedCloth",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_RedCloth": [
+          0.37123769521713257,
+          0.0802198201417923,
+          0.05612849071621895,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.4859,
+            -3.825,
+            0.0
+          ],
+          "max": [
+            2.4859,
+            1.93,
+            5.535
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Forge",
+      "mesh_name": "SM_Forge",
+      "identifier": "Forge",
+      "kind": "building",
+      "description": "Smith workshop with separate glowing stone furnace and horned anvil",
+      "vertices": 3099,
+      "triangles": 5535,
+      "bounds_m": {
+        "min": [
+          -2.5849,
+          -3.2,
+          0.0
+        ],
+        "max": [
+          3.525,
+          2.18,
+          5.535
+        ]
+      },
+      "bounds_min": [
+        -2.5849,
+        -3.2,
+        0.0
+      ],
+      "bounds_max": [
+        3.525,
+        2.18,
+        5.535
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Forge",
+      "fbx": "Exports/FBX/SM_Forge.fbx",
+      "glb": "Exports/GLB/SM_Forge.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.5849,
+            -3.2,
+            0.0
+          ],
+          "max": [
+            3.525,
+            2.18,
+            5.535
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Market",
+      "mesh_name": "SM_Market",
+      "identifier": "Market",
+      "kind": "building",
+      "description": "Striped linen canopy, scalloped valance and three visible produce displays",
+      "vertices": 1732,
+      "triangles": 3184,
+      "bounds_m": {
+        "min": [
+          -3.033,
+          -2.475,
+          0.0
+        ],
+        "max": [
+          3.05,
+          2.475,
+          3.6
+        ]
+      },
+      "bounds_min": [
+        -3.033,
+        -2.475,
+        0.0
+      ],
+      "bounds_max": [
+        3.05,
+        2.475,
+        3.6
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Market",
+      "fbx": "Exports/FBX/SM_Market.fbx",
+      "glb": "Exports/GLB/SM_Market.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Plaster",
+        "WL_Wood",
+        "WL_Banner",
+        "WL_Mushroom",
+        "WL_LeafLight",
+        "WL_Metal",
+        "WL_CutWood"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Plaster",
+        "WL_Wood",
+        "WL_Banner",
+        "WL_Mushroom",
+        "WL_LeafLight",
+        "WL_Metal",
+        "WL_CutWood"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ],
+        "WL_Mushroom": [
+          0.5711248517036438,
+          0.18116424977779388,
+          0.09305896610021591,
+          1.0
+        ],
+        "WL_LeafLight": [
+          0.366252601146698,
+          0.46207699179649353,
+          0.18116424977779388,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -3.033,
+            -2.475,
+            0.0
+          ],
+          "max": [
+            3.05,
+            2.475,
+            3.6
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Wall",
+      "mesh_name": "SM_Wall",
+      "identifier": "Wall",
+      "kind": "building",
+      "description": "Stone wall segment with machicolation-like sill and crenellated walk",
+      "vertices": 1568,
+      "triangles": 3024,
+      "bounds_m": {
+        "min": [
+          -2.775,
+          -0.925,
+          0.0
+        ],
+        "max": [
+          2.775,
+          0.925,
+          3.905
+        ]
+      },
+      "bounds_min": [
+        -2.775,
+        -0.925,
+        0.0
+      ],
+      "bounds_max": [
+        2.775,
+        0.925,
+        3.905
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Wall",
+      "fbx": "Exports/FBX/SM_Wall.fbx",
+      "glb": "Exports/GLB/SM_Wall.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.775,
+            -0.925,
+            0.0
+          ],
+          "max": [
+            2.775,
+            0.925,
+            3.905
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Gate",
+      "mesh_name": "SM_Gate",
+      "identifier": "Gate",
+      "kind": "building",
+      "description": "Twin crenellated towers and visible timber and iron portcullis",
+      "vertices": 3733,
+      "triangles": 7163,
+      "bounds_m": {
+        "min": [
+          -3.747,
+          -1.522,
+          0.0
+        ],
+        "max": [
+          3.822,
+          1.447,
+          7.45
+        ]
+      },
+      "bounds_min": [
+        -3.747,
+        -1.522,
+        0.0
+      ],
+      "bounds_max": [
+        3.822,
+        1.447,
+        7.45
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Gate",
+      "fbx": "Exports/FBX/SM_Gate.fbx",
+      "glb": "Exports/GLB/SM_Gate.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_Stone",
+        "WL_StoneLight",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_Stone",
+        "WL_StoneLight",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -3.747,
+            -1.522,
+            0.0
+          ],
+          "max": [
+            3.822,
+            1.447,
+            7.45
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Watchtower",
+      "mesh_name": "SM_Watchtower",
+      "identifier": "Watchtower",
+      "kind": "building",
+      "description": "Tall stone lookout with arrow slits and signal banner",
+      "vertices": 2005,
+      "triangles": 3803,
+      "bounds_m": {
+        "min": [
+          -1.65,
+          -1.725,
+          0.0
+        ],
+        "max": [
+          1.725,
+          1.65,
+          8.8
+        ]
+      },
+      "bounds_min": [
+        -1.65,
+        -1.725,
+        0.0
+      ],
+      "bounds_max": [
+        1.725,
+        1.65,
+        8.8
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Watchtower",
+      "fbx": "Exports/FBX/SM_Watchtower.fbx",
+      "glb": "Exports/GLB/SM_Watchtower.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_Stone",
+        "WL_StoneLight",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Black",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_Stone",
+        "WL_StoneLight",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Black",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -1.65,
+            -1.725,
+            0.0
+          ],
+          "max": [
+            1.725,
+            1.65,
+            8.8
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Beacon",
+      "mesh_name": "SM_Beacon",
+      "identifier": "Beacon",
+      "kind": "building",
+      "description": "Large floating teal crystal in octagonal stone pedestal and gold-tipped cage",
+      "vertices": 782,
+      "triangles": 1484,
+      "bounds_m": {
+        "min": [
+          -1.55,
+          -1.55,
+          0.0
+        ],
+        "max": [
+          1.55,
+          1.55,
+          4.4
+        ]
+      },
+      "bounds_min": [
+        -1.55,
+        -1.55,
+        0.0
+      ],
+      "bounds_max": [
+        1.55,
+        1.55,
+        4.4
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Beacon",
+      "fbx": "Exports/FBX/SM_Beacon.fbx",
+      "glb": "Exports/GLB/SM_Beacon.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Gold",
+        "WL_Crystal",
+        "WL_Darkwood",
+        "WL_Copper",
+        "WL_Rune"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Gold",
+        "WL_Crystal",
+        "WL_Darkwood",
+        "WL_Copper",
+        "WL_Rune"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_Rune": [
+          0.5583403706550598,
+          0.8307698965072632,
+          0.6583748459815979,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -1.55,
+            -1.55,
+            0.0
+          ],
+          "max": [
+            1.55,
+            1.55,
+            4.4
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Sanctuary",
+      "mesh_name": "SM_Sanctuary",
+      "identifier": "Sanctuary",
+      "kind": "building",
+      "description": "Open circular ritual sanctuary with column ring and five supporting crystals",
+      "vertices": 2236,
+      "triangles": 4368,
+      "bounds_m": {
+        "min": [
+          -3.0973,
+          -3.585,
+          0.0
+        ],
+        "max": [
+          3.0973,
+          3.0973,
+          3.8
+        ]
+      },
+      "bounds_min": [
+        -3.0973,
+        -3.585,
+        0.0
+      ],
+      "bounds_max": [
+        3.0973,
+        3.0973,
+        3.8
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Sanctuary",
+      "fbx": "Exports/FBX/SM_Sanctuary.fbx",
+      "glb": "Exports/GLB/SM_Sanctuary.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Gold",
+        "WL_Crystal"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Gold",
+        "WL_Crystal"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -3.0973,
+            -3.585,
+            0.0
+          ],
+          "max": [
+            3.0973,
+            3.0973,
+            3.8
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "MageTower",
+      "mesh_name": "SM_MageTower",
+      "identifier": "MageTower",
+      "kind": "building",
+      "description": "Tapering arcane tower, corbelled observatory and crystal-tipped conical roof",
+      "vertices": 2306,
+      "triangles": 4380,
+      "bounds_m": {
+        "min": [
+          -2.025,
+          -2.68,
+          0.0
+        ],
+        "max": [
+          2.025,
+          2.025,
+          10.58
+        ]
+      },
+      "bounds_min": [
+        -2.025,
+        -2.68,
+        0.0
+      ],
+      "bounds_max": [
+        2.025,
+        2.025,
+        10.58
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_MageTower",
+      "fbx": "Exports/FBX/SM_MageTower.fbx",
+      "glb": "Exports/GLB/SM_MageTower.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Gold",
+        "WL_Crystal",
+        "WL_Metal"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Window",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Gold",
+        "WL_Crystal",
+        "WL_Metal"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.025,
+            -2.68,
+            0.0
+          ],
+          "max": [
+            2.025,
+            2.025,
+            10.58
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "SiegeWorkshop",
+      "mesh_name": "SM_SiegeWorkshop",
+      "identifier": "SiegeWorkshop",
+      "kind": "building",
+      "description": "Long engineering hall with unfinished catapult mechanism in the workshop yard",
+      "vertices": 3619,
+      "triangles": 6451,
+      "bounds_m": {
+        "min": [
+          -3.5275,
+          -3.3925,
+          0.0
+        ],
+        "max": [
+          4.9,
+          2.53,
+          5.985
+        ]
+      },
+      "bounds_min": [
+        -3.5275,
+        -3.3925,
+        0.0
+      ],
+      "bounds_max": [
+        4.9,
+        2.53,
+        5.985
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_SiegeWorkshop",
+      "fbx": "Exports/FBX/SM_SiegeWorkshop.fbx",
+      "glb": "Exports/GLB/SM_SiegeWorkshop.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Window",
+        "WL_CutWood",
+        "WL_Roof",
+        "WL_Copper",
+        "WL_RoofLight",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_RoofLight": [
+          0.6653872728347778,
+          0.2581828534603119,
+          0.14995978772640228,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -3.5275,
+            -3.3925,
+            0.0
+          ],
+          "max": [
+            4.9,
+            2.53,
+            5.985
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Worker",
+      "mesh_name": "SM_Worker",
+      "identifier": "Worker",
+      "kind": "unit",
+      "description": "Broad work hat, pack and hand axe",
+      "vertices": 512,
+      "triangles": 936,
+      "bounds_m": {
+        "min": [
+          -0.4911,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.652,
+          0.228,
+          1.744
+        ]
+      },
+      "bounds_min": [
+        -0.4911,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.652,
+        0.228,
+        1.744
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Worker",
+      "fbx": "Exports/FBX/SM_Worker.fbx",
+      "glb": "Exports/GLB/SM_Worker.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_CutWood",
+        "WL_Metal"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_CutWood",
+        "WL_Metal"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Hair": [
+          0.109461709856987,
+          0.0666259378194809,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.4911,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.652,
+            0.228,
+            1.744
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Militia",
+      "mesh_name": "SM_Militia",
+      "identifier": "Militia",
+      "kind": "unit",
+      "description": "Cloth levy with wooden kite shield and short steel blade",
+      "vertices": 475,
+      "triangles": 859,
+      "bounds_m": {
+        "min": [
+          -0.668,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.544,
+          0.18,
+          1.728
+        ]
+      },
+      "bounds_min": [
+        -0.668,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.544,
+        0.18,
+        1.728
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Militia",
+      "fbx": "Exports/FBX/SM_Militia.fbx",
+      "glb": "Exports/GLB/SM_Militia.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_Metal"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_Metal"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Hair": [
+          0.109461709856987,
+          0.0666259378194809,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.668,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.544,
+            0.18,
+            1.728
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Spearman",
+      "mesh_name": "SM_Spearman",
+      "identifier": "Spearman",
+      "kind": "unit",
+      "description": "Helmed infantry with long spear and metal kite shield",
+      "vertices": 508,
+      "triangles": 920,
+      "bounds_m": {
+        "min": [
+          -0.668,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.504,
+          0.204,
+          2.544
+        ]
+      },
+      "bounds_min": [
+        -0.668,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.504,
+        0.204,
+        2.544
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Spearman",
+      "fbx": "Exports/FBX/SM_Spearman.fbx",
+      "glb": "Exports/GLB/SM_Spearman.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.668,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.504,
+            0.204,
+            2.544
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Swordsman",
+      "mesh_name": "SM_Swordsman",
+      "identifier": "Swordsman",
+      "kind": "unit",
+      "description": "Armored sword captain with gold-tabarded shoulders and kite shield",
+      "vertices": 547,
+      "triangles": 987,
+      "bounds_m": {
+        "min": [
+          -0.668,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.544,
+          0.204,
+          1.744
+        ]
+      },
+      "bounds_min": [
+        -0.668,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.544,
+        0.204,
+        1.744
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Swordsman",
+      "fbx": "Exports/FBX/SM_Swordsman.fbx",
+      "glb": "Exports/GLB/SM_Swordsman.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.668,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.544,
+            0.204,
+            1.744
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Archer",
+      "mesh_name": "SM_Archer",
+      "identifier": "Archer",
+      "kind": "unit",
+      "description": "Hooded archer with bent segmented bow, string and visible back quiver",
+      "vertices": 746,
+      "triangles": 1368,
+      "bounds_m": {
+        "min": [
+          -0.6652,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.4911,
+          0.288,
+          1.744
+        ]
+      },
+      "bounds_min": [
+        -0.6652,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.4911,
+        0.288,
+        1.744
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Archer",
+      "fbx": "Exports/FBX/SM_Archer.fbx",
+      "glb": "Exports/GLB/SM_Archer.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_LeafDark",
+        "WL_Plaster",
+        "WL_CutWood"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_LeafDark",
+        "WL_Plaster",
+        "WL_CutWood"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Hair": [
+          0.109461709856987,
+          0.0666259378194809,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.6652,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.4911,
+            0.288,
+            1.744
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Cavalry",
+      "mesh_name": "SM_Cavalry",
+      "identifier": "Cavalry",
+      "kind": "unit",
+      "description": "Armored mounted rider with long lance and sculpted horse",
+      "vertices": 951,
+      "triangles": 1723,
+      "bounds_m": {
+        "min": [
+          -0.6139,
+          -1.6671,
+          0.0
+        ],
+        "max": [
+          1.27,
+          1.2415,
+          3.92
+        ]
+      },
+      "bounds_min": [
+        -0.6139,
+        -1.6671,
+        0.0
+      ],
+      "bounds_max": [
+        1.27,
+        1.2415,
+        3.92
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Cavalry",
+      "fbx": "Exports/FBX/SM_Cavalry.fbx",
+      "glb": "Exports/GLB/SM_Cavalry.glb",
+      "materials": [
+        "WL_Wood",
+        "WL_Darkwood",
+        "WL_Black",
+        "WL_RedCloth",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_Wood",
+        "WL_Darkwood",
+        "WL_Black",
+        "WL_RedCloth",
+        "WL_Metal",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_RedCloth": [
+          0.37123769521713257,
+          0.0802198201417923,
+          0.05612849071621895,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.6139,
+            -1.6671,
+            0.0
+          ],
+          "max": [
+            1.27,
+            1.2415,
+            3.92
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Engineer",
+      "mesh_name": "SM_Engineer",
+      "identifier": "Engineer",
+      "kind": "unit",
+      "description": "Goggled engineer with apron, hammer and carried toolbox",
+      "vertices": 592,
+      "triangles": 1100,
+      "bounds_m": {
+        "min": [
+          -0.6,
+          -0.216,
+          0.0
+        ],
+        "max": [
+          0.576,
+          0.18,
+          1.696
+        ]
+      },
+      "bounds_min": [
+        -0.6,
+        -0.216,
+        0.0
+      ],
+      "bounds_max": [
+        0.576,
+        0.18,
+        1.696
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Engineer",
+      "fbx": "Exports/FBX/SM_Engineer.fbx",
+      "glb": "Exports/GLB/SM_Engineer.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_CutWood",
+        "WL_Copper",
+        "WL_Metal"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_CutWood",
+        "WL_Copper",
+        "WL_Metal"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Hair": [
+          0.109461709856987,
+          0.0666259378194809,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.6,
+            -0.216,
+            0.0
+          ],
+          "max": [
+            0.576,
+            0.18,
+            1.696
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "ArcaneGuard",
+      "mesh_name": "SM_ArcaneGuard",
+      "identifier": "ArcaneGuard",
+      "kind": "unit",
+      "description": "Teal glaive and runic shield guard with crystal shoulder crests",
+      "vertices": 550,
+      "triangles": 992,
+      "bounds_m": {
+        "min": [
+          -0.668,
+          -0.2714,
+          0.0
+        ],
+        "max": [
+          0.528,
+          0.204,
+          2.384
+        ]
+      },
+      "bounds_min": [
+        -0.668,
+        -0.2714,
+        0.0
+      ],
+      "bounds_max": [
+        0.528,
+        0.204,
+        2.384
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_ArcaneGuard",
+      "fbx": "Exports/FBX/SM_ArcaneGuard.fbx",
+      "glb": "Exports/GLB/SM_ArcaneGuard.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Roof",
+        "WL_Crystal"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Metal",
+        "WL_Wood",
+        "WL_Gold",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Roof",
+        "WL_Crystal"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.668,
+            -0.2714,
+            0.0
+          ],
+          "max": [
+            0.528,
+            0.204,
+            2.384
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "ForestAlly",
+      "mesh_name": "SM_ForestAlly",
+      "identifier": "ForestAlly",
+      "kind": "unit",
+      "description": "Living grove guardian with branch antlers, root feet and light eyes",
+      "vertices": 456,
+      "triangles": 828,
+      "bounds_m": {
+        "min": [
+          -1.1456,
+          -0.3921,
+          0.0
+        ],
+        "max": [
+          1.1456,
+          0.4822,
+          3.3573
+        ]
+      },
+      "bounds_min": [
+        -1.1456,
+        -0.3921,
+        0.0
+      ],
+      "bounds_max": [
+        1.1456,
+        0.4822,
+        3.3573
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_ForestAlly",
+      "fbx": "Exports/FBX/SM_ForestAlly.fbx",
+      "glb": "Exports/GLB/SM_ForestAlly.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Rune",
+        "WL_LeafLight",
+        "WL_Leaf"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Rune",
+        "WL_LeafLight",
+        "WL_Leaf"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Rune": [
+          0.5583403706550598,
+          0.8307698965072632,
+          0.6583748459815979,
+          1.0
+        ],
+        "WL_LeafLight": [
+          0.366252601146698,
+          0.46207699179649353,
+          0.18116424977779388,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -1.1456,
+            -0.3921,
+            0.0
+          ],
+          "max": [
+            1.1456,
+            0.4822,
+            3.3573
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Ram",
+      "mesh_name": "SM_Ram",
+      "identifier": "Ram",
+      "kind": "unit",
+      "description": "Four wheeled covered battering ram with suspended timber and iron head",
+      "vertices": 1219,
+      "triangles": 2271,
+      "bounds_m": {
+        "min": [
+          -1.2808,
+          -2.23,
+          0.0
+        ],
+        "max": [
+          1.2808,
+          2.23,
+          2.905
+        ]
+      },
+      "bounds_min": [
+        -1.2808,
+        -2.23,
+        0.0
+      ],
+      "bounds_max": [
+        1.2808,
+        2.23,
+        2.905
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Ram",
+      "fbx": "Exports/FBX/SM_Ram.fbx",
+      "glb": "Exports/GLB/SM_Ram.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Copper"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Roof",
+        "WL_Plaster",
+        "WL_Copper"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Copper": [
+          0.5520114302635193,
+          0.22322796285152435,
+          0.07618538290262222,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -1.2808,
+            -2.23,
+            0.0
+          ],
+          "max": [
+            1.2808,
+            2.23,
+            2.905
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Catapult",
+      "mesh_name": "SM_Catapult",
+      "identifier": "Catapult",
+      "kind": "unit",
+      "description": "Four wheeled torsion catapult, trestle, pivot and loaded throwing cup",
+      "vertices": 1056,
+      "triangles": 1980,
+      "bounds_m": {
+        "min": [
+          -1.155,
+          -1.65,
+          0.0
+        ],
+        "max": [
+          1.155,
+          1.7898,
+          3.585
+        ]
+      },
+      "bounds_min": [
+        -1.155,
+        -1.65,
+        0.0
+      ],
+      "bounds_max": [
+        1.155,
+        1.7898,
+        3.585
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Catapult",
+      "fbx": "Exports/FBX/SM_Catapult.fbx",
+      "glb": "Exports/GLB/SM_Catapult.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Stone"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_CutWood",
+        "WL_Metal",
+        "WL_Stone"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Metal": [
+          0.09530746936798096,
+          0.16513219475746155,
+          0.20507873594760895,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -1.155,
+            -1.65,
+            0.0
+          ],
+          "max": [
+            1.155,
+            1.7898,
+            3.585
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "Wizard",
+      "mesh_name": "SM_Wizard",
+      "identifier": "Wizard",
+      "kind": "unit",
+      "description": "Bearded robed caster with crystal staff and red spellbook",
+      "vertices": 702,
+      "triangles": 1320,
+      "bounds_m": {
+        "min": [
+          -0.54,
+          -0.3,
+          0.0
+        ],
+        "max": [
+          0.6064,
+          0.3,
+          2.2104
+        ]
+      },
+      "bounds_min": [
+        -0.54,
+        -0.3,
+        0.0
+      ],
+      "bounds_max": [
+        0.6064,
+        0.3,
+        2.2104
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Wizard",
+      "fbx": "Exports/FBX/SM_Wizard.fbx",
+      "glb": "Exports/GLB/SM_Wizard.glb",
+      "materials": [
+        "WL_Roof",
+        "WL_Gold",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Crystal",
+        "WL_RedCloth",
+        "WL_Banner"
+      ],
+      "material_names": [
+        "WL_Roof",
+        "WL_Gold",
+        "WL_Cloth",
+        "WL_Wood",
+        "WL_Skin",
+        "WL_Black",
+        "WL_Hair",
+        "WL_Plaster",
+        "WL_Darkwood",
+        "WL_Crystal",
+        "WL_RedCloth",
+        "WL_Banner"
+      ],
+      "material_colors": {
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ],
+        "WL_Gold": [
+          0.7011018991470337,
+          0.48514994978904724,
+          0.13563333451747894,
+          1.0
+        ],
+        "WL_Cloth": [
+          0.17464740574359894,
+          0.30054378509521484,
+          0.2541520893573761,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Skin": [
+          0.5906188488006592,
+          0.3915724754333496,
+          0.21952620148658752,
+          1.0
+        ],
+        "WL_Black": [
+          0.020288562402129173,
+          0.04666508734226227,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Hair": [
+          0.109461709856987,
+          0.0666259378194809,
+          0.039546236395835876,
+          1.0
+        ],
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ],
+        "WL_RedCloth": [
+          0.37123769521713257,
+          0.0802198201417923,
+          0.05612849071621895,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -0.54,
+            -0.3,
+            0.0
+          ],
+          "max": [
+            0.6064,
+            0.3,
+            2.2104
+          ]
+        }
+      },
+      "animation": "static mesh; no production rig"
+    },
+    {
+      "id": "TreeOak",
+      "mesh_name": "SM_TreeOak",
+      "identifier": "TreeOak",
+      "kind": "environment",
+      "description": "Broad clustered oak canopy with buttress roots and branching trunk",
+      "vertices": 402,
+      "triangles": 752,
+      "bounds_m": {
+        "min": [
+          -2.0364,
+          -1.77,
+          0.0
+        ],
+        "max": [
+          2.0339,
+          1.615,
+          5.43
+        ]
+      },
+      "bounds_min": [
+        -2.0364,
+        -1.77,
+        0.0
+      ],
+      "bounds_max": [
+        2.0339,
+        1.615,
+        5.43
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_TreeOak",
+      "fbx": "Exports/FBX/SM_TreeOak.fbx",
+      "glb": "Exports/GLB/SM_TreeOak.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_LeafLight"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_LeafDark",
+        "WL_Leaf",
+        "WL_LeafLight"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_LeafLight": [
+          0.366252601146698,
+          0.46207699179649353,
+          0.18116424977779388,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "convex trunk / foliage no collision",
+        "bounds_m": {
+          "min": [
+            -2.0364,
+            -1.77,
+            0.0
+          ],
+          "max": [
+            2.0339,
+            1.615,
+            5.43
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "TreePine",
+      "mesh_name": "SM_TreePine",
+      "identifier": "TreePine",
+      "kind": "environment",
+      "description": "Tiered eight sided pine silhouette",
+      "vertices": 170,
+      "triangles": 320,
+      "bounds_m": {
+        "min": [
+          -1.4313,
+          -1.4313,
+          0.0
+        ],
+        "max": [
+          1.4313,
+          1.4313,
+          4.5706
+        ]
+      },
+      "bounds_min": [
+        -1.4313,
+        -1.4313,
+        0.0
+      ],
+      "bounds_max": [
+        1.4313,
+        1.4313,
+        4.5706
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_TreePine",
+      "fbx": "Exports/FBX/SM_TreePine.fbx",
+      "glb": "Exports/GLB/SM_TreePine.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_LeafDark",
+        "WL_Leaf"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_LeafDark": [
+          0.08650045841932297,
+          0.15896083414554596,
+          0.09084171056747437,
+          1.0
+        ],
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "convex trunk / foliage no collision",
+        "bounds_m": {
+          "min": [
+            -1.4313,
+            -1.4313,
+            0.0
+          ],
+          "max": [
+            1.4313,
+            1.4313,
+            4.5706
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Rock",
+      "mesh_name": "SM_Rock",
+      "identifier": "Rock",
+      "kind": "resource",
+      "description": "Moss capped faceted harvestable stone",
+      "vertices": 66,
+      "triangles": 120,
+      "bounds_m": {
+        "min": [
+          -1.2364,
+          -0.9,
+          0.0
+        ],
+        "max": [
+          1.2364,
+          0.9,
+          1.72
+        ]
+      },
+      "bounds_min": [
+        -1.2364,
+        -0.9,
+        0.0
+      ],
+      "bounds_max": [
+        1.2364,
+        0.9,
+        1.72
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Rock",
+      "fbx": "Exports/FBX/SM_Rock.fbx",
+      "glb": "Exports/GLB/SM_Rock.glb",
+      "materials": [
+        "WL_Stone",
+        "WL_StoneDark",
+        "WL_Grass"
+      ],
+      "material_names": [
+        "WL_Stone",
+        "WL_StoneDark",
+        "WL_Grass"
+      ],
+      "material_colors": {
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_Grass": [
+          0.3324515223503113,
+          0.4125426113605499,
+          0.18447498977184296,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "convex hull",
+        "bounds_m": {
+          "min": [
+            -1.2364,
+            -0.9,
+            0.0
+          ],
+          "max": [
+            1.2364,
+            0.9,
+            1.72
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Crystal",
+      "mesh_name": "SM_Crystal",
+      "identifier": "Crystal",
+      "kind": "resource",
+      "description": "Three differently angled six sided light crystals",
+      "vertices": 154,
+      "triangles": 292,
+      "bounds_m": {
+        "min": [
+          -1.096,
+          -1.0971,
+          0.0
+        ],
+        "max": [
+          1.096,
+          1.096,
+          2.05
+        ]
+      },
+      "bounds_min": [
+        -1.096,
+        -1.0971,
+        0.0
+      ],
+      "bounds_max": [
+        1.096,
+        1.096,
+        2.05
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Crystal",
+      "fbx": "Exports/FBX/SM_Crystal.fbx",
+      "glb": "Exports/GLB/SM_Crystal.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_Crystal"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_Crystal"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "convex hull",
+        "bounds_m": {
+          "min": [
+            -1.096,
+            -1.0971,
+            0.0
+          ],
+          "max": [
+            1.096,
+            1.096,
+            2.05
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Mushroom",
+      "mesh_name": "SM_Mushroom",
+      "identifier": "Mushroom",
+      "kind": "environment",
+      "description": "Terracotta woodland mushroom cluster with cream flecks",
+      "vertices": 282,
+      "triangles": 504,
+      "bounds_m": {
+        "min": [
+          -0.5483,
+          -0.45,
+          0.0
+        ],
+        "max": [
+          0.8153,
+          0.64,
+          0.5985
+        ]
+      },
+      "bounds_min": [
+        -0.5483,
+        -0.45,
+        0.0
+      ],
+      "bounds_max": [
+        0.8153,
+        0.64,
+        0.5985
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Mushroom",
+      "fbx": "Exports/FBX/SM_Mushroom.fbx",
+      "glb": "Exports/GLB/SM_Mushroom.glb",
+      "materials": [
+        "WL_Plaster",
+        "WL_Mushroom"
+      ],
+      "material_names": [
+        "WL_Plaster",
+        "WL_Mushroom"
+      ],
+      "material_colors": {
+        "WL_Plaster": [
+          0.8879231214523315,
+          0.7835378050804138,
+          0.5906188488006592,
+          1.0
+        ],
+        "WL_Mushroom": [
+          0.5711248517036438,
+          0.18116424977779388,
+          0.09305896610021591,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "none",
+        "bounds_m": {
+          "min": [
+            -0.5483,
+            -0.45,
+            0.0
+          ],
+          "max": [
+            0.8153,
+            0.64,
+            0.5985
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Ruin",
+      "mesh_name": "SM_Ruin",
+      "identifier": "Ruin",
+      "kind": "environment",
+      "description": "Broken old gateway, fallen cut stones and rediscovered light crystal",
+      "vertices": 966,
+      "triangles": 1860,
+      "bounds_m": {
+        "min": [
+          -2.125,
+          -1.625,
+          0.0
+        ],
+        "max": [
+          2.125,
+          1.625,
+          3.1879
+        ]
+      },
+      "bounds_min": [
+        -2.125,
+        -1.625,
+        0.0
+      ],
+      "bounds_max": [
+        2.125,
+        1.625,
+        3.1879
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Ruin",
+      "fbx": "Exports/FBX/SM_Ruin.fbx",
+      "glb": "Exports/GLB/SM_Ruin.glb",
+      "materials": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Crystal"
+      ],
+      "material_names": [
+        "WL_StoneDark",
+        "WL_StoneLight",
+        "WL_Stone",
+        "WL_Crystal"
+      ],
+      "material_colors": {
+        "WL_StoneDark": [
+          0.17144110798835754,
+          0.22696587443351746,
+          0.15896083414554596,
+          1.0
+        ],
+        "WL_StoneLight": [
+          0.533276379108429,
+          0.5906188488006592,
+          0.4564110338687897,
+          1.0
+        ],
+        "WL_Stone": [
+          0.366252601146698,
+          0.41788506507873535,
+          0.31398871541023254,
+          1.0
+        ],
+        "WL_Crystal": [
+          0.2622506618499756,
+          0.6239603757858276,
+          0.5028864741325378,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "box",
+        "bounds_m": {
+          "min": [
+            -2.125,
+            -1.625,
+            0.0
+          ],
+          "max": [
+            2.125,
+            1.625,
+            3.1879
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "GrassTuft",
+      "mesh_name": "SM_GrassTuft",
+      "identifier": "GrassTuft",
+      "kind": "environment",
+      "description": "Five angular leaf blades",
+      "vertices": 15,
+      "triangles": 5,
+      "bounds_m": {
+        "min": [
+          -0.1861,
+          -0.2187,
+          0.0
+        ],
+        "max": [
+          0.23,
+          0.2187,
+          0.54
+        ]
+      },
+      "bounds_min": [
+        -0.1861,
+        -0.2187,
+        0.0
+      ],
+      "bounds_max": [
+        0.23,
+        0.2187,
+        0.54
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_GrassTuft",
+      "fbx": "Exports/FBX/SM_GrassTuft.fbx",
+      "glb": "Exports/GLB/SM_GrassTuft.glb",
+      "materials": [
+        "WL_GrassLight"
+      ],
+      "material_names": [
+        "WL_GrassLight"
+      ],
+      "material_colors": {
+        "WL_GrassLight": [
+          0.46207699179649353,
+          0.5028864741325378,
+          0.22696587443351746,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "none",
+        "bounds_m": {
+          "min": [
+            -0.1861,
+            -0.2187,
+            0.0
+          ],
+          "max": [
+            0.23,
+            0.2187,
+            0.54
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Flowers",
+      "mesh_name": "SM_Flowers",
+      "identifier": "Flowers",
+      "kind": "environment",
+      "description": "Buttercream and lavender five petal meadow cluster",
+      "vertices": 384,
+      "triangles": 656,
+      "bounds_m": {
+        "min": [
+          -0.3599,
+          -0.3894,
+          0.0
+        ],
+        "max": [
+          0.3771,
+          0.2794,
+          0.461
+        ]
+      },
+      "bounds_min": [
+        -0.3599,
+        -0.3894,
+        0.0
+      ],
+      "bounds_max": [
+        0.3771,
+        0.2794,
+        0.461
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Flowers",
+      "fbx": "Exports/FBX/SM_Flowers.fbx",
+      "glb": "Exports/GLB/SM_Flowers.glb",
+      "materials": [
+        "WL_Leaf",
+        "WL_Flower",
+        "WL_Banner",
+        "WL_Violet"
+      ],
+      "material_names": [
+        "WL_Leaf",
+        "WL_Flower",
+        "WL_Banner",
+        "WL_Violet"
+      ],
+      "material_colors": {
+        "WL_Leaf": [
+          0.18447498977184296,
+          0.2961382567882538,
+          0.10461648553609848,
+          1.0
+        ],
+        "WL_Flower": [
+          0.8069522380828857,
+          0.6444796919822693,
+          0.3324515223503113,
+          1.0
+        ],
+        "WL_Banner": [
+          0.7605245113372803,
+          0.5028864741325378,
+          0.18116424977779388,
+          1.0
+        ],
+        "WL_Violet": [
+          0.28744083642959595,
+          0.18116424977779388,
+          0.38132601976394653,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "none",
+        "bounds_m": {
+          "min": [
+            -0.3599,
+            -0.3894,
+            0.0
+          ],
+          "max": [
+            0.3771,
+            0.2794,
+            0.461
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Lantern",
+      "mesh_name": "SM_Lantern",
+      "identifier": "Lantern",
+      "kind": "environment",
+      "description": "Hanging amber light in timber roadside lantern",
+      "vertices": 184,
+      "triangles": 336,
+      "bounds_m": {
+        "min": [
+          -0.05,
+          -0.2245,
+          0.0
+        ],
+        "max": [
+          0.6245,
+          0.2245,
+          2.1956
+        ]
+      },
+      "bounds_min": [
+        -0.05,
+        -0.2245,
+        0.0
+      ],
+      "bounds_max": [
+        0.6245,
+        0.2245,
+        2.1956
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Lantern",
+      "fbx": "Exports/FBX/SM_Lantern.fbx",
+      "glb": "Exports/GLB/SM_Lantern.glb",
+      "materials": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Window",
+        "WL_Roof"
+      ],
+      "material_names": [
+        "WL_Darkwood",
+        "WL_Wood",
+        "WL_Window",
+        "WL_Roof"
+      ],
+      "material_colors": {
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ],
+        "WL_Window": [
+          1.0,
+          0.6938717365264893,
+          0.32314321398735046,
+          1.0
+        ],
+        "WL_Roof": [
+          0.48514994978904724,
+          0.13563333451747894,
+          0.0802198201417923,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "none",
+        "bounds_m": {
+          "min": [
+            -0.05,
+            -0.2245,
+            0.0
+          ],
+          "max": [
+            0.6245,
+            0.2245,
+            2.1956
+          ]
+        }
+      },
+      "animation": "not applicable"
+    },
+    {
+      "id": "Bridge",
+      "mesh_name": "SM_Bridge",
+      "identifier": "Bridge",
+      "kind": "environment",
+      "description": "Arched plank footbridge with fitted posts and curved handrail",
+      "vertices": 1056,
+      "triangles": 1936,
+      "bounds_m": {
+        "min": [
+          -1.55,
+          -3.255,
+          0.0
+        ],
+        "max": [
+          1.55,
+          3.255,
+          1.6158
+        ]
+      },
+      "bounds_min": [
+        -1.55,
+        -3.255,
+        0.0
+      ],
+      "bounds_max": [
+        1.55,
+        3.255,
+        1.6158
+      ],
+      "pivot_m": [
+        0,
+        0,
+        0
+      ],
+      "unreal_path": "/Game/Wildlight/Meshes/SM_Bridge",
+      "fbx": "Exports/FBX/SM_Bridge.fbx",
+      "glb": "Exports/GLB/SM_Bridge.glb",
+      "materials": [
+        "WL_CutWood",
+        "WL_Darkwood",
+        "WL_Wood"
+      ],
+      "material_names": [
+        "WL_CutWood",
+        "WL_Darkwood",
+        "WL_Wood"
+      ],
+      "material_colors": {
+        "WL_CutWood": [
+          0.43415364623069763,
+          0.2961382567882538,
+          0.11697066575288773,
+          1.0
+        ],
+        "WL_Darkwood": [
+          0.0666259378194809,
+          0.045186202973127365,
+          0.03189603239297867,
+          1.0
+        ],
+        "WL_Wood": [
+          0.23839756846427917,
+          0.13013647496700287,
+          0.05448027700185776,
+          1.0
+        ]
+      },
+      "collision": {
+        "strategy": "multiple boxes / nav-link ends",
+        "bounds_m": {
+          "min": [
+            -1.55,
+            -3.255,
+            0.0
+          ],
+          "max": [
+            1.55,
+            3.255,
+            1.6158
+          ]
+        }
+      },
+      "animation": "not applicable"
+    }
+  ]
+}

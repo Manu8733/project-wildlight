@@ -1,0 +1,55 @@
+Change Dir: 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+
+Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile -j2
+"C:\Program Files\CMake\bin\cmake.exe" -SC:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core -BC:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build --check-build-system CMakeFiles\Makefile.cmake 0
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_progress_start C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\CMakeFiles C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\\CMakeFiles\progress.marks
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\Makefile2 all
+mingw32-make[1]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_simulation.dir\build.make CMakeFiles/wildlight_simulation.dir/depend
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_depends "MinGW Makefiles" C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\CMakeFiles\wildlight_simulation.dir\DependInfo.cmake "--color="
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_simulation.dir\build.make CMakeFiles/wildlight_simulation.dir/build
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+[ 16%] Building CXX object CMakeFiles/wildlight_simulation.dir/src/Simulation.cpp.obj
+C:\msys64\mingw64\bin\g++.exe  @CMakeFiles/wildlight_simulation.dir/includes_CXX.rsp -O2 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Werror -fno-exceptions -fno-rtti -MD -MT CMakeFiles/wildlight_simulation.dir/src/Simulation.cpp.obj -MF CMakeFiles\wildlight_simulation.dir\src\Simulation.cpp.obj.d -o CMakeFiles\wildlight_simulation.dir\src\Simulation.cpp.obj -c C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core\src\Simulation.cpp
+[ 33%] Linking CXX static library libwildlight_simulation.a
+"C:\Program Files\CMake\bin\cmake.exe" -P CMakeFiles\wildlight_simulation.dir\cmake_clean_target.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\wildlight_simulation.dir\link.txt --verbose=1
+C:\msys64\mingw64\bin\ar.exe qc libwildlight_simulation.a CMakeFiles/wildlight_simulation.dir/src/Simulation.cpp.obj
+C:\msys64\mingw64\bin\ranlib.exe libwildlight_simulation.a
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+[ 33%] Built target wildlight_simulation
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_headless.dir\build.make CMakeFiles/wildlight_headless.dir/depend
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_tests.dir\build.make CMakeFiles/wildlight_tests.dir/depend
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_depends "MinGW Makefiles" C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\CMakeFiles\wildlight_headless.dir\DependInfo.cmake "--color="
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_depends "MinGW Makefiles" C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\CMakeFiles\wildlight_tests.dir\DependInfo.cmake "--color="
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_headless.dir\build.make CMakeFiles/wildlight_headless.dir/build
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\wildlight_tests.dir\build.make CMakeFiles/wildlight_tests.dir/build
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+mingw32-make[2]: Entering directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+[ 50%] Building CXX object CMakeFiles/wildlight_headless.dir/tools/headless.cpp.obj
+C:\msys64\mingw64\bin\g++.exe  @CMakeFiles/wildlight_headless.dir/includes_CXX.rsp -O2 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Werror -fno-exceptions -fno-rtti -MD -MT CMakeFiles/wildlight_headless.dir/tools/headless.cpp.obj -MF CMakeFiles\wildlight_headless.dir\tools\headless.cpp.obj.d -o CMakeFiles\wildlight_headless.dir\tools\headless.cpp.obj -c C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core\tools\headless.cpp
+[ 66%] Building CXX object CMakeFiles/wildlight_tests.dir/tests/simulation_tests.cpp.obj
+C:\msys64\mingw64\bin\g++.exe  @CMakeFiles/wildlight_tests.dir/includes_CXX.rsp -O2 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Werror -fno-exceptions -fno-rtti -MD -MT CMakeFiles/wildlight_tests.dir/tests/simulation_tests.cpp.obj -MF CMakeFiles\wildlight_tests.dir\tests\simulation_tests.cpp.obj.d -o CMakeFiles\wildlight_tests.dir\tests\simulation_tests.cpp.obj -c C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\recovered-cloud\Wildlight\Core\tests\simulation_tests.cpp
+[ 83%] Linking CXX executable wildlight_headless.exe
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\wildlight_headless.dir\link.txt --verbose=1
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\wildlight_headless.dir/objects.a
+C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\wildlight_headless.dir/objects.a @CMakeFiles\wildlight_headless.dir\objects1.rsp
+C:\msys64\mingw64\bin\g++.exe -O2 -DNDEBUG -Wl,--whole-archive CMakeFiles\wildlight_headless.dir/objects.a -Wl,--no-whole-archive -o wildlight_headless.exe -Wl,--out-implib,libwildlight_headless.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\wildlight_headless.dir\linkLibs.rsp
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+[ 83%] Built target wildlight_headless
+[100%] Linking CXX executable wildlight_tests.exe
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\wildlight_tests.dir\link.txt --verbose=1
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\wildlight_tests.dir/objects.a
+C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\wildlight_tests.dir/objects.a @CMakeFiles\wildlight_tests.dir\objects1.rsp
+C:\msys64\mingw64\bin\g++.exe -O2 -DNDEBUG -Wl,--whole-archive CMakeFiles\wildlight_tests.dir/objects.a -Wl,--no-whole-archive -o wildlight_tests.exe -Wl,--out-implib,libwildlight_tests.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\wildlight_tests.dir\linkLibs.rsp
+mingw32-make[2]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+[100%] Built target wildlight_tests
+mingw32-make[1]: Leaving directory 'C:/Users/Manu/Documents/Codex/2026-10-10/01a124bb-f708-7253-bbc6-964469454061-de/work/core-baseline/build'
+"C:\Program Files\CMake\bin\cmake.exe" -E cmake_progress_start C:\Users\Manu\Documents\Codex\2026-10-10\01a124bb-f708-7253-bbc6-964469454061-de\work\core-baseline\build\CMakeFiles 0
+

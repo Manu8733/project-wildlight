@@ -1,0 +1,823 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-10T15:29:19.5148359Z",
+  "scope": "Portable Core baseline only; not Unreal, multiplayer, six-participant acceptance, or GPU verification",
+  "source": "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\recovered-cloud\\Wildlight",
+  "build_directory": "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\build",
+  "toolchain": {
+    "platform": "Windows / MSYS2 MinGW64",
+    "cxx_path": "C:/msys64/mingw64/bin/g++.exe",
+    "cxx_version": "g++.exe (Rev5, Built by MSYS2 project) 15.1.0",
+    "cmake_path": "C:/Program Files/CMake/bin/cmake.exe",
+    "cmake_version": "cmake version 3.29.2",
+    "make_path": "C:/msys64/mingw64/bin/mingw32-make.exe",
+    "make_version": "GNU Make 4.4.1",
+    "python_version": "Python 3.11.1"
+  },
+  "steps": [
+    {
+      "name": "configure",
+      "executable": "C:/Program Files/CMake/bin/cmake.exe",
+      "arguments": [
+        "-S",
+        "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\recovered-cloud\\Wildlight\\Core",
+        "-B",
+        "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\build",
+        "-G",
+        "MinGW Makefiles",
+        "-DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=C:/msys64/mingw64/bin/mingw32-make.exe",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O2 -DNDEBUG",
+        "-DBUILD_TESTING=ON"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.193915,
+      "log": "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\configure.log"
+    },
+    {
+      "name": "build",
+      "executable": "C:/Program Files/CMake/bin/cmake.exe",
+      "arguments": [
+        "--build",
+        "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\build",
+        "--parallel",
+        "2",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.5741771,
+      "log": "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\build.log"
+    },
+    {
+      "name": "ctest",
+      "executable": "C:/Program Files/CMake/bin/ctest.exe",
+      "arguments": [
+        "--test-dir",
+        "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\build",
+        "--output-on-failure",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.0495156,
+      "log": "C:\\Users\\Manu\\Documents\\Codex\\2026-10-10\\01a124bb-f708-7253-bbc6-964469454061-de\\work\\core-baseline\\ctest.log"
+    }
+  ],
+  "source_files_before": 93,
+  "source_files_after": 93,
+  "source_unchanged": true,
+  "changed_source_paths": [],
+  "source_inventory_before": {
+    ".artifacts/compile_headless_sanitized.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_headless.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_tests_sanitized.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_tests.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/headless_match_sanitized.log": {
+      "bytes": 390,
+      "sha256": "4bbf933786fdb20ba4d04d4bd67a9d7a6aa798abe588d1fb421c774ce89f528e"
+    },
+    ".artifacts/headless_match.log": {
+      "bytes": 389,
+      "sha256": "eb94421d52d0efde29d425f41dbcf0cabbb0a6280705c660b3aa69849cd94d52"
+    },
+    ".artifacts/simulation_tests_sanitized.log": {
+      "bytes": 1228,
+      "sha256": "ce0e6c089a016ce668ea44bce1320d9b5952529f18db9b82af352f27ac0438b2"
+    },
+    ".artifacts/simulation_tests.log": {
+      "bytes": 915,
+      "sha256": "2fd24d3f4a325a4b048e24cd40633b666089af88b496af0ef32c4cba0b7a6956"
+    },
+    ".artifacts/soak.json": {
+      "bytes": 33656,
+      "sha256": "e3962b0413d27aa616a813a7ab97d009d246efcd70bf93a0aacc8cdaf4f1ea51"
+    },
+    ".artifacts/verification_sanitized.json": {
+      "bytes": 5713,
+      "sha256": "72cc42f470a1948072d41b26f1223090d5ca10ccffb6d78b422c01b1c4ab32e5"
+    },
+    ".artifacts/verification.json": {
+      "bytes": 5121,
+      "sha256": "628770056cba56a9cdde92b6c61d10bdd3eac098dceff6d3f2dae5b9c6cd71e1"
+    },
+    ".gitattributes": {
+      "bytes": 497,
+      "sha256": "74bbd566715906988342318e540c45123e399c581ebe523d0dd766a2548c124f"
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "bytes": 314,
+      "sha256": "77348deae16a5eafdcfc1a2e3f462f79698e3c7665ac8041101b1e1ebf8cc9da"
+    },
+    ".github/workflows/core.yml": {
+      "bytes": 500,
+      "sha256": "bc9dfd0b442557fc10ac06974694878676233564579bde02116a2ab5b8902cc5"
+    },
+    ".gitignore": {
+      "bytes": 248,
+      "sha256": "0dc39145019154e9960b80916da0dc2cd7276270d47429282a034c7bb08107c8"
+    },
+    "AGENTS.md": {
+      "bytes": 3228,
+      "sha256": "7f96f9185d68279e92c003ecf2520966689a6893ae84c371d4a3ed37c23898e3"
+    },
+    "Art/animation_manifest.json": {
+      "bytes": 2056,
+      "sha256": "6f445c626284abc167c0a3d180aa54d7c3c86c4a42fef3d7146cddfe77978cf7"
+    },
+    "Art/ART_BIBLE.md": {
+      "bytes": 10779,
+      "sha256": "b83f1542a800e57615ebe884418d7a9b1433b9014f4c709f54f6a86d2637a6bb"
+    },
+    "Art/asset_manifest.json": {
+      "bytes": 118111,
+      "sha256": "fd6ec36eb92e2004145b6f4c1ec6ead74d717c4bd5d74d7bef7443f61722efe5"
+    },
+    "Art/ASSET_REVIEW.md": {
+      "bytes": 5825,
+      "sha256": "d2c39ffcbe85dbd177d18314b28f8ebe2268e363462a488172a1fad0e84a5c81"
+    },
+    "Art/Audio/manifest.json": {
+      "bytes": 3130,
+      "sha256": "15c3dc71ae5cc82a62182b64c25419eee7b6afaddea583e3e374430221a7b6f8"
+    },
+    "Art/LICENSES.md": {
+      "bytes": 3765,
+      "sha256": "ae93d4d94fa19024586800683519442388e61411b71e05e3ec01aee57356279c"
+    },
+    "Art/manifest.json": {
+      "bytes": 118111,
+      "sha256": "fd6ec36eb92e2004145b6f4c1ec6ead74d717c4bd5d74d7bef7443f61722efe5"
+    },
+    "Art/Renders/README.md": {
+      "bytes": 1245,
+      "sha256": "07cc8264befb9e8121ced3a3875abde604a5b41be1298b2aaf0bacd8fa2b0f8e"
+    },
+    "Art/Source/build_unit_rigs.py": {
+      "bytes": 10699,
+      "sha256": "8e072aff6de228f5711c2c27bcff61d618d70ac48251eef796f15c3b0eca6d11"
+    },
+    "Art/Source/build_wildlight_art.py": {
+      "bytes": 59044,
+      "sha256": "da2adb944460a3ec279cf42d1d7e28e7dfcbd0ec426bb6265bf9db954c506d43"
+    },
+    "Art/Source/build.log": {
+      "bytes": 12873,
+      "sha256": "0e18cf641360c03d8b1005485193032723e1d516468b4bcbfa646539cf1e7f9c"
+    },
+    "Art/Source/catalog.log": {
+      "bytes": 17850,
+      "sha256": "b7d290c99e3be6abaa492a85e939e46b894cc954dc6e59530f69479a47389131"
+    },
+    "Art/Source/README.md": {
+      "bytes": 1680,
+      "sha256": "47905bfa8fd84243ac7bf7124484c4f56326723b2fdde1742fc4f51ee53900d6"
+    },
+    "Art/Source/render.log": {
+      "bytes": 65163,
+      "sha256": "0dc8b455225455fbb8bbe61d0efca3bd4e84e8fbf533c134ba6c77364f269873"
+    },
+    "Art/Source/rigs.log": {
+      "bytes": 2118,
+      "sha256": "5f68155c369ad22f8f66ecaa22d78339048f390e1442f2f9f2bca5836c9b7c53"
+    },
+    "Art/Source/validate_wildlight_art.py": {
+      "bytes": 3374,
+      "sha256": "890078fac9e2bf3fe67a0f06227f207339385f3fa8f88ae2440e4b1d054a16fc"
+    },
+    "Art/Source/validation.log": {
+      "bytes": 802,
+      "sha256": "4ef27c5fd91934d0d5969a9f307a6626e6a4deabaf16ec02e54361c008af7d71"
+    },
+    "Art/UI/manifest.json": {
+      "bytes": 12906,
+      "sha256": "679646fe57c388c6b2291acc77ce960c8016e16961392b10d85f3d8fb1e0d96b"
+    },
+    "Art/validation_report.json": {
+      "bytes": 15262,
+      "sha256": "2925605ed612de894df268967185dc23c112476decbe23ca534edb6b096a7fda"
+    },
+    "Config/DefaultEngine.ini": {
+      "bytes": 995,
+      "sha256": "cc33fdc48476e84e25f169373ab3ea69de43c570daa83c6c7f5f9380e87e9e3e"
+    },
+    "Config/DefaultGame.ini": {
+      "bytes": 529,
+      "sha256": "3c50157ffb5640ab1d36b1bab50132891c5f8237c6fe83d2acadffa91140796b"
+    },
+    "Config/DefaultInput.ini": {
+      "bytes": 1004,
+      "sha256": "b9edd9248f41de72a355d9b7742640e324e1da2c09dd1a74f25a33e3c77eb90e"
+    },
+    "Content/README.md": {
+      "bytes": 652,
+      "sha256": "49d69c3010c3af84aea3c02b3eadb0dbcd44a982105fe2de0ccaa77bcb5e1a15"
+    },
+    "Core/CMakeLists.txt": {
+      "bytes": 1583,
+      "sha256": "90493881a4258f55e8fe9c9d595c73e63aa6b94848d1d93a8c633c1b54e50a9f"
+    },
+    "Core/include/wildlight/Simulation.hpp": {
+      "bytes": 9173,
+      "sha256": "228a9526f7266e107c4877cac03e2756068a1bcdc1e3574ccfc0085fcee9766b"
+    },
+    "Core/src/Simulation.cpp": {
+      "bytes": 118088,
+      "sha256": "c6a9f687c2f58a892ab6f1797c35271b1307255161d43a45bb427c50e1259f09"
+    },
+    "Core/tests/simulation_tests.cpp": {
+      "bytes": 37903,
+      "sha256": "aae6dcff3290286645c1ceee8014eadfe0a73d1f9536e9d6d50fd937661e41bf"
+    },
+    "Core/tools/headless.cpp": {
+      "bytes": 4819,
+      "sha256": "ef2d9e8378305534c4b0e0c9ed12086d9880573d279b97147851cdc719019cca"
+    },
+    "Docs/ARCHITECTURE.md": {
+      "bytes": 6163,
+      "sha256": "d8d119ebc2d131c28d601abedd120c8e59227f24a85304b583fe19d300ada833"
+    },
+    "Docs/ArtBible.md": {
+      "bytes": 6799,
+      "sha256": "7edf2e509ae08363498981286b62a1f1aff00aeae61a3a9058fa4c52c6c44cf5"
+    },
+    "Docs/ASSET_PROVENANCE.md": {
+      "bytes": 3330,
+      "sha256": "b26a2e0f18cc7eba08427a141ab35712d75ed6bbe7e2dcb25647858879a61557"
+    },
+    "Docs/BACKUP_AND_RECOVERY.md": {
+      "bytes": 2369,
+      "sha256": "0d142f1115535b5d6ddcb8c9ddf34ed7e551ba9f6b683442a12ebe4f4986778b"
+    },
+    "Docs/BALANCE_BASELINE.md": {
+      "bytes": 6864,
+      "sha256": "738bec2f3eb89a621d1ba227eabc77a8cfeb71a4e6cd9da31632d2a9e3014acc"
+    },
+    "Docs/BUILD_AND_VERIFY.md": {
+      "bytes": 5296,
+      "sha256": "f295848453fc41b867cfd42ba79016e8d45b0295bed9388c291768fe0828ad19"
+    },
+    "Docs/CHANGELOG.md": {
+      "bytes": 513,
+      "sha256": "ebf2a9fa163f3b554c0685fa1b64dcdcffef111f098ec2be6a2d471608b298e8"
+    },
+    "Docs/DocumentAudit.json": {
+      "bytes": 344,
+      "sha256": "972d4c339e3cdfa3ff23e357c87567f19a19b54d0dcab7ad3d7cec3bb8d00011"
+    },
+    "Docs/GDD.md": {
+      "bytes": 13658,
+      "sha256": "0e6dac7866c3b1463dcea40db8a109bc43d987181193d85e07ceb4bd1598af64"
+    },
+    "Docs/GPU_SESSION_RUNBOOK.md": {
+      "bytes": 3443,
+      "sha256": "e01e80acf906c27672e088884160c780d44e39afbc685fda240676486bbd6a55"
+    },
+    "Docs/LAPTOP_QUICKSTART.md": {
+      "bytes": 3685,
+      "sha256": "8953aa15297758599d9bad4a7e6b709d9d75da4a8b5a8f4bf580abaa806dc99c"
+    },
+    "Docs/MILESTONES.md": {
+      "bytes": 3393,
+      "sha256": "d72037c25788b8013960bbcbdb5b686e6624f98e17a612d42b4a3def1786c5ed"
+    },
+    "Docs/MULTIPLAYER_PLAN.md": {
+      "bytes": 1789,
+      "sha256": "345f52337ebde20f38d3b894fe7a749504db4970ac61034bc4c44b6c784dafec"
+    },
+    "Docs/Original_Romanian_Brief.txt": {
+      "bytes": 27636,
+      "sha256": "68f3aeb67af1a6b56260d556b1b8381b5d6b828e4b1d6c05fd98f5b89df3868c"
+    },
+    "Docs/PERFORMANCE_BUDGETS.md": {
+      "bytes": 4298,
+      "sha256": "2a509b4a0b90c3c24558965547c788f04128a84ee4995e552ef8e394b789be96"
+    },
+    "Docs/PROGRESS.md": {
+      "bytes": 14775,
+      "sha256": "ce458840ecf53dd0dac34585346900efef8e45d220722322585f4e94b9593d33"
+    },
+    "Docs/QA_PLAN.md": {
+      "bytes": 8495,
+      "sha256": "e0f6bec089751f34e669119defae3dcb52bba000cce2ffb074812efcdb0b35df"
+    },
+    "Docs/refresh_progress.py": {
+      "bytes": 4659,
+      "sha256": "210b9fc82403927a4b56b6725a8595c22515b427fd1893e4edc8394d3f5a80ae"
+    },
+    "Docs/Requirements.json": {
+      "bytes": 78421,
+      "sha256": "82891642bcc656738e18c850b7cfa86804505a4d48a0d5ef5748a3e90f4ef8a0"
+    },
+    "Docs/VFX_AUDIO_SPEC.md": {
+      "bytes": 3254,
+      "sha256": "cd91ab89565f07b531d162bd8bf33492b3ebd61dd60bc78dcefd8c38ed9ae9c7"
+    },
+    "Docs/VISUAL_PREVIEW.md": {
+      "bytes": 1132,
+      "sha256": "2a3a545a03c215be1a7797bf4c7806aea2d2afbfb0af70e71d8933c5432108bf"
+    },
+    "engine-lock.json": {
+      "bytes": 331,
+      "sha256": "8772ce71cdb116884bf4d2b3dbc8b91de6da5669877c5d2ff39bc9dabc43ba9f"
+    },
+    "README.md": {
+      "bytes": 3719,
+      "sha256": "60faa17d203ff54a8aa2237f363d7087315308c014c08a1a63994791e743d18d"
+    },
+    "Source/Wildlight.Target.cs": {
+      "bytes": 342,
+      "sha256": "1359e1691e9180332ddb5641b56eea76253560c9df5176a86374df1ead6726ba"
+    },
+    "Source/Wildlight/Private/Wildlight.cpp": {
+      "bytes": 114,
+      "sha256": "c2e2acf4603d0bdf234b51b678096bf368634efbbe76131c6b1ec8be3d40dadf"
+    },
+    "Source/Wildlight/Private/WildlightCameraPawn.cpp": {
+      "bytes": 7590,
+      "sha256": "29de68b8333ce3951c3eeb652e84ffa336f37adae141cff0d0c64e8db53e2989"
+    },
+    "Source/Wildlight/Private/WildlightGameInstance.cpp": {
+      "bytes": 9052,
+      "sha256": "cf30f0a72892ec675d1369e6007bb2db21cded79fd51d9479e86c4842ba8c113"
+    },
+    "Source/Wildlight/Private/WildlightGameMode.cpp": {
+      "bytes": 603,
+      "sha256": "d0b34c7d8b8a740c0e7c61363bfa68d16ebc89c26274403fadd5c304adab9825"
+    },
+    "Source/Wildlight/Private/WildlightHUD.cpp": {
+      "bytes": 22059,
+      "sha256": "ea454687feb19c843a87c1c637931eb080c6a204d4ab607009cce31e7190a6e9"
+    },
+    "Source/Wildlight/Private/WildlightPlayerController.cpp": {
+      "bytes": 35616,
+      "sha256": "5f4fddc75a6e815493eeb1d10ebcd770a0914700c63a8c4b49d42fc403478d47"
+    },
+    "Source/Wildlight/Private/WildlightSimulation.cpp": {
+      "bytes": 134,
+      "sha256": "ebad3d00cabc1ae4d4ad0ff36f5da46ec6f65ab2f230aba9b389835246ac45eb"
+    },
+    "Source/Wildlight/Private/WildlightWorld.cpp": {
+      "bytes": 33146,
+      "sha256": "f6681a7a8d6fc47c65acefae698527c6cd9752fd6a2c5e56691da6ca330dff80"
+    },
+    "Source/Wildlight/Public/WildlightCameraPawn.h": {
+      "bytes": 4011,
+      "sha256": "85c2db302a120e155db81e63be43c67421c350795c71d7ecad1d8e40519978c2"
+    },
+    "Source/Wildlight/Public/WildlightGameInstance.h": {
+      "bytes": 922,
+      "sha256": "b6706cb14343fcf78b76276427fb23c721d338912d2e5d1b1d9f7273b41f06d2"
+    },
+    "Source/Wildlight/Public/WildlightGameMode.h": {
+      "bytes": 289,
+      "sha256": "60fe2ff230317f0ecaa3ca8ca242aa946c13e80d3a0ceed1ec1f4a09eff17262"
+    },
+    "Source/Wildlight/Public/WildlightHUD.h": {
+      "bytes": 1009,
+      "sha256": "ba2798dbb61848785ab7214104ecc7c422f986f632dafa168d1ebe49870f8f14"
+    },
+    "Source/Wildlight/Public/WildlightPlayerController.h": {
+      "bytes": 2121,
+      "sha256": "e0bca386466e8a61ed5b3992fbe2b3a3a605b9f605f04acf9631b9866a6c7945"
+    },
+    "Source/Wildlight/Public/WildlightWorld.h": {
+      "bytes": 4425,
+      "sha256": "91313429e3571430bb767e67e9bbafc326c7ffd89f79d9c02a93645cb23aa155"
+    },
+    "Source/Wildlight/Wildlight.Build.cs": {
+      "bytes": 627,
+      "sha256": "35731d6fcddf4e1302c096e8d0b0f2f7aaea7da7b35259104f5f31e7b61365eb"
+    },
+    "Source/WildlightEditor.Target.cs": {
+      "bytes": 356,
+      "sha256": "69ae537ed6916a0e514c351e1c63aaa8387a52703e7e0e4463b85d5f48e1b970"
+    },
+    "Tests/README.md": {
+      "bytes": 3175,
+      "sha256": "ee0ac19c8408bdc3a41e1a2be49bb2029435e5551e32540e4b9b5b56e370bd9e"
+    },
+    "Tools/author_audio.py": {
+      "bytes": 4327,
+      "sha256": "e8348c0c9bc1a7b58116de3e6dd730f7105d64d7cf5d2770513de5e3e6fa5780"
+    },
+    "Tools/author_icons.py": {
+      "bytes": 8400,
+      "sha256": "9784cb4925a343b9a4ecf57c6a983a6b9d91e106a5134deece158044ae8c553c"
+    },
+    "Tools/backup.py": {
+      "bytes": 4804,
+      "sha256": "63e4017e569f57a98ccb70ad939739d468a0167f454f2885ecf8ec916854b017"
+    },
+    "Tools/benchmark.py": {
+      "bytes": 2887,
+      "sha256": "815104d83f4183f1c98cfbc59a02323e950f8760dcd2d18e8bb4e25eddf6f4e2"
+    },
+    "Tools/Build-Windows.ps1": {
+      "bytes": 3453,
+      "sha256": "2235145451ba47b89e4e804a019c3ab3547338c3d934c769d02ad47ad378902c"
+    },
+    "Tools/Import-Assets.py": {
+      "bytes": 7639,
+      "sha256": "56a95993f12d376783b85f018391b575a3fb73e10452f50717e183a939ebada7"
+    },
+    "Tools/verify.py": {
+      "bytes": 6743,
+      "sha256": "21c5ecbd98d9b28bc79449c92ca8f3f4b5ffdd9e71f4b6b330befbb55e8d531f"
+    },
+    "Wildlight.uproject": {
+      "bytes": 443,
+      "sha256": "a5cc696ded5de0f550eca811080e6f4231f4a85128b901b246214ce52a79d0e0"
+    }
+  },
+  "source_inventory_after": {
+    ".artifacts/compile_headless_sanitized.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_headless.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_tests_sanitized.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/compile_tests.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/headless_match_sanitized.log": {
+      "bytes": 390,
+      "sha256": "4bbf933786fdb20ba4d04d4bd67a9d7a6aa798abe588d1fb421c774ce89f528e"
+    },
+    ".artifacts/headless_match.log": {
+      "bytes": 389,
+      "sha256": "eb94421d52d0efde29d425f41dbcf0cabbb0a6280705c660b3aa69849cd94d52"
+    },
+    ".artifacts/simulation_tests_sanitized.log": {
+      "bytes": 1228,
+      "sha256": "ce0e6c089a016ce668ea44bce1320d9b5952529f18db9b82af352f27ac0438b2"
+    },
+    ".artifacts/simulation_tests.log": {
+      "bytes": 915,
+      "sha256": "2fd24d3f4a325a4b048e24cd40633b666089af88b496af0ef32c4cba0b7a6956"
+    },
+    ".artifacts/soak.json": {
+      "bytes": 33656,
+      "sha256": "e3962b0413d27aa616a813a7ab97d009d246efcd70bf93a0aacc8cdaf4f1ea51"
+    },
+    ".artifacts/verification_sanitized.json": {
+      "bytes": 5713,
+      "sha256": "72cc42f470a1948072d41b26f1223090d5ca10ccffb6d78b422c01b1c4ab32e5"
+    },
+    ".artifacts/verification.json": {
+      "bytes": 5121,
+      "sha256": "628770056cba56a9cdde92b6c61d10bdd3eac098dceff6d3f2dae5b9c6cd71e1"
+    },
+    ".gitattributes": {
+      "bytes": 497,
+      "sha256": "74bbd566715906988342318e540c45123e399c581ebe523d0dd766a2548c124f"
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "bytes": 314,
+      "sha256": "77348deae16a5eafdcfc1a2e3f462f79698e3c7665ac8041101b1e1ebf8cc9da"
+    },
+    ".github/workflows/core.yml": {
+      "bytes": 500,
+      "sha256": "bc9dfd0b442557fc10ac06974694878676233564579bde02116a2ab5b8902cc5"
+    },
+    ".gitignore": {
+      "bytes": 248,
+      "sha256": "0dc39145019154e9960b80916da0dc2cd7276270d47429282a034c7bb08107c8"
+    },
+    "AGENTS.md": {
+      "bytes": 3228,
+      "sha256": "7f96f9185d68279e92c003ecf2520966689a6893ae84c371d4a3ed37c23898e3"
+    },
+    "Art/animation_manifest.json": {
+      "bytes": 2056,
+      "sha256": "6f445c626284abc167c0a3d180aa54d7c3c86c4a42fef3d7146cddfe77978cf7"
+    },
+    "Art/ART_BIBLE.md": {
+      "bytes": 10779,
+      "sha256": "b83f1542a800e57615ebe884418d7a9b1433b9014f4c709f54f6a86d2637a6bb"
+    },
+    "Art/asset_manifest.json": {
+      "bytes": 118111,
+      "sha256": "fd6ec36eb92e2004145b6f4c1ec6ead74d717c4bd5d74d7bef7443f61722efe5"
+    },
+    "Art/ASSET_REVIEW.md": {
+      "bytes": 5825,
+      "sha256": "d2c39ffcbe85dbd177d18314b28f8ebe2268e363462a488172a1fad0e84a5c81"
+    },
+    "Art/Audio/manifest.json": {
+      "bytes": 3130,
+      "sha256": "15c3dc71ae5cc82a62182b64c25419eee7b6afaddea583e3e374430221a7b6f8"
+    },
+    "Art/LICENSES.md": {
+      "bytes": 3765,
+      "sha256": "ae93d4d94fa19024586800683519442388e61411b71e05e3ec01aee57356279c"
+    },
+    "Art/manifest.json": {
+      "bytes": 118111,
+      "sha256": "fd6ec36eb92e2004145b6f4c1ec6ead74d717c4bd5d74d7bef7443f61722efe5"
+    },
+    "Art/Renders/README.md": {
+      "bytes": 1245,
+      "sha256": "07cc8264befb9e8121ced3a3875abde604a5b41be1298b2aaf0bacd8fa2b0f8e"
+    },
+    "Art/Source/build_unit_rigs.py": {
+      "bytes": 10699,
+      "sha256": "8e072aff6de228f5711c2c27bcff61d618d70ac48251eef796f15c3b0eca6d11"
+    },
+    "Art/Source/build_wildlight_art.py": {
+      "bytes": 59044,
+      "sha256": "da2adb944460a3ec279cf42d1d7e28e7dfcbd0ec426bb6265bf9db954c506d43"
+    },
+    "Art/Source/build.log": {
+      "bytes": 12873,
+      "sha256": "0e18cf641360c03d8b1005485193032723e1d516468b4bcbfa646539cf1e7f9c"
+    },
+    "Art/Source/catalog.log": {
+      "bytes": 17850,
+      "sha256": "b7d290c99e3be6abaa492a85e939e46b894cc954dc6e59530f69479a47389131"
+    },
+    "Art/Source/README.md": {
+      "bytes": 1680,
+      "sha256": "47905bfa8fd84243ac7bf7124484c4f56326723b2fdde1742fc4f51ee53900d6"
+    },
+    "Art/Source/render.log": {
+      "bytes": 65163,
+      "sha256": "0dc8b455225455fbb8bbe61d0efca3bd4e84e8fbf533c134ba6c77364f269873"
+    },
+    "Art/Source/rigs.log": {
+      "bytes": 2118,
+      "sha256": "5f68155c369ad22f8f66ecaa22d78339048f390e1442f2f9f2bca5836c9b7c53"
+    },
+    "Art/Source/validate_wildlight_art.py": {
+      "bytes": 3374,
+      "sha256": "890078fac9e2bf3fe67a0f06227f207339385f3fa8f88ae2440e4b1d054a16fc"
+    },
+    "Art/Source/validation.log": {
+      "bytes": 802,
+      "sha256": "4ef27c5fd91934d0d5969a9f307a6626e6a4deabaf16ec02e54361c008af7d71"
+    },
+    "Art/UI/manifest.json": {
+      "bytes": 12906,
+      "sha256": "679646fe57c388c6b2291acc77ce960c8016e16961392b10d85f3d8fb1e0d96b"
+    },
+    "Art/validation_report.json": {
+      "bytes": 15262,
+      "sha256": "2925605ed612de894df268967185dc23c112476decbe23ca534edb6b096a7fda"
+    },
+    "Config/DefaultEngine.ini": {
+      "bytes": 995,
+      "sha256": "cc33fdc48476e84e25f169373ab3ea69de43c570daa83c6c7f5f9380e87e9e3e"
+    },
+    "Config/DefaultGame.ini": {
+      "bytes": 529,
+      "sha256": "3c50157ffb5640ab1d36b1bab50132891c5f8237c6fe83d2acadffa91140796b"
+    },
+    "Config/DefaultInput.ini": {
+      "bytes": 1004,
+      "sha256": "b9edd9248f41de72a355d9b7742640e324e1da2c09dd1a74f25a33e3c77eb90e"
+    },
+    "Content/README.md": {
+      "bytes": 652,
+      "sha256": "49d69c3010c3af84aea3c02b3eadb0dbcd44a982105fe2de0ccaa77bcb5e1a15"
+    },
+    "Core/CMakeLists.txt": {
+      "bytes": 1583,
+      "sha256": "90493881a4258f55e8fe9c9d595c73e63aa6b94848d1d93a8c633c1b54e50a9f"
+    },
+    "Core/include/wildlight/Simulation.hpp": {
+      "bytes": 9173,
+      "sha256": "228a9526f7266e107c4877cac03e2756068a1bcdc1e3574ccfc0085fcee9766b"
+    },
+    "Core/src/Simulation.cpp": {
+      "bytes": 118088,
+      "sha256": "c6a9f687c2f58a892ab6f1797c35271b1307255161d43a45bb427c50e1259f09"
+    },
+    "Core/tests/simulation_tests.cpp": {
+      "bytes": 37903,
+      "sha256": "aae6dcff3290286645c1ceee8014eadfe0a73d1f9536e9d6d50fd937661e41bf"
+    },
+    "Core/tools/headless.cpp": {
+      "bytes": 4819,
+      "sha256": "ef2d9e8378305534c4b0e0c9ed12086d9880573d279b97147851cdc719019cca"
+    },
+    "Docs/ARCHITECTURE.md": {
+      "bytes": 6163,
+      "sha256": "d8d119ebc2d131c28d601abedd120c8e59227f24a85304b583fe19d300ada833"
+    },
+    "Docs/ArtBible.md": {
+      "bytes": 6799,
+      "sha256": "7edf2e509ae08363498981286b62a1f1aff00aeae61a3a9058fa4c52c6c44cf5"
+    },
+    "Docs/ASSET_PROVENANCE.md": {
+      "bytes": 3330,
+      "sha256": "b26a2e0f18cc7eba08427a141ab35712d75ed6bbe7e2dcb25647858879a61557"
+    },
+    "Docs/BACKUP_AND_RECOVERY.md": {
+      "bytes": 2369,
+      "sha256": "0d142f1115535b5d6ddcb8c9ddf34ed7e551ba9f6b683442a12ebe4f4986778b"
+    },
+    "Docs/BALANCE_BASELINE.md": {
+      "bytes": 6864,
+      "sha256": "738bec2f3eb89a621d1ba227eabc77a8cfeb71a4e6cd9da31632d2a9e3014acc"
+    },
+    "Docs/BUILD_AND_VERIFY.md": {
+      "bytes": 5296,
+      "sha256": "f295848453fc41b867cfd42ba79016e8d45b0295bed9388c291768fe0828ad19"
+    },
+    "Docs/CHANGELOG.md": {
+      "bytes": 513,
+      "sha256": "ebf2a9fa163f3b554c0685fa1b64dcdcffef111f098ec2be6a2d471608b298e8"
+    },
+    "Docs/DocumentAudit.json": {
+      "bytes": 344,
+      "sha256": "972d4c339e3cdfa3ff23e357c87567f19a19b54d0dcab7ad3d7cec3bb8d00011"
+    },
+    "Docs/GDD.md": {
+      "bytes": 13658,
+      "sha256": "0e6dac7866c3b1463dcea40db8a109bc43d987181193d85e07ceb4bd1598af64"
+    },
+    "Docs/GPU_SESSION_RUNBOOK.md": {
+      "bytes": 3443,
+      "sha256": "e01e80acf906c27672e088884160c780d44e39afbc685fda240676486bbd6a55"
+    },
+    "Docs/LAPTOP_QUICKSTART.md": {
+      "bytes": 3685,
+      "sha256": "8953aa15297758599d9bad4a7e6b709d9d75da4a8b5a8f4bf580abaa806dc99c"
+    },
+    "Docs/MILESTONES.md": {
+      "bytes": 3393,
+      "sha256": "d72037c25788b8013960bbcbdb5b686e6624f98e17a612d42b4a3def1786c5ed"
+    },
+    "Docs/MULTIPLAYER_PLAN.md": {
+      "bytes": 1789,
+      "sha256": "345f52337ebde20f38d3b894fe7a749504db4970ac61034bc4c44b6c784dafec"
+    },
+    "Docs/Original_Romanian_Brief.txt": {
+      "bytes": 27636,
+      "sha256": "68f3aeb67af1a6b56260d556b1b8381b5d6b828e4b1d6c05fd98f5b89df3868c"
+    },
+    "Docs/PERFORMANCE_BUDGETS.md": {
+      "bytes": 4298,
+      "sha256": "2a509b4a0b90c3c24558965547c788f04128a84ee4995e552ef8e394b789be96"
+    },
+    "Docs/PROGRESS.md": {
+      "bytes": 14775,
+      "sha256": "ce458840ecf53dd0dac34585346900efef8e45d220722322585f4e94b9593d33"
+    },
+    "Docs/QA_PLAN.md": {
+      "bytes": 8495,
+      "sha256": "e0f6bec089751f34e669119defae3dcb52bba000cce2ffb074812efcdb0b35df"
+    },
+    "Docs/refresh_progress.py": {
+      "bytes": 4659,
+      "sha256": "210b9fc82403927a4b56b6725a8595c22515b427fd1893e4edc8394d3f5a80ae"
+    },
+    "Docs/Requirements.json": {
+      "bytes": 78421,
+      "sha256": "82891642bcc656738e18c850b7cfa86804505a4d48a0d5ef5748a3e90f4ef8a0"
+    },
+    "Docs/VFX_AUDIO_SPEC.md": {
+      "bytes": 3254,
+      "sha256": "cd91ab89565f07b531d162bd8bf33492b3ebd61dd60bc78dcefd8c38ed9ae9c7"
+    },
+    "Docs/VISUAL_PREVIEW.md": {
+      "bytes": 1132,
+      "sha256": "2a3a545a03c215be1a7797bf4c7806aea2d2afbfb0af70e71d8933c5432108bf"
+    },
+    "engine-lock.json": {
+      "bytes": 331,
+      "sha256": "8772ce71cdb116884bf4d2b3dbc8b91de6da5669877c5d2ff39bc9dabc43ba9f"
+    },
+    "README.md": {
+      "bytes": 3719,
+      "sha256": "60faa17d203ff54a8aa2237f363d7087315308c014c08a1a63994791e743d18d"
+    },
+    "Source/Wildlight.Target.cs": {
+      "bytes": 342,
+      "sha256": "1359e1691e9180332ddb5641b56eea76253560c9df5176a86374df1ead6726ba"
+    },
+    "Source/Wildlight/Private/Wildlight.cpp": {
+      "bytes": 114,
+      "sha256": "c2e2acf4603d0bdf234b51b678096bf368634efbbe76131c6b1ec8be3d40dadf"
+    },
+    "Source/Wildlight/Private/WildlightCameraPawn.cpp": {
+      "bytes": 7590,
+      "sha256": "29de68b8333ce3951c3eeb652e84ffa336f37adae141cff0d0c64e8db53e2989"
+    },
+    "Source/Wildlight/Private/WildlightGameInstance.cpp": {
+      "bytes": 9052,
+      "sha256": "cf30f0a72892ec675d1369e6007bb2db21cded79fd51d9479e86c4842ba8c113"
+    },
+    "Source/Wildlight/Private/WildlightGameMode.cpp": {
+      "bytes": 603,
+      "sha256": "d0b34c7d8b8a740c0e7c61363bfa68d16ebc89c26274403fadd5c304adab9825"
+    },
+    "Source/Wildlight/Private/WildlightHUD.cpp": {
+      "bytes": 22059,
+      "sha256": "ea454687feb19c843a87c1c637931eb080c6a204d4ab607009cce31e7190a6e9"
+    },
+    "Source/Wildlight/Private/WildlightPlayerController.cpp": {
+      "bytes": 35616,
+      "sha256": "5f4fddc75a6e815493eeb1d10ebcd770a0914700c63a8c4b49d42fc403478d47"
+    },
+    "Source/Wildlight/Private/WildlightSimulation.cpp": {
+      "bytes": 134,
+      "sha256": "ebad3d00cabc1ae4d4ad0ff36f5da46ec6f65ab2f230aba9b389835246ac45eb"
+    },
+    "Source/Wildlight/Private/WildlightWorld.cpp": {
+      "bytes": 33146,
+      "sha256": "f6681a7a8d6fc47c65acefae698527c6cd9752fd6a2c5e56691da6ca330dff80"
+    },
+    "Source/Wildlight/Public/WildlightCameraPawn.h": {
+      "bytes": 4011,
+      "sha256": "85c2db302a120e155db81e63be43c67421c350795c71d7ecad1d8e40519978c2"
+    },
+    "Source/Wildlight/Public/WildlightGameInstance.h": {
+      "bytes": 922,
+      "sha256": "b6706cb14343fcf78b76276427fb23c721d338912d2e5d1b1d9f7273b41f06d2"
+    },
+    "Source/Wildlight/Public/WildlightGameMode.h": {
+      "bytes": 289,
+      "sha256": "60fe2ff230317f0ecaa3ca8ca242aa946c13e80d3a0ceed1ec1f4a09eff17262"
+    },
+    "Source/Wildlight/Public/WildlightHUD.h": {
+      "bytes": 1009,
+      "sha256": "ba2798dbb61848785ab7214104ecc7c422f986f632dafa168d1ebe49870f8f14"
+    },
+    "Source/Wildlight/Public/WildlightPlayerController.h": {
+      "bytes": 2121,
+      "sha256": "e0bca386466e8a61ed5b3992fbe2b3a3a605b9f605f04acf9631b9866a6c7945"
+    },
+    "Source/Wildlight/Public/WildlightWorld.h": {
+      "bytes": 4425,
+      "sha256": "91313429e3571430bb767e67e9bbafc326c7ffd89f79d9c02a93645cb23aa155"
+    },
+    "Source/Wildlight/Wildlight.Build.cs": {
+      "bytes": 627,
+      "sha256": "35731d6fcddf4e1302c096e8d0b0f2f7aaea7da7b35259104f5f31e7b61365eb"
+    },
+    "Source/WildlightEditor.Target.cs": {
+      "bytes": 356,
+      "sha256": "69ae537ed6916a0e514c351e1c63aaa8387a52703e7e0e4463b85d5f48e1b970"
+    },
+    "Tests/README.md": {
+      "bytes": 3175,
+      "sha256": "ee0ac19c8408bdc3a41e1a2be49bb2029435e5551e32540e4b9b5b56e370bd9e"
+    },
+    "Tools/author_audio.py": {
+      "bytes": 4327,
+      "sha256": "e8348c0c9bc1a7b58116de3e6dd730f7105d64d7cf5d2770513de5e3e6fa5780"
+    },
+    "Tools/author_icons.py": {
+      "bytes": 8400,
+      "sha256": "9784cb4925a343b9a4ecf57c6a983a6b9d91e106a5134deece158044ae8c553c"
+    },
+    "Tools/backup.py": {
+      "bytes": 4804,
+      "sha256": "63e4017e569f57a98ccb70ad939739d468a0167f454f2885ecf8ec916854b017"
+    },
+    "Tools/benchmark.py": {
+      "bytes": 2887,
+      "sha256": "815104d83f4183f1c98cfbc59a02323e950f8760dcd2d18e8bb4e25eddf6f4e2"
+    },
+    "Tools/Build-Windows.ps1": {
+      "bytes": 3453,
+      "sha256": "2235145451ba47b89e4e804a019c3ab3547338c3d934c769d02ad47ad378902c"
+    },
+    "Tools/Import-Assets.py": {
+      "bytes": 7639,
+      "sha256": "56a95993f12d376783b85f018391b575a3fb73e10452f50717e183a939ebada7"
+    },
+    "Tools/verify.py": {
+      "bytes": 6743,
+      "sha256": "21c5ecbd98d9b28bc79449c92ca8f3f4b5ffdd9e71f4b6b330befbb55e8d531f"
+    },
+    "Wildlight.uproject": {
+      "bytes": 443,
+      "sha256": "a5cc696ded5de0f550eca811080e6f4231f4a85128b901b246214ce52a79d0e0"
+    }
+  },
+  "error": null,
+  "passed": true,
+  "unreal_compiled": false,
+  "graphics_measured": false,
+  "sanitizers_run": false
+}
