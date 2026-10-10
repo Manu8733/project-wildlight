@@ -14,6 +14,7 @@
 #include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Input/SNumericEntryBox.h"
 #include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SScaleBox.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Accessibility/SlateWidgetAccessibleTypes.h"
@@ -25,7 +26,7 @@ const FLinearColor Gold(.96f, .75f, .36f);
 const FLinearColor Muted(.57f, .68f, .59f);
 FString CostText(const wildlight::Resources& R)
 {
-    return FString::Printf(TEXT("Wood %.0f   Stone %.0f   Food %.0f   Gold %.0f   Light %.0f"), R.wood, R.stone, R.food, R.gold, R.mana);
+    return FString::Printf(TEXT("Wood %.2f   Stone %.2f   Food %.2f   Gold %.2f   Light %.2f"), R.wood, R.stone, R.food, R.gold, R.mana);
 }
 FString Name(std::string_view S) { return UTF8_TO_TCHAR(std::string(S).c_str()); }
 }
@@ -168,11 +169,46 @@ void AWildlightHUD::EnsureGrowthControls()
     GrowthViewport = Viewport;
     Viewport->AddViewportWidgetContent(GrowthControls.ToSharedRef(), 10);
 }
+void AWildlightHUD::EnsureActionTooltip()
+{
+    if (ActionTooltip.IsValid() || !GetWorld()) return;
+    UGameViewportClient* Viewport = GetWorld()->GetGameViewport();
+    if (!Viewport) return;
+    ActionTooltipContent = SNew(SBox)
+        .WidthOverride_Lambda([this]() { return ActionTooltipWidth; })
+        [
+            SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+            .BorderBackgroundColor(PanelColor).Padding(FMargin(10.f, 9.f))
+            [
+                SNew(STextBlock).Text_Lambda([this]() { return ActionTooltipText; })
+                .WrapTextAt_Lambda([this]() { return FMath::Max(1.f, ActionTooltipWidth - 20.f); })
+                .WrappingPolicy(ETextWrappingPolicy::AllowPerCharacterWrapping)
+                .Font(FCoreStyle::GetDefaultFontStyle("Regular", 12)).ColorAndOpacity(Ink)
+            ]
+        ];
+    ActionTooltip = SNew(SCanvas)
+        .Visibility_Lambda([this]() { return ActionTooltipText.IsEmpty() ? EVisibility::Collapsed : EVisibility::HitTestInvisible; })
+        + SCanvas::Slot()
+        .Position(TAttribute<FVector2D>::CreateLambda([this]() { return ActionTooltipPosition; }))
+        .Size(TAttribute<FVector2D>::CreateLambda([this]() { return ActionTooltipSize; }))
+        [
+            SNew(SScaleBox).Stretch(EStretch::UserSpecified)
+            .UserSpecifiedScale_Lambda([this]() { return ActionTooltipScale; })
+            .HAlign(HAlign_Left).VAlign(VAlign_Top)
+            [ ActionTooltipContent.ToSharedRef() ]
+        ];
+    TooltipViewport = Viewport;
+    Viewport->AddViewportWidgetContent(ActionTooltip.ToSharedRef(), 20);
+}
 void AWildlightHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     if (GrowthControls.IsValid() && GrowthViewport.IsValid()) GrowthViewport->RemoveViewportWidgetContent(GrowthControls.ToSharedRef());
+    if (ActionTooltip.IsValid() && TooltipViewport.IsValid()) TooltipViewport->RemoveViewportWidgetContent(ActionTooltip.ToSharedRef());
     GrowthControls.Reset();
     GrowthViewport.Reset();
+    ActionTooltip.Reset();
+    ActionTooltipContent.Reset();
+    TooltipViewport.Reset();
     Super::EndPlay(EndPlayReason);
 }
 void AWildlightHUD::Panel(float X, float Y, float W, float H, FLinearColor Color)
@@ -234,9 +270,10 @@ void AWildlightHUD::DrawHUD()
     Super::DrawHUD();
     if (!Canvas || !GEngine) return;
     Buttons.Empty(); Panels.Empty();
+    ActionTooltipText = FText::GetEmpty();
     const auto* Preferences = Cast<UWildlightGameInstance>(GetGameInstance());
     const float Requested = Preferences ? Preferences->UIScale : 1.f;
-    // Fit to viewport first, then apply the chosen size. Clamp avoids overlapping panels at 720p.
+    // Menus keep their scale; the match also reserves space for guidance and growth.
     Scale = FMath::Clamp(Requested * FMath::Min(Canvas->ClipX / 1280.f, Canvas->ClipY / 720.f), .65f, 1.35f);
     auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
     if (!C) return;
@@ -251,14 +288,21 @@ void AWildlightHUD::DrawHUD()
     const FVector2D Mouse = C->MousePosition();
     for (const auto& B : Buttons) if (B.Bounds.IsInside(Mouse) && !B.Tooltip.IsEmpty())
     {
-        TArray<FString> Lines;
-        B.Tooltip.ParseIntoArrayLines(Lines);
-        const float W = FMath::Min(630.f * Scale, Canvas->ClipX - 24.f);
-        const float H = (Lines.Num() * 21.f + 18.f) * Scale;
-        const float X = FMath::Clamp(Mouse.X + 14.f, 12.f, Canvas->ClipX - W - 12.f);
-        const float Y = FMath::Clamp(Mouse.Y - H - 16.f, 12.f, Canvas->ClipY - H - 12.f);
-        Panel(X, Y, W, H, PanelColor);
-        for (int32 I = 0; I < Lines.Num(); ++I) Label(Lines[I].Left(90), X + 10.f * Scale, Y + (9.f + I * 21.f) * Scale, 12.f, Ink);
+        ActionTooltipText = FText::FromString(B.Tooltip);
+        ActionTooltipWidth = FMath::Max(1.f, FMath::Min(630.f, (Canvas->ClipX - 24.f) / Scale));
+        EnsureActionTooltip();
+        if (ActionTooltipContent.IsValid())
+        {
+            // Measure wrapped text before positioning, including the first hover frame.
+            ActionTooltipContent->Invalidate(EInvalidateWidgetReason::Layout);
+            ActionTooltipContent->SlatePrepass(1.f);
+            const auto DesiredSize = ActionTooltipContent->GetDesiredSize();
+            ActionTooltipScale = FMath::Min(Scale, FMath::Max(1.f, Canvas->ClipY - 24.f) / FMath::Max(1.f, static_cast<float>(DesiredSize.Y)));
+            ActionTooltipSize = FVector2D(DesiredSize.X * ActionTooltipScale, DesiredSize.Y * ActionTooltipScale);
+            ActionTooltipPosition = FVector2D(
+                FMath::Clamp(static_cast<float>(Mouse.X) + 14.f, 12.f, Canvas->ClipX - static_cast<float>(ActionTooltipSize.X) - 12.f),
+                FMath::Clamp(static_cast<float>(Mouse.Y) - static_cast<float>(ActionTooltipSize.Y) - 16.f, 12.f, Canvas->ClipY - static_cast<float>(ActionTooltipSize.Y) - 12.f));
+        }
         break;
     }
 }
@@ -359,6 +403,10 @@ void AWildlightHUD::DrawMatch()
 {
     auto* C = Cast<AWildlightPlayerController>(PlayerOwner);
     if (!C->Arena) return;
+    const float MatchLayoutHeight = 620.f;
+    const float MatchLayoutWidth = 960.f;
+    Scale = FMath::Min(Scale, Canvas->ClipY / MatchLayoutHeight);
+    Scale = FMath::Min(Scale, Canvas->ClipX / MatchLayoutWidth);
     const auto& S = C->Arena->Simulation.state();
     const auto& F = S.factions[0];
     Panel(0, 0, Canvas->ClipX, 62.f * Scale, PanelColor);
