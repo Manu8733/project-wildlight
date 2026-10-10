@@ -155,6 +155,36 @@ bool initial_state_and_ids() {
     return true;
 }
 
+bool housing_pressure_grows_after_one_hundred_ticks() {
+    Simulation sim;
+    const Id house_id = place_near_castle(sim, BuildingKind::House);
+    CHECK(house_id);
+    auto& state = const_cast<State&>(sim.state());
+    for (auto& building : state.buildings)
+        if (building.id == house_id) building.progress = 1;
+    // Isolate continuous population demand from AI purchases and worker jobs.
+    state.ai_timer = 1000;
+    for (auto& unit : state.units) {
+        unit.automatic_work = false;
+        unit.stance = Stance::Hold;
+    }
+    const Unit worker = *sim.unit(first_unit(sim, Owner::Player, UnitKind::Worker));
+    for (int i = 0; i < 8; ++i) {
+        Unit resident = worker;
+        resident.id = state.next_id++;
+        state.units.push_back(resident);
+    }
+    advance(sim, 99);
+    CHECK(sim.state().factions[0].population == 21);
+    CHECK(sim.state().factions[0].population_limit == 26);
+    CHECK(sim.state().factions[0].resources.wood >= 129.25);
+    CHECK(sim.state().factions[0].resources.stone >= 56.5);
+    CHECK(sim.building(house_id)->level == 1);
+    advance(sim, 1);
+    CHECK(sim.building(house_id)->level == 2);
+    return true;
+}
+
 bool deterministic_seed_and_commands() {
     Simulation first, second, other_seed;
     first.new_match(1, 12345, AIPersonality::Arcanist, Difficulty::Hard);
@@ -826,6 +856,7 @@ struct Test { const char* name; bool (*run)(); };
 int main() {
     const Test tests[]{
         {"initial state and stable IDs", initial_state_and_ids},
+        {"housing pressure grows after 100 fixed ticks", housing_pressure_grows_after_one_hundred_ticks},
         {"seed and command determinism", deterministic_seed_and_commands},
         {"fixed-step partition and invalid time", fixed_step_partition},
         {"atomic command validation", command_validation_is_atomic},
