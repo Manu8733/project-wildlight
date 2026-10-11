@@ -242,6 +242,14 @@ def _validate_layout(layout):
                 if abs(x - _river_x(river, test_y)) + bank_width / 2 >= span / 2:
                     raise ValueError("Deck must span the complete channel over its entire width")
 
+        if rectangular:
+            reservations = list(decks.values())
+            for index, a in enumerate(reservations):
+                for b in reservations[index + 1:]:
+                    if (abs(a["center_m"][0] - b["center_m"][0]) <= (a["span_m"] + b["span_m"]) / 2 and
+                            abs(a["center_m"][1] - b["center_m"][1]) <= (a["width_m"] + b["width_m"]) / 2):
+                        raise ValueError("Rectangular deck footprints must be disjoint")
+
         graph = {name: set() for name in clearings}
         exits = {name: set() for name in clearings}
         used_decks = set()
@@ -267,6 +275,13 @@ def _validate_layout(layout):
                 if name not in clearings or _route_distance(route, *clearings[name]["center_m"]) > 0.000001:
                     raise ValueError("Every recorded start must meet its route centerline")
                 exits[name].add(category)
+            if rectangular and category == "transverse":
+                centres = [clearings[name]["center_m"] for name in ids]
+                if (centres[0][0] < river_min - bank_width / 2) == (centres[1][0] < river_min - bank_width / 2):
+                    raise ValueError("Rectangular transverse routes must pair starts on opposite river banks")
+                if ([polyline[0], polyline[-1]] != centres and
+                        [polyline[-1], polyline[0]] != centres):
+                    raise ValueError("Rectangular transverse starts must match the terminal route endpoints")
             for a, b in zip(ids, ids[1:]):
                 graph[a].add(b)
                 graph[b].add(a)

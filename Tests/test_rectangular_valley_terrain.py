@@ -119,6 +119,49 @@ class RectangularTerrainTests(unittest.TestCase):
             with self.subTest(key=key, value=value), self.assertRaises(ValueError):
                 self.validate(invalid)
 
+    def test_transverse_routes_cannot_record_same_bank_pairs_with_dangling_bridges(self):
+        invalid = copy.deepcopy(self.layout)
+        invalid["routes"][2].update({
+            "start_ids": ["west-one", "west-two"],
+            "polyline_m": [[250, 250], [590, 190], [690, 300], [800, 300], [910, 300], [1200, 260]],
+        })
+        invalid["routes"][3].update({
+            "start_ids": ["west-three", "east-three"],
+            "polyline_m": [[330, 930], [690, 650], [800, 650], [910, 650], [1370, 970]],
+        })
+        invalid["routes"][4].update({
+            "start_ids": ["east-one", "east-two"],
+            "polyline_m": [[250, 250], [690, 950], [800, 950], [910, 950], [1200, 260], [1070, 750]],
+        })
+        with self.assertRaises(ValueError):
+            self.validate(invalid)
+
+    def test_transverse_recorded_starts_are_the_terminal_endpoints(self):
+        for endpoint in (0, -1):
+            invalid = copy.deepcopy(self.layout)
+            route = invalid["routes"][2]
+            if endpoint == 0:
+                route["polyline_m"].insert(0, [200, 250])
+            else:
+                route["polyline_m"].append([1250, 260])
+            with self.subTest(endpoint=endpoint), self.assertRaises(ValueError):
+                self.validate(invalid)
+        reversed_route = copy.deepcopy(self.layout)
+        reversed_route["routes"][2]["polyline_m"].reverse()
+        self.validate(reversed_route)
+
+    def test_three_reserved_deck_footprints_must_be_disjoint(self):
+        for separation, second_x in ((0, 800), (12, 799.35875), (24, 797.57)):
+            invalid = copy.deepcopy(self.layout)
+            for index, deck in enumerate(invalid["crossings"][:2]):
+                y = 300 + index * separation
+                x = second_x if index else 800
+                deck["center_m"] = [x, y]
+                route = invalid["routes"][index + 2]
+                route["polyline_m"] = [route["polyline_m"][0], [690, y], [x, y], [910, y], route["polyline_m"][-1]]
+            with self.subTest(separation=separation), self.assertRaises(ValueError):
+                self.validate(invalid)
+
     def test_rectangular_export_full_png_r16_orientation_and_exclusive_paths(self):
         output = self.root / "export"
         manifest = terrain.export_terrain(self.layout, output)
