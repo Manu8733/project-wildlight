@@ -43,13 +43,21 @@ Height encoding is `round(32768 + (height_m-actor_z_m)*100*128/z_scale)`. At the
 
 ## Offline Export
 
+Use Python 3.12 and install the tested export dependency from `Tools/requirements-terrain.txt` in an isolated environment **outside the public checkout**. From the checkout root, choose a private work directory and run:
+
+```powershell
+$terrainVenv = '<private-work-directory>/.venv-terrain'
+python -m venv $terrainVenv
+& "$terrainVenv/Scripts/python.exe" -m pip install -r Tools/requirements-terrain.txt
+```
+
+Pure layout loading and sampling use the Python standard library. Export and the complete test suite require the pinned `Pillow==12.3.0`; Pillow is imported only by `export_terrain`. No engine, render or C++ build is required. CI selects Python 3.12 with `actions/setup-python` and installs this requirements file before running all tests. On Linux/macOS, the isolated interpreter is `$terrainVenv/bin/python` instead of `Scripts/python.exe`.
+
 Use an output directory **outside the public checkout**, for example the chat's sibling `outputs/` directory:
 
 ```powershell
-python Tools/author_valley_terrain.py --layout Art/Maps/WoodedValley768.layout.json --output <new-private-directory>
+& "$terrainVenv/Scripts/python.exe" Tools/author_valley_terrain.py --layout Art/Maps/WoodedValley768.layout.json --output <new-private-directory>
 ```
-
-The tool requires no engine, render, C++ build or package installation. Pure layout loading and sampling use the Python standard library. Pillow is imported only by `export_terrain`, and is available in the bundled Codex Python runtime used for this verification.
 
 The documented interfaces are `load_layout(path: Path) -> dict`, `height_metres(layout: dict, x_m: float, y_m: float) -> float`, `encode_height(height_m: float, z_scale: float, actor_z_m: float) -> int`, `decode_height(sample: int, z_scale: float, actor_z_m: float) -> float`, and `export_terrain(layout: dict, output_dir: Path) -> dict`. Pass a validated `load_layout` result to the height sampler; export validates its input again.
 
@@ -64,8 +72,8 @@ The source is deterministic with its recorded Python/Pillow export runtime. Expo
 Focused tests cover height literals, overflow and invalid input; native dimensions; flat/disjoint cores; smooth margins; deterministic samples; irregular raised edges; route connectivity and endpoint exits; equal initial resource anchors; separate permanent decks; continuous river floor; no overwrite/partial invalid export; exact R16 length/order/orientation; PNG IHDR bit depth/dimensions; equality of all PNG and R16 samples; sampled metre round trips and manifest hashes. Run:
 
 ```powershell
-python -m unittest discover -s Tests -p test_valley_terrain.py -v
-python -m unittest discover -s Tests -p 'test_*.py' -v
+& "$terrainVenv/Scripts/python.exe" -m unittest discover -s Tests -p test_valley_terrain.py -v
+& "$terrainVenv/Scripts/python.exe" -m unittest discover -s Tests -p 'test_*.py' -v
 ```
 
 Unreal 5.8.3 must still verify actual Landscape creation/import API or editor workflow, component/extent placement, vertical calibration, orientation and native R16 byte order. Preparation references were the [Landscape technical guide](https://dev.epicgames.com/documentation/en-us/unreal-engine/landscape-technical-guide-in-unreal-engine?application_version=5.6) and [heightmap format documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/importing-and-exporting-landscape-heightmaps-in-unreal-engine?application_version=5.6); their 5.6 reference version is not proof of 5.8.3 compatibility.
