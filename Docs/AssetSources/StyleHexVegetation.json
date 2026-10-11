@@ -1,0 +1,166 @@
+{
+  "title": "StyleHex stylized vegetation continuation checkpoint",
+  "author": "StyleHex Studio",
+  "recorded_on": "2026-10-12",
+  "record_type": "Public metadata only; licensed native binaries remain in the private chat workspace",
+  "sources": [
+    {
+      "title": "FREE Stylized Foliage | Stylized Grass, Flowers & Plants Pack",
+      "fab_listing_id": "b494d1c5-8d02-48c4-9038-54bb8970a26f",
+      "source_url": "https://www.fab.com/listings/b494d1c5-8d02-48c4-9038-54bb8970a26f",
+      "advertised_launcher_download_mb": 8.22,
+      "private_native_source_mount": "/Game/StyleHex_Studio/Free_Packs/FREE_Stylized_Grass_Flowers_Foliage"
+    },
+    {
+      "title": "FREE Stylized Forest Sample | Stylized Trees & Foliage Pack",
+      "fab_listing_id": "3c1a31b6-e523-4a0f-97d0-26b0db69b6bc",
+      "source_url": "https://www.fab.com/listings/3c1a31b6-e523-4a0f-97d0-26b0db69b6bc",
+      "advertised_launcher_download_mb": 72.54,
+      "private_native_source_mount": "/Game/StyleHex_Studio/Free_Packs/FREE_Stylized_Forest_Sample"
+    }
+  ],
+  "license": "Fab Standard License",
+  "acquisition": "Both free listings were added to the authenticated account library; native Launcher downloads were bounded and no paid purchase was made",
+  "listing_allows_usage_with_ai": false,
+  "is_ai_forbidden_from_listing": true,
+  "public_binary_redistribution_approved": false,
+  "ai_generation_upload_approved": false,
+  "new_meshy_credits_spent": 0,
+  "native_engine": "5.8.3",
+  "native_map": "/Game/Wildlight/Maps/WoodedValley1600x1200",
+  "private_native_destination": "/Game/Wildlight/Owned/StyleHexAdapted",
+  "forest_acquisition_recovery": {
+    "launcher_copy_error": "IV-0002",
+    "method": "Copy only missing packages from the owned downloaded forest cache while preserving existing shared dependencies",
+    "missing_files_copied": 76,
+    "missing_files_bytes": 79589956,
+    "all_files_sha256_compared": 91,
+    "all_91_cache_project_hashes_identical": true,
+    "existing_project_files_unchanged": true,
+    "raw_cache_published": false
+  },
+  "modifications": [
+    "Preserved original native meshes, UVs, material dependencies and supplied LODs rather than replacing them with palette-only FBX imports",
+    "Added private native foliage types and original-scale variants; tree placement uses a deterministic source planner and protects authored clearings, routes, water and crossing reservations",
+    "Used NoCollision for decorative foliage; this does not implement harvestable tree blockers or prove whole-map navigation",
+    "Enabled native foliage WPO and restored the shared MPC wind defaults after controlled diagnostic captures",
+    "Saved and reloaded the same persistent map, then loaded World Partition actors for complete count readbacks",
+    "No asset upload to Meshy or another AI-generation service; no licensed binary public upload"
+  ],
+  "native_tree_variants": [
+    {
+      "mesh": "SM_Tree_Birch_1",
+      "publisher_type": "Birch",
+      "saved_reload_instances": 435,
+      "native_lod_triangles": [2712, 2175, 1529, 958]
+    },
+    {
+      "mesh": "SM_Tree_Birch_2",
+      "publisher_type": "Birch",
+      "saved_reload_instances": 436,
+      "native_lod_triangles": [2602, 2218, 1670, 1190]
+    },
+    {
+      "mesh": "SM_Tree_Broadleaf_1",
+      "publisher_type": "Broadleaf; exact species unspecified",
+      "saved_reload_instances": 448,
+      "native_lod_triangles": [2438, 1943, 1490, 987]
+    },
+    {
+      "mesh": "SM_Tree_Broadleaf_2",
+      "publisher_type": "Broadleaf; exact species unspecified",
+      "saved_reload_instances": 445,
+      "native_lod_triangles": [1806, 1466, 1045, 735]
+    }
+  ],
+  "tree_instance_count": 1764,
+  "tree_scale_range": [0.8, 1.2],
+  "publisher_tree_type_count": 2,
+  "three_distinct_species_requirement_complete": false,
+  "groundcover": {
+    "saved_reload_instances": 64984,
+    "native_foliage_types": 23,
+    "preserved_sample_instances": 4984,
+    "preserved_sample_bounds_m": [394, 328, 460, 392],
+    "added_instances": 60000,
+    "added_patch_count": 150,
+    "added_category_counts": {"grass": 50704, "flowers": 8450, "shrubs_and_plants": 846},
+    "added_sector_counts_row_major": [14722, 8880, 10741, 9780, 6699, 9178],
+    "added_cull_range_m": [150, 210],
+    "added_wpo_cutoff_m": 120,
+    "added_density_scalable": true,
+    "full_map_groundcover_complete": false
+  },
+  "added_decorative_rocks": {"instances": 600, "native_variants": 4, "harvestable_mineral_nodes": false},
+  "dependency_recovery_on_reopen": {
+    "source": "Already-owned downloaded forest cache",
+    "missing_only_no_overwrite": true,
+    "source_destination_sha256_identical": true,
+    "packages": ["MPC_Wind_Global_STARTER", "T_Flower_Atlas_Color_Mask"],
+    "bytes": [2460, 5585],
+    "older_archive_omitted_these_dependencies": true,
+    "older_archive_preserved_unchanged": true,
+    "restarted_exact_private_project_and_inspected_colored_capture": true
+  },
+  "saved_reload_readback": {
+    "saved_same_map_reloaded": true,
+    "landscape_components": 64,
+    "loaded_foliage_descriptors": 35,
+    "stylehex_foliage_types": 31,
+    "distinct_stylehex_meshes": 23,
+    "decorative_collision_profile": "NoCollision",
+    "wpo_enabled": true,
+    "river_surface_m": 5.5,
+    "river_spline_points": 121,
+    "wind_defaults_restored": true
+  },
+  "wind_visual_validation": {
+    "status": "PARTIAL_NEAR_VIEW_TREE_REGION",
+    "controlled_comparisons": 4,
+    "historical_failed_comparisons": 3,
+    "fourth_tree_crop_passed": true,
+    "fourth_groundcover_crop_passed": false,
+    "reason": "After dependency repair tree crop changes exceed 3x repeated disabled-WPO baseline, but groundcover does not; no all-LOD or whole-map wind acceptance",
+    "historical_failure_evidence_preserved": true,
+    "diagnostic_paths": [
+      "outputs/StyleHex-wind-image-verification-2026-10-11.json",
+      "outputs/StyleHex-wind-image-verification-2026-10-11-v2.json",
+      "outputs/StyleHex-wind-image-verification-2026-10-11-v3.json",
+      "outputs/StyleHex-wind-image-verification-2026-10-11-v4.json"
+    ]
+  },
+  "private_evidence": [
+    "outputs/StyleHex-native-inventory-2026-10-11.json",
+    "outputs/StyleHex-groundcover-native-2026-10-11.json",
+    "outputs/StyleHex-forest-plan-2026-10-11.json",
+    "outputs/StyleHex-forest-native-2026-10-11.json",
+    "outputs/StyleHex-saved-native-facts-2026-10-11.json",
+    "outputs/Wildlight-stylized-forest-unreal-2026-10-11-v2.png",
+    "outputs/Wildlight-stylized-rts-unreal-2026-10-11.png",
+    "outputs/Wildlight-full-map-native-facts-2026-10-12-v2.json",
+    "outputs/Wildlight-full-map-patch-unreal-2026-10-12-v2.png",
+    "outputs/Wildlight-environment-blueprint-PIE-2026-10-12.json",
+    "outputs/Wildlight-population-height-verification-2026-10-12.json"
+  ],
+  "private_checkpoint": {
+    "path": "outputs/Wildlight-map-population-UE5.8.3-2026-10-12.zip",
+    "bytes": 479298999,
+    "sha256": "8d4168ff060ea89819c3baa51d3ceb96cb6264c6bf59addf4a2288f15eb89af9",
+    "file_members": 413,
+    "crc_verified": true,
+    "all_member_sha256_verified": true,
+    "sources_unchanged": true,
+    "historical_archives_unchanged": true,
+    "restored_extracted_editor_open_verified": false,
+    "contains_licensed_private_binaries": true,
+    "public_upload_approved": false
+  },
+  "verification_scope": "Private native population counts, original source planner tests, bounded native cosmetic Blueprint PIE, limited tree motion and archive integrity; no complete gameplay or final art acceptance",
+  "native_wind_pixel_validation_passed": false,
+  "harvest_bindings_implemented": false,
+  "whole_map_navigation_verified": false,
+  "full_environment_complete": false,
+  "performance_measured": false,
+  "final_visual_acceptance": false,
+  "requirement_acceptance_changed": false
+}
