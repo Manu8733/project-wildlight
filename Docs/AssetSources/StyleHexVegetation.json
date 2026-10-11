@@ -118,6 +118,30 @@
     "post_grass_editor_restart_verified": false,
     "private_checkpoint": {"path": "outputs/Wildlight-blade-grass-UE5.8.3-2026-10-12.zip", "bytes": 499794424, "sha256": "f8d0425a7cdbcf0de561d0db6d48c9921502e83ccb1c51eaf128b0eb241f39ed", "file_members": 437, "crc_all_member_hashes_verified": true, "restored_editor_open_verified": false}
   },
+  "environment_refinement": {
+    "ground_material": "/Game/Wildlight/Terrain/M_ValleyGroundFernwake",
+    "grass_type": "/Game/Wildlight/Terrain/LG_ValleyBladeGrassFernwake",
+    "blade_material": "/Game/Wildlight/Terrain/MI_ValleyBladeGrassFernwake",
+    "leaf_materials": ["MI_ValleyBirchLeavesFernwake", "MI_ValleyBroadleafLeavesFernwake"],
+    "original_native_assets_preserved": true,
+    "original_public_surface_shader": "Tools/author_valley_surface.py",
+    "exact_density_mask_preserved": true,
+    "tree_instances_preserved": 1764,
+    "tree_types": 2,
+    "tree_cull_start_end_m": [1500, 2300],
+    "tree_source_lods_retained": true,
+    "tree_wpo_cutoff_m_unchanged": 250,
+    "blade_wind_changed_pixels": {"disabled_wpo_repeat": 2781, "live": 56575, "passes_required_ratio": true},
+    "native_height_samples_unchanged": 1018081,
+    "central_wide_progress_capture": "outputs/Wildlight-polish-midmap-unreal-2026-10-12-v2.png",
+    "central_close_progress_capture": "outputs/Wildlight-polish-central-grove-unreal-2026-10-12.png",
+    "editor_profile": {"frames": 120, "median_frame_ms": 36.4435, "median_gpu_ms": 21.8364, "screen_percentage": 70, "fps_cap": 30, "release_acceptance": false},
+    "whole_map_population_complete": false,
+    "natural_route_art_complete": false,
+    "post_polish_editor_restart_verified": false,
+    "private_checkpoint": {"path": "outputs/Wildlight-environment-polish-UE5.8.3-2026-10-12.zip", "bytes": 522743593, "sha256": "c10693b91d92a909482b50ed8dbf6b8a9391fdf69c71b942860e53bfad944a85", "file_members": 471, "crc_all_member_hashes_verified": true, "sources_unchanged_during_packaging": true, "historical_archives_unchanged": true, "restored_editor_open_verified": false},
+    "final_visual_acceptance": false
+  },
   "dependency_recovery_on_reopen": {
     "source": "Already-owned downloaded forest cache",
     "missing_only_no_overwrite": true,
@@ -187,6 +211,7 @@
   "whole_map_navigation_verified": false,
   "full_environment_complete": false,
   "performance_measured": false,
+  "bounded_editor_profile_recorded": true,
   "final_visual_acceptance": false,
   "requirement_acceptance_changed": false
 }
