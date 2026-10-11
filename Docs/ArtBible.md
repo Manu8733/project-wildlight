@@ -1,6 +1,6 @@
 # Wildlight art direction
 
-Working style: **Fernwake kingdom**. An original forest civilization binds pale stone and bent timber around living light lenses. Buildings look built and inhabited: foundation, joinery, doorway, roof, functional props and one strong identifying feature. The user requests the cozy feel of Tiny Glade with an added magical atmosphere: rounded welcoming buildings, soft warm daylight, rich vegetation, evening fireflies, subtle mist and luminous threads. This is a feeling reference only; geometry, textures, compositions and interface remain Wildlight's own. The goal is an authored RTS scene, with a repeatable visual language and enough selective detail to reward closer inspection.
+Working style: **Fernwake kingdom**. An original forest civilization binds pale stone and bent timber around living light lenses. Buildings look built and inhabited: foundation, joinery, doorway, roof, functional props and one strong identifying feature. The user's latest direction is an anime fairy-tale atmosphere with the cozy feel of Tiny Glade: rounded welcoming forms, soft warm daylight, rich vegetation, evening fireflies, subtle mist and luminous threads. This applies to the entire scene, including terrain, water, rocks, deposits, vegetation, structures and effects. This is a feeling reference only; geometry, textures, compositions and interface remain Wildlight's own. The goal is an authored RTS scene, with a repeatable visual language and enough selective detail to reward closer inspection.
 
 This is a style specification. The current original kit and its honest acceptance state are documented in [Art/ART_BIBLE.md](../Art/ART_BIBLE.md), [asset review](../Art/ASSET_REVIEW.md) and [provenance](../Art/LICENSES.md). Those procedural prototypes are not final game art. Blender showcase renders are labeled as art previews.
 
@@ -30,6 +30,8 @@ Avoid identical roof profiles on every building, random spikes, excessive glowin
 
 Material breakup is purpose-driven: broad roughness changes for stone, restrained longitudinal marks for timber, a seam in roof panels and hand-painted-looking value variation derived from explicit masks. There is no noisy photographic detail or all-over emissive surface. Base color and roughness must look correct without bloom. Light lenses have a contained bright center and a darker supporting frame.
 
+Owned photorealistic Epic/Fab assets are source material, not an exception to this direction. Preserve usable medium-or-higher silhouette detail, UVs, material dependencies and wind data, then adapt shape, broad color/value grouping, normal strength and roughness to the coherent fairy-tale scene. Avoid both untouched photographic noise and a flat recolor presented as finished art. Review the rendered result at close and RTS distances before accepting it. Any adaptation must respect the asset's license and NoAI restrictions.
+
 These values match the latest original generator palette. The generated manifest retains actual palette values; material conversion and the in-engine lit result still require review. Geometry convergence to the cozy style is a tracked art task, not inferred from palette alone.
 
 ## Readability at RTS scale
@@ -41,6 +43,10 @@ View a 1280×720 capture at 100%: select 20 infantry beside two buildings and tw
 ## Environment and day/night
 
 Use clustered canopies with clear trunks and navigable ground gaps. Three foliage density bands frame the map; important crossings and depot exits stay open. A river is a broad legible navigation barrier, with legal bridge anchors visibly marked by carved stone and dormant lenses. Ruins reuse the kingdom's original material grammar in broken, overgrown forms.
+
+The approved map is a 1600 by 1200 m rectangle with six irregular authored starts. Stronghold Crusader is a reference for the organization of playable relief only: broad buildable plains, grouped rises rather than noisy hills everywhere, clear crossings and open approaches. Do not copy its map layouts or visual treatment. Mountains, banks and rock clusters still use Wildlight's soft, refined anime fairy-tale shape/material language; the reference does not authorize rescaling props or moving approved starts without review.
+
+Authored roads help read the landscape but do not restrict NPC movement. Navigation must cover all practicable terrain. Decorative foliage and small rocks should not create accidental blockers; real cliffs, water and structures have deliberate navigation boundaries, with crossings validated in the native scene. An attractive road network is not proof of functioning pathfinding.
 
 Daytime is cool green ambient light with warm directional highlights. Night preserves building and troop contrast through restrained cool fill; beacon light is a readable tactical landmark. Exposure must not wash out the HUD or change army ownership cues. Fireflies occupy limited low-contrast pockets outside battle lanes. Weather and fog never hide command targets merely for atmosphere.
 

@@ -115,6 +115,35 @@ def _validate_rectangular_approaches(route, deck, channel_min, channel_max):
     return steps
 
 
+def _validate_cluster_relief(mountains, extent, clearings, routes, decks, river):
+    clusters = _unique(mountains["clusters"], "relief clusters", 10)
+    river_min = min(point[0] for point in river["centerline_m"]) - river["bank_width_m"] / 2
+    river_max = max(point[0] for point in river["centerline_m"]) + river["bank_width_m"] / 2
+    for cluster in clusters.values():
+        x, y = _coordinate(cluster["center_m"], "cluster center", extent)
+        rx, ry = _pair(cluster["radii_m"], "cluster radii", 30, 250)
+        _number(cluster["height_m"], "cluster height", 1, 70)
+        if not (x + rx < river_min or x - rx > river_max):
+            raise ValueError("Relief clusters must not change the continuous river or banks")
+        # A world-space clearance becomes at most clearance/min_radius after scaling.
+        for clearing in clearings.values():
+            clearance = clearing["radius_m"] + clearing["blend_margin_m"]
+            if math.hypot((x - clearing["center_m"][0]) / rx,
+                          (y - clearing["center_m"][1]) / ry) <= 1 + clearance / min(rx, ry):
+                raise ValueError("Relief clusters must stay outside clearing cores and margins")
+        for route in routes.values():
+            clearance = route["width_m"] / 2 + route["blend_margin_m"]
+            points = [((p[0] - x) / rx, (p[1] - y) / ry)
+                      for p in route["polyline_m"]]
+            if any(_segment_distance(0, 0, a, b) <= 1 + clearance / min(rx, ry)
+                   for a, b in zip(points, points[1:])):
+                raise ValueError("Relief clusters must stay outside complete route corridors")
+        for deck in decks.values():
+            if (abs(x - deck["center_m"][0]) <= rx + deck["span_m"] / 2 and
+                    abs(y - deck["center_m"][1]) <= ry + deck["width_m"] / 2):
+                raise ValueError("Relief clusters must stay outside reserved deck footprints")
+
+
 def _validate_layout(layout):
     try:
         if not isinstance(layout, dict) or len(_canonical(layout)) > MAX_LAYOUT_BYTES:
@@ -315,6 +344,10 @@ def _validate_layout(layout):
                 pending.extend(graph[name] - visited)
         if visited != set(clearings):
             raise ValueError("All six starts must be connected")
+        if "clusters" in mountains:
+            if not rectangular:
+                raise ValueError("Cluster relief is only supported by the rectangular profile")
+            _validate_cluster_relief(mountains, extent, clearings, routes, decks, river)
     except (KeyError, TypeError, OverflowError, RecursionError) as error:
         raise ValueError("Malformed or unsupported valley layout") from error
 
@@ -351,13 +384,21 @@ def height_metres(layout: dict, x_m: float, y_m: float) -> float:
     valley, mountain, river = settings["valley"], settings["mountains"], settings["river"]
     height = (valley["height_m"] + valley["undulation_m"] * math.sin(x / 80) * math.sin(y / 96) +
               valley["side_rise_m"] * ((x - extent_x / 2) / (extent_x / 2)) ** 2)
-    ridges = []
-    for distance, along, phase in ((x, y, 0.4), (extent_x - x, y, 1.7), (y, x, 2.5), (extent_y - y, x, 3.8)):
-        width = mountain["ridge_width_m"] * (0.86 + 0.14 * math.sin(along / 97 + phase))
-        taper = _smooth(1 - distance / width)
-        profile = 0.78 + 0.14 * math.sin(along / 62 + phase) + 0.08 * math.cos(along / 31 - phase)
-        ridges.append(taper * taper * profile)
-    height += mountain["peak_height_m"] * math.sqrt(sum(ridge * ridge for ridge in ridges))
+    if "clusters" in mountain:
+        relief = []
+        for cluster in mountain["clusters"]:
+            radius = math.hypot((x - cluster["center_m"][0]) / cluster["radii_m"][0],
+                                (y - cluster["center_m"][1]) / cluster["radii_m"][1])
+            relief.append(cluster["height_m"] * _smooth(1 - radius))
+        height += max(relief)
+    else:
+        ridges = []
+        for distance, along, phase in ((x, y, 0.4), (extent_x - x, y, 1.7), (y, x, 2.5), (extent_y - y, x, 3.8)):
+            width = mountain["ridge_width_m"] * (0.86 + 0.14 * math.sin(along / 97 + phase))
+            taper = _smooth(1 - distance / width)
+            profile = 0.78 + 0.14 * math.sin(along / 62 + phase) + 0.08 * math.cos(along / 31 - phase)
+            ridges.append(taper * taper * profile)
+        height += mountain["peak_height_m"] * math.sqrt(sum(ridge * ridge for ridge in ridges))
 
     for clearing in layout["clearings"]:
         distance = math.hypot(x - clearing["center_m"][0], y - clearing["center_m"][1])

@@ -37,8 +37,8 @@ class RectangularTerrainTests(unittest.TestCase):
         for axis, extent_cm in enumerate((160000, 120000)):
             self.assertAlmostEqual(native["xy_scale_cm"][axis] * 1008, extent_cm, places=6)
         self.assertNotEqual(native["xy_scale_cm"][0], native["xy_scale_cm"][1])
-        self.assertGreater(terrain.height_metres(self.layout, 1600, 600), 60)
-        self.assertGreater(terrain.height_metres(self.layout, 300, 1200), 60)
+        self.assertGreater(terrain.height_metres(self.layout, 1570, 620), 60)
+        self.assertGreater(terrain.height_metres(self.layout, 510, 1170), 40)
         for x, y in ((1600.01, 600), (600, 1200.01), (-1, 0)):
             with self.assertRaises(ValueError):
                 terrain.height_metres(self.layout, x, y)
@@ -87,7 +87,8 @@ class RectangularTerrainTests(unittest.TestCase):
         for deck in self.layout["crossings"]:
             self.assertIs(deck["permanent"], True)
             self.assertIs(deck["terrain_fill"], False)
-            self.assertLess(terrain.height_metres(self.layout, *deck["center_m"]), 0)
+            self.assertLess(terrain.height_metres(self.layout, *deck["center_m"]),
+                            self.layout["terrain"]["river"]["water_surface_m"])
 
     def test_off_deck_channel_bends_and_route_width_are_rejected(self):
         for mutation in ("off-deck", "diagonal", "double-crossing", "bank-edge", "wide", "disconnected"):

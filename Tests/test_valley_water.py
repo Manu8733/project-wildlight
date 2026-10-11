@@ -27,12 +27,12 @@ class ValleyWaterTests(unittest.TestCase):
         samples = water.sample_river(self.layout, step_m=73)
         rows = [sample["center_m"][1] for sample in samples]
         self.assertEqual(rows, sorted(set(rows)))
-        self.assertEqual(samples[0]["center_m"], [800, 0, 0])
-        self.assertEqual(samples[-1]["center_m"], [800, 1200, 0])
+        self.assertEqual(samples[0]["center_m"], [800, 0, 5.5])
+        self.assertEqual(samples[-1]["center_m"], [800, 1200, 5.5])
         self.assertTrue(set(range(0, 1201, 73)).issubset(rows))
         centers = {sample["center_m"][1]: sample["center_m"] for sample in samples}
         for x, y in self.layout["terrain"]["river"]["centerline_m"]:
-            self.assertEqual(centers[y], [x, y, 0])
+            self.assertEqual(centers[y], [x, y, 5.5])
 
     def test_centerline_retains_smoothstep_bends_instead_of_linear_chords(self):
         centers = {sample["center_m"][1]: sample["center_m"][0]
@@ -74,7 +74,7 @@ class ValleyWaterTests(unittest.TestCase):
                 self.assertLess(sample["width_m"], river["bank_width_m"])
                 self.assertAlmostEqual(sample["width_m"], right[0] - left[0], places=10)
                 self.assertGreater(sample["depth_m"], 0)
-                self.assertAlmostEqual(sample["depth_m"], 4 - 0.001 * center[1], places=10)
+                self.assertAlmostEqual(sample["depth_m"], 3 - 0.001 * center[1], places=10)
                 self.assertAlmostEqual(sample["depth_m"], center[2] - terrain.height_metres(
                     self.layout, center[0], center[1]), places=10)
 
@@ -107,26 +107,26 @@ class ValleyWaterTests(unittest.TestCase):
         first[0]["center_m"][0] = -1
         first[0]["left_m"][0] = -2
         self.assertEqual(self.layout, original)
-        self.assertEqual(water.sample_river(self.layout, step_m=17.25)[0]["center_m"], [800, 0, 0])
+        self.assertEqual(water.sample_river(self.layout, step_m=17.25)[0]["center_m"], [800, 0, 5.5])
 
     def test_channel_continues_away_from_routes_and_under_separate_decks(self):
         samples = {sample["center_m"][1]: sample for sample in water.sample_river(self.layout)}
-        self.assertEqual(samples[80]["center_m"], [820, 80, 0])
+        self.assertEqual(samples[80]["center_m"], [820, 80, 5.5])
         for y in (300, 650, 950):
-            self.assertEqual(samples[y]["center_m"], [800, y, 0])
+            self.assertEqual(samples[y]["center_m"], [800, y, 5.5])
             self.assertGreater(samples[y]["depth_m"], 0)
-            self.assertLess(terrain.height_metres(self.layout, 800, y), 0)
+            self.assertLess(terrain.height_metres(self.layout, 800, y), 5.5)
 
     def test_validated_declared_water_level_sets_points_and_depth(self):
-        self.layout["terrain"]["river"]["water_surface_m"] = 1
+        self.layout["terrain"]["river"]["water_surface_m"] = 6.5
         for sample in water.sample_river(self.layout, step_m=100):
             x, y, z = sample["center_m"]
-            self.assertEqual(z, 1)
-            self.assertAlmostEqual(sample["depth_m"], 5 - 0.001 * y, places=10)
+            self.assertEqual(z, 6.5)
+            self.assertAlmostEqual(sample["depth_m"], 4 - 0.001 * y, places=10)
             for key in ("left_m", "right_m"):
-                self.assertEqual(sample[key][2], 1)
+                self.assertEqual(sample[key][2], 6.5)
                 self.assertAlmostEqual(terrain.height_metres(self.layout, *sample[key][:2]),
-                                       1, delta=0.000001)
+                                       6.5, delta=0.000001)
 
     def test_invalid_steps_are_rejected(self):
         for step in (None, True, False, 0, -1, float("nan"), float("inf"), float("-inf"),
@@ -160,7 +160,7 @@ class ValleyWaterTests(unittest.TestCase):
             elif mutation == "nonfinite":
                 river["bed_height_m"] = float("nan")
             else:
-                river["bed_height_m"] = 0
+                river["bed_height_m"] = river["water_surface_m"]
             invalid.append(edited)
         for index, layout in enumerate(invalid):
             with self.subTest(index=index), self.assertRaises(ValueError):

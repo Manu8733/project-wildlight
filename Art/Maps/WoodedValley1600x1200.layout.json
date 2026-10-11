@@ -17,15 +17,30 @@
     "actor_z_m": 0
   },
   "terrain": {
-    "valley": {"height_m": 8, "undulation_m": 0.75, "side_rise_m": 2.5},
-    "mountains": {"ridge_width_m": 130, "peak_height_m": 120},
+    "valley": {"height_m": 8, "undulation_m": 0.35, "side_rise_m": 0.5},
+    "mountains": {
+      "ridge_width_m": 130,
+      "peak_height_m": 120,
+      "clusters": [
+        {"id": "northwest-massif", "center_m": [30, 30], "radii_m": [160, 145], "height_m": 42},
+        {"id": "west-mid-massif", "center_m": [35, 550], "radii_m": [110, 210], "height_m": 58},
+        {"id": "southwest-massif", "center_m": [40, 1120], "radii_m": [170, 170], "height_m": 49},
+        {"id": "southwest-ridge", "center_m": [510, 1170], "radii_m": [200, 80], "height_m": 37},
+        {"id": "northeast-massif", "center_m": [1115, 15], "radii_m": [180, 100], "height_m": 60},
+        {"id": "east-north-massif", "center_m": [1560, 150], "radii_m": [110, 160], "height_m": 52},
+        {"id": "east-mid-massif", "center_m": [1570, 620], "radii_m": [100, 180], "height_m": 62},
+        {"id": "south-east-ridge", "center_m": [1150, 1170], "radii_m": [170, 75], "height_m": 45},
+        {"id": "west-meadow-hill", "center_m": [270, 570], "radii_m": [105, 100], "height_m": 10},
+        {"id": "east-meadow-hill", "center_m": [1330, 600], "radii_m": [105, 90], "height_m": 12}
+      ]
+    },
     "river": {
       "centerline_m": [[800, 0], [840, 160], [800, 300], [760, 460], [800, 650], [835, 800], [800, 950], [765, 1080], [800, 1200]],
       "bed_width_m": 32,
       "bank_width_m": 70,
-      "bed_height_m": -4,
+      "bed_height_m": 2.5,
       "downstream_rise_per_m": 0.001,
-      "water_surface_m": 0,
+      "water_surface_m": 5.5,
       "cross_section_axis": "X at fixed Y; smoothstep centerline interpolation"
     }
   },
