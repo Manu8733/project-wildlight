@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "name": "WoodedValley768",
+  "authorship": "Original explicit analytic blockout; no random generation or third-party assets",
+  "status": "Editable blockout proposal; native validation and balance pending",
+  "engine_target": "5.8.3",
+  "extent_m": [768, 768],
+  "origin_m": [0, 0],
+  "logical_cell_m": 2,
+  "landscape": {
+    "samples": [505, 505],
+    "quads_per_section": 63,
+    "sections_per_component": 1,
+    "components": [8, 8],
+    "xy_scale_cm": 152.38095238095238,
+    "z_scale": 100,
+    "actor_z_m": 0
+  },
+  "terrain": {
+    "valley": {"height_m": 8, "undulation_m": 0.75, "side_rise_m": 2.5},
+    "mountains": {"ridge_width_m": 110, "peak_height_m": 120},
+    "river": {
+      "centerline_m": [[384, 0], [407, 96], [384, 144], [360, 256], [384, 384], [410, 496], [384, 624], [364, 720], [384, 768]],
+      "bed_width_m": 24,
+      "bank_width_m": 52,
+      "bed_height_m": -4,
+      "downstream_rise_per_m": 0.002,
+      "water_surface_m": 0,
+      "cross_section_axis": "X at fixed Y; smoothstep centerline interpolation"
+    }
+  },
+  "clearings": [
+    {"id": "west-south", "center_m": [144, 144], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-south", "center_m": [624, 144], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "west-middle", "center_m": [144, 384], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-middle", "center_m": [624, 384], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "west-north", "center_m": [144, 624], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-north", "center_m": [624, 624], "radius_m": 60, "blend_margin_m": 16, "flat_height_m": 8, "resource_template_id": "initial-equal"}
+  ],
+  "routes": [
+    {"id": "west-bank", "polyline_m": [[144, 144], [144, 384], [144, 624]], "width_m": 20, "blend_margin_m": 8, "height_m": 8, "start_ids": ["west-south", "west-middle", "west-north"]},
+    {"id": "east-bank", "polyline_m": [[624, 144], [624, 384], [624, 624]], "width_m": 20, "blend_margin_m": 8, "height_m": 8, "start_ids": ["east-south", "east-middle", "east-north"]},
+    {"id": "south-transverse", "polyline_m": [[144, 144], [624, 144]], "width_m": 20, "blend_margin_m": 8, "height_m": 8, "start_ids": ["west-south", "east-south"], "crossing_id": "south-deck"},
+    {"id": "middle-transverse", "polyline_m": [[144, 384], [624, 384]], "width_m": 20, "blend_margin_m": 8, "height_m": 8, "start_ids": ["west-middle", "east-middle"], "crossing_id": "middle-deck"},
+    {"id": "north-transverse", "polyline_m": [[144, 624], [624, 624]], "width_m": 20, "blend_margin_m": 8, "height_m": 8, "start_ids": ["west-north", "east-north"], "crossing_id": "north-deck"}
+  ],
+  "crossings": [
+    {"id": "south-deck", "center_m": [384, 144], "span_m": 72, "width_m": 20, "deck_height_m": 8, "permanent": true, "terrain_fill": false},
+    {"id": "middle-deck", "center_m": [384, 384], "span_m": 72, "width_m": 20, "deck_height_m": 8, "permanent": true, "terrain_fill": false},
+    {"id": "north-deck", "center_m": [384, 624], "span_m": 72, "width_m": 20, "deck_height_m": 8, "permanent": true, "terrain_fill": false}
+  ],
+  "resource_templates": {
+    "initial-equal": [
+      {"kind": "Wood", "offset_m": [-35, -25], "initial_quantity": 1800},
+      {"kind": "Stone", "offset_m": [-32, 28], "initial_quantity": 1800},
+      {"kind": "Gold", "offset_m": [28, -32], "initial_quantity": 1800}
+    ]
+  },
+  "source_footprints": {
+    "castle_m": [8, 8],
+    "farm_m": [6, 6],
+    "source": "Core/src/Simulation.cpp building_catalog: Castle 4x4 and Farm 3x3 cells at 2 metres per cell",
+    "unit_physical_radii": "Not established; do not infer from gameplay ranges"
+  }
+}
