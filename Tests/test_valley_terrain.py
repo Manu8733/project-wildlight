@@ -140,6 +140,44 @@ class TerrainTests(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises(ValueError):
                 terrain.load_layout(self.write_layout(invalid))
 
+    def test_edited_transverse_route_cannot_cross_river_outside_its_deck(self):
+        invalid = copy.deepcopy(self.layout)
+        invalid["routes"][2]["polyline_m"] = [[144, 144], [300, 200], [500, 200], [384, 144], [624, 144]]
+        with self.assertRaises(ValueError):
+            terrain.load_layout(self.write_layout(invalid))
+        output = self.root / "unbridged"
+        with self.assertRaises(ValueError):
+            terrain.export_terrain(invalid, output)
+        self.assertFalse(output.exists())
+
+    def test_landscape_topology_counts_must_be_integers_before_export(self):
+        for key, value in (("samples", [505.0, 505]), ("samples", [505, 505.0]),
+                           ("components", [8.0, 8]), ("components", [8, 8.0]),
+                           ("quads_per_section", 63.0), ("sections_per_component", 1.0),
+                           ("samples", [True, 505]), ("sections_per_component", True)):
+            invalid = copy.deepcopy(self.layout)
+            invalid["landscape"][key] = value
+            with self.subTest(key=key, value=value):
+                with self.assertRaises(ValueError):
+                    terrain.load_layout(self.write_layout(invalid))
+                output = self.root / "float-count"
+                with self.assertRaises(ValueError):
+                    terrain.export_terrain(invalid, output)
+                self.assertFalse(output.exists())
+
+    def test_entire_transverse_channel_must_fit_deck_span(self):
+        invalid = copy.deepcopy(self.layout)
+        invalid["terrain"]["river"]["centerline_m"][2:2] = [[384, 134], [430, 140]]
+        with self.assertRaises(ValueError):
+            terrain.load_layout(self.write_layout(invalid))
+
+    def test_straight_subdivided_transverse_route_remains_editable(self):
+        edited = copy.deepcopy(self.layout)
+        edited["routes"][2]["polyline_m"] = [[144, 144], [300, 144], [384, 144], [500, 144], [624, 144]]
+        validated = terrain.load_layout(self.write_layout(edited))
+        self.assertLess(terrain.height_metres(validated, 384, 144), 0)
+        self.assertEqual(terrain.height_metres(validated, 300, 144), 8)
+
     def test_deterministic_samples_flat_clearings_and_raised_irregular_edges(self):
         another = terrain.load_layout(LAYOUT)
         for x, y in ((0, 0), (768, 768), (100, 400), (340, 220)):

@@ -93,6 +93,9 @@ def _validate_layout(layout):
             raise ValueError("Logical transform requires origin zero and 2 metre cells")
         _number(layout["logical_cell_m"], "logical cell", 2, 2)
         native = layout["landscape"]
+        counts = native["samples"] + native["components"] + [native["quads_per_section"], native["sections_per_component"]]
+        if any(isinstance(count, bool) or not isinstance(count, int) for count in counts):
+            raise ValueError("Landscape samples, components, quads and section counts must be integers")
         if (native["samples"] != [505, 505] or native["components"] != [8, 8] or
                 native["quads_per_section"] != 63 or native["sections_per_component"] != 1):
             raise ValueError("Native Landscape requires 505 samples, 63 quads, 1 section, 8 components")
@@ -184,9 +187,12 @@ def _validate_layout(layout):
                 raise ValueError("Crossings must be permanent separate decks, never terrain fill")
             if abs(x - _river_x(river, y)) > 0.000001 or y < width / 2 or y > 768 - width / 2:
                 raise ValueError("Deck must be centered over the river within the extent")
-            for test_y in (y - width / 2, y, y + width / 2):
+            # Smoothstep segments are monotone, so endpoints and interior control points bound the whole channel.
+            test_rows = [y - width / 2, y, y + width / 2]
+            test_rows.extend(point[1] for point in points if y - width / 2 < point[1] < y + width / 2)
+            for test_y in test_rows:
                 if abs(x - _river_x(river, test_y)) + bank_width / 2 >= span / 2:
-                    raise ValueError("Deck must span the complete channel at both edges")
+                    raise ValueError("Deck must span the complete channel over its entire width")
 
         graph = {name: set() for name in clearings}
         exits = {name: set() for name in clearings}
@@ -221,6 +227,11 @@ def _validate_layout(layout):
                     raise ValueError("Each transverse route must use its own matching deck")
                 if deck["width_m"] != width or deck["deck_height_m"] != route["height_m"]:
                     raise ValueError("Deck must match route width and elevation")
+                if any(point[1] != deck["center_m"][1] for point in polyline):
+                    raise ValueError("Transverse routes must stay straight along their reserved deck axis")
+                steps = [b[0] - a[0] for a, b in zip(polyline, polyline[1:])]
+                if not (all(step > 0 for step in steps) or all(step < 0 for step in steps)):
+                    raise ValueError("Transverse routes must cross their deck without doubling back")
                 used_decks.add(deck_id)
             elif not (all(p[0] < river_min - bank_width / 2 for p in polyline) or
                       all(p[0] > river_max + bank_width / 2 for p in polyline)):
