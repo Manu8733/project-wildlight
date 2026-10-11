@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "name": "WoodedValley1600x1200",
+  "authorship": "Original fixed authored analytic wooded valley; no random generation or third-party assets",
+  "status": "Approved physical extent and irregular starts; native validation and balance pending",
+  "engine_target": "5.8.3",
+  "extent_m": [1600, 1200],
+  "origin_m": [0, 0],
+  "logical_cell_m": 2,
+  "landscape": {
+    "samples": [1009, 1009],
+    "quads_per_section": 63,
+    "sections_per_component": 2,
+    "components": [8, 8],
+    "xy_scale_cm": [158.73015873015873, 119.04761904761905],
+    "z_scale": 100,
+    "actor_z_m": 0
+  },
+  "terrain": {
+    "valley": {"height_m": 8, "undulation_m": 0.75, "side_rise_m": 2.5},
+    "mountains": {"ridge_width_m": 130, "peak_height_m": 120},
+    "river": {
+      "centerline_m": [[800, 0], [840, 160], [800, 300], [760, 460], [800, 650], [835, 800], [800, 950], [765, 1080], [800, 1200]],
+      "bed_width_m": 32,
+      "bank_width_m": 70,
+      "bed_height_m": -4,
+      "downstream_rise_per_m": 0.001,
+      "water_surface_m": 0,
+      "cross_section_axis": "X at fixed Y; smoothstep centerline interpolation"
+    }
+  },
+  "clearings": [
+    {"id": "west-one", "center_m": [250, 250], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "west-two", "center_m": [590, 190], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "west-three", "center_m": [330, 930], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-one", "center_m": [1200, 260], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-two", "center_m": [1070, 750], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"},
+    {"id": "east-three", "center_m": [1370, 970], "radius_m": 110, "blend_margin_m": 22, "flat_height_m": 8, "resource_template_id": "initial-equal"}
+  ],
+  "routes": [
+    {"id": "west-bank", "polyline_m": [[250, 250], [590, 190], [520, 520], [330, 930]], "width_m": 24, "blend_margin_m": 10, "height_m": 8, "start_ids": ["west-one", "west-two", "west-three"]},
+    {"id": "east-bank", "polyline_m": [[1200, 260], [1070, 750], [1370, 970]], "width_m": 24, "blend_margin_m": 10, "height_m": 8, "start_ids": ["east-one", "east-two", "east-three"]},
+    {"id": "one-transverse", "polyline_m": [[250, 250], [690, 300], [800, 300], [910, 300], [1200, 260]], "width_m": 24, "blend_margin_m": 10, "height_m": 8, "start_ids": ["west-one", "east-one"], "crossing_id": "one-deck"},
+    {"id": "two-transverse", "polyline_m": [[590, 190], [670, 450], [690, 650], [800, 650], [910, 650], [1070, 750]], "width_m": 24, "blend_margin_m": 10, "height_m": 8, "start_ids": ["west-two", "east-two"], "crossing_id": "two-deck"},
+    {"id": "three-transverse", "polyline_m": [[330, 930], [690, 950], [800, 950], [910, 950], [1370, 970]], "width_m": 24, "blend_margin_m": 10, "height_m": 8, "start_ids": ["west-three", "east-three"], "crossing_id": "three-deck"}
+  ],
+  "crossings": [
+    {"id": "one-deck", "center_m": [800, 300], "span_m": 160, "width_m": 24, "deck_height_m": 8, "permanent": true, "terrain_fill": false},
+    {"id": "two-deck", "center_m": [800, 650], "span_m": 160, "width_m": 24, "deck_height_m": 8, "permanent": true, "terrain_fill": false},
+    {"id": "three-deck", "center_m": [800, 950], "span_m": 160, "width_m": 24, "deck_height_m": 8, "permanent": true, "terrain_fill": false}
+  ],
+  "resource_templates": {
+    "initial-equal": [
+      {"kind": "Wood", "offset_m": [-35, -25], "initial_quantity": 1800},
+      {"kind": "Stone", "offset_m": [-32, 28], "initial_quantity": 1800},
+      {"kind": "Gold", "offset_m": [28, -32], "initial_quantity": 1800}
+    ]
+  },
+  "source_footprints": {
+    "castle_m": [8, 8],
+    "farm_m": [6, 6],
+    "source": "Core/src/Simulation.cpp building_catalog: Castle 4x4 and Farm 3x3 cells at 2 metres per cell",
+    "unit_physical_radii": "Not established; do not infer from gameplay ranges"
+  }
+}

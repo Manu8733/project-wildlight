@@ -261,6 +261,7 @@ class TerrainTests(unittest.TestCase):
         output = self.root / "export"
         manifest = terrain.export_terrain(self.layout, output)
         raw = (output / "WoodedValley768.r16").read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), "196163c93d408dc77a1c649476c3608fbc86e565f1f8c0c104154edb14dc1247")
         self.assertEqual(len(raw), 510050)
         self.assertEqual(manifest["sample_count"], 255025)
         self.assertEqual(manifest["orientation"], {"row_0": "Y=0", "column_0": "X=0", "rows_increase": "+Y", "columns_increase": "+X"})
@@ -274,6 +275,10 @@ class TerrainTests(unittest.TestCase):
         self.assertEqual(raw[(252 * 505 + 252) * 2:(252 * 505 + 252) * 2 + 2], b"b~")
         self.assertNotEqual(raw[:2], raw[(504 * 505) * 2:(504 * 505) * 2 + 2])
         png = (output / "WoodedValley768.png").read_bytes()
+        if manifest["exporter"] == {"python_version": "3.12.14", "pillow_version": "12.3.0"}:
+            self.assertEqual(hashlib.sha256(png).hexdigest(), "d5c5afcd9080d4d5827ea029271b6772f47d57220a23df0078a2413fbefe8be0")
+            self.assertEqual(hashlib.sha256((output / "WoodedValley768.manifest.json").read_bytes()).hexdigest(),
+                             "fbb69510304d77be3f81f5c82b47e71b220ddc59943f610e4022a24673a23a2d")
         self.assertEqual(png[:8], b"\x89PNG\r\n\x1a\n")
         self.assertEqual(struct.unpack(">IIBB", png[16:26]), (505, 505, 16, 0))
         from PIL import Image

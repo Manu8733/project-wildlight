@@ -14,6 +14,13 @@ MAX_LAYOUT_BYTES = 256 * 1024
 PNG_NAME = "WoodedValley768.png"
 R16_NAME = "WoodedValley768.r16"
 MANIFEST_NAME = "WoodedValley768.manifest.json"
+PROFILES = {
+    "WoodedValley768": {"extent_m": [768, 768], "samples": [505, 505], "sections": 1,
+                        "files": (PNG_NAME, R16_NAME, MANIFEST_NAME)},
+    "WoodedValley1600x1200": {"extent_m": [1600, 1200], "samples": [1009, 1009], "sections": 2,
+                             "files": ("WoodedValley1600x1200.png", "WoodedValley1600x1200.r16",
+                                       "WoodedValley1600x1200.manifest.json")},
+}
 
 
 def _number(value, label, minimum=None, maximum=None):
@@ -32,6 +39,13 @@ def _pair(value, label, minimum=0, maximum=768):
     if not isinstance(value, list) or len(value) != 2:
         raise ValueError(f"{label} must contain two coordinates")
     return [_number(v, label, minimum, maximum) for v in value]
+
+
+def _coordinate(value, label, extent):
+    pair = _pair(value, label, maximum=max(extent))
+    for axis in range(2):
+        _number(pair[axis], label, 0, extent[axis])
+    return pair
 
 
 def _canonical(layout):
@@ -79,16 +93,41 @@ def _route_distance(route, x, y):
     return min(_segment_distance(x, y, a, b) for a, b in zip(points, points[1:]))
 
 
+def _validate_rectangular_approaches(route, deck, channel_min, channel_max):
+    """Allow bank bends only where the full road corridor cannot reach the river."""
+    clearance = route["width_m"] / 2 + route["blend_margin_m"]
+    deck_left = deck["center_m"][0] - deck["span_m"] / 2
+    deck_right = deck["center_m"][0] + deck["span_m"] / 2
+    steps = []
+    for a, b in zip(route["polyline_m"], route["polyline_m"][1:]):
+        left, right = sorted((a[0], b[0]))
+        if right < channel_min - clearance or left > channel_max + clearance:
+            continue
+        if a[1] != deck["center_m"][1] or b[1] != deck["center_m"][1]:
+            raise ValueError("River approaches must align with the reserved deck before entering its corridor")
+        overlap_left, overlap_right = max(left, channel_min), min(right, channel_max)
+        if overlap_left < overlap_right:
+            if overlap_left < deck_left or overlap_right > deck_right:
+                raise ValueError("Every channel crossing must fit inside its complete reserved deck")
+            steps.append(b[0] - a[0])
+    if not steps:
+        raise ValueError("Transverse route must cross the channel on its reserved deck")
+    return steps
+
+
 def _validate_layout(layout):
     try:
         if not isinstance(layout, dict) or len(_canonical(layout)) > MAX_LAYOUT_BYTES:
             raise ValueError("Layout must be a bounded JSON object")
         if layout["schema_version"] != 1 or isinstance(layout["schema_version"], bool):
             raise ValueError("Unsupported layout schema")
-        if layout["name"] != "WoodedValley768" or layout["engine_target"] != "5.8.3":
-            raise ValueError("This authoring input targets WoodedValley768 on Unreal 5.8.3")
-        if _pair(layout["extent_m"], "extent") != [768, 768]:
-            raise ValueError("Playable extent must be 768 by 768 metres")
+        if layout["name"] not in PROFILES or layout["engine_target"] != "5.8.3":
+            raise ValueError("Only the two authored valley profiles on Unreal 5.8.3 are supported")
+        profile = PROFILES[layout["name"]]
+        extent = profile["extent_m"]
+        rectangular = layout["name"] == "WoodedValley1600x1200"
+        if _pair(layout["extent_m"], "extent", maximum=max(extent)) != extent:
+            raise ValueError("Playable extent must match the named authored profile")
         if _pair(layout["origin_m"], "origin") != [0, 0] or layout["logical_cell_m"] != 2:
             raise ValueError("Logical transform requires origin zero and 2 metre cells")
         _number(layout["logical_cell_m"], "logical cell", 2, 2)
@@ -96,16 +135,21 @@ def _validate_layout(layout):
         counts = native["samples"] + native["components"] + [native["quads_per_section"], native["sections_per_component"]]
         if any(isinstance(count, bool) or not isinstance(count, int) for count in counts):
             raise ValueError("Landscape samples, components, quads and section counts must be integers")
-        if (native["samples"] != [505, 505] or native["components"] != [8, 8] or
-                native["quads_per_section"] != 63 or native["sections_per_component"] != 1):
-            raise ValueError("Native Landscape requires 505 samples, 63 quads, 1 section, 8 components")
-        _pair(native["samples"], "samples", 505, 505)
+        if (native["samples"] != profile["samples"] or native["components"] != [8, 8] or
+                native["quads_per_section"] != 63 or native["sections_per_component"] != profile["sections"]):
+            raise ValueError("Native Landscape topology must match the named authored profile")
+        _pair(native["samples"], "samples", profile["samples"][0], profile["samples"][0])
         _pair(native["components"], "components", 8, 8)
         _number(native["quads_per_section"], "quads", 63, 63)
-        _number(native["sections_per_component"], "sections", 1, 1)
-        scale = _number(native["xy_scale_cm"], "XY scale", 0.001, 1000)
-        if not math.isclose(scale * 504, 76800, rel_tol=0, abs_tol=0.000001):
-            raise ValueError("Native measured extent does not match 76800 cm")
+        _number(native["sections_per_component"], "sections", profile["sections"], profile["sections"])
+        if rectangular:
+            scales = _pair(native["xy_scale_cm"], "XY scale", 0.001, 1000)
+        else:
+            scales = [_number(native["xy_scale_cm"], "XY scale", 0.001, 1000)] * 2
+        for axis, scale in enumerate(scales):
+            if not math.isclose(scale * (native["samples"][axis] - 1), extent[axis] * 100,
+                                rel_tol=0, abs_tol=0.000001):
+                raise ValueError("Native measured extent does not match its authored axis")
         _number(native["z_scale"], "Z scale", 0.001, 10000)
         _number(native["actor_z_m"], "actor Z", -10000, 10000)
         settings = layout["terrain"]
@@ -119,18 +163,18 @@ def _validate_layout(layout):
         if not isinstance(points, list) or not 2 <= len(points) <= 64:
             raise ValueError("River requires a bounded continuous centerline")
         for point in points:
-            _pair(point, "river point")
-        if points[0][1] != 0 or points[-1][1] != 768 or any(a[1] >= b[1] for a, b in zip(points, points[1:])):
-            raise ValueError("River must span Y=0..768 with strictly increasing control points")
+            _coordinate(point, "river point", extent)
+        if points[0][1] != 0 or points[-1][1] != extent[1] or any(a[1] >= b[1] for a, b in zip(points, points[1:])):
+            raise ValueError("River must span the full Y extent with strictly increasing control points")
         bed_width = _number(river["bed_width_m"], "river bed width", 4, 60)
         bank_width = _number(river["bank_width_m"], "river bank width", bed_width + 1, 100)
         _number(river["bed_height_m"], "river bed height", -200, 200)
         rise = _number(river["downstream_rise_per_m"], "river grade", -0.02, 0.02)
         water = _number(river["water_surface_m"], "water surface", -200, 200)
-        if max(river["bed_height_m"], river["bed_height_m"] + rise * 768) >= water:
+        if max(river["bed_height_m"], river["bed_height_m"] + rise * extent[1]) >= water:
             raise ValueError("Continuous river floor must remain below the proposed water surface")
         river_min, river_max = min(p[0] for p in points), max(p[0] for p in points)
-        if river_min <= bank_width / 2 or river_max >= 768 - bank_width / 2:
+        if river_min <= bank_width / 2 or river_max >= extent[0] - bank_width / 2:
             raise ValueError("River must have both banks within the extent")
 
         clearings = _unique(layout["clearings"], "clearings", 6)
@@ -144,10 +188,10 @@ def _validate_layout(layout):
         reference = None
         flat_height = None
         for clearing in clearings.values():
-            x, y = _pair(clearing["center_m"], "clearing center")
-            radius = _number(clearing["radius_m"], "clearing radius", 20, 100)
+            x, y = _coordinate(clearing["center_m"], "clearing center", extent)
+            radius = _number(clearing["radius_m"], "clearing radius", 20, 110 if rectangular else 100)
             margin = _number(clearing["blend_margin_m"], "clearing margin", 1, 40)
-            if min(x, y, 768 - x, 768 - y) < radius + margin:
+            if min(x, y, extent[0] - x, extent[1] - y) < radius + margin:
                 raise ValueError("Clearing and margin must stay within terrain")
             if not (x + radius + margin < river_min - bank_width / 2 or
                     x - radius - margin > river_max + bank_width / 2):
@@ -173,19 +217,23 @@ def _validate_layout(layout):
                 raise ValueError("All six starts must use equal initial resource templates")
             reference = template
         values = list(clearings.values())
+        if rectangular and (len({c["center_m"][0] for c in values}) != 6 or
+                            len({c["center_m"][1] for c in values}) != 6):
+            raise ValueError("Rectangular starts require six distinct X and Y coordinates")
         for i, a in enumerate(values):
             for b in values[i + 1:]:
                 if math.dist(a["center_m"], b["center_m"]) <= a["radius_m"] + b["radius_m"] + a["blend_margin_m"] + b["blend_margin_m"]:
                     raise ValueError("Clearing cores and smooth margins must be disjoint")
 
         for deck in decks.values():
-            x, y = _pair(deck["center_m"], "deck center")
+            x, y = _coordinate(deck["center_m"], "deck center", extent)
             span = _number(deck["span_m"], "deck span", bank_width + 2, 160)
             width = _number(deck["width_m"], "deck width", 4, 80)
             _number(deck["deck_height_m"], "deck height", water + 1, 200)
             if deck["permanent"] is not True or deck["terrain_fill"] is not False:
                 raise ValueError("Crossings must be permanent separate decks, never terrain fill")
-            if abs(x - _river_x(river, y)) > 0.000001 or y < width / 2 or y > 768 - width / 2:
+            if (abs(x - _river_x(river, y)) > 0.000001 or y < width / 2 or y > extent[1] - width / 2 or
+                    x < span / 2 or x > extent[0] - span / 2):
                 raise ValueError("Deck must be centered over the river within the extent")
             # Smoothstep segments are monotone, so endpoints and interior control points bound the whole channel.
             test_rows = [y - width / 2, y, y + width / 2]
@@ -199,20 +247,22 @@ def _validate_layout(layout):
         used_decks = set()
         for route in routes.values():
             width = _number(route["width_m"], "route width", 4, 80)
-            _number(route["blend_margin_m"], "route margin", 1, 40)
+            route_margin = _number(route["blend_margin_m"], "route margin", 1, 40)
             if _number(route["height_m"], "route height", -200, 200) != flat_height:
                 raise ValueError("Routes must meet the flat start heights")
             polyline = route["polyline_m"]
             if not isinstance(polyline, list) or not 2 <= len(polyline) <= 64:
                 raise ValueError("Routes need a bounded polyline")
             for point in polyline:
-                _pair(point, "route point")
+                _coordinate(point, "route point", extent)
             if any(a == b for a, b in zip(polyline, polyline[1:])):
                 raise ValueError("Route segments cannot have zero length")
             ids = route["start_ids"]
             if not isinstance(ids, list) or len(ids) not in (2, 3) or len(set(ids)) != len(ids):
                 raise ValueError("Routes must connect distinct starts")
             category = "transverse" if "crossing_id" in route else "bank"
+            if rectangular and len(ids) != (2 if category == "transverse" else 3):
+                raise ValueError("Rectangular routes require paired crossings and three starts on each bank")
             for name in ids:
                 if name not in clearings or _route_distance(route, *clearings[name]["center_m"]) > 0.000001:
                     raise ValueError("Every recorded start must meet its route centerline")
@@ -227,14 +277,18 @@ def _validate_layout(layout):
                     raise ValueError("Each transverse route must use its own matching deck")
                 if deck["width_m"] != width or deck["deck_height_m"] != route["height_m"]:
                     raise ValueError("Deck must match route width and elevation")
-                if any(point[1] != deck["center_m"][1] for point in polyline):
-                    raise ValueError("Transverse routes must stay straight along their reserved deck axis")
-                steps = [b[0] - a[0] for a, b in zip(polyline, polyline[1:])]
+                if rectangular:
+                    steps = _validate_rectangular_approaches(route, deck, river_min - bank_width / 2,
+                                                           river_max + bank_width / 2)
+                else:
+                    if any(point[1] != deck["center_m"][1] for point in polyline):
+                        raise ValueError("Transverse routes must stay straight along their reserved deck axis")
+                    steps = [b[0] - a[0] for a, b in zip(polyline, polyline[1:])]
                 if not (all(step > 0 for step in steps) or all(step < 0 for step in steps)):
                     raise ValueError("Transverse routes must cross their deck without doubling back")
                 used_decks.add(deck_id)
-            elif not (all(p[0] < river_min - bank_width / 2 for p in polyline) or
-                      all(p[0] > river_max + bank_width / 2 for p in polyline)):
+            elif not (all(p[0] < river_min - bank_width / 2 - (width / 2 + route_margin if rectangular else 0) for p in polyline) or
+                      all(p[0] > river_max + bank_width / 2 + (width / 2 + route_margin if rectangular else 0) for p in polyline)):
                 raise ValueError("Bank routes must remain outside the river")
         if used_decks != set(decks) or any(e != {"bank", "transverse"} for e in exits.values()):
             raise ValueError("Every start needs a bank exit and transverse exit")
@@ -275,14 +329,15 @@ def load_layout(path: Path) -> dict:
 
 def height_metres(layout: dict, x_m: float, y_m: float) -> float:
     """Sample a validated layout in metres; deck geometry never changes the riverbed."""
-    x = _number(x_m, "X", 0, 768)
-    y = _number(y_m, "Y", 0, 768)
+    extent_x, extent_y = layout["extent_m"]
+    x = _number(x_m, "X", 0, extent_x)
+    y = _number(y_m, "Y", 0, extent_y)
     settings = layout["terrain"]
     valley, mountain, river = settings["valley"], settings["mountains"], settings["river"]
     height = (valley["height_m"] + valley["undulation_m"] * math.sin(x / 80) * math.sin(y / 96) +
-              valley["side_rise_m"] * ((x - 384) / 384) ** 2)
+              valley["side_rise_m"] * ((x - extent_x / 2) / (extent_x / 2)) ** 2)
     ridges = []
-    for distance, along, phase in ((x, y, 0.4), (768 - x, y, 1.7), (y, x, 2.5), (768 - y, x, 3.8)):
+    for distance, along, phase in ((x, y, 0.4), (extent_x - x, y, 1.7), (y, x, 2.5), (extent_y - y, x, 3.8)):
         width = mountain["ridge_width_m"] * (0.86 + 0.14 * math.sin(along / 97 + phase))
         taper = _smooth(1 - distance / width)
         profile = 0.78 + 0.14 * math.sin(along / 62 + phase) + 0.08 * math.cos(along / 31 - phase)
@@ -330,7 +385,8 @@ def export_terrain(layout: dict, output_dir: Path) -> dict:
     """Validate and prepare complete deterministic buffers before creating output files."""
     _validate_layout(layout)
     output_dir = Path(output_dir)
-    targets = [output_dir / name for name in (PNG_NAME, R16_NAME, MANIFEST_NAME)]
+    png_name, r16_name, manifest_name = PROFILES[layout["name"]]["files"]
+    targets = [output_dir / name for name in (png_name, r16_name, manifest_name)]
     if any(path.exists() or path.is_symlink() for path in targets):
         raise FileExistsError("Refusing to overwrite existing terrain output")
     native = layout["landscape"]
@@ -371,9 +427,9 @@ def export_terrain(layout: dict, output_dir: Path) -> dict:
             "landscape_formula": "column=world_x_cm/xy_scale_cm, row=world_y_cm/xy_scale_cm",
         },
         "files": {
-            "png": {"name": PNG_NAME, "bytes": len(png), "sha256": hashlib.sha256(png).hexdigest(),
+            "png": {"name": png_name, "bytes": len(png), "sha256": hashlib.sha256(png).hexdigest(),
                     "format": "PNG 16-bit single-channel grayscale"},
-            "r16": {"name": R16_NAME, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+            "r16": {"name": r16_name, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
                     "format": "Row-major little-endian UInt16"},
         },
         "verification": {
@@ -386,6 +442,12 @@ def export_terrain(layout: dict, output_dir: Path) -> dict:
             "user_accepted": False,
         },
     }
+    if layout["name"] == "WoodedValley1600x1200":
+        manifest["world_to_grid"].update({
+            "logical_cells": [800, 600],
+            "logical_domain_cm": "0 <= X < 160000, 0 <= Y < 120000; upper edges are boundaries, not cells 800/600",
+            "landscape_formula": "column=world_x_cm/xy_scale_cm[0], row=world_y_cm/xy_scale_cm[1]",
+        })
     buffers = [png, raw, (json.dumps(manifest, indent=2, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")]
     output_dir.mkdir(parents=True, exist_ok=True)
     created = []
