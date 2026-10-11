@@ -1,8 +1,8 @@
 {
   "engine": "Unreal Engine",
-  "version": "5.8.1",
+  "version": "5.8.3",
   "association": "5.8",
-  "verification": "Project target, not an engine build verified in this cloud environment",
+  "verification": "User-approved 5.8.3 migration; installed Build.version verified on 2026-10-11; gameplay compilation and compatibility pending",
   "source": "https://forums.unrealengine.com/tag/released/11396",
   "platform": "Windows x86_64",
   "game_language": "en",

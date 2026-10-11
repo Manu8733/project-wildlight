@@ -34,10 +34,12 @@ Native Unreal Landscape, Water and Sky Atmosphere are the selected implementatio
 
 ## Verification And Delivery
 
-1. Prove compatible Unreal and a usable authoring connection before engine work. The later user instruction permits optimized local Unreal through MCP; wait for their announced completion of the 5.8 installation before launching it. The game remains locked to 5.8.1 unless a deliberate migration is approved/tested. No unapproved server rental, subscription or credit spending.
+1. Prove compatible Unreal and a usable authoring connection before engine work. On 11 October the user announced readiness and explicitly approved the installed 5.8.3 patch with a verified pre-migration backup. The current target is 5.8.3; native authoring runs in a separate Blueprint-only environment project, not a compiled/validated migration of the game's C++ module. No unapproved server rental, subscription or credit spending.
 2. Verify private asset intake and repeatable material/wind-preserving import before adapting geometry. Use isolated versioned Blender masters and inspect exports as well as scene previews.
 3. Validate the full blockout and measured extent, then terrain, routes, crossings, resource access, vegetation and water. No unfinished regions, holes, incoherent overlaps or permanently sealed starts.
 4. Capture actual overview/detail renders at day, dusk, night and rain, plus a short wind/transition sequence. Index commit, engine version, preset, camera and artifact hashes. Label Blender asset previews separately from Unreal environment/gameplay captures.
 5. Profile reproducible Low/High views with warm shaders, CPU/GPU/frame time and RAM/VRAM. Refine LOD/culling/density without silently downgrading the requested near-art quality. Preserve both raw evidence and unresolved defects; final acceptance requires the user's test.
 
 Use the scoped guides in `GAME_SKILLS.md` for design, engine boundaries, Niagara, Blender evidence and profiling. They do not supply a runtime. The latest cloud retry received messages but exposed no terminal/filesystem tools; no new engine session, import or render is established.
+
+The separate local authoring project now has a saved native Landscape and a real bare-relief capture. Its 1009 by 1009 native height samples cover exactly 768 m per side; the original 505 by 505 height source describes sampling, not physical map size. Neither resolution nor six clearing markers establish sufficient economic expansion, route timing or six-participant balance. Final materials, water, vegetation, wind, weather, time-of-day integration, gameplay and performance acceptance remain pending. See `Evidence/2026-10-11/native-environment-first-relief.json` and `SESSION_HANDOFF.md` for the scoped evidence.

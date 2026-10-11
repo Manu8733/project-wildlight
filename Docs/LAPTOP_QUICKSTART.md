@@ -4,8 +4,8 @@ The user already has Unreal installed and wants as much work as possible complet
 
 ## Prepare
 
-1. Install/select Unreal **5.8.1**, matching `engine-lock.json`. Confirm its `Engine/Build/Build.version`. If the installed newest engine differs, keep this project pinned until a tested migration is recorded.
-2. Install Visual Studio 2022 with Game development with C++, supported MSVC and Windows SDK, plus Git and Git LFS. Verify the current Epic requirements for 5.8.1.
+1. Select Unreal **5.8.3**, matching the user-approved target in `engine-lock.json`. Confirm its `Engine/Build/Build.version`. The pre-migration 5.8.1 backup remains available; native environment connection is verified, not gameplay compatibility.
+2. Install Visual Studio 2022 with Game development with C++, supported MSVC and Windows SDK, plus Git and Git LFS for a future gameplay build. Verify the current Epic requirements for 5.8.3. The Blueprint-only environment authoring project does not require a gameplay C++ build.
 3. Extract the provided source archive to a short path, for example `C:\Projects\Wildlight`, or clone [the verified private repository](https://github.com/Manu8733/project-wildlight) after the first push is confirmed in `PROGRESS.md`. Avoid synchronized desktop folders for the working build tree.
 4. In the clone, run `git lfs install` and `git lfs pull`. Confirm FBX/Blender files are actual binary assets rather than LFS pointer text. Keep credentials in Git's credential manager.
 5. Connect power, use the GPU's appropriate performance profile, close expensive applications and leave enough disk space for engine shaders and build outputs. First shader compilation is not a steady-state FPS test.

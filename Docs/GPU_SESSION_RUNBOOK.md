@@ -6,7 +6,7 @@ Current state: **not executed**. This Linux cloud has no usable Unreal installat
 
 1. Select a Windows machine against `PERFORMANCE_BUDGETS.md`; record provider, exact GPU/VRAM, CPU, RAM, free disk, hourly price, minimum billing and shutdown rule. Do not rent until tasks and budget are explicitly established.
 2. Use a hardened remote connection supported by the host, MFA and an encrypted channel. Do not expose RDP directly to public internet. Use a temporary scoped Git credential from a secret store; avoid tokens in command history and repository files.
-3. Install pinned Unreal 5.8.1, supported Visual Studio C++/Windows SDK, Blender, Git LFS and current stable driver. Check the current Epic toolchain requirements rather than assuming an SDK number from this document.
+3. Use the user-approved Unreal 5.8.3 target, supported Visual Studio C++/Windows SDK for gameplay builds, Blender, Git LFS and current stable driver. Check the current Epic toolchain requirements rather than assuming an SDK number from this document. The private Blueprint-only authoring connection is not a compiled gameplay build.
 4. Clone the private repository, run `git lfs pull`, confirm the exact commit, and verify asset checksums. Capture an independent pre-session backup and prove that it can be listed and restored.
 5. Queue one session objective: import/readability, skeleton/animation, lighting/VFX, performance or Shipping QA. Estimate duration and checkpoint time. Keep a log of actual cost and completed requirement IDs.
 

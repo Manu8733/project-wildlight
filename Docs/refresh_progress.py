@@ -81,7 +81,7 @@ lines += [
     "",
     "## Outstanding gates",
     "",
-    "- Compile Unreal 5.8.1 on Windows; run importer, editor match and actual Shipping package.",
+    "- Compile the user-approved Unreal 5.8.3 target on Windows; run importer, editor match and actual Shipping package.",
     "- Finish and review unit rigs/animation, final UV/texture/LOD/collision, VFX/audio, complete tutorial/remapping/accessibility and all polished scenarios.",
     "- Measure 100/200/500-unit scenes where supported and long sessions on an actual GPU; regress RTX 3050 Low.",
     "- Complete fair-AI and economy/class tuning, independent playtest and explicit acceptance.",

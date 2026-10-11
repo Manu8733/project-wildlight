@@ -12,7 +12,7 @@
 
 - One 768 by 768 metre wooded-valley environment first; future 384 by 384 logical cells at 200 cm. No Core/gameplay/save changes.
 - The user now authorizes local Unreal with prudent optimization, but explicitly asks to wait for their Unreal 5.8 readiness message before starting it. Do not open 5.6, migrate the game, install an engine, start render/shader workloads or close other applications.
-- Preserve the 5.8.1 lock. An installed 5.8 folder alone does not prove a completed or compatible installation. No paid server, premium plugin or Meshy spending.
+- The user announced installation completion and approved the installed 5.8.3 patch with backup on 11 October. Build.version is verified; gameplay compatibility remains pending. Preserve the independent 5.8.1 backup and use 5.8.3 for these preparations. No paid server, premium plugin or Meshy spending.
 - Epic/Fab content stays private and retains original material/wind data; no licensed binaries, secrets or engine source copies in public Git.
 - Preparation tests, terrain data and MCP protocol success are not native Landscape, six-player gameplay, final art, GPU profiling or wind/weather acceptance.
 - Use the original refined valley design and the scoped skills in `Docs/GAME_SKILLS.md`; do not substitute a low-poly prototype or generated concept image for a game capture.
@@ -21,7 +21,7 @@
 
 **Files:** Create `Tools/unreal_mcp.py`, `Tools/unreal_mcp_probe.py`, `Tools/requirements-unreal-mcp.txt`, `Tests/test_unreal_mcp.py`, `Docs/UNREAL_MCP.md`.
 
-**Interfaces:** `ProbeConfig(engine_root: Path, project_file: Path, expected_version: str = "5.8.1")`; `select_project_node(nodes: list[dict], project_dir: Path) -> str`; `parse_probe_response(response: dict, config: ProbeConfig) -> dict`; `run_bounded_probe(config: ProbeConfig) -> dict`. The stdio server has one no-argument tool, `probe_project`; a CLI client supports `probe`, while `serve` is the server entry point. Trusted CLI paths select the engine/project; tool calls cannot pass arbitrary Python, shell commands, script paths or node overrides.
+**Interfaces:** `ProbeConfig(engine_root: Path, project_file: Path, expected_version: str = "5.8.3")`; `select_project_node(nodes: list[dict], project_dir: Path) -> str`; `parse_probe_response(response: dict, config: ProbeConfig) -> dict`; `run_bounded_probe(config: ProbeConfig) -> dict`. The stdio server has one no-argument tool, `probe_project`; a CLI client supports `probe`, while `serve` is the server entry point. Trusted CLI paths select the engine/project; tool calls cannot pass arbitrary Python, shell commands, script paths or node overrides.
 
 - [ ] Write unittest fixtures first: valid exact project; no/multiple matches; malformed/missing node identity; normalized path handling; wrong project/version; unsuccessful/malformed remote command; missing probe marker; child timeout/nonzero exit; no-editor failure. Keep tests independent of an installed engine or MCP package by testing the real policy/parsing boundaries and mocking only unavailable external execution.
 - [ ] Run `python -m unittest discover -s Tests -p 'test_unreal_mcp.py' -v` and retain the expected failure before implementation.

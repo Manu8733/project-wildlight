@@ -67,4 +67,4 @@ Version baseline references:
 - [Unreal Engine 5.8 release](https://www.unrealengine.com/news/unreal-engine-5-8-is-now-available)
 - [Epic release announcements](https://forums.unrealengine.com/tag/released/11396)
 
-The project lock targets 5.8.1. Engine installation and toolchain compatibility must still be checked on the user's actual machine.
+The project lock targets the user-approved 5.8.3 patch. Its installed Build.version and a live private authoring-project MCP connection were verified on 11 October 2026. The separate gameplay C++ build, Windows SDK/toolchain and Shipping compatibility remain unverified. The pre-migration 5.8.1 source backup is retained independently.
