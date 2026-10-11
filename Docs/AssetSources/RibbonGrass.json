@@ -1,0 +1,43 @@
+{
+  "title": "Ribbon Grass",
+  "author": "Quixel Megascans",
+  "fab_listing_id": "6b7af6c8-e24b-4beb-a943-4ddb35d2db87",
+  "source_url": "https://www.fab.com/listings/6b7af6c8-e24b-4beb-a943-4ddb35d2db87",
+  "megascans_asset_id": "tbdpec3r",
+  "recorded_on": "2026-10-11",
+  "source_evidence": "Chat workspace outputs/local-epic-fab-inventory.json and private tbdpec3r.json",
+  "license": null,
+  "license_verification": "Asset-specific acquisition license and current entitlement not independently verified; general shortlist notes are insufficient for redistribution",
+  "is_ai_forbidden_from_metadata": true,
+  "public_binary_redistribution_approved": false,
+  "private_native_destination": "/Game/Wildlight/Owned/RibbonGrass",
+  "native_engine": "5.8.3",
+  "source_format": "FBX, Y-up centimetres, original zero pivot with negative embedded roots",
+  "modifications": [
+    "Imported E and F as static meshes, retained original physical scale and source UVs",
+    "No generated simple collision, no animation/skeleton import or automatic material replacement",
+    "Imported BaseColor, Opacity, Roughness, Normal and AO; correct color/normal sampler spaces; runtime texture size capped at 2048",
+    "Generated two reduced native LODs per variant and assigned a two-sided masked foliage material",
+    "Original per-instance local-Z anchored wind shader with mesh-specific root height and live native Time",
+    "No upload to Meshy or other AI generation service"
+  ],
+  "variants": {
+    "E": {
+      "filename": "Ribbon_Grass_tbdpec3r_Raw_tbdpec3r_VarE_LOD0.fbx",
+      "native_lod_triangles": [4248, 2124, 935],
+      "native_height_above_root_cm": 24.770793914794922,
+      "private_foliage_instances": 729
+    },
+    "F": {
+      "filename": "Ribbon_Grass_tbdpec3r_Raw_tbdpec3r_VarF_LOD0.fbx",
+      "native_lod_triangles": [2246, 1122, 495],
+      "native_height_above_root_cm": 15.634736061096191,
+      "private_foliage_instances": 484
+    }
+  },
+  "verification_scope": "Native material/detail capture and controlled near-view wind phases only; partial first-clearing placement",
+  "final_visual_acceptance": false,
+  "all_lod_root_stability_verified": false,
+  "whole_map_wind_weather_controller_verified": false,
+  "performance_verified": false
+}

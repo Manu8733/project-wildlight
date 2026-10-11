@@ -1,6 +1,6 @@
 # Wildlight Wooded Valley Environment
 
-Approved direction, 10 October 2026. Design approval is not implemented content or final user acceptance. The latest size is **768 by 768 metres**, superseding the intermediate 1 km proposal. Environment production is the first milestone; further FFA/gameplay and building-tier expansion are deferred.
+Direction originally approved on 10 October 2026, with the explicit size/layout revision approved on 11 October: **1600 by 1200 metres**, six irregularly positioned authored starts and bounded oblique top-down RTS camera. This supersedes the intermediate 1600 metre square and older 768 metre map. See `../plans/2026-10-11-rectangular-valley.md` for the revision. Design approval is not implemented content or final user acceptance. Environment production is the first milestone; further FFA/gameplay and building-tier expansion are deferred.
 
 ## Experience And Scope
 
@@ -12,7 +12,7 @@ Use original refined medium-or-higher art with the cozy forest-kingdom direction
 
 ## Coordinates And Logical Boundary
 
-The existing logical scale is 200 Unreal centimetres per cell. A 768 m square corresponds to 384 by 384 logical cells. Landscape vertices/components must use valid Unreal dimensions independently of that grid and cover the measured 768 m playable extent. Record the world-to-logical transform with terrain data; do not create a ground object per logical cell.
+The existing logical scale is 200 Unreal centimetres per cell. The approved rectangle corresponds to a future 800 by 600 logical grid, not a migrated Core. Landscape vertices/components must use valid Unreal dimensions independently of that grid and cover the measured 1600 by 1200 m extent. Current native height sampling is 1009 by 1009 with unequal horizontal spacing; keep building, unit and vegetation scale unchanged. Record the world-to-logical transform with terrain data; do not create a ground object per logical cell.
 
 The current two-faction 64 by 48 simulation remains unchanged in this environment milestone. Start markers and an art map do not establish AI, six economies, fog, saves or working gameplay. Later FFA integration requires its own approved end-state rules and compatibility tests. The confirmed single-castle/no-capture/full-destruction rule remains recorded in `SESSION_HANDOFF.md`; surrender, victory and simultaneous-loss proposals are not approved here.
 
@@ -42,4 +42,4 @@ Native Unreal Landscape, Water and Sky Atmosphere are the selected implementatio
 
 Use the scoped guides in `GAME_SKILLS.md` for design, engine boundaries, Niagara, Blender evidence and profiling. They do not supply a runtime. The latest cloud retry received messages but exposed no terminal/filesystem tools; no new engine session, import or render is established.
 
-The separate local authoring project now has a saved native Landscape and a real bare-relief capture. Its 1009 by 1009 native height samples cover exactly 768 m per side; the original 505 by 505 height source describes sampling, not physical map size. Neither resolution nor six clearing markers establish sufficient economic expansion, route timing or six-participant balance. Final materials, water, vegetation, wind, weather, time-of-day integration, gameplay and performance acceptance remain pending. See `Evidence/2026-10-11/native-environment-first-relief.json` and `SESSION_HANDOFF.md` for the scoped evidence.
+The historical first-relief checkpoint in the separate local authoring project covers exactly 768 m per side with 1009 by 1009 native samples resampled from the original 505 by 505 source. It remains preserved. The newer separate rectangular native map exactly covers 1600 by 1200 m and matches all 1,018,081 original height samples without resampling. Preliminary material and limited owned grass/wind work are recorded separately. Neither resolution nor six clearing markers establish sufficient economic expansion, route timing or six-participant balance. Final environment, shared wind/weather/day cycle, gameplay and performance acceptance remain pending. See `Evidence/2026-10-11/native-environment-first-relief.json`, `Evidence/2026-10-11/rectangular-environment-progress.json` and `SESSION_HANDOFF.md` for the scoped historical/current evidence.
